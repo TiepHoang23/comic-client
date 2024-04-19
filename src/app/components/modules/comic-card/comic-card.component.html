@@ -1,0 +1,9 @@
+<ng-container *ngIf="comic">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ comic.title }}</h5>
+            <p class="card-text">{{ comic.description }}</p>
+            <a [routerLink]="['/comic', comic.id]" target="_blank" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</ng-container>
