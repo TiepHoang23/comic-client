@@ -10,17 +10,21 @@ export class ThemeService {
   );
 
   constructor() {
-    // this.isDarkTheme = new BehaviorSubject<boolean>(
-    //   localStorage.getItem('isDarkTheme') === 'true'
-    // );
+    const isDarkTheme = typeof window === 'undefined' ? false :
+      localStorage?.getItem('isDarkTheme') === 'true';
+    this.isDarkTheme.next(isDarkTheme);
   }
 
   setDarkTheme(isDarkTheme: boolean) {
     this.isDarkTheme.next(isDarkTheme);
-    // localStorage.setItem('isDarkTheme', this.isDarkTheme.value.toString());
+    if (typeof window !== 'undefined') {
+      localStorage?.setItem('isDarkTheme', this.isDarkTheme.value.toString());
+    }
   }
 
   getDarkTheme(): Observable<boolean> {
     return this.isDarkTheme;
   }
 }
+
+

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Comic } from '../../../../dataSource/schema/comic';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { ComicService } from '../../../../dataSource/services/comic.service';
 
 @Component({
   selector: 'app-comic-detail',
@@ -10,15 +10,23 @@ import { map } from 'rxjs/operators';
   styleUrl: './comic-detail.component.scss',
 })
 export class ComicDetailComponent  implements OnInit {
-   comic!: Comic;
+  comic!: Comic;
 
-  constructor(private route: ActivatedRoute) {
-    // console.log(this.route.data);
-    this.route.data.subscribe((data) => console.log(data));
+  constructor(private route: ActivatedRoute, private ComicService: ComicService , private location: Location) {
   }
 
   ngOnInit(): void {
-    console.log(this.route.data);
-    this.route.data.pipe(map((data) => data['comic'])).subscribe((comic) => (this.comic = comic));
+    this.getComic();
   }
+
+  getComic(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.ComicService.getComicById(id)
+      .subscribe(comic => this.comic = comic);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }

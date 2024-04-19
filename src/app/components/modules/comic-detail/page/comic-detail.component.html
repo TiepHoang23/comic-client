@@ -1,1 +1,9 @@
-<div> </div>
+<ng-container *ngIf="comic">
+    <h2>{{comic.title}} Details</h2>
+    <div><span>id: </span>{{comic.id}}</div>
+    <div>
+        <label for="comic-name">comic name: </label>
+        <!-- <input id="comic-name" [(ngModel)]="comic.description" placeholder="Hero name" /> -->
+    </div>
+    <button type="button" (click)="goBack()">go back</button>
+</ng-container>
