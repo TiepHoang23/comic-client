@@ -1,23 +1,25 @@
+// export interface Comic {
+//   id: number;
+//   title: string;
+//   description: string;
+//   thumbnail: string;
+// }
+
+import { Chapter } from "./Chapter";
+import { Genre } from "./Genre";
+
 export interface Comic {
   id: number;
   title: string;
-  description: string;
-  thumbnail: string;
+  url: string;
+  author?: string;
+  description?: string|null;
+  coverImage?: string;
+  viewCount: number;
+  status: number;
+  rating: number;
+  createAt?: string;
+  updateAt?: string;
+  genres: Genre[];
+  chapters: Chapter[];
 }
-
-// import { Chapter } from "./Chapter";
-
-// export interface Comic {
-//   ID: number;
-//   Title: string;
-//   URL: string;
-//   Author?: string;
-//   Description?: string;
-//   CoverImage?: string;
-//   Status: number;
-//   Rating: number;
-//   CreateAt: Date;
-//   UpdateAt: Date;
-//   genres: Genre[];
-//   Chapters: Chapter[];
-// }

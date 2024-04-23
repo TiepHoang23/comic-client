@@ -1,28 +1,65 @@
-<div class="wrapper">
-  <div class="toolbar">
-    <!-- <mat-toolbar color="primary"> -->
-    <div class="container">
-      <span class="branding spacer center d-none d-sm-inline d-md-none">
-        Angular Folder Structure
-      </span>
-      <span class="branding spacer d-none d-md-inline">
-        Angular Folder Structure
-      </span>
-      <span class="d-none d-md-inline">
-        <!-- <button mat-button class="nav-button" *ngFor="let item of navItems" [routerLink]="item.link"
-              routerLinkActive="active">
-              {{ item.title }}
-            </button> -->
-        <!--   
-            <mat-slide-toggle [checked]="isDarkTheme$ | async" (change)="toggleTheme($event.checked)">Change Theme
-            </mat-slide-toggle> -->
-      </span>
-      <div style="float: right;">
-        <!-- <a [href]="repoUrl" target="_blank">Fork on GitHub
-              <fa-icon [icon]="['fab','github']"></fa-icon>
-            </a> -->
-      </div>
+<nav class="bg-gray-800 p-4">
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo or brand name -->
+    <div class="text-white text-lg font-bold">YourLogo</div>
+
+    <!-- Search input -->
+    <div class="relative">
+      <input type="text" class="bg-gray-700 text-white rounded-md px-8 py-2 focus:outline-none focus:bg-gray-600"
+        placeholder="Search...">
+      <button
+        class="absolute inset-y-0 right-0 px-3 py-2 bg-gray-700 rounded-r-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+        <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M9 0a9 9 0 016.32 14.72l4.51 4.5a1 1 0 11-1.42 1.42l-4.5-4.51A9 9 0 119 0zm0 2a7 7 0 100 14A7 7 0 009 2z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
     </div>
-    <!-- </mat-toolbar> -->
+
+
   </div>
-</div>
+</nav>
+<!-- Navigation links -->
+<nav>
+  <ul class="flex space-x-4 ">
+    <li>
+      <a target="_self" href="/">
+        <i class="fa fa-home hidden-xs"></i>
+        <span class="visible-xs">Trang chủ</span>
+      </a>
+    </li>
+    <li class="active">
+      <a target="_self" href="https://www.nettruyentt.com/hot">Hot</a>
+    </li>
+    <li>
+      <a target="_self" href="https://www.nettruyentt.com/theo-doi">Theo dõi</a>
+    </li>
+    <li>
+      <a target="_self" href="https://www.nettruyentt.com/lich-su">Lịch sử</a>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" target="_self"
+        href="https://www.nettruyentt.com/tim-truyen">
+        Thể loại <i class="fa fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu megamenu">
+        <li>
+          <!-- Dropdown content -->
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a rel="nofollow" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Xếp
+        hạng <i class="fa fa-sort"></i></a>
+      <div class="dropdown-menu navbar-dropdown">
+        <!-- Dropdown content -->
+      </div>
+    </li>
+    <li class="">
+      <a target="_self" href="https://www.nettruyentt.com/tim-truyen-nang-cao">Tìm truyện</a>
+    </li>
+
+  </ul>
+
+</nav>

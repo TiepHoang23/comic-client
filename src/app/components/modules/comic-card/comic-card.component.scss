@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card {
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+
+        .content {
+            height: 20%;
+        }
+
+        .details {
+            height: 20%;
+        }
+
+        // Ensure the image takes up 80% of the remaining space
+        img {
+            flex: 1;
+            height: 100%;
+            object-fit: cover; // Ensure the image covers the entire container
+        }
+    }
+}
