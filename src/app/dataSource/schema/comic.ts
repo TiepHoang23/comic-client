@@ -18,7 +18,7 @@ export interface Comic {
   viewCount: number;
   status: number;
   rating: number;
-  createAt?: string;
+  // createAt?: string;
   updateAt?: string;
   genres: Genre[];
   chapters: Chapter[];

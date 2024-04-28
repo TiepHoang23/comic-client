@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LayoutComponent,
     NavComponent,
     FooterComponent,
+    
     // PageComponent,
   ],
   imports: [
