@@ -8,7 +8,7 @@
       <div class="relative">
         <input
           type="text"
-          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:outline-none focus:bg-gray-600"
+          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:w-96 focus:outline-none focus:bg-gray-600"
           placeholder="Tìm kiếm..."
         />
         <button
@@ -82,26 +82,20 @@
         <div
           class="absolute top-full left-0 hidden group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
         >
-          @for ( genre of "12345" ;track genre; let indexx = $index ) {
           <ul
+            *ngFor="let Genre of listGenre"
             itemscope=""
             itemtype="http://www.schema.org/SiteNavigationElement"
           >
-            @for ( genre of listGenre$ | async ;track genre; let i = $index ) {
-            @if(i % 5 === 0) {
-            <li>
+            <li *ngFor="let g of Genre">
               <a
                 itemprop="url"
                 href="https://doctruyenonline.vn/truyen-tranh/the-loai/action"
                 class="block px-3 py-2 w-full hover:text-[#be8c28] truncate font-bold"
-                ><span itemprop="name">{{ genre.title }}</span></a
+                ><span itemprop="name">{{ g.title }}</span></a
               >
             </li>
-
-            } }
           </ul>
-
-          }
         </div>
       </div>
     </li>

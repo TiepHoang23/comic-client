@@ -4,6 +4,7 @@ import { HomePageComponent } from './page/home-page.component';
 
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { ComicDetailComponent } from '../comic-detail/page/layout/comic-detail.component';
+import { ChapterPageComponent } from '../chapter-page/page/chapter-page.component';
 
 export const routes: Routes = [
   //   {
@@ -17,12 +18,13 @@ export const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'comic/:id',
+    path: 'truyen-tranh/:id',
     component: ComicDetailComponent,
     resolve: (route: ActivatedRouteSnapshot) => {
       inject(ComicService).getComicById(route.params['id']);
     },
   },
+
 ];
 
 @NgModule({
