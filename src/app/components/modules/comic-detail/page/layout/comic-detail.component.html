@@ -1,0 +1,143 @@
+<ng-container *ngIf="comic" class="max-w-2xl mx-auto px-4">
+    <div class="detail-info">
+        <div class="grid grid-cols-3 gap-4">
+            <div class="col-xs-3 col-image">
+                <img class="w-15 h-30" src="{{ comic.coverImage }}" alt="{{ comic.title }}">
+                <div class="mt-8 flex justify-center">
+                    <button type="button" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        (click)="goBack()">Theo dõi</button>
+                </div>
+
+            </div>
+
+            <div class="col-xs-8 col-info">
+                <h1 class="other-name  font-semibold uppercase text-2xl">{{ comic.title }}</h1>
+
+
+                <ul class="list-info mt-3 space-y-2">
+                    <li class="othername flex space-x-2">
+                        <p class="name">
+                            <i class="fa fa-plus"></i> Tên khác:
+                        </p>
+                        <h2 class="other-name  font-medium">{{ comic.title }}</h2>
+                    </li>
+                    <li class="author flex space-x-2">
+                        <p class="name col-xs-4">
+                            <i class="fa fa-user"></i> Tác giả:
+                        </p>
+                        <p class="col-xs-8">{{ comic.author }}</p>
+                    </li>
+                    <li class="status  flex space-x-2">
+                        <p class="name col-xs-4">
+                            <i class="fa fa-rss"></i> Tình trạng:
+                        </p>
+                        <p class="col-xs-8">{{ comic.status == 0 ? 'Đang tiến hành' : 'Đã hoàn thành' }}</p>
+                    </li>
+                    <li class="kind row flex space-x-2">
+                        <p class="name col-xs-4">
+                            <i class="fa fa-tags"></i> Thể loại:
+                        </p>
+                        <p class="col-xs-8">
+                            <!-- Assuming comic.categories is an array of category names -->
+                            <ng-container *ngFor="let category of comic.genres">
+
+                                <a class="category font-semibold hover:text-gray-500 h-6 px-2 mx-1 text-sm border border-blue-500 hover:border-transparent rounded"
+                                    type="button" href="#">{{ category.title }}</a>
+                            </ng-container>
+                        </p>
+                    </li>
+                    <li class="flex space-x-2">
+                        <p class="name text">
+                            <i class="fa fa-eye"></i> Lượt xem:
+                        </p>
+                        <p class="number font-semibold text-gray-500">{{ comic.viewCount }}</p>
+
+
+                    </li>
+                    <li class="mrt5 mrb10 flex space-x-2">
+                        <p class="name text">
+                            <i class="fa fa-eye"></i> Xếp hạng:
+                        </p>
+
+                        <p class="ratingValue font-semibold text-gray-500">{{ comic.rating }}</p>
+                    </li>
+                </ul>
+
+                <div class="row rating">
+                    <div class="col-xs-6">
+                        <div class="star" data-id="83850" data-allowrating="true" style="cursor: pointer;">
+                            <!-- You may need to implement the star rating logic here -->
+                        </div>
+                    </div>
+                    <div class="col-xs-6 lazy-module" data-type="facebook" style="overflow:hidden">
+                        <!-- Facebook like button code -->
+                    </div>
+                </div>
+                <div class="follow">
+                    <!-- Follow button and follower count -->
+                </div>
+                <div class="read-action space-x-2 mt-2 text-white">
+                    <a class="btn btn-warning"> Đọc từ đầu</a>
+                    <a class="btn btn-warning"> Đọc mới nhất</a>
+                </div>
+            </div>
+            <!-- <ng-container *ngFor="let comic of listTopComics$ | async">
+                <div class="top-comic-item">
+                    <app-top-list [topComic]="comic"></app-top-list>
+                </div> -->
+
+            <div *ngIf="listTopComics" class="flex flex-col items-center w-full">
+                <div class="text-xl font-bold mb-4">TOP COMICS</div>
+                <app-top-list [listTopComics]="listTopComics"></app-top-list>
+            </div>
+
+            <!-- </ng-container> -->
+        </div>
+    </div>
+    <!-- <div *ngFor="let chapter of comic.chapters">
+        <p>{{ chapter.title }}</p>
+    </div> -->
+
+    <div class="detail-content mt-3">
+        <h1 class="list-title font-semibold uppercase">
+            <i class="fa fa-file-text-o"></i> Nội dung
+        </h1>
+        <p class="shortened">
+            Câu chuyện về 2 đứa trẻ Rokuro và Benio với cuộc sống của những pháp sư trừ tà...
+        </p>
+        <!-- <a href="#" class="morelink">Xem thêm <i class="fa fa-angle-right"></i></a> -->
+    </div>
+    <h3 class="list-title font-semibold uppercase mt-4">
+        <i class="fa fa-file-text-o"></i> Danh sách chương
+    </h3>
+    <div *ngFor="let chapter of comic.chapters" class="flex items-center justify-between p-4 border-b border-gray-200">
+        <div class="flex items-center">
+            <!-- Chapter Thumbnail (if available) -->
+            <!-- <img [src]="chapter.thumbnail" alt="thumbnail" class="w-16 h-16 mr-4 rounded"> -->
+
+            <div>
+                <!-- Chapter Number (if available) -->
+                <!-- <p class="text-sm text-gray-500">#{{ chapter.number }}</p> -->
+
+                <!-- Chapter Title -->
+                <p class="text-base font-medium">#{{ chapter.title }}</p>
+
+                <!-- Chapter Date (if available) -->
+                <!-- <p class="text-sm text-gray-500">{{ chapter.date }}</p> -->
+            </div>
+            <!-- <div class="text-sm text-gray-500 ml-4">2024-01-01</div> -->
+            <div class="text-sm text-gray-500 ml-4">2024-01-01</div>
+        </div>
+
+        <!-- Link to Comments -->
+        <a [href]="'/comments/' + chapter.id" class="flex items-center">
+            <img src="/img/btn_comment@4x.188ef5f1.svg" alt="commentIcon" class="w-6 h-6 mr-2">
+            <span class="text-sm text-gray-500">Views</span>
+        </a>
+
+    </div>
+
+
+
+
+</ng-container>

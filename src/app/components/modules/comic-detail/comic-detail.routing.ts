@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ComicDetailComponent } from './page/comic-detail.component';
+import { ComicDetailComponent } from './page/layout/comic-detail.component';
 
 const routes: Routes = [
   {
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ComicDetailRoutingModule {}
+export class ComicDetailRoutingModule { }

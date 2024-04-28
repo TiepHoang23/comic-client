@@ -16,4 +16,7 @@ export class ComicService {
   getComicById(id: number): Observable<Comic> {
     return this.jsonApiService.get(`/comic/${id}`);
   }
+  getTopComics(): Observable<Array<Comic>> {
+    return this.jsonApiService.get('/top-comics');
+  }
 }

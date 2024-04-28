@@ -687,6 +687,8 @@ export class fetchComicService {
     switch (url) {
       case '/comics':
         return of(this.data);
+      case'/top-comics':
+        return of(this.data.slice(0, 5)); // top 5 demo
       default:
         const id = Number(url.substring(url.lastIndexOf('/')).match(/\d+/)?.[0]);
         const comicById = this.data?.find((comic) => comic.id === id);

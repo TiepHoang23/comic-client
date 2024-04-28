@@ -8,6 +8,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LayoutComponent,
     NavComponent,
     FooterComponent,
+    // PageComponent,
   ],
   imports: [
     BrowserModule,
