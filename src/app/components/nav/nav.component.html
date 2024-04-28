@@ -1,65 +1,225 @@
-<nav class="bg-gray-800 p-4">
+<header class="bg-gray-800 p-4">
   <div class="container mx-auto flex items-center justify-between">
     <!-- Logo or brand name -->
     <div class="text-white text-lg font-bold">YourLogo</div>
 
     <!-- Search input -->
-    <div class="relative">
-      <input type="text" class="bg-gray-700 text-white rounded-md px-8 py-2 focus:outline-none focus:bg-gray-600"
-        placeholder="Search...">
+    <div class="flex items-center space-x-4">
+      <div class="relative">
+        <input
+          type="text"
+          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:outline-none focus:bg-gray-600"
+          placeholder="Tìm kiếm..."
+        />
+        <button
+          class="absolute inset-y-0 right-0 px-3 py-2 bg-gray-700 rounded-r-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+        >
+          <svg
+            class="h-5 w-5 text-white"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 0a9 9 0 016.32 14.72l4.51 4.5a1 1 0 11-1.42 1.42l-4.5-4.51A9 9 0 119 0zm0 2a7 7 0 100 14A7 7 0 009 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
       <button
-        class="absolute inset-y-0 right-0 px-3 py-2 bg-gray-700 rounded-r-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-        <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd"
-            d="M9 0a9 9 0 016.32 14.72l4.51 4.5a1 1 0 11-1.42 1.42l-4.5-4.51A9 9 0 119 0zm0 2a7 7 0 100 14A7 7 0 009 2z"
-            clip-rule="evenodd" />
-        </svg>
+        class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+      >
+        <span>Đăng nhập</span>
       </button>
     </div>
-
-
   </div>
-</nav>
+</header>
 <!-- Navigation links -->
-<nav>
-  <ul class="flex space-x-4 ">
-    <li>
-      <a target="_self" href="/">
-        <i class="fa fa-home hidden-xs"></i>
-        <span class="visible-xs">Trang chủ</span>
+
+<nav class="bg-[#e4e4e4] dark:bg-[#454545] lg:block hidden">
+  <ul
+    class="h-10 flex items-center mx-auto w-full md:max-w-[760px] lg:max-w-[940px] xl:max-w-[1200px]"
+    itemscope=""
+    itemtype="http://www.schema.org/SiteNavigationElement"
+  >
+    <li class="h-full">
+      <a
+        href="https://doctruyenonline.vn/truyen-tranh"
+        class="px-4 h-full hover:bg-[#fff] items-center flex hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="18"
+          viewBox="0 0 576 512"
+        >
+          <path
+            d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
+          ></path>
+        </svg>
       </a>
     </li>
-    <li class="active">
-      <a target="_self" href="https://www.nettruyentt.com/hot">Hot</a>
-    </li>
-    <li>
-      <a target="_self" href="https://www.nettruyentt.com/theo-doi">Theo dõi</a>
-    </li>
-    <li>
-      <a target="_self" href="https://www.nettruyentt.com/lich-su">Lịch sử</a>
-    </li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" target="_self"
-        href="https://www.nettruyentt.com/tim-truyen">
-        Thể loại <i class="fa fa-caret-down"></i>
-      </a>
-      <ul class="dropdown-menu megamenu">
-        <li>
-          <!-- Dropdown content -->
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a rel="nofollow" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Xếp
-        hạng <i class="fa fa-sort"></i></a>
-      <div class="dropdown-menu navbar-dropdown">
-        <!-- Dropdown content -->
+    <li class="h-full">
+      <div
+        class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group"
+      >
+        <span class="flex items-center"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            ></path></svg
+          >Thể Loại</span
+        >
+        <div
+          class="absolute top-full left-0 hidden group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
+        >
+          @for ( genre of "12345" ;track genre; let indexx = $index ) {
+          <ul
+            itemscope=""
+            itemtype="http://www.schema.org/SiteNavigationElement"
+          >
+            @for ( genre of listGenre$ | async ;track genre; let i = $index ) {
+            @if(i % 5 === 0) {
+            <li>
+              <a
+                itemprop="url"
+                href="https://doctruyenonline.vn/truyen-tranh/the-loai/action"
+                class="block px-3 py-2 w-full hover:text-[#be8c28] truncate font-bold"
+                ><span itemprop="name">{{ genre.title }}</span></a
+              >
+            </li>
+
+            } }
+          </ul>
+
+          }
+        </div>
       </div>
     </li>
-    <li class="">
-      <a target="_self" href="https://www.nettruyentt.com/tim-truyen-nang-cao">Tìm truyện</a>
+    <li class="h-full">
+      <a
+        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 mr-1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+          ></path></svg
+        >Xếp Hạng</a
+      >
     </li>
-
+    <li class="h-full">
+      <a
+        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          ></path></svg
+        >Tìm Truyện</a
+      >
+    </li>
+    <li class="h-full">
+      <a
+        href="https://doctruyenonline.vn/sach"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+          ></path></svg
+        >Sách</a
+      >
+    </li>
+    <li class="h-full">
+      <a
+        href="https://doctruyenonline.vn"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z"
+          ></path></svg
+        >Truyện Chữ</a
+      >
+    </li>
+    <li class="h-full">
+      <a
+        href="https://www.facebook.com/groups/doctruyenonline.vn"
+        target="blank"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+          ></path></svg
+        >Group</a
+      >
+    </li>
+    <li class="h-full">
+      <a
+        href="https://www.facebook.com/Doctruyenonline.Official"
+        target="blank"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
+          ></path></svg
+        >Fanpage</a
+      >
+    </li>
   </ul>
-
 </nav>
