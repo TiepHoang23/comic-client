@@ -2,7 +2,7 @@
     <div class="card bg-white shadow-md max-h-120">
         <div class="h-130 flex flex-col max-h-120">
 
-            <a [routerLink]="['/comic', comic.id]"
+            <a [routerLink]="['/truyen-tranh', comic.id]"
                 class="h-80 card-image transition-transform duration-300 transform-gpu hover:-translate-y-3">
                 <img [src]="comic.coverImage" alt="{{ comic.title }}" class="object-cover w-full h-full">
 
@@ -38,5 +38,5 @@
                 {{ comic.chapters[comic.chapters.length-1].title }}</p>
         </div>
     </div>
-
+    </div>
 </ng-container>
