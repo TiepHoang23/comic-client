@@ -1,11 +1,13 @@
 <!-- app-top-list.component.html -->
 <ul class="list-unstyled w-full  hover:border-transparent">
-    <li *ngFor="let topComic of listTopComics; let i = index" class="flex items-center">
+    <li *ngFor="let topComic of listTopComics; let i = index" class="flex items-center snap-y">
 
-        <div class="txt-rank fn-order mr-2 bg-gray-200 h-full ">{{ i+ 1 }}</div>
+        <div class="txt-rank bg-gray-800 h-full rounded-full ">
+            <p class="justify-self-center">{{ i+ 1 }}</p>
+        </div>
         <div class="t-item comic-item flex flex-row items-center" [attr.data-id]="topComic.id">
             <a class="thumb mr-2" [title]="topComic.title" [href]="'/comic/' + topComic.id">
-                <img class=" w-12 h-24 object-cover" [src]="topComic.coverImage" [alt]="topComic.title">
+                <img class=" w-12 h-24 object-fill" [src]="topComic.coverImage" [alt]="topComic.title">
             </a>
 
             <div class="info p-4 items-center">
@@ -28,6 +30,5 @@
                 </div>
             </div>
         </div>
-
     </li>
 </ul>
