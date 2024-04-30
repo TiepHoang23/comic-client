@@ -19,10 +19,15 @@ export class HomePageComponent implements OnInit {
     this.pages = Array.from({ length: 10 }, (_, i) => i + 1);
   }
   ngOnInit(): void {
+
+    console.log(this.listComics)
     let page = Number(this.route.snapshot.queryParams['page']) || 1;
-    this.pages = Array.from({ length: 10 }, (_, i) => i + page);;
-    this.comicService.getComics(page).subscribe((res: any) => {
-      this.listComics = res.data
-    });
+    this.route.params.subscribe(params => {
+
+      this.pages = Array.from({ length: 10 }, (_, i) => i + page);;
+      this.comicService.getComics(page).subscribe((res: any) => {
+        this.listComics = res.data
+      });
+    })
   }
 }
