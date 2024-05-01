@@ -22,13 +22,22 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     let page = Number(this.route.snapshot.queryParams['page']) || 1;
-    this.route.params.subscribe((params) => {
-      this.pages = Array.from({ length: 10 }, (_, i) => i + page);
-      this.comicService.getComics(page).subscribe((res: any) => {
-        this.listComics = res.data.comics;
-        this.isLoading = false;
-      });
+    this.route.queryParams.subscribe(params => {
+      page = Number(params['page']) || 1;
+      this.isLoading = true;
+      this.OnChangePage(page);
+
+    })
+
+  }
+
+  OnChangePage(page: number) {
+    this.pages = Array.from({ length: 10 }, (_, i) => i + page);;
+    this.comicService.getComics(page).subscribe((res: any) => {
+      this.isLoading = false;
+      this.listComics = res.data.comics
     });
   }
 }
