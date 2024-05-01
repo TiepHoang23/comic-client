@@ -17,7 +17,7 @@ export class ComicService {
 
   getComics(
     page: number = 1,
-    step: number = 80,
+    step: number = 40,
     genre: number = -1,
     sort: number = 8,
     status: number = -1
@@ -30,7 +30,7 @@ export class ComicService {
     );
   }
 
-  getComicById(id: number) {
+  getComicById(id: string) {
     if (!globalConfig.USE_API) {
       return this.jsonApiService.get(`/comic/${id}`);
     }

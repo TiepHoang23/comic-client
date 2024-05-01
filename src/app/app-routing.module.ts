@@ -22,7 +22,7 @@ const routes: Routes = [
         component: ComicDetailComponent,
       },
       {
-        path: 'truyen-tranh/:comicid/:chapterid',
+        path: 'truyen-tranh/:comicid/chapter/:chapterid',
         component: ChapterPageComponent,
       },
     ]

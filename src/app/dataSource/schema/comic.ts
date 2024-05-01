@@ -13,7 +13,7 @@ export interface Comic {
   title: string;
   url: string;
   author?: string;
-  description?: string|null;
+  description?: string | null;
   coverImage?: string;
   viewCount: number;
   status: number;
@@ -22,4 +22,9 @@ export interface Comic {
   updateAt?: string;
   genres: Genre[];
   chapters: Chapter[];
+}
+
+export interface ComicList {
+  listComics: Array<Comic>;
+  totalpage: number;
 }

@@ -116,8 +116,7 @@
       <i class="fa fa-file-text-o"></i> Nội dung
     </h1>
     <p class="shortened">
-      Câu chuyện về 2 đứa trẻ Rokuro và Benio với cuộc sống của những pháp sư
-      trừ tà...
+      {{ comic.description }}
     </p>
     <!-- <a href="#" class="morelink">Xem thêm <i class="fa fa-angle-right"></i></a> -->
   </div>
@@ -137,7 +136,7 @@
         <!-- <p class="text-sm text-gray-500">#{{ chapter.number }}</p> -->
 
         <!-- Chapter Title -->
-        <a routerLink="/truyen-tranh/{{ comic.id }}/{{ chapter.id }}">
+        <a routerLink="/truyen-tranh/{{ comic.url }}/chapter/{{ chapter.id }}">
           <p class="text-base font-medium">#{{ chapter.title }}</p>
         </a>
 

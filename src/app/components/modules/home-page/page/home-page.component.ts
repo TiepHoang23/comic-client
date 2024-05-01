@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit {
 
       this.pages = Array.from({ length: 10 }, (_, i) => i + page);;
       this.comicService.getComics(page).subscribe((res: any) => {
-        this.listComics = res.data
+        this.listComics = res.data.comics
       });
     })
   }

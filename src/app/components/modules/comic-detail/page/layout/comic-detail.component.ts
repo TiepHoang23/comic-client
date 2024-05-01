@@ -25,7 +25,7 @@ export class ComicDetailComponent implements OnInit {
   }
 
   getComic(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id') || "";
     this.ComicService.getComicById(id).subscribe(res => {
       this.comic = res.data
     });
