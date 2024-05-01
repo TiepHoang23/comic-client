@@ -8,6 +8,7 @@ import { TopListComponent } from '../comic-detail/page/top-list/top-list.compone
 import { CarouselLandingComponent } from '../carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from '../carousel-landing/page/carousel-layout/carousel-layout.component';
 import { ListCardSkeletonComponent } from './page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
+import { ListSearchComicComponent } from '../../nav/list-search-comic/list-search-comic.component';
 // import { CarouselLandingComponent } from '../carousel-landing/carousel-landing.component';
 
 @NgModule({
@@ -19,9 +20,10 @@ import { ListCardSkeletonComponent } from './page/list-card-skeleton/list-card-s
     CarouselLandingComponent,
     CarouselLayoutComponent,
     ListCardSkeletonComponent,
+    ListSearchComicComponent
   ],
   imports: [HomePageRoutingModule, CommonModule],
   exports: [],
   providers: [],
 })
-export class HomePageModule {}
+export class HomePageModule { }

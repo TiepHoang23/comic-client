@@ -12,8 +12,9 @@ import { AppModule } from './app.module';
     AppModule,
     ServerModule,
     RouterOutlet,
+
     // NavComponent,
   ],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule { }
