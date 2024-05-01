@@ -21,12 +21,15 @@ const routes: Routes = [
         path: 'truyen-tranh/:id',
         component: ComicDetailComponent,
       },
-      {
-        path: 'truyen-tranh/:comicid/chapter/:chapterid',
-        component: ChapterPageComponent,
-      },
+
     ]
   },
+  {
+
+    path: 'truyen-tranh/:comicid/chapter/:chapterid',
+    component: ChapterPageComponent,
+
+  }
 ];
 
 @NgModule({
