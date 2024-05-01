@@ -16,13 +16,7 @@ export const routes: Routes = [
     path: '',
     component: HomePageComponent,
   },
-  {
-    path: 'truyen-tranh/:id',
-    component: ComicDetailComponent,
-    resolve: (route: ActivatedRouteSnapshot) => {
-      inject(ComicService).getComicById(route.params['id']);
-    },
-  },
+
 
 ];
 
