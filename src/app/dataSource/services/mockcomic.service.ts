@@ -1064,7 +1064,7 @@ export class fetchComicService {
           url.substring(url.lastIndexOf('/')).match(/\d+/)?.[0]
         );
         const comicById = this.data?.find((comic) => comic.id === id);
-        return of(comicById);
+        return of({ data: comicById });
     }
   }
 }

@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
@@ -18,6 +17,7 @@ export class HomePageComponent implements OnInit {
 
     this.pages = Array.from({ length: 10 }, (_, i) => i + 1);
   }
+
   ngOnInit(): void {
     let page = Number(this.route.snapshot.queryParams['page']) || 1;
     this.pages = Array.from({ length: 10 }, (_, i) => i + page);;

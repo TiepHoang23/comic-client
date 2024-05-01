@@ -21,7 +21,6 @@ export class ChapterPageComponent {
     let chapterid = Number(this.route.snapshot.params['chapterid'])
     this.comicService.getChapterImgs(chapterid).subscribe((res: any) => {
       this.ListChapterImg = res.data.pages
-      console.log(this.ListChapterImg)
     });
   }
 }
