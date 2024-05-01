@@ -7,12 +7,21 @@ import { ComicDetailComponent } from '../comic-detail/page/layout/comic-detail.c
 import { TopListComponent } from '../comic-detail/page/top-list/top-list.component';
 import { CarouselLandingComponent } from '../carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from '../carousel-landing/page/carousel-layout/carousel-layout.component';
+import { ListCardSkeletonComponent } from './page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
 // import { CarouselLandingComponent } from '../carousel-landing/carousel-landing.component';
 
 @NgModule({
-  declarations: [HomePageComponent, ComicCardComponent, ComicDetailComponent, TopListComponent, CarouselLandingComponent, CarouselLayoutComponent],
+  declarations: [
+    HomePageComponent,
+    ComicCardComponent,
+    ComicDetailComponent,
+    TopListComponent,
+    CarouselLandingComponent,
+    CarouselLayoutComponent,
+    ListCardSkeletonComponent,
+  ],
   imports: [HomePageRoutingModule, CommonModule],
   exports: [],
   providers: [],
 })
-export class HomePageModule { }
+export class HomePageModule {}

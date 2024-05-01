@@ -10,4 +10,4 @@ import { ComicDetailComponent } from './page/layout/comic-detail.component';
   declarations: [ComicDetailComponent, TopListComponent],
   imports: [ComicDetailRoutingModule, CommonModule, NgModule],
 })
-export class ComicDetailModule { }
+export class ComicDetailModule {}
