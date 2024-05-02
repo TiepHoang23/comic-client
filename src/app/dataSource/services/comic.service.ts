@@ -46,6 +46,11 @@ export class ComicService {
   getTopComics(): Observable<Array<Comic>> {
     return this.jsonApiService.get('/top-comics');
   }
+  getSearchComic(key: string) {
+    return this.httpclient.get(
+      `${globalConfig.API_HOST}/api/search?keyword=${key}`
+    );
+  }
 
   getGenres(): Observable<Array<Genre>> {
     return this.jsonApiService.get('/genres');

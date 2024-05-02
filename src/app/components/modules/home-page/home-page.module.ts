@@ -24,4 +24,4 @@ import { ListCardSkeletonComponent } from './page/list-card-skeleton/list-card-s
   exports: [],
   providers: [],
 })
-export class HomePageModule {}
+export class HomePageModule { }
