@@ -17,18 +17,37 @@
         <path d="M5 12h14m-7-7 7 7-7 7"></path>
       </svg>
     </a>
-    <div *ngFor="let comic of listSearch">
-      <a
-        href="/title/599b6b9c-31cc-4b5e-8121-fd2ae7e70ca3/robottakun"
-        class="group flex items-start relative mb-auto select-none w-full h-full cover"
-      >
-      </a>
+    <section class="bg-gray-100">
       <div
-        class="font-bold text-lg line-clamp-1 break-all"
+        *ngFor="let comic of listSearch"
+        class="rounded bg-white shadow-lg mb-2"
       >
-        {{comic.title}}
+        <div class="px-2 py-1">
+          <!-- <ul class="-my-8"> -->
+          <div
+            class="flex flex-col space-y-3 py-1 text-left sm:flex-row sm:space-x-5 sm:space-y-0"
+          >
+            <div class="shrink-0 relative">
+              <img
+                class="h-24 w-18 max-w-full rounded-lg object-cover"
+                src="{{ comic.coverImage }}"
+                alt=""
+              />
+            </div>
+
+            <div class="relative flex flex-1 flex-col justify-between">
+              <div class="pr-8 sm:pr-5">
+                <p class="text-base font-semibold text-gray-900">
+                  {{ comic.title }}
+                </p>
+                <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">36EU - 4US</p>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- </ul> -->
+        </div>
       </div>
-     
-    </div>
+    </section>
   </div>
 </div>

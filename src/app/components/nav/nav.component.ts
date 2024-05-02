@@ -28,22 +28,21 @@ export class NavComponent {
     }
     );
   }
-  OnSearchChange(e:Event)
-  {
+  OnSearchChange(e: Event) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-        this.searchText = this.SearchField.nativeElement.value;
+      this.searchText = this.SearchField.nativeElement.value;
     }, this.doneTypingInterval);
 
   }
   OnSearchFocus(isFoucs: boolean): boolean {
     console.log("focus", isFoucs);
-    // if (isFoucs) {
+    if (isFoucs) {
       this.document.getElementById("search-result")?.classList.remove("invisible");
-    // }
-    // else {
-    //   this.document.getElementById("search-result")?.classList.add("invisible");
-    // }
+    }
+    else {
+      this.document.getElementById("search-result")?.classList.add("invisible");
+    }
 
     return true;
   }
