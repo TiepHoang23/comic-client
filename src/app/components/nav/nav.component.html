@@ -6,11 +6,13 @@
     <!-- Search input -->
     <div class="flex items-center space-x-4">
       <div class="relative">
-        <input
+        <input 
+          #SearchInput
           (focus)="OnSearchFocus(true)"
           (focusout)="OnSearchFocus(false)"
+          (input)="OnSearchChange($event)"
           type="text"
-          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:w-96 focus:outline-none focus:bg-gray-600"
+          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:w-[200rem] focus:outline-none focus:bg-gray-600"
           placeholder="Tìm kiếm..."
         />
         <button
@@ -33,7 +35,7 @@
           class="invisible absolute rounded-md z-50 flex w-96 mt-2 flex-col bg-gray-100 px-4 py-2 shadow-xl group-hover:visible"
         >
           Nhập từ khóa tìm kiếm
-          <!-- <list-search-comic></list-search-comic> -->
+          <list-search-comic [searchValue]="searchText"></list-search-comic>
         </div>
       </div>
 

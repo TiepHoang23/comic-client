@@ -10,6 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/page/chapter-page.component';
+import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ChapterPageComponent } from './components/modules/chapter-page/page/cha
     NavComponent,
     FooterComponent,
     ChapterPageComponent,
+    ListSearchComicComponent
     // PageComponent,
   ],
   imports: [
