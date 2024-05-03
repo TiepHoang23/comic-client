@@ -1,34 +1,29 @@
+<button
+  class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
+  (click)="ToggleMenu(true)"
+>
+  <svg
+    class="w-6 h-6 text-gray-800 dark:text-white"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 20 20"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
+    ></path>
+  </svg>
+</button>
 <div
-  class="fixed px-2.5 py-2 right-0 top-0 bottom-0 w-72 bg-gray-50 shadow-md shadow-slate-300"
+  #MenuNavigation
+  class="fixed transition-transform translate-x-full px-2.5 py-2 right-0 top-0 bottom-0 w-72 h-screen bg-gray-50 shadow-md shadow-slate-300"
 >
   <!---->
-  <div class="flex justify-between -mx-2 -mt-2">
-    <button
-      class="bg-gray-200 custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent text rounded-full"
-      style="min-height: 2.5rem; min-width: 2.5rem"
-    >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: center"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="icon"
-          style="color: currentcolor"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M18 6 6 18M6 6l12 12"
-          ></path></svg
-      ></span>
-    </button>
-  </div>
+
   <div class="flex flex-col gap-y-2 mb-2 md:mb-4">
     <div class="flex">
       <svg
@@ -47,10 +42,10 @@
           d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zm20 0h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
         ></path></svg
       ><a
-        href="/title/65125892-8584-4938-b45c-7a4cd9ad67d7/naruto-sasuke-s-story-the-uchiha-and-the-heavenly-stardust-the-manga"
+        href="/truyen-tranh/{{ comic.url }}"
         class="flex items-center text-primary break-words"
         title=""
-        >Naruto</a
+        >{{ comic.title }}</a
       >
     </div>
     <div class="flex items-center break-words">
@@ -77,7 +72,7 @@
           d="M13 2v7h7"
         ></path>
       </svg>
-      Chapter 9
+      {{ mainChapter.title }}
     </div>
   </div>
   <div class="flex mb-1">
@@ -131,7 +126,7 @@
           </svg>
         </div>
         <div
-          class="absolute z-50 transition duration-150 top-14 rounded-md shadow-lg left-0 w-full max-h-[24rem] overflow-auto bg-accent pointer-events-none opacity-0 -translate-y-2"
+          class="absolute z-50 transition duration-150 top-14 rounded-md shadow-lg left-0 w-full overflow-auto bg-accent pointer-events-none opacity-0 -translate-y-2"
         >
           <ul class="my-2 mx-1">
             <li>
@@ -242,108 +237,33 @@
           </svg>
         </div>
         <div
-          class="absolute z-50 transition duration-150 top-14 rounded-md shadow-lg left-0 w-full max-h-[24rem] overflow-auto bg-accent pointer-events-none opacity-0 -translate-y-2"
+          class="absolute z-50 transition duration-150 rounded-md shadow-lg left-0 w-full overflow-auto bg-slate-300 pointer-events-none opacity-1 -translate-y-2"
         >
-          <ul class="my-2 mx-1">
-            <li>
-              <div
-                class="py-1 px-2 sticky top-0 bg-accent flex space-x-2 select-none"
-                style="z-index: 0"
-              >
-                <span class="text-midTone text-sm">Volume 2</span>
-                <div class="bg-midTone h-[1px] flex-grow my-auto"></div>
-              </div>
-              <ul>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="7bcbabc3-ea11-4f89-8a65-3e19b3ecc2e3"
-                >
-                  Chapter 10
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-primary text-white"
-                  data-value="30777964-317d-41b7-aab3-c1b9d2b7337b"
-                >
-                  Chapter 9
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="25d5538b-251a-460b-9d26-dd07dc145dc2"
-                >
-                  Chapter 8.2
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="2bc14827-d689-431e-9c09-56efbb515162"
-                >
-                  Chapter 8.1
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="30960e72-ee7b-4573-92ae-07a4228ddd7a"
-                >
-                  Chapter 7.2
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="54f7d532-e148-4aa5-ad84-0414b7ab18c4"
-                >
-                  Chapter 7.1
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="d460af28-b921-4779-a3e5-96122a5ba9a6"
-                >
-                  Chapter 6.2
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="a7b41178-7654-453f-a006-2f3182e2433c"
-                >
-                  Chapter 6
-                </li>
-              </ul>
+          <ul>
+            <li
+              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
+            >
+              Chapter 5
             </li>
-            <li>
-              <div
-                class="py-1 px-2 sticky top-0 bg-accent flex space-x-2 select-none"
-                style="z-index: 1"
-              >
-                <span class="text-midTone text-sm">Volume 1</span>
-                <div class="bg-midTone h-[1px] flex-grow my-auto"></div>
-              </div>
-              <ul>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="be9747ae-5ef2-430d-b826-b500be6b1f13"
-                >
-                  Chapter 5
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="79a6034c-02c5-4467-82a6-ee0903d32be3"
-                >
-                  Chapter 4
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="4e942435-ab74-41d1-911b-3ad1dcba1167"
-                >
-                  Chapter 3
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="9077332d-a395-4b05-b65b-2b68fa92ef6d"
-                >
-                  Chapter 2
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="9ea13eb7-2ec8-4092-ac4d-64b30523bf9b"
-                >
-                  Chapter 1
-                </li>
-              </ul>
+            <li
+              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
+            >
+              Chapter 4
+            </li>
+            <li
+              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
+            >
+              Chapter 3
+            </li>
+            <li
+              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
+            >
+              Chapter 2
+            </li>
+            <li
+              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
+            >
+              Chapter 1
             </li>
           </ul>
         </div>
@@ -608,43 +528,44 @@
     </button>
   </div>
 </div>
+<div class="" (click)="ToggleMenu(false)">
+  <div class="mb-10 bg-white p-5 text-center">
+    <h1 class="text-center text-xl">
+      <a
+        href="/truyen-tranh/toi-se-bi-tru-khu-cung-hoang-de"
+        title="{{ comic.title }}"
+        class="cursor-pointer text-[#7a6ff1] font-semibold"
+        >{{ comic.title }}</a
+      ><span
+        >&nbsp;-
+        <!-- -->{{ mainChapter.title }}</span
+      >
+    </h1>
+    <i>[Đăng lúc: {{ mainChapter.updateAt | date : "HH:mm dd/MM/yyyy " }}]</i>
+  </div>
 
-<div class="mb-10 bg-white p-5 text-center">
-  <h1 class="text-center text-xl">
-    <a
-      href="/truyen-tranh/toi-se-bi-tru-khu-cung-hoang-de"
-      title="Tôi Sẽ Bị Trừ Khử Cùng Hoàng Đế"
-      class="cursor-pointer text-[#7a6ff1] font-semibold"
-      >Tôi Sẽ Bị Trừ Khử Cùng Hoàng Đế</a
-    ><span
-      >&nbsp;-
-      <!-- -->Chapter 188</span
-    >
-  </h1>
-  <i>[Đăng lúc: 2024-04-19]</i>
-</div>
-
-<div
-  class="p-4 bg-[#d9edf7] border border-solid border-[#bce8f1] items-center mb-3 text-[#31708f] rounded-lg flex justify-center"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="16"
-    width="16"
-    viewBox="0 0 512 512"
-    class="mr-1"
+  <div
+    class="p-4 bg-[#d9edf7] border border-solid border-[#bce8f1] items-center mb-3 text-[#31708f] rounded-lg flex justify-center"
   >
-    <path
-      fill="#31708f"
-      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
-    ></path></svg
-  ><i>Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter</i>
-</div>
-<div id="position-btn"></div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="16"
+      width="16"
+      viewBox="0 0 512 512"
+      class="mr-1"
+    >
+      <path
+        fill="#31708f"
+        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+      ></path></svg
+    ><i>Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter</i>
+  </div>
+  <div id="position-btn"></div>
 
-<img
-  *ngFor="let pageimg of ListChapterImg"
-  src="{{ pageimg.url }}"
-  alt="banner chapter"
-  class="mx-auto"
-/>
+  <img
+    *ngFor="let pageimg of ListChapterImg"
+    src="{{ pageimg.url }}"
+    alt="banner chapter"
+    class="mx-auto"
+  />
+</div>
