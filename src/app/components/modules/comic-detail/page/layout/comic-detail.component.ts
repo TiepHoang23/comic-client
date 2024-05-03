@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ComicService } from '../../../../../dataSource/services/comic.service';
 import { Comic } from '../../../../../dataSource/schema/comic';
-
 
 @Component({
   selector: 'app-comic-detail',
@@ -15,9 +13,13 @@ export class ComicDetailComponent implements OnInit {
   comic!: Comic;
   listTopComics?: Comic[];
   $index = 0;
+  isOpen = false;
 
-  constructor(private route: ActivatedRoute, private ComicService: ComicService, private location: Location) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private ComicService: ComicService,
+    private location: Location,
+  ) {}
 
   ngOnInit(): void {
     this.getComic();
@@ -25,20 +27,19 @@ export class ComicDetailComponent implements OnInit {
   }
 
   getComic(): void {
-    const id = this.route.snapshot.paramMap.get('id') || "";
-    this.ComicService.getComicById(id).subscribe(res => {
-      this.comic = res.data
+    const id = this.route.snapshot.paramMap.get('id') || '';
+    this.ComicService.getComicById(id).subscribe((res) => {
+      this.comic = res.data;
     });
   }
 
   getTopComics(): void {
-    this.ComicService.getTopComics()
-      .subscribe(topComics => this.listTopComics = topComics);
-
+    this.ComicService.getTopComics().subscribe(
+      (topComics) => (this.listTopComics = topComics),
+    );
   }
 
   goBack(): void {
     this.location.back();
   }
-
 }
