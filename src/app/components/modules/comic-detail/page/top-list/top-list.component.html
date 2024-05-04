@@ -6,12 +6,14 @@
         <div class="txt-rank bg-gray-500 rounded-full w-8 h-8 ml-3 text-center text-white">
             {{ i+ 1 }}
         </div>
-        <div class="t-item comic-item flex flex-row items-center" [attr.data-id]="topComic.id">
-            <a class="thumb mr-2 line-clamp-1" [title]="topComic.title" [href]="'/comic/' + topComic.id">
-                <img class=" w-12 h-24 object-fill" [src]="topComic.coverImage" [alt]="topComic.title">
+        <div class="t-item comic-item flex flex-row items-center m-2" [attr.data-id]="topComic.id">
+            <a class="thumb mr-2 line-clamp-1 h-24 w-19 max-w-full" [title]="topComic.title"
+                [href]="'/comic/' + topComic.id">
+                <img class="h-24 w-19 max-w-full rounded object-cover" [src]="topComic.coverImage"
+                    [alt]="topComic.title">
             </a>
 
-            <div class="info p-4 items-center">
+            <div class="info p-1 items-center">
                 <h3 class="title mb-1  font-semibold">
                     <a [routerLink]="['/comic', topComic.id]">{{
                         topComic.title }}</a>
@@ -21,7 +23,7 @@
                         topComic.chapters[0].title }}</a>
 
                 </p>
-                <div class="view pull-right font-semibold flex items-center space-x-2 mt-2 ">
+                <div class="view pull-right font-semibold flex items-center space-x-1 mt-2 ">
                     <svg xmlns="http://www.w3.org/2000/svg" height="12" width="13.5"
                         viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                         <path

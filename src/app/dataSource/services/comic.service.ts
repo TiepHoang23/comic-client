@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Comic } from '../schema/comic';
 import { fetchComicService } from './mockcomic.service';
 import { Genre } from '../schema/Genre';
 import { HttpClient } from '@angular/common/http';
 import globalConfig from '../../../../GlobalConfig';
+import { IServiceResponse } from '../schema/ResponseType';
 
 @Injectable({
   providedIn: 'root',
@@ -12,43 +13,63 @@ import globalConfig from '../../../../GlobalConfig';
 export class ComicService {
   constructor(
     private httpclient: HttpClient,
-    private jsonApiService: fetchComicService
-  ) { }
+    private jsonApiService: fetchComicService,
+  ) {}
 
   getComics(
     page: number = 1,
     step: number = 40,
     genre: number = -1,
     sort: number = 8,
-    status: number = -1
-  ) {
+    status: number = -1,
+  ): Observable<IServiceResponse<{ comics: Comic[] }>> {
     if (!globalConfig.USE_API) {
       return this.jsonApiService.get('/comics');
     }
+    const params = {
+      page: page.toString(),
+      step: step.toString(),
+      genre: genre.toString(),
+      sort: sort.toString(),
+      status: status.toString(),
+    };
+    const searchParams = new URLSearchParams(params).toString();
     return this.httpclient.get(
-      `${globalConfig.API_HOST}/comics?sort=${sort}&status=${status}&genre=${genre}&page=${page}&step=${step}`
-    );
+      `${globalConfig.API_HOST}/comics?${searchParams}`,
+    ) as Observable<IServiceResponse<{ comics: Comic[] }>>;
   }
 
-  getComicById(id: string) {
+  getComicById(id: string): Observable<IServiceResponse<Comic>> {
     if (!globalConfig.USE_API) {
       return this.jsonApiService.get(`/comic/${id}`);
     }
+
     return this.httpclient.get(
-      `${globalConfig.API_HOST}/comic/${id}`
-    );
+      `${globalConfig.API_HOST}/comic/${id}`,
+    ) as Observable<IServiceResponse<Comic>>;
   }
   getChapterImgs(id: number) {
-    return this.httpclient.get(
-      `${globalConfig.API_HOST}/Comic/chapter/${id}`
-    );
+    return this.httpclient.get(`${globalConfig.API_HOST}/Comic/chapter/${id}`);
   }
-  getTopComics(): Observable<Array<Comic>> {
-    return this.jsonApiService.get('/top-comics');
+  getTopComics(): Observable<IServiceResponse<{ comics: Comic[] }>> {
+    if (!globalConfig.USE_API) {
+      return this.jsonApiService.get('/top-comics');
+    }
+    const params = {
+      page: '1',
+      step: '5',
+      genre: '-1',
+      sort: '8',
+      status: '-1',
+    };
+    const searchParams = new URLSearchParams(params).toString();
+    return this.httpclient.get(
+      `${globalConfig.API_HOST}/comics?${searchParams}`,
+    ) as Observable<IServiceResponse<{ comics: Comic[] }>>;
   }
   getSearchComic(key: string) {
     return this.httpclient.get(
-      `${globalConfig.API_HOST}/api/search?keyword=${key}`
+      `${globalConfig.API_HOST}/api/search?keyword=${key}`,
     );
   }
 

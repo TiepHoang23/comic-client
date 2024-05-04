@@ -159,6 +159,7 @@
   <!-- <div *ngFor="let chapter of comic.chapters">
         <p>{{ chapter.title }}</p>
     </div> -->
+
   <div class="grid grid-cols-3 gap-4">
     <div class="col-span-2">
       <h3 class="list-title font-semibold uppercase mt-3 flex ">
@@ -169,23 +170,26 @@
         </svg>
         <span class="ml-2 "> Danh sách chương</span>
       </h3>
-
-
       <div class="grid grid-cols-3 gap-3 snap-proximity snap-y overflow-y-auto mt-4"
         style="scroll-snap-type: y mandatory; height: 500px;">
-        <div class="mr-3" *ngFor="let chapter of comic.chapters"
+        <div class="mr-3" *ngFor="let chapter of comicChapters"
           [ngClass]="{'chapter-1-50': $index >= 1 && $index <= 50}" style="scroll-snap-align: start;">
-          <div class="flex items-center bg-gray-100 text-sm hover:bg-gray-200 rounded-lg px-2 py-1">
+          <div
+            class="flex items-center col-span-1 bg-gray-100 text-sm hover:bg-gray-200 rounded-lg px-2 py-1 cursor-pointer tooltip-trigger select-none">
             <div>
               <!-- Chapter Title -->
               <a routerLink="/truyen-tranh/{{ comic.url }}/chapter/{{ chapter.id }}">
-                <p class="p-1 font-medium">#{{ chapter.title }}</p>
+                <p class="p-1 font-medium">#{{ chapter.chapterTitle }}</p>
+                <span class="tooltip-content">{{ chapter.chapterDescription??""}}</span>
+                <!-- <p class="p-1 font-medium">#{{ chapter.chapterDescription }}</p> -->
+
               </a>
             </div>
-            <a [href]="'/comments/' + chapter.id" class="flex items-center">
-              <img src="/img/btn_comment@4x.188ef5f1.svg" alt="commentIcon" class="w-6 h-6 mr-2" />
-              <span class="text-sm text-gray-500">Views</span>
-            </a>
+            <div class="ml-auto">
+              <div class="text-sm text-gray-500">updated: {{ chapter.updateAt }}</div>
+              <div class="text-sm text-gray-500">view: {{ chapter.viewCount }}</div>
+
+            </div>
           </div>
           <!-- Link to Comments -->
         </div>

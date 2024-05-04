@@ -1,5 +1,5 @@
 export interface IServiceResponse<T> {
-  Data?: T;
-  Status: number;
-  Message?: string;
+  data?: T;
+  status: number;
+  message?: string;
 }
