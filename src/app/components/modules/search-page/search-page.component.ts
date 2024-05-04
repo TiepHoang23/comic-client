@@ -15,13 +15,16 @@ import { Chapter } from '../../../dataSource/schema/Chapter';
 export class SearchPageComponent {
 
 
-  
+
   constructor(private comicService: ComicService, private route: ActivatedRoute) {
-   
+
   }
 
   ngOnInit(): void {
 
-}
-  
+  }
+  OnSearchChange(e: Event) {
+
+  }
+
 }

@@ -25,6 +25,6 @@ export interface Comic {
 }
 
 export interface ComicList {
-  listComics: Array<Comic>;
+  comics: Array<Comic>;
   totalpage: number;
 }
