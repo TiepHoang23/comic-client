@@ -57,15 +57,15 @@
 </header>
 <!-- Navigation links -->
 
-<nav class="bg-[#e4e4e4] dark:bg-[#454545] lg:block hidden">
+<nav class="bg-gray-200 ">
   <ul
-    class="h-10 flex items-center mx-auto w-full md:max-w-[760px] lg:max-w-[940px] xl:max-w-[1200px]"
+    class="h-10 flex items-center mx-auto container"
     itemscope=""
     itemtype="http://www.schema.org/SiteNavigationElement"
   >
-    <li class="h-full">
+    <li class="h-full hover:bg-white">
       <a
-        href="https://doctruyenonline.vn/truyen-tranh"
+        routerLink="/"
         class="px-4 h-full hover:bg-[#fff] items-center flex hover:fill-[#be8c28]"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,28 @@
         </svg>
       </a>
     </li>
-    <li class="h-full">
+    <li class="h-full hover:bg-white">
+      <div
+        class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group"
+      >
+        <span class="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="20"
+            height="20"
+            viewBox="0 0 32 32"
+          >
+            <path
+              d="M 9 4 L 10.726562 5.9082031 C 10.741563 5.9252031 12.181266 7.5891094 11.947266 9.5371094 C 11.798266 10.781109 10.986922 11.930406 9.5449219 12.941406 C 5.3059219 15.813406 4.0203438 19.676781 5.7773438 23.425781 C 7.0993437 26.247781 9.9972813 28 13.113281 28 L 14.927734 28 L 13.791016 26.388672 C 12.883016 25.214672 12.900187 23.873047 13.117188 22.873047 C 14.662188 24.042047 16.466703 23.89275 17.720703 23.09375 C 18.871703 22.35975 19.685891 21.037937 19.712891 19.460938 C 19.970891 19.868938 20.183937 20.344094 20.335938 20.871094 C 20.777938 22.402094 20.724094 24.737297 19.121094 26.279297 L 17.451172 28 L 19.025391 28 C 19.916391 28 20.810422 27.8335 21.607422 27.4375 C 24.096422 26.2025 25.776109 23.946547 26.662109 20.685547 C 27.383109 18.030547 26.922484 14.523922 25.396484 11.794922 C 21.857484 5.4439219 11.999031 4.2979531 11.582031 4.2519531 L 9 4 z M 13.453125 6.6152344 C 16.360125 7.2692344 21.514344 8.9335312 23.652344 12.769531 C 24.915344 15.026531 25.326563 17.8675 24.726562 20.1875 C 24.229563 22.1285 23.448078 23.578609 22.330078 24.599609 C 22.725078 23.101609 22.615813 21.558406 22.257812 20.316406 C 21.602812 18.048406 20.050125 16.403484 18.203125 16.021484 L 16 15.560547 L 17.142578 17.511719 C 18.203578 19.295719 17.628484 20.78025 16.646484 21.40625 C 15.863484 21.90525 14.583781 21.9535 13.550781 20.4375 L 12.597656 19.037109 L 11.832031 20.548828 C 11.567031 21.071828 10.540422 23.331078 11.232422 25.705078 C 9.7724219 25.231078 8.29725 24.171172 7.53125 22.451172 C 5.91025 18.813172 8.3426875 16.171891 10.679688 14.587891 C 12.627688 13.222891 13.7245 11.595906 13.9375 9.7539062 C 14.0755 8.5629062 13.812125 7.4792344 13.453125 6.6152344 z"
+            ></path>
+          </svg>
+          HOT</span
+        >
+      </div>
+    </li>
+    <li class="h-full hover:bg-white">
       <div
         class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group"
       >
@@ -119,7 +140,26 @@
         </div>
       </div>
     </li>
-    <li class="h-full">
+    <li class="h-full hover:bg-white">
+      <a
+        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#000000"
+          width="20px"
+          height="20px"
+          viewBox="0 0 96 96"
+        >
+          <path
+            d="M12.364 13.17C8.407 15.085 8 17.964 8 44c0 30.815.427 32 11.547 32H24v15.453l7.772-7.726L39.544 76h20.681c21.988 0 24.764-.485 26.665-4.657 1.52-3.337 1.52-51.349 0-54.686-.611-1.34-2.207-2.936-3.547-3.547-3.224-1.469-67.935-1.414-70.979.06M16 44v24h64V20H16v24m29.118-12.573-2.249 5.428-6.596.706-6.595.706 4.893 4.245 4.893 4.245-1.217 5.803c-1.529 7.286-1.395 7.385 4.7 3.474l5.024-3.224 5.123 3.153c6.201 3.815 6.177 3.832 4.659-3.403l-1.217-5.803 4.893-4.245 4.893-4.245-6.595-.706-6.596-.706-2.249-5.428C49.644 28.442 48.348 26 48 26c-.348 0-1.644 2.442-2.882 5.427"
+            fill-rule="evenodd"
+          />
+        </svg>
+        Theo dõi</a
+      >
+    </li>
+    <li class="h-full hover:bg-white">
       <a
         href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
@@ -139,9 +179,9 @@
         >Xếp Hạng</a
       >
     </li>
-    <li class="h-full">
+    <li class="h-full hover:bg-white">
       <a
-        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen"
+        routerLink="/tim-truyen"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
@@ -159,27 +199,8 @@
         >Tìm Truyện</a
       >
     </li>
-    <li class="h-full">
-      <a
-        href="https://doctruyenonline.vn/sach"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-          ></path></svg
-        >Sách</a
-      >
-    </li>
-    <li class="h-full">
+
+    <li class="h-full hover:bg-white">
       <a
         href="https://doctruyenonline.vn"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
@@ -193,241 +214,8 @@
           <path
             d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z"
           ></path></svg
-        >Truyện Chữ</a
-      >
-    </li>
-    <li class="h-full">
-      <a
-        href="https://www.facebook.com/groups/doctruyenonline.vn"
-        target="blank"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-          ></path></svg
-        >Group</a
-      >
-    </li>
-    <li class="h-full">
-      <a
-        href="https://www.facebook.com/Doctruyenonline.Official"
-        target="blank"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="16"
-          viewBox="0 0 512 512"
-          class="mr-1"
-        >
-          <path
-            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
-          ></path></svg
-        >Fanpage</a
+        >Lịch sử</a
       >
     </li>
   </ul>
 </nav>
-
-<!-- drawer component -->
-<div
-  id="drawer-navigation"
-  class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
-  tabindex="-1"
-  aria-labelledby="drawer-navigation-label"
->
-  <h5
-    id="drawer-navigation-label"
-    class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-  >
-    Menu
-  </h5>
-  <button
-    type="button"
-    data-drawer-hide="drawer-navigation"
-    aria-controls="drawer-navigation"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-  >
-    <svg
-      aria-hidden="true"
-      class="w-5 h-5"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-        clip-rule="evenodd"
-      ></path>
-    </svg>
-    <span class="sr-only">Close menu</span>
-  </button>
-  <div class="py-4 overflow-y-auto">
-    <ul class="space-y-2 font-medium">
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 22 21"
-          >
-            <path
-              d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
-            />
-            <path
-              d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
-            />
-          </svg>
-          <span class="ms-3">Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 18"
-          >
-            <path
-              d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
-          <span
-            class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300"
-            >Pro</span
-          >
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
-          <span
-            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
-            >3</span
-          >
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 18"
-          >
-            <path
-              d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 20"
-          >
-            <path
-              d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 18 16"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <svg
-            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"
-            />
-            <path
-              d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"
-            />
-            <path
-              d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"
-            />
-          </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>

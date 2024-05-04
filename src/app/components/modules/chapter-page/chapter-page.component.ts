@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ComicService } from '../../../../dataSource/services/comic.service';
-import { Comic } from '../../../../dataSource/schema/comic';
-import { Page } from '../../../../dataSource/schema/Page';
+import { ComicService } from '../../../dataSource/services/comic.service';
+import { Comic } from '../../../dataSource/schema/comic';
+import { Page } from '../../../dataSource/schema/Page';
 import { ActivatedRoute } from '@angular/router';
-import { Chapter } from '../../../../dataSource/schema/Chapter';
+import { Chapter } from '../../../dataSource/schema/Chapter';
 
 @Component({
   selector: 'app-chapter',

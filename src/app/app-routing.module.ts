@@ -1,11 +1,12 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
-import { ChapterPageComponent } from './components/modules/chapter-page/page/chapter-page.component';
+import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
 import { ComicDetailComponent } from './components/modules/comic-detail/page/layout/comic-detail.component';
 import { ComicService } from './dataSource/services/comic.service';
+import { SearchPageComponent } from './components/modules/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'truyen-tranh/:id',
         component: ComicDetailComponent,
+      },
+      {
+        path: 'tim-truyen',
+        component: SearchPageComponent,
       },
 
     ]
