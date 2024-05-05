@@ -57,7 +57,7 @@
 </header>
 <!-- Navigation links -->
 
-<nav class="bg-gray-200 ">
+<nav class="bg-gray-200">
   <ul
     class="h-10 flex items-center mx-auto container"
     itemscope=""
@@ -124,14 +124,15 @@
           class="absolute top-full left-0 hidden group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
         >
           <ul
-            *ngFor="let Genre of listGenre"
+            *ngFor="let Genres of listGenre"
             itemscope=""
             itemtype="http://www.schema.org/SiteNavigationElement"
           >
-            <li *ngFor="let g of Genre">
+            <li *ngFor="let g of Genres">
               <a
                 itemprop="url"
-                href="https://doctruyenonline.vn/truyen-tranh/the-loai/action"
+                [routerLink]="['tim-truyen']"
+                [queryParams]="{ genre: g.id }"
                 class="block px-3 py-2 w-full hover:text-[#be8c28] truncate font-bold"
                 ><span itemprop="name">{{ g.title }}</span></a
               >

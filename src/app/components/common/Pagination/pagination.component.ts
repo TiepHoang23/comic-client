@@ -47,8 +47,7 @@ export class PaginationComponent implements OnInit {
         for (let index = Math.max(1, page - 1); index <= Math.max(page + 1, 3); index++)
           this.pages.push(index.toString());
 
-        this.pages.push('...')
-        this.pages.push(this.totalpage.toString())
+        this.pages.push('...', this.totalpage.toString())
       }
       else {
         page = Math.max(this.totalpage, page)

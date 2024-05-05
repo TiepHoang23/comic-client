@@ -45,9 +45,8 @@ import { NumeralPipe } from './pines/numeral.pipe';
     CarouselLandingComponent,
     CarouselLayoutComponent,
     ListCardSkeletonComponent,
-    PaginationComponent
-    // PageComponent,
-    // NumeralPipe,
+    PaginationComponent,
+    NumeralPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],

@@ -15,16 +15,6 @@ import { NumeralPipe } from '../../../pines/numeral.pipe';
 
 @NgModule({
   declarations: [
-
-
-    HomePageComponent,
-    ComicCardComponent,
-    ComicDetailComponent,
-    TopListComponent,
-    CarouselLandingComponent,
-    CarouselLayoutComponent,
-    ListCardSkeletonComponent,
-    NumeralPipe,
   ],
   imports: [HomePageRoutingModule, CommonModule],
   exports: [],

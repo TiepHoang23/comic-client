@@ -38,17 +38,19 @@ export class SearchPageComponent {
       let page = Number(params['page']) || 1;
       let sort = Number(params['sort']) || SortType.TopAll;
       let status = Number(params['status']) || ComicStatus.ALL;
+      let genre = Number(params['genre']) || -1;
+      console.log(page, sort, status, genre);
+
       this.isLoading = true;
-      this.OnFilterChange(page, sort, status);
+      this.OnFilterChange(page, sort, status, genre);
     })
 
   }
 
-  OnFilterChange(page: number, sort: number, status: number) {
-    this.comicService.getComics(page, 40, -1, sort, status).subscribe((res: any) => {
+  OnFilterChange(page: number, sort: number, status: number, genre: number) {
+    this.comicService.getComics(page, 40, genre, sort, status).subscribe((res: any) => {
       this.isLoading = false;
       this.totalpage = res.data.totalpage
-
       this.listComics = res.data.comics
     });
 

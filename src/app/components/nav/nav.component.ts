@@ -36,7 +36,6 @@ export class NavComponent {
 
   }
   OnSearchFocus(isFoucs: boolean): boolean {
-    console.log("focus", isFoucs);
     if (isFoucs) {
       this.document.getElementById("search-result")?.classList.remove("invisible");
     }
