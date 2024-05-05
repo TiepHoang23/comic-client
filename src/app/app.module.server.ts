@@ -9,9 +9,10 @@ import { AppModule } from './app.module';
 
 @NgModule({
   imports: [
-    AppModule,
+    // AppModule,
     ServerModule,
     RouterOutlet,
+
 
     // NavComponent,
   ],

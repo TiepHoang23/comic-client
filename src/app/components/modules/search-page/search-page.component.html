@@ -2,19 +2,11 @@
   <div class="mr-2 min-w-32"><p>Trạng Thái:</p></div>
   <div class="inline-flex items-center">
     <button
+      *ngFor="let s of dataView.status"
+      (click)="OnStatusChange(s.Status)"
       class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
     >
-      <span class="hidden md:inline-block">Tất cả </span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
-    >
-      <span class="hidden md:inline-block">Hoàn thành</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
-    >
-      <span class="hidden md:inline-block">Đang ra</span>
+      <span class="hidden md:inline-block">{{ s.Name }} </span>
     </button>
   </div>
 </div>
@@ -22,36 +14,20 @@
   <div class="mr-2 min-w-32"><p>Sắp xếp theo</p></div>
   <div class="grid xl:grid-cols-6 md:grid-cols-4">
     <button
-      value="0"
-      (click)="OnSearchChange($event)"
+      *ngFor="let s of dataView.sorts"
+      (click)="OnSortTypeChange(s.Type)"
       class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
     >
-      <span class="hidden md:inline-block">Ngày cập nhật</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">Truyện mới</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">Top all</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">Số chapter</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">Theo dõi</span>
-    </button>
-    <button
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">Đánh giá</span>
+      <span class="hidden md:inline-block">{{ s.Name }} </span>
     </button>
   </div>
 </div>
+
+<div class="grid grid-cols-5 gap-1">
+  <ng-container *ngFor="let comic of listComics">
+    <div ngxMasonryItem class="masonry-item">
+      <app-comic-card [comic]="comic"></app-comic-card>
+    </div>
+  </ng-container>
+</div>
+<pagination-component [totalpage]="totalpage"> </pagination-component>

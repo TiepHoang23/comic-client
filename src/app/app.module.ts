@@ -12,6 +12,15 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
+import { PaginationComponent } from './components/common/Pagination/pagination.component';
+import { HomePageModule } from './components/modules/home-page/home-page.module';
+import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
+import { ComicDetailComponent } from './components/modules/comic-detail/page/layout/comic-detail.component';
+import { ComicCardComponent } from './components/modules/comic-card/comic-card.component';
+import { TopListComponent } from './components/modules/comic-detail/page/top-list/top-list.component';
+import { CarouselLandingComponent } from './components/modules/carousel-landing/carousel-landing.component';
+import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
+import { ListCardSkeletonComponent } from './components/modules/home-page/page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
 @NgModule({
@@ -22,8 +31,15 @@ import { SearchPageComponent } from './components/modules/search-page/search-pag
     FooterComponent,
     ChapterPageComponent,
     ListSearchComicComponent,
-    SearchPageComponent
-    // PageComponent,
+    SearchPageComponent,
+    HomePageComponent,
+    ComicCardComponent,
+    ComicDetailComponent,
+    TopListComponent,
+    CarouselLandingComponent,
+    CarouselLayoutComponent,
+    ListCardSkeletonComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -30,10 +30,8 @@ const routes: Routes = [
     ]
   },
   {
-
     path: 'truyen-tranh/:comicid/chapter/:chapterid',
     component: ChapterPageComponent,
-
   }
 ];
 
