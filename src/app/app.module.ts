@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +15,9 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
+import { NumeralPipe } from './pines/numeral.pipe';
+
+// import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
 @NgModule({
@@ -22,20 +28,13 @@ import { SearchPageComponent } from './components/modules/search-page/search-pag
     FooterComponent,
     ChapterPageComponent,
     ListSearchComicComponent,
-    SearchPageComponent
+    SearchPageComponent,
     // PageComponent,
+    // NumeralPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule
-  ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient()
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  providers: [provideClientHydration(), provideHttpClient()],
+  bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule { }
+export class AppModule {}
