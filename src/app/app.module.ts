@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +24,9 @@ import { TopListComponent } from './components/modules/comic-detail/page/top-lis
 import { CarouselLandingComponent } from './components/modules/carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
 import { ListCardSkeletonComponent } from './components/modules/home-page/page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
+import { NumeralPipe } from './pines/numeral.pipe';
+
+// import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
 @NgModule({
@@ -40,18 +46,12 @@ import { ListCardSkeletonComponent } from './components/modules/home-page/page/l
     CarouselLayoutComponent,
     ListCardSkeletonComponent,
     PaginationComponent
+    // PageComponent,
+    // NumeralPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule
-  ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient()
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  providers: [provideClientHydration(), provideHttpClient()],
+  bootstrap: [AppComponent],
   // exports: [AppModule]
 })
 export class AppModule { }

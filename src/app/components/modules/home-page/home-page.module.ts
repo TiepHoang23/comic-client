@@ -10,12 +10,21 @@ import { CarouselLayoutComponent } from '../carousel-landing/page/carousel-layou
 import { ListCardSkeletonComponent } from './page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
 import { PaginationComponent } from '../../common/Pagination/pagination.component';
 import { AppModule } from '../../../app.module';
+import { NumeralPipe } from '../../../pines/numeral.pipe';
 // import { CarouselLandingComponent } from '../carousel-landing/carousel-landing.component';
 
 @NgModule({
   declarations: [
 
 
+    HomePageComponent,
+    ComicCardComponent,
+    ComicDetailComponent,
+    TopListComponent,
+    CarouselLandingComponent,
+    CarouselLayoutComponent,
+    ListCardSkeletonComponent,
+    NumeralPipe,
   ],
   imports: [HomePageRoutingModule, CommonModule],
   exports: [],
