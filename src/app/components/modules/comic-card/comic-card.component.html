@@ -22,7 +22,9 @@
             <p class="title font-bold line-clamp-1 hover:line-clamp-none">
               {{ comic.title }}
             </p>
-            <p class="author font-thin text-sm">{{ comic.author }}</p>
+            <p class="author font-thin text-sm line-clamp-1">
+              {{ comic.author }}
+            </p>
           </div>
         </div>
       </a>
@@ -50,7 +52,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <p class="chapter font-thin text-sm">
+      <p class="chapter font-thin text-sm line-clamp-1">
         {{ comic.chapters[comic.chapters.length - 1].title }}
       </p>
     </div>

@@ -76,7 +76,10 @@ export class ComicDetailComponent implements OnInit {
       (topComics) => (this.listTopComics = topComics?.data?.comics),
     );
   }
-
+  onRatingChanged(rating: number) {
+    // Implement your logic here
+    console.log('Rating changed:', rating);
+  }
   goBack(): void {
     this.location.back();
   }

@@ -1,11 +1,13 @@
-<header class="bg-gray-800 p-4">
-  <div class="container mx-auto flex items-center justify-between">
+<header class="bg-white p-4">
+  <div class="container mx-auto flex justify-between">
     <!-- Logo or brand name -->
-    <div class="text-white text-lg font-bold">YourLogo</div>
+    <div class="text-amber-500 text-3xl font-bold size-lg hover:text-amber-100">
+      N
+    </div>
 
     <!-- Search input -->
-    <div class="flex items-center space-x-4">
-      <div style="width: 36rem" class="relative flex justify-end">
+    <div class="flex space-x-3">
+      <div style="width: 36rem" class="relative flex justify-end w-36 h-8">
         <!-- <div class="relative"> -->
         <input
           #SearchInput
@@ -13,24 +15,18 @@
           (focusout)="OnSearchFocus(false)"
           (input)="OnSearchChange($event)"
           type="text"
-          class="bg-gray-700 text-white rounded-md px-8 py-2 focus:w-full focus:outline-none focus:bg-gray-600"
+          class="custom-transition"
           placeholder="Tìm kiếm..."
         />
-        <button
-          class="absolute inset-y-0 right-0 px-3 py-2 bg-gray-700 rounded-r-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-        >
-          <svg
-            class="h-5 w-5 text-white"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fill-rule="evenodd"
+
+        <!-- <button
+          class="absolute inset-y-0 right-0 px-3 py-1 bg-gray-200 rounded-r-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+          <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
               d="M9 0a9 9 0 016.32 14.72l4.51 4.5a1 1 0 11-1.42 1.42l-4.5-4.51A9 9 0 119 0zm0 2a7 7 0 100 14A7 7 0 009 2z"
-              clip-rule="evenodd"
-            />
+              clip-rule="evenodd" />
           </svg>
-        </button>
+        </button> -->
         <div
           id="search-result"
           class="invisible absolute rounded-md z-50 flex w-full mt-12 flex-col bg-gray-100 px-4 py-4 shadow-xl group-hover:visible"
@@ -203,7 +199,7 @@
 
     <li class="h-full hover:bg-white">
       <a
-        routerLink="lich-su"
+        href="https://doctruyenonline.vn"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
         ><svg
           xmlns="http://www.w3.org/2000/svg"

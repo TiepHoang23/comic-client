@@ -7,12 +7,11 @@
     <!-- Dark overlay -->
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <div class="flex col-span-4 rounded shadow-md bg-white container mt-10 z-10 blur-none">
-      <div class="col-image">
+      <div class="col-image ml-10">
         <div class="flex justify-center relative bottom-5" style="width: 200px; height: 300px;">
           <img class="rounded shadow-md flex justify-center object-cover" src="{{ comic.coverImage }}"
             alt="{{ comic.title }}" />
         </div>
-
         <div class="mb-3 flex justify-center">
           <button type="button"
             class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 flex space-x-1 items-center"
@@ -32,6 +31,7 @@
           {{ comic.title }}
         </h1>
         <p class="col-xs-8 uppercase font-thin">{{ comic.author }}</p>
+        <app-star-rating [initialRating]="comic.rating"></app-star-rating>
         <ul class="list-info space-y-2 text-sm mt-2">
 
 
