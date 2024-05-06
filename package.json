@@ -1,5 +1,5 @@
 {
-  "name": "my-comic",
+  "name": "comic-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:my-comic": "node dist/my-comic/server/server.mjs"
+    "serve:ssr:comic-client": "node dist/comic-client/server/server.mjs"
   },
   "private": true,
   "dependencies": {
