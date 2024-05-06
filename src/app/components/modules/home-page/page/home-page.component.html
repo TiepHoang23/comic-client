@@ -10,7 +10,9 @@
   </ng-container>
 
   <ng-template #content>
-    <div class="grid grid-cols-5 gap-1">
+    <div
+      class="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+    >
       <ng-container *ngFor="let comic of listComics">
         <div ngxMasonryItem class="masonry-item">
           <app-comic-card [comic]="comic"></app-comic-card>

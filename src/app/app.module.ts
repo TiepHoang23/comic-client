@@ -25,6 +25,7 @@ import { CarouselLandingComponent } from './components/modules/carousel-landing/
 import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
 import { ListCardSkeletonComponent } from './components/modules/home-page/page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
 import { NumeralPipe } from './pines/numeral.pipe';
+import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
 
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
@@ -47,6 +48,7 @@ import { NumeralPipe } from './pines/numeral.pipe';
     ListCardSkeletonComponent,
     PaginationComponent,
     NumeralPipe,
+    HistoryPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],

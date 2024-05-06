@@ -1,19 +1,22 @@
 <ng-container *ngIf="comic">
-  <div class="card bg-white shadow-md max-h-120">
-    <div class="h-130 flex flex-col max-h-120">
+  <div class="bg-white shadow-md h-full rounded-lg overflow-hidden">
+    <div
+      class="relative w-full h-0 overflow-hidden transition-transform duration-300 transform-gpu hover:-translate-y-2"
+      style="padding-bottom: 140%"
+    >
       <a
         routerLink="/truyen-tranh/{{ comic.url }}"
         routerLinkActive="active"
-        class="h-80 card-image transition-transform duration-300 transform-gpu hover:-translate-y-3"
+        class="flex h-full w-full"
       >
         <img
           [src]="comic.coverImage"
           alt="{{ comic.title }}"
-          class="object-cover w-full h-full"
+          class="object-cover w-full absolute"
         />
 
         <div
-          class="content backdrop-blur-sm bg-gradient-to-t from-black relative bottom-12 flex justify-start mb-2 pl-2"
+          class="w-full backdrop-blur-sm bg-gradient-to-t from-black absolute bottom-0 flex justify-start"
         >
           <div class="text-white p-1">
             <p class="title font-bold line-clamp-1 hover:line-clamp-none">

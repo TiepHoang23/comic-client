@@ -29,17 +29,33 @@ export class ComicDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private ComicService: ComicService,
     private location: Location,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getComic();
     this.getTopComics();
+
+  }
+  saveHistory(comicKey: string) {
+    if (localStorage.getItem("history") === null) {
+      localStorage.setItem("history", JSON.stringify([comicKey]))
+      return;
+    }
+    let history = localStorage.getItem("history") as string
+    let his = JSON.parse(history) as string[]
+    if (his.includes(comicKey)) return
+    his.push(comicKey)
+
+    // history.push(comicKey)
+    localStorage.setItem("history", JSON.stringify(his))
   }
 
   getComic(): void {
     const id = this.route.snapshot.paramMap.get('id') || '';
     this.ComicService.getComicById(id).subscribe((res) => {
+      this.saveHistory(id)
       this.comic = res.data ?? ({} as Comic);
+
       this.comicChapters = (res.data?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
           chapter.title?.split(':') ?? [];

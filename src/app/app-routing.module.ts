@@ -7,17 +7,14 @@ import { HomePageComponent } from './components/modules/home-page/page/home-page
 import { ComicDetailComponent } from './components/modules/comic-detail/page/layout/comic-detail.component';
 import { ComicService } from './dataSource/services/comic.service';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
+import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./components/modules/home-page/home-page.module').then(m => m.HomePageModule)
-      },
+
       {
         path: 'truyen-tranh/:id',
         component: ComicDetailComponent,
@@ -25,6 +22,15 @@ const routes: Routes = [
       {
         path: 'tim-truyen',
         component: SearchPageComponent,
+      },
+      {
+        path: 'lich-su',
+        component: HistoryPageComponent,
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./components/modules/home-page/home-page.module').then(m => m.HomePageModule)
       },
 
     ]
