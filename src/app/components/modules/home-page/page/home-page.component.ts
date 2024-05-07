@@ -12,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
   listComics: Comic[] = [];
-  isLoading: boolean = true;
   totalpage!: number
   constructor(
     private route: ActivatedRoute,
@@ -22,19 +21,15 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // this.currentPage = Number(this.route.snapshot.queryParams['page']) || 1;
     this.route.queryParams.subscribe(params => {
       let page = Number(params['page']) || 1;
-      this.isLoading = true;
       this.OnChangePage(page)
     })
-
   }
 
   OnChangePage(page: number) {
+    this.listComics = [];
     this.comicService.getComics(page).subscribe((res: any) => {
-      this.isLoading = false;
       if (!this.totalpage) {
         this.totalpage = res.data.totalpage
       }

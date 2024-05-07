@@ -19,14 +19,14 @@ import { PaginationComponent } from './components/common/Pagination/pagination.c
 import { HomePageModule } from './components/modules/home-page/home-page.module';
 import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
 import { ComicDetailComponent } from './components/modules/comic-detail/page/layout/comic-detail.component';
-import { ComicCardComponent } from './components/modules/comic-card/comic-card.component';
+import { ComicCardComponent } from './components/common/comic-card/comic-card.component';
 import { TopListComponent } from './components/modules/comic-detail/page/top-list/top-list.component';
 import { CarouselLandingComponent } from './components/modules/carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
-import { ListCardSkeletonComponent } from './components/modules/home-page/page/list-card-skeleton/list-card-skeleton/list-card-skeleton.component';
 import { NumeralPipe } from './pines/numeral.pipe';
 import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
 import { StarRatingComponent } from './components/modules/comic-detail/page/star-rating/star-rating.component';
+import { GridComicComponent } from './components/common/grid-comic/grid-comic.component';
 
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
@@ -46,11 +46,11 @@ import { StarRatingComponent } from './components/modules/comic-detail/page/star
     TopListComponent,
     CarouselLandingComponent,
     CarouselLayoutComponent,
-    ListCardSkeletonComponent,
     PaginationComponent,
     NumeralPipe,
     HistoryPageComponent,
     StarRatingComponent,
+    GridComicComponent
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],

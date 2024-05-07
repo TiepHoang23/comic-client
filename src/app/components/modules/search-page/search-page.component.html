@@ -1,33 +1,38 @@
-<div class="inline-flex items-center my-1">
-  <div class="mr-2 min-w-32"><p>Trạng Thái:</p></div>
-  <div class="inline-flex items-center">
-    <button
-      *ngFor="let s of dataView.status"
-      (click)="OnStatusChange(s.Status)"
-      class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
-    >
-      <span class="hidden md:inline-block">{{ s.Name }} </span>
-    </button>
-  </div>
-</div>
-<div class="flex my-2">
-  <div class="mr-2 min-w-32"><p>Sắp xếp theo</p></div>
-  <div class="grid xl:grid-cols-6 md:grid-cols-4">
-    <button
-      *ngFor="let s of dataView.sorts"
-      (click)="OnSortTypeChange(s.Type)"
-      class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-    >
-      <span class="hidden md:inline-block">{{ s.Name }} </span>
-    </button>
-  </div>
-</div>
-
-<div class="grid grid-cols-5 gap-1">
-  <ng-container *ngFor="let comic of listComics">
-    <div ngxMasonryItem class="masonry-item">
-      <app-comic-card [comic]="comic"></app-comic-card>
+<div id="content" class="container mx-auto">
+  <div class="inline-flex items-center my-1">
+    <div class="mr-2 min-w-32"><p>Trạng Thái:</p></div>
+    <div class="inline-flex items-center">
+      <button
+        *ngFor="let s of dataView.status"
+        (click)="OnStatusChange(s.Status)"
+        class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
+      >
+        <span class="hidden md:inline-block">{{ s.Name }} </span>
+      </button>
     </div>
-  </ng-container>
+  </div>
+  <div class="flex my-2">
+    <div class="mr-2 min-w-32"><p>Sắp xếp theo</p></div>
+    <div class="grid xl:grid-cols-6 md:grid-cols-4">
+      <button
+        *ngFor="let s of dataView.sorts"
+        (click)="OnSortTypeChange(s.Type)"
+        class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
+      >
+        <span class="hidden md:inline-block">{{ s.Name }} </span>
+      </button>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <grid-comic
+      class="basis-9/12 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"
+      [listComics]="listComics"
+      [num_preview] = "40"
+    >
+    </grid-comic>
+
+    <div class="basis-3/12 animate-pulse ml-4 bg-slate-300"></div>
+  </div>
+
+  <pagination-component [totalpage]="totalpage"> </pagination-component>
 </div>
-<pagination-component [totalpage]="totalpage"> </pagination-component>

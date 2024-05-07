@@ -15,7 +15,7 @@ import { ComicStatus, SortType } from '../../../dataSource/enum';
 
 })
 export class SearchPageComponent {
-  listComics!: Comic[]
+  listComics!: Comic[] 
   isLoading: boolean = true;
   totalpage!: number
   dataView: any =
@@ -48,6 +48,7 @@ export class SearchPageComponent {
   }
 
   OnFilterChange(page: number, sort: number, status: number, genre: number) {
+    this.listComics = []
     this.comicService.getComics(page, 40, genre, sort, status).subscribe((res: any) => {
       this.isLoading = false;
       this.totalpage = res.data.totalpage

@@ -32,9 +32,8 @@ export class PaginationComponent implements OnInit {
     this.OnChangePage(Number(this.currentPage))
   }
   PageSetup(page: number) {
-    console.log(page, this.totalpage);
 
-    this.pages = []//Array.from({ length: 10 }, (_, i) => i + page).map(String);
+    this.pages = []
     if (page <= 3) {
       for (let index = Math.max(1, page - 2); index <= Math.max(page + 2, 3); index++)
         this.pages.push(index.toString());
