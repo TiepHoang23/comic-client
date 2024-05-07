@@ -3,7 +3,7 @@ import { Routes, RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 import { HomePageComponent } from './page/home-page.component';
 
 import { ComicService } from '../../../dataSource/services/comic.service';
-import { ComicDetailComponent } from '../comic-detail/page/layout/comic-detail.component';
+import { ComicDetailComponent } from '../comic-detail/comic-detail.component';
 // import { ChapterPageComponent } from '../chapter-page/page/chapter-page.component';
 
 export const routes: Routes = [

@@ -51,6 +51,9 @@ export class ComicService {
   getChapterImgs(id: number) {
     return this.httpclient.get(`${globalConfig.API_HOST}/Comic/chapter/${id}`);
   }
+  getChapterById(id: string) {
+    return this.httpclient.get(`${globalConfig.API_HOST}/Comic/${id}/chapters`);
+  }
   getTopComics(): Observable<IServiceResponse<{ comics: Comic[] }>> {
     if (!globalConfig.USE_API) {
       return this.jsonApiService.get('/top-comics');

@@ -4,7 +4,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
-import { ComicDetailComponent } from './components/modules/comic-detail/page/layout/comic-detail.component';
+import { ComicDetailComponent } from './components/modules/comic-detail/comic-detail.component';
 import { ComicService } from './dataSource/services/comic.service';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
 import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
