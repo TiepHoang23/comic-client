@@ -15,9 +15,8 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
-import { PaginationComponent } from './components/common/Pagination/pagination.component';
-import { HomePageModule } from './components/modules/home-page/home-page.module';
-import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
+import { PaginationComponent } from './components/common/pagination/pagination.component';
+import { HomePageComponent } from './components/modules/home-page/home-page.component';
 import { ComicDetailComponent } from './components/modules/comic-detail/comic-detail.component';
 import { ComicCardComponent } from './components/common/comic-card/comic-card.component';
 import { TopListComponent } from './components/modules/comic-detail/page/top-list/top-list.component';
@@ -28,6 +27,7 @@ import { HistoryPageComponent } from './components/modules/history-page/history-
 import { StarRatingComponent } from './components/modules/comic-detail/page/star-rating/star-rating.component';
 import { GridComicComponent } from './components/common/grid-comic/grid-comic.component';
 import { ChapterListComponent } from './components/modules/comic-detail/page/list-chapter/chapter-list.component';
+import { RecentReadComponent } from './components/common/recent-read/recent-read.component';
 
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
@@ -53,7 +53,7 @@ import { ChapterListComponent } from './components/modules/comic-detail/page/lis
     StarRatingComponent,
     GridComicComponent,
     ChapterListComponent,
- 
+    RecentReadComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],

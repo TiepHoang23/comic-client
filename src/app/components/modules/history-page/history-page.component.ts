@@ -12,23 +12,30 @@ import { url } from 'inspector';
   styleUrls: ['./history-page.component.scss'],
 })
 export class HistoryPageComponent {
-  comics!: Comic[];
+  comics: Comic[] = [];
   constructor(private comicService: ComicService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
 
-    console.log(localStorage);
     if (localStorage.getItem("history") === null) return
 
     let history = localStorage.getItem("history") as string
-    let his = JSON.parse(history) as string[]
+    let his = JSON.parse(history) as Comic[]
     // this.comicService.getComicsByIds(his).subscribe((res: any) => {
     //   this.comics = res.data
     // })
-    console.log(his);
+    let list = []
+    his.forEach((element, i) => {
+      this.comicService.getComicById(element.url).subscribe((res: any) => {
+        list.push(res.data)
+        if (i === his.length - 1) {
+          this.comics = list
+        }
 
-    this.comics = his.map((id) => ({} as Comic))
+      })
+    });
+    // this.comics = his.map((id) => ({} as Comic))
   }
 
 

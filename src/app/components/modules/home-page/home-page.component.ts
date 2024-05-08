@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ComicService } from '../../../../dataSource/services/comic.service';
-import { Comic } from '../../../../dataSource/schema/comic';
+import { ComicService } from '../../../dataSource/services/comic.service';
+import { Comic } from '../../../dataSource/schema/comic';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

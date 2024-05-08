@@ -1,7 +1,4 @@
-
 <!-- Remeber add grid class into parent -->
 <ng-container *ngFor="let comic of listComics">
-<div ngxMasonryItem class="masonry-item">
-    <app-comic-card [comic]="comic" ></app-comic-card>
-</div>
+  <app-comic-card [comic]="comic"></app-comic-card>
 </ng-container>
