@@ -60,7 +60,7 @@ export class ComicService {
     }
     const params = {
       page: '1',
-      step: '5',
+      step: '15',
       genre: '-1',
       sort: '8',
       status: '-1',
