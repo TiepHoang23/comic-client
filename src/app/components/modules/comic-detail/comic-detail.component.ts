@@ -34,25 +34,25 @@ export class ComicDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private ComicService: ComicService,
     private location: Location,
-    @Inject(DOCUMENT) private document:Document
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
     this.getComic();
     this.getTopComics();
-   
+
 
   }
 
-  saveHistory(comicKey: string) {
+  saveHistory(comic: Comic) {
     if (localStorage.getItem("history") === null) {
-      localStorage.setItem("history", JSON.stringify([comicKey]))
+      localStorage.setItem("history", JSON.stringify([comic]))
       return;
     }
     let history = localStorage.getItem("history") as string
-    let his = JSON.parse(history) as string[]
-    if (his.includes(comicKey)) return
-    his.push(comicKey)
+    let his = JSON.parse(history) as Comic[]
+    if (his.find(c => c.id === comic.id)) return
+    his.push(comic)
     localStorage.setItem("history", JSON.stringify(his))
   }
 
@@ -60,48 +60,47 @@ export class ComicDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id') || '';
 
     this.ComicService.getComicById(id).subscribe((res) => {
-      this.saveHistory(id)
       this.comic = res.data ?? ({} as Comic);
+      this.saveHistory(this.comic)
 
-         this.allchapter=  (res.data?.chapters ?? []).map((chapter) => {
-          const [chapterTitle, chapterDescription] =
-            chapter.title?.split(':') ?? [];
-          // const isToDay = new Date(chapter.updateAt)..toDateString() === new Date().toDateString()
-          return {
-            id: chapter.id,
-            chapterTitle,
-            chapterDescription,
-            updateAt: moment(chapter.updateAt).format('DD/MM'),
-            viewCount: chapter.viewCount,
-          };
-        
-        });
-        this.setUpScroll()
+      this.allchapter = (res.data?.chapters ?? []).map((chapter) => {
+        const [chapterTitle, chapterDescription] =
+          chapter.title?.split(':') ?? [];
+        // const isToDay = new Date(chapter.updateAt)..toDateString() === new Date().toDateString()
+        return {
+          id: chapter.id,
+          chapterTitle,
+          chapterDescription,
+          updateAt: moment(chapter.updateAt).format('DD/MM'),
+          viewCount: chapter.viewCount,
+        };
+
+      });
+      this.setUpScroll()
 
 
     });
 
-        
+
   }
   setUpScroll() {
     //Tạm thời hard code, sau có responsive thì sửa sau
-      let overlay = this.document.getElementById("overlay");
-      if (overlay === null) return;
-      this.comicChapters = this.allchapter.slice(0, 99)
-      this.maxChapterPage = Math.ceil((this.allchapter.length +1)/ 99 -1)
-      let nColumn = Math.floor((this.allchapter.length -1)/3) +1
+    let overlay = this.document.getElementById("overlay");
+    if (overlay === null) return;
+    this.comicChapters = this.allchapter.slice(0, 99)
+    this.maxChapterPage = Math.ceil((this.allchapter.length + 1) / 99 - 1)
+    let nColumn = Math.floor((this.allchapter.length - 1) / 3) + 1
 
-      overlay.style.height= `${nColumn*72}px` ;
-       this.currentChapterPage = 1
-       this.SearchField.nativeElement.addEventListener('scroll', (e:any)=> {
-        if(this.currentChapterPage > this.maxChapterPage) return
-          if(e.target.scrollTop>2304*this.currentChapterPage)
-          {
-            this.currentChapterPage++
-            this.comicChapters = this.allchapter.slice(0, 99*this.currentChapterPage)
-          }
+    overlay.style.height = `${nColumn * 72}px`;
+    this.currentChapterPage = 1
+    this.SearchField.nativeElement.addEventListener('scroll', (e: any) => {
+      if (this.currentChapterPage > this.maxChapterPage) return
+      if (e.target.scrollTop > 2304 * this.currentChapterPage) {
+        this.currentChapterPage++
+        this.comicChapters = this.allchapter.slice(0, 99 * this.currentChapterPage)
+      }
 
-      });
+    });
   }
 
   getTopComics(): void {

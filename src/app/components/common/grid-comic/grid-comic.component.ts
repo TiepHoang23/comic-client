@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GridComicComponent {
 
-  @Input() num_preview : number = 40
+  @Input() num_preview: number = 40
   @Input() listComics!: Comic[]
   constructor(private comicService: ComicService
     , private route: ActivatedRoute
@@ -20,14 +20,15 @@ export class GridComicComponent {
 
   }
   ngOnChanges(changes: any) {
-   if(this.listComics.length===0){
-    this.listComics = Array(this.num_preview).fill(undefined);
-   }
-        
+    if (this.listComics.length === 0) {
+      this.listComics = Array(this.num_preview).fill(undefined);
+    }
+    console.log(this.listComics);
+
   }
 
 
   ngOnInit(): void {
-    this.listComics =Array(this.num_preview).fill(undefined)
+    this.listComics = Array(this.num_preview).fill(undefined)
   }
 }

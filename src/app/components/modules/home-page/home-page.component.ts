@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ComicService } from '../../../../dataSource/services/comic.service';
-import { Comic } from '../../../../dataSource/schema/comic';
+import { Observable } from 'rxjs';
+
+import { ComicService } from '../../../dataSource/services/comic.service';
+import { Comic } from '../../../dataSource/schema/comic';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
   listComics: Comic[] = [];
-  listTopComics?: Comic[] = [];
   totalpage!: number;
   constructor(
     private route: ActivatedRoute,
@@ -20,8 +21,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTopComics();
-    console.log({ listTopComics: this.listTopComics });
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
       this.OnChangePage(page);
@@ -35,13 +34,6 @@ export class HomePageComponent implements OnInit {
         this.totalpage = res.data.totalpage;
       }
       this.listComics = res.data.comics;
-    });
-  }
-
-  getTopComics(): void {
-    this.comicService.getTopComics().subscribe((topComics) => {
-      this.listTopComics = topComics?.data?.comics;
-      console.log({ listComics: this.listTopComics });
     });
   }
 }

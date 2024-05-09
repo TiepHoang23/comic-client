@@ -1,0 +1,43 @@
+<div
+  class="px-3 pb-2 pt-2 mt-14 mb:3 border overflow-hidden bg-slate-100 lg:block"
+>
+  <div class="border-b border-solid border-[#ccc] mb-1">
+    <h4 class="flex items-center border-b border-[black] text-base font-bold">
+      Đọc gần đây
+    </h4>
+  </div>
+
+  <div *ngFor="let item of listComics" class="hover:bg-black">
+    <div
+      class="border rounded-md flex items-center w-full h-[48px] my-2 mb-1 bg-white"
+    >
+      <img
+        src="{{ item.coverImage }}"
+        alt="Hogosha Shikkaku. Issen Wo Koe Ta Yoru"
+        class="h-full mr-2 w-[40px] p-1 rounded-md"
+      />
+      <div class="flex w-full text-sm h-full">
+        <div class="h-full flex-1 flex flex-col mr-1">
+          <span class="w-full">
+            <a
+              [routerLink]="['/truyen-tranh', item.url]"
+              class="hover:underline font-bold line-clamp-1"
+            >
+              {{ item.title }}
+            </a>
+          </span>
+
+          <a
+            [routerLink]="['/truyen-tranh', item.url]"
+            class="capitalize flex text-sm items-center hover:underline text-[#be8c28]"
+          >
+            {{ item.chapters[0].title }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full mt-2 text-center hover:underline">
+    <a [routerLink]="['/lich-su']" class="hover:underline">Xem thêm</a>
+  </div>
+</div>

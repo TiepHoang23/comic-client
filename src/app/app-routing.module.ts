@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { NavComponent } from './components/nav/nav.component';
-import { HomePageComponent } from './components/modules/home-page/page/home-page.component';
+import { HomePageComponent } from './components/modules/home-page/home-page.component';
 import { ComicDetailComponent } from './components/modules/comic-detail/comic-detail.component';
 import { ComicService } from './dataSource/services/comic.service';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
@@ -16,6 +16,10 @@ const routes: Routes = [
     children: [
 
       {
+        path: '',
+        component: HomePageComponent,
+      },
+      {
         path: 'truyen-tranh/:id',
         component: ComicDetailComponent,
       },
@@ -27,11 +31,6 @@ const routes: Routes = [
         path: 'lich-su',
         component: HistoryPageComponent,
       },
-      {
-        path: '',
-        loadChildren: () =>
-          import('./components/modules/home-page/home-page.module').then(m => m.HomePageModule)
-      },
 
     ]
   },
@@ -42,7 +41,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking',
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
