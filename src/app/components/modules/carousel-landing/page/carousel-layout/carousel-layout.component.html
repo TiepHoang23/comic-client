@@ -1,7 +1,23 @@
-<div class="angry-grid">
-    <div id="item-0" class="grid-item" [style.backgroundImage]="images[0]"></div>
-    <div id="item-1" class="grid-item" [style.backgroundImage]="images[1]"></div>
-    <div id="item-2" class="grid-item" [style.backgroundImage]="images[2]"></div>
-    <div id="item-3" class="grid-item" [style.backgroundImage]="images[3]"></div>
+<div class=" w-2/5 h-0 relative" style="padding-bottom:30%">
+    <div class="angry-grid grid grid-cols-4 grid-rows-4 gap-2 pt-10 rounded absolute w-full h-full">
+        <div id="item-col-1" class="grid-item col-span-1 row-span-2 col-start-1  row-start-1 bg-cover bg-center"
+            [style.backgroundImage]="images[0]">
+        </div>
+        <div id="item-col-1" class="grid-item col-span-1 row-span-2 col-start-1 row-start-3 bg-cover bg-center"
+            [style.backgroundImage]="images[1]">
+        </div>
+        <div id="item-0" class="grid-item col-span-2 col-start-2 row-span-full  bg-cover bg-center"
+            [style.backgroundImage]="images[2]">
+        </div>
+
+        <div id="item-3" class="grid-item col-span-1 row-span-2 col-start-4 row-start-1 bg-cover bg-center"
+            [style.backgroundImage]="images[3]">
+        </div>
+
+        <div id="item-3" class="grid-item col-span-1 row-span-2  col-start-4 row-start-3 bg-cover bg-center"
+            [style.backgroundImage]="images[4]">
+        </div>
+
+    </div>
 
 </div>

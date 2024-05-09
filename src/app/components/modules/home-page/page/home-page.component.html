@@ -1,19 +1,18 @@
 <div id="content" class="container mx-auto">
-  <!-- <app-carousel-layout></app-carousel-layout> -->
+  <div *ngIf="listTopComics">
+    <app-carousel-landing [dataSlide]="listTopComics"></app-carousel-landing>
 
-  <app-carousel-landing></app-carousel-landing>
+  </div>
   <div>
     <h1 class="text-2xl font-bold mb-4">Truyện mới cập nhật</h1>
   </div>
   <div class="flex flex-row">
-    <grid-comic  class="basis-9/12 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5" 
-    [listComics]="listComics"
-    [num_preview] = "40"
-    >
-    
+    <grid-comic class="basis-9/12 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5"
+      [listComics]="listComics" [num_preview]="40">
+
     </grid-comic>
 
     <div class="basis-3/12 animate-pulse ml-4 bg-slate-400"></div>
   </div>
-  <pagination-component [totalpage]="totalpage"> </pagination-component>  
+  <pagination-component [totalpage]="totalpage"> </pagination-component>
 </div>

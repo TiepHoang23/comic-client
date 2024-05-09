@@ -1,14 +1,12 @@
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
+<div id="default-carousel" class="relative w-full " data-carousel="slide">
     <!-- Carousel wrapper -->
 
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative overflow-hidden rounded-lg">
         <!-- Carousel wrapper -->
         <ng-container *ngFor="let item of carouselItems ; let i = index">
             <div [class.hidden]="selectedIndex !== i"
-                [ngClass]="{'transition ease-in-out duration-500': isTransitioning}" data-carousel-item>
-                <img [src]="item.src"
-                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 transition duration-700 ease-in-out"
-                    alt="...">
+                [ngClass]="{'transition ease-in-out duration-500 w-full': isTransitioning}" data-carousel-item>
+                <app-carousel-layout class="flex justify-center w-full" [comics]="item.comic"></app-carousel-layout>
             </div>
         </ng-container>
     </div>
