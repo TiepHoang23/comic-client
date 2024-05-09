@@ -24,7 +24,7 @@ export class RecentReadComponent implements OnInit {
     if (localStorage.getItem("history") === null) return
 
     let history = localStorage.getItem("history") as string
-    this.listComics = JSON.parse(history) as Comic[]
+    this.listComics = (JSON.parse(history) as Comic[]).slice(0, 5) ?? []
 
   }
   ngOnChanges() {
