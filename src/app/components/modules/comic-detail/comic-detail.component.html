@@ -51,7 +51,7 @@
   <!-- Dark overlay -->
 
   <div
-    class="flex rounded-t-3xl container mt-10 z-10 bg-white"
+    class="flex rounded-t-3xl container mt-10 z-5 bg-white"
     style="
       border-top: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
       border-left: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
@@ -418,6 +418,15 @@
         <!-- Link to Comments -->
       </div>
     </div>
+    <grid-comic
+      [listComics]="listTopComics!"
+      [num_preview]="10"
+      [_title]="'Truyện tương tự'"
+      [_class]="
+        'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
+      "
+    >
+    </grid-comic>
   </div>
   <div
     *ngIf="listTopComics"

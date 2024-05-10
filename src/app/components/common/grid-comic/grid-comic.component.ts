@@ -14,16 +14,20 @@ export class GridComicComponent {
 
   @Input() num_preview: number = 40
   @Input() listComics!: Comic[]
+  @Input() _class!: string
+  @Input() _title!: string
+
   constructor(private comicService: ComicService
     , private route: ActivatedRoute
     , private router: Router) {
 
   }
   ngOnChanges(changes: any) {
-    if (this.listComics.length === 0) {
+    if (this.listComics && this.listComics.length === 0) {
+
       this.listComics = Array(this.num_preview).fill(undefined);
     }
-    console.log(this.listComics);
+
 
   }
 

@@ -38,11 +38,15 @@ export class ComicDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getComic();
-    this.getTopComics();
+    this.route.params.subscribe((params) => {
+      let id = params['id'];
+      this.getComic(id);
+      this.getTopComics();
 
+    });
 
   }
+
 
   saveHistory(comic: Comic) {
     if (localStorage.getItem("history") === null) {
@@ -56,8 +60,7 @@ export class ComicDetailComponent implements OnInit {
     localStorage.setItem("history", JSON.stringify(his))
   }
 
-  getComic(): void {
-    const id = this.route.snapshot.paramMap.get('id') || '';
+  getComic(id: string): void {
 
     this.ComicService.getComicById(id).subscribe((res) => {
       this.comic = res.data ?? ({} as Comic);
@@ -79,7 +82,9 @@ export class ComicDetailComponent implements OnInit {
       this.setUpScroll()
 
 
-    });
+    })
+    // const id = this.route.snapshot.paramMap.get('id') || '';
+
 
 
   }

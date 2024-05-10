@@ -5,73 +5,13 @@
 
   <div class="flex flex-col-reverse lg:flex-row">
     <div class="basis-9/12">
-      <div>
-        <h1 class="text-2xl font-bold mb-4">Truyện mới cập nhật</h1>
-      </div>
-      <div class="flex my-6 flex-row justify-between gap-6">
-        <div class="flex ml-auto bg-slate-200">
-          <div class="p-2 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              class=""
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
-              ></path>
-            </svg>
-          </div>
-          <div class="p-2 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              class=""
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 3H3v7h18zm0 11H3v7h18z"
-              ></path>
-            </svg>
-          </div>
-          <div class="p-2 cursor-pointer active">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-              class=""
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 3H3v7h7zm11 0h-7v7h7zm0 11h-7v7h7zm-11 0H3v7h7z"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
       <grid-comic
         [listComics]="listComics"
         [num_preview]="40"
-        [ngClass]="[
+        [_title]="'Truyện mới cập nhật'"
+        [_class]="
           'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
-        ]"
+        "
       >
       </grid-comic>
     </div>

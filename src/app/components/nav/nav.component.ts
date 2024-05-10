@@ -35,7 +35,7 @@ export class NavComponent {
     }, this.doneTypingInterval);
 
   }
-  OnSearchFocus(isFoucs: boolean): boolean {
+  OnSearchFocus = (isFoucs: boolean): boolean => {
     if (isFoucs) {
       this.document.getElementById("search-result")?.classList.remove("invisible");
     }
