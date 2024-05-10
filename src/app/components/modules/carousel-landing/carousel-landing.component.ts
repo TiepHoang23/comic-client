@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Comic } from '../../../dataSource/schema/comic';
+import chunk from 'lodash/chunk';
 
 @Component({
   selector: 'app-carousel-landing',
@@ -29,20 +30,16 @@ export class CarouselLandingComponent implements OnInit {
 
   ngOnChanges() {
     this.carouselItems = this.carouselItems?.map((slide, index) => {
-      const comicChunk = this.dataSlide?.slice(index, index + 5); // get 5 comics per slide
+      const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
       return {
         slideIndex: slide.slideIndex,
-        comic: comicChunk,
+        comic: comicChunk[index],
       };
     });
-    console.log({ carouselItems: this.carouselItems });
     this.startAutoSlide();
   }
 
-  ngOnInit() {
-    // console.log({ dataSlide: this.dataSlide });
-    // console.log({ carouselItems: this.dataSlide });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     clearInterval(this.interval);

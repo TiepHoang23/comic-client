@@ -13,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 export class HomePageComponent implements OnInit {
   listComics: Comic[] = [];
   totalpage!: number;
+  listTopComics?: Comic[];
   constructor(
     private route: ActivatedRoute,
-    private comicService: ComicService,
+    private ComicService: ComicService,
   ) {
     // this.pages = Array.from({ length: 10 }, (_, i) => i + 1).map(String);
   }
@@ -24,16 +25,22 @@ export class HomePageComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
       this.OnChangePage(page);
+      this.getTopComics();
     });
   }
 
   OnChangePage(page: number) {
     this.listComics = [];
-    this.comicService.getComics(page).subscribe((res: any) => {
+    this.ComicService.getComics(page).subscribe((res: any) => {
       if (!this.totalpage) {
         this.totalpage = res.data.totalpage;
       }
       this.listComics = res.data.comics;
+    });
+  }
+  getTopComics(): void {
+    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics) => {
+      this.listTopComics = topComics?.data?.comics;
     });
   }
 }

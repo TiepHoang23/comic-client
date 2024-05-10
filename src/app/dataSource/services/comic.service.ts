@@ -54,13 +54,15 @@ export class ComicService {
   getChapterById(id: string) {
     return this.httpclient.get(`${globalConfig.API_HOST}/Comic/${id}/chapters`);
   }
-  getTopComics(): Observable<IServiceResponse<{ comics: Comic[] }>> {
+  getTopComics({
+    top = 10,
+  }): Observable<IServiceResponse<{ comics: Comic[] }>> {
     if (!globalConfig.USE_API) {
       return this.jsonApiService.get('/top-comics');
     }
     const params = {
       page: '1',
-      step: '15',
+      step: top.toString(),
       genre: '-1',
       sort: '8',
       status: '-1',
