@@ -9,7 +9,7 @@ import { Comic } from '../../../../../dataSource/schema/comic';
 export class CarouselLayoutComponent {
   images: string[] = [];
   @Input() comics?: Comic[] = [];
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.preloadImages();
@@ -18,11 +18,10 @@ export class CarouselLayoutComponent {
   preloadImages(): void {
     console.log({ comics: this.comics });
     this.comics?.forEach((comic, index) => {
-      const img = new Image();
-      img.onload = () => {
-        this.images[index] = `url(${comic.coverImage})`;
-      };
-      img.src = comic.coverImage ?? '';
+
+
+      // this.images[index] = comic.coverImage;
+
     });
   }
 }

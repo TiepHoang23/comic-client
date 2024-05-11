@@ -13,16 +13,16 @@ export class CarouselLandingComponent implements OnInit {
     slideIndex: number;
     comic?: Comic[];
   }> = [
-    {
-      slideIndex: 1,
-    },
-    {
-      slideIndex: 2,
-    },
-    {
-      slideIndex: 3,
-    },
-  ];
+      {
+        slideIndex: 1,
+      },
+      {
+        slideIndex: 2,
+      },
+      {
+        slideIndex: 3,
+      }
+    ];
 
   selectedIndex = 0;
   isTransitioning: boolean = false;
@@ -36,10 +36,10 @@ export class CarouselLandingComponent implements OnInit {
         comic: comicChunk[index],
       };
     });
-    this.startAutoSlide();
+    // this.startAutoSlide();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnDestroy() {
     clearInterval(this.interval);
@@ -48,7 +48,7 @@ export class CarouselLandingComponent implements OnInit {
   private startAutoSlide() {
     this.interval = setInterval(() => {
       this.nextSlide();
-    }, 5000);
+    }, 4000);
   }
 
   selectSlide(index: number) {

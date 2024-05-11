@@ -1,23 +1,59 @@
-<div class=" w-2/5 h-0 relative" style="padding-bottom:30%">
-    <div class="angry-grid grid grid-cols-4 grid-rows-4 gap-2 pt-10 rounded absolute w-full h-full">
-        <div id="item-col-1" class="grid-item col-span-1 row-span-2 col-start-1  row-start-1 bg-cover bg-center"
-            [style.backgroundImage]="images[0]">
-        </div>
-        <div id="item-col-1" class="grid-item col-span-1 row-span-2 col-start-1 row-start-3 bg-cover bg-center"
-            [style.backgroundImage]="images[1]">
-        </div>
-        <div id="item-0" class="grid-item col-span-2 col-start-2 row-span-full  bg-cover bg-center"
-            [style.backgroundImage]="images[2]">
-        </div>
-
-        <div id="item-3" class="grid-item col-span-1 row-span-2 col-start-4 row-start-1 bg-cover bg-center"
-            [style.backgroundImage]="images[3]">
-        </div>
-
-        <div id="item-3" class="grid-item col-span-1 row-span-2  col-start-4 row-start-3 bg-cover bg-center"
-            [style.backgroundImage]="images[4]">
-        </div>
-
-    </div>
-
+<div
+  class="w-full h-0 relative rounded-md overflow-hidden bg-white shadow-md border-3 border-white"
+  style="padding-bottom: 75%"
+>
+  <div
+    class="angry-grid grid grid-cols-4 grid-rows-4 gap-1 rounded absolute w-full h-full"
+  >
+    <a
+      [routerLink]="['truyen-tranh',comics?.[0]?.url]"
+      class="grid-item col-span-1 row-span-2 col-start-1 row-start-1"
+    >
+      <img
+        id="item-col-1"
+        class="object-cover h-full"
+        src="{{ comics?.[0]?.coverImage }}"
+      />
+    </a>
+    <a
+      [routerLink]="['truyen-tranh',comics?.[1]?.url]"
+      class="grid-item col-span-1 row-span-2 col-start-1 row-start-3"
+    >
+      <img
+        id="item-col-1"
+        class="object-cover h-full"
+        src="{{ comics?.[1]?.coverImage }}"
+      />
+    </a>
+    <a
+      [routerLink]="['truyen-tranh',comics?.[2]?.url]"
+      class="grid-item col-span-2 col-start-2 row-span-full"
+    >
+      <img
+        id="item-0"
+        class="object-cover h-full"
+        src="{{ comics?.[2]?.coverImage }}"
+      />
+    </a>
+    <a
+      [routerLink]="['truyen-tranh',comics?.[3]?.url]"
+      class="grid-item col-span-1 row-span-2 col-start-4 row-start-1"
+    >
+      <img
+        id="item-3"
+        class="object-cover h-full"
+        src="{{ comics?.[3]?.coverImage }}"
+      />
+    </a>
+    <a
+      [routerLink]="['truyen-tranh',comics?.[4]?.url]"
+      class="grid-item col-span-1 row-span-2 col-start-4 row-start-3"
+    >
+      <img
+        id="item-3"
+        class="object-cover h-full"
+        src="{{ comics?.[4]?.coverImage }}"
+      />
+    </a>
+  </div>
 </div>
