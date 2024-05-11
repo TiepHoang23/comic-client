@@ -1,38 +1,177 @@
 <div id="content" class="container mx-auto">
+  <div class="grid gap-2 md:grid-cols-[1fr_12rem]">
+    <!-- Search Form -->
+    <form class="md-inputwrap" action="/titles" method="GET">
+      <input class="placeholder-current" placeholder="Search" title="Search" name="q" autocomplete="off">
+      <div class="md-search-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
+          class="icon text-icon-contrast text-undefined">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16m10 2-4.35-4.35"></path>
+        </svg>
+      </div>
+      <div class="md-border"></div>
+    </form>
+
+    <!-- Show Filters Button -->
+    <button (click)="toggleFilters()"
+      class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4"
+      style="min-height: 2.5rem; min-width: 100%;">
+      <span class="flex relative items-center justify-center font-medium select-none w-full"
+        style="pointer-events: none; justify-content: center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+          stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-chevron-down icon mr-4"
+          viewBox="0 0 24 24" style="color: currentcolor;">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        Show filters
+      </span>
+    </button>
+  </div>
+
+  <!-- Filter Options -->
+  <div [ngClass]="{ 'hidden': !showFilters }" class="expander grid grid-rows-[1fr_0fr]">
+
+
+    <div data-v-a1fe968e="" class="">
+      <div class="hidden md:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-8 my-4">
+        <div class="relative space-y-1"><!----><label id="headlessui-listbox-label-1" data-headlessui-state=""
+            class="text-midTone xl:text-base text-sm">Sort by</label><button id="headlessui-listbox-button-2"
+            type="button" aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-1 headlessui-listbox-button-2"><span class="text-left truncate"
+              title="None">None</span><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-midTone"
+              viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+        <div class="relative space-y-1" mode="AND" data-headlessui-state=""><!----><label data-v-b3f56003=""
+            class="text-midTone xl:text-base text-sm">Filter tags <!----><!----></label><button
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color,outline-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            title="Include any" id="headlessui-popover-button-4" type="button" aria-expanded="false"
+            data-headlessui-state=""><span data-v-b3f56003="" class="truncate text-left">Include any</span><svg
+              data-v-b3f56003="" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-midTone"
+              viewBox="0 0 24 24">
+              <path data-v-b3f56003="" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----><!----></div>
+        <div hidden=""
+          style="position: fixed; height: 0px; padding: 0px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; display: none;">
+        </div>
+        <div class="relative space-y-1 grid"><!----><label id="headlessui-listbox-label-9" data-headlessui-state=""
+            class="text-midTone truncate xl:text-base text-sm"><span title="Content Rating">Content
+              Rating</span><!----></label><button id="headlessui-listbox-button-10" type="button"
+            aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-9 headlessui-listbox-button-10"><span
+              class="text-left truncate">Any</span><svg xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 my-auto text-midTone" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+        <div class="relative space-y-1 grid"><!----><label id="headlessui-listbox-label-12" data-headlessui-state=""
+            class="text-midTone truncate xl:text-base text-sm"><span title="Magazine Demographic">Magazine
+              Demographic</span><!----></label><button id="headlessui-listbox-button-13" type="button"
+            aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-12 headlessui-listbox-button-13"><span
+              class="text-left truncate">Any</span><svg xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 my-auto text-midTone" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+        <div class="relative space-y-1 grid" disablefilter="true" data-headlessui-state=""><!----><label
+            id="headlessui-listbox-label-15" data-headlessui-state=""
+            class="text-midTone truncate xl:text-base text-sm"><span
+              title="Authors">Authors</span><!----></label><button id="headlessui-listbox-button-16" type="button"
+            aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-15 headlessui-listbox-button-16"><span
+              class="text-left truncate">Any<!----></span><svg xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 my-auto text-midTone" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+        <div class="relative space-y-1 grid" disablefilter="true" data-headlessui-state=""><!----><label
+            id="headlessui-listbox-label-18" data-headlessui-state=""
+            class="text-midTone truncate xl:text-base text-sm"><span
+              title="Artists">Artists</span><!----></label><button id="headlessui-listbox-button-19" type="button"
+            aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-18 headlessui-listbox-button-19"><span
+              class="text-left truncate">Any<!----></span><svg xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 my-auto text-midTone" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+        <label data-v-eb114e73="" class="text-midTone truncate xl:text-base text-sm relative space-y-1 grid"><span
+            data-v-eb114e73="" title="Publication year">Publication year</span>
+          <div data-v-eb114e73=""
+            class="grid grid-cols-[1fr_3rem] gap-2 rounded-md outline outline-0 outline-transparent bg-accent pointer-events-none">
+            <input data-v-eb114e73=""
+              class="px-2 py-[0.3rem] bg-accent rounded-md text-color outline-none outline-1 -outline-offset-1 transition-[outline-color] w-full font-medium pointer-events-auto placeholder:text-color focus:outline-primary"
+              type="number" min="0" inputmode="numeric" placeholder="Any"><!---->
+            <div data-v-eb114e73="" class="flex my-auto gap-2 pointer-events-auto"><svg data-v-5cba5096=""
+                data-v-eb114e73="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                class="feather feather-minus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
+                viewBox="0 0 24 24">
+                <path d="M5 12h14"></path>
+              </svg><svg data-v-5cba5096="" data-v-eb114e73="" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                class="feather feather-plus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
+                viewBox="0 0 24 24">
+                <path d="M12 5v14m-7-7h14"></path>
+              </svg></div>
+          </div>
+        </label>
+        <div class="relative space-y-1 grid"><!----><label id="headlessui-listbox-label-24" data-headlessui-state=""
+            class="text-midTone truncate xl:text-base text-sm"><span title="Publication Status">Publication
+              Status</span><!----></label><button id="headlessui-listbox-button-25" type="button"
+            aria-haspopup="listbox" aria-expanded="false" data-headlessui-state=""
+            class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-accent"
+            aria-labelledby="headlessui-listbox-label-24 headlessui-listbox-button-25"><span
+              class="text-left truncate">Any</span><svg xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 my-auto text-midTone" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m8 9l4-4l4 4m0 6l-4 4l-4-4"></path>
+            </svg></button><!----></div>
+
+      </div>
+    </div>
+    <div data-v-a1fe968e=""></div>
+
+
+  </div>
+
+
   <div class="inline-flex items-center my-1">
-    <div class="mr-2 min-w-32"><p>Trạng Thái:</p></div>
+    <div class="mr-2 min-w-32">
+      <p>Trạng Thái:</p>
+    </div>
     <div class="inline-flex items-center">
-      <button
-        *ngFor="let s of dataView.status"
-        (click)="OnStatusChange(s.Status)"
-        class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center"
-      >
+      <button *ngFor="let s of dataView.status" (click)="OnStatusChange(s.Status)"
+        class="text-slate-800 mx-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex space-x-1 items-center">
         <span class="hidden md:inline-block">{{ s.Name }} </span>
       </button>
     </div>
   </div>
   <div class="flex my-2">
-    <div class="mr-2 min-w-32"><p>Sắp xếp theo</p></div>
+    <div class="mr-2 min-w-32">
+      <p>Sắp xếp theo</p>
+    </div>
     <div class="grid xl:grid-cols-6 md:grid-cols-4">
-      <button
-        *ngFor="let s of dataView.sorts"
-        (click)="OnSortTypeChange(s.Type)"
-        class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center"
-      >
+      <button *ngFor="let s of dataView.sorts" (click)="OnSortTypeChange(s.Type)"
+        class="text-slate-800 mx-1 my-1 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded font-medium px-4 py-2 inline-flex items-center">
         <span class="hidden md:inline-block">{{ s.Name }} </span>
       </button>
     </div>
   </div>
   <div class="flex flex-row">
     <div class="basis-9/12">
-      <grid-comic
-        [listComics]="listComics"
-        [num_preview]="40"
-        [_title]="'Kết quả tìm kiếm'"
-        [_class]="
+      <grid-comic [listComics]="listComics" [num_preview]="40" [_title]="'Kết quả tìm kiếm'" [_class]="
           'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
-        "
-      >
+        ">
       </grid-comic>
     </div>
 

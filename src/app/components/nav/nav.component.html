@@ -2,8 +2,7 @@
   <div class="container mx-auto flex justify-between">
     <!-- Logo or brand name -->
     <div
-      class="text-amber-500 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-amber-100 rounded-full w-10 h-10 text-center"
-    >
+      class="text-amber-500 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-amber-100 rounded-full w-10 h-10 text-center">
       N
     </div>
 
@@ -11,36 +10,23 @@
     <div class="flex space-x-3">
       <div class="relative flex justify-end h-8 w-[36rem]">
         <!-- <div class="relative"> -->
-        <input
-          #SearchInput
-          (focus)="OnSearchFocus(true)"
-          (input)="OnSearchChange($event)"
-          type="text"
-          class="custom-transition"
-          placeholder="Tìm kiếm..."
-        />
+        <input #SearchInput (focus)="OnSearchFocus(true)" (input)="OnSearchChange($event)" type="text"
+          class="custom-transition" placeholder="Tìm kiếm..." />
 
-        <div
-          id="search-result"
-          class="transition-[width] invisible absolute rounded-md z-10 flex w-full mt-10 flex-col bg-gray-100 px-4 py-3 shadow-xl"
-        >
+        <div id="search-result"
+          class="transition-[width] invisible absolute rounded-md z-10 flex w-full mt-10 flex-col bg-gray-100 px-4 py-3 shadow-xl">
           <!-- Nhập từ khóa tìm kiếm -->
-          <list-search-comic
-            [searchValue]="searchText"
-            (CloseEvent)="OnSearchFocus(false)"
-          ></list-search-comic>
+          <list-search-comic [searchValue]="searchText" (CloseEvent)="OnSearchFocus(false)"></list-search-comic>
         </div>
         <!-- </div> -->
       </div>
       <div class="hidden space-x-1 text-white lg:flex h-8">
         <button
-          class="flex hover:bg-amber-300 items-center bg-amber-400 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-        >
+          class="flex hover:bg-amber-300 items-center bg-amber-400 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           <span>Đăng nhập</span>
         </button>
         <button
-          class="flex hover:bg-gray-200 items-center bg-white border border-gray-300 rounded-r-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-        >
+          class="flex hover:bg-gray-200 items-center bg-white border border-gray-300 rounded-r-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           <span>Đăng ký</span>
         </button>
       </div>
@@ -50,165 +36,83 @@
 <!-- Navigation links -->
 
 <nav class="bg-gray-200">
-  <ul
-    class="h-10 flex items-center mx-auto container"
-    itemscope=""
-    itemtype="http://www.schema.org/SiteNavigationElement"
-  >
+  <ul class="h-10 flex items-center mx-auto container" itemscope=""
+    itemtype="http://www.schema.org/SiteNavigationElement">
     <li class="h-full hover:bg-white">
-      <a
-        routerLink="/"
-        class="px-4 h-full hover:bg-[#fff] items-center flex hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="18"
-          viewBox="0 0 576 512"
-        >
+      <a routerLink="/" class="px-4 h-full hover:bg-[#fff] items-center flex hover:fill-[#be8c28]"><svg
+          xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512">
           <path
-            d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
-          ></path>
+            d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z">
+          </path>
         </svg>
       </a>
     </li>
     <li class="h-full hover:bg-white">
-      <div
-        class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group"
-      >
+      <div class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group">
         <span class="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="20"
-            height="20"
-            viewBox="0 0 32 32"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 32 32">
             <path
-              d="M 9 4 L 10.726562 5.9082031 C 10.741563 5.9252031 12.181266 7.5891094 11.947266 9.5371094 C 11.798266 10.781109 10.986922 11.930406 9.5449219 12.941406 C 5.3059219 15.813406 4.0203438 19.676781 5.7773438 23.425781 C 7.0993437 26.247781 9.9972813 28 13.113281 28 L 14.927734 28 L 13.791016 26.388672 C 12.883016 25.214672 12.900187 23.873047 13.117188 22.873047 C 14.662188 24.042047 16.466703 23.89275 17.720703 23.09375 C 18.871703 22.35975 19.685891 21.037937 19.712891 19.460938 C 19.970891 19.868938 20.183937 20.344094 20.335938 20.871094 C 20.777938 22.402094 20.724094 24.737297 19.121094 26.279297 L 17.451172 28 L 19.025391 28 C 19.916391 28 20.810422 27.8335 21.607422 27.4375 C 24.096422 26.2025 25.776109 23.946547 26.662109 20.685547 C 27.383109 18.030547 26.922484 14.523922 25.396484 11.794922 C 21.857484 5.4439219 11.999031 4.2979531 11.582031 4.2519531 L 9 4 z M 13.453125 6.6152344 C 16.360125 7.2692344 21.514344 8.9335312 23.652344 12.769531 C 24.915344 15.026531 25.326563 17.8675 24.726562 20.1875 C 24.229563 22.1285 23.448078 23.578609 22.330078 24.599609 C 22.725078 23.101609 22.615813 21.558406 22.257812 20.316406 C 21.602812 18.048406 20.050125 16.403484 18.203125 16.021484 L 16 15.560547 L 17.142578 17.511719 C 18.203578 19.295719 17.628484 20.78025 16.646484 21.40625 C 15.863484 21.90525 14.583781 21.9535 13.550781 20.4375 L 12.597656 19.037109 L 11.832031 20.548828 C 11.567031 21.071828 10.540422 23.331078 11.232422 25.705078 C 9.7724219 25.231078 8.29725 24.171172 7.53125 22.451172 C 5.91025 18.813172 8.3426875 16.171891 10.679688 14.587891 C 12.627688 13.222891 13.7245 11.595906 13.9375 9.7539062 C 14.0755 8.5629062 13.812125 7.4792344 13.453125 6.6152344 z"
-            ></path>
+              d="M 9 4 L 10.726562 5.9082031 C 10.741563 5.9252031 12.181266 7.5891094 11.947266 9.5371094 C 11.798266 10.781109 10.986922 11.930406 9.5449219 12.941406 C 5.3059219 15.813406 4.0203438 19.676781 5.7773438 23.425781 C 7.0993437 26.247781 9.9972813 28 13.113281 28 L 14.927734 28 L 13.791016 26.388672 C 12.883016 25.214672 12.900187 23.873047 13.117188 22.873047 C 14.662188 24.042047 16.466703 23.89275 17.720703 23.09375 C 18.871703 22.35975 19.685891 21.037937 19.712891 19.460938 C 19.970891 19.868938 20.183937 20.344094 20.335938 20.871094 C 20.777938 22.402094 20.724094 24.737297 19.121094 26.279297 L 17.451172 28 L 19.025391 28 C 19.916391 28 20.810422 27.8335 21.607422 27.4375 C 24.096422 26.2025 25.776109 23.946547 26.662109 20.685547 C 27.383109 18.030547 26.922484 14.523922 25.396484 11.794922 C 21.857484 5.4439219 11.999031 4.2979531 11.582031 4.2519531 L 9 4 z M 13.453125 6.6152344 C 16.360125 7.2692344 21.514344 8.9335312 23.652344 12.769531 C 24.915344 15.026531 25.326563 17.8675 24.726562 20.1875 C 24.229563 22.1285 23.448078 23.578609 22.330078 24.599609 C 22.725078 23.101609 22.615813 21.558406 22.257812 20.316406 C 21.602812 18.048406 20.050125 16.403484 18.203125 16.021484 L 16 15.560547 L 17.142578 17.511719 C 18.203578 19.295719 17.628484 20.78025 16.646484 21.40625 C 15.863484 21.90525 14.583781 21.9535 13.550781 20.4375 L 12.597656 19.037109 L 11.832031 20.548828 C 11.567031 21.071828 10.540422 23.331078 11.232422 25.705078 C 9.7724219 25.231078 8.29725 24.171172 7.53125 22.451172 C 5.91025 18.813172 8.3426875 16.171891 10.679688 14.587891 C 12.627688 13.222891 13.7245 11.595906 13.9375 9.7539062 C 14.0755 8.5629062 13.812125 7.4792344 13.453125 6.6152344 z">
+            </path>
           </svg>
-          HOT</span
-        >
+          HOT</span>
       </div>
     </li>
     <li class="h-full hover:bg-white">
-      <div
-        class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group"
-      >
-        <span class="flex items-center"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      <div class="cursor-pointer px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] relative group">
+        <span class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
               d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-            ></path></svg
-          >Thể Loại</span
-        >
+              *ngIf="listGenres">
+            </path>
+          </svg>Thể Loại</span>
         <div
-          class="absolute top-full left-0 hidden group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
-        >
-          <ul
-            *ngFor="let Genres of listGenre"
-            itemscope=""
-            itemtype="http://www.schema.org/SiteNavigationElement"
-          >
-            <li *ngFor="let g of Genres">
-              <a
-                itemprop="url"
-                [routerLink]="['tim-truyen']"
-                [queryParams]="{ genre: g.id }"
-                class="block px-3 py-2 w-full hover:text-[#be8c28] truncate font-bold"
-                ><span itemprop="name">{{ g.title }}</span></a
-              >
-            </li>
-          </ul>
+          class="absolute top-full left-0 hidden group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]">
+
+          <app-genre-catagories [listGenres]="listGenres"></app-genre-catagories>
         </div>
+
+
       </div>
     </li>
     <li class="h-full hover:bg-white">
-      <a
-        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#000000"
-          width="20px"
-          height="20px"
-          viewBox="0 0 96 96"
-        >
+      <a href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"><svg
+          xmlns="http://www.w3.org/2000/svg" fill="#000000" width="20px" height="20px" viewBox="0 0 96 96">
           <path
             d="M12.364 13.17C8.407 15.085 8 17.964 8 44c0 30.815.427 32 11.547 32H24v15.453l7.772-7.726L39.544 76h20.681c21.988 0 24.764-.485 26.665-4.657 1.52-3.337 1.52-51.349 0-54.686-.611-1.34-2.207-2.936-3.547-3.547-3.224-1.469-67.935-1.414-70.979.06M16 44v24h64V20H16v24m29.118-12.573-2.249 5.428-6.596.706-6.595.706 4.893 4.245 4.893 4.245-1.217 5.803c-1.529 7.286-1.395 7.385 4.7 3.474l5.024-3.224 5.123 3.153c6.201 3.815 6.177 3.832 4.659-3.403l-1.217-5.803 4.893-4.245 4.893-4.245-6.595-.706-6.596-.706-2.249-5.428C49.644 28.442 48.348 26 48 26c-.348 0-1.644 2.442-2.882 5.427"
-            fill-rule="evenodd"
-          />
+            fill-rule="evenodd" />
         </svg>
-        Theo dõi</a
-      >
+        Theo dõi</a>
     </li>
     <li class="h-full hover:bg-white">
-      <a
-        href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5 mr-1"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-          ></path></svg
-        >Xếp Hạng</a
-      >
+      <a href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"><svg
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5 mr-1">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z">
+          </path>
+        </svg>Xếp Hạng</a>
     </li>
     <li class="h-full hover:bg-white">
-      <a
-        routerLink="/tim-truyen"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          ></path></svg
-        >Tìm Truyện</a
-      >
+      <a routerLink="/tim-truyen" class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"><svg
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+        </svg>Tìm Truyện</a>
     </li>
 
     <li class="h-full hover:bg-white">
-      <a
-        routerLink="lich-su"
-        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="16"
-          viewBox="0 0 512 512"
-          class="mr-1"
-        >
+      <a routerLink="lich-su"
+        class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"><svg
+          xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" class="mr-1">
           <path
-            d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z"
-          ></path></svg
-        >Lịch sử</a
-      >
+            d="M368.4 18.3L312.7 74.1 437.9 199.3l55.7-55.7c21.9-21.9 21.9-57.3 0-79.2L447.6 18.3c-21.9-21.9-57.3-21.9-79.2 0zM288 94.6l-9.2 2.8L134.7 140.6c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-3.8 11.3-1 23.9 7.3 32.4L164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L33.7 500.9c8.6 8.3 21.1 11.2 32.4 7.3l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 2.8-9.2L288 94.6z">
+          </path>
+        </svg>Lịch sử</a>
     </li>
   </ul>
 </nav>

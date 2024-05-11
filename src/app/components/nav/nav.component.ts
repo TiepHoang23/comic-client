@@ -1,10 +1,11 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Genre } from '../../dataSource/schema/Genre';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { ComicService } from '../../dataSource/services/comic.service';
 import { DOCUMENT } from '@angular/common';
-import { EventEmitter } from 'stream';
-import { Target } from '@angular/compiler';
+// import { EventEmitter } from 'stream';
+// import { Target } from '@angular/compiler';
+// import { partition } from 'lodash';
 
 @Component({
   selector: 'app-nav',
@@ -12,37 +13,36 @@ import { Target } from '@angular/compiler';
   styleUrl: './nav.component.scss',
 })
 export class NavComponent {
-  listGenre: Array<Array<Genre>> = new Array<Array<Genre>>;
-  searchText: string = "";
+  listGenres: Array<Genre> = new Array<Genre>();
+  // catagoriesGenre: Map<string, Genre[]> = new Map();
+  searchText: string = '';
   doneTypingInterval = 200;
   typingTimer: any;
   @ViewChild('SearchInput') SearchField!: ElementRef;
-  constructor(private comicService: ComicService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(
+    private comicService: ComicService,
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
   ngOnInit() {
-    this.comicService.getGenres().subscribe(genres => {
-      let nrow = Math.ceil(genres.length / 5);
-      for (let i = 0; i < 5; i++) {
-        this.listGenre.push(genres.slice(i * nrow, i * nrow + nrow));
-      }
-
-    }
-    );
+    this.comicService.getGenres().subscribe((genres) => {
+      this.listGenres = genres;
+    });
   }
   OnSearchChange(e: Event) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
       this.searchText = this.SearchField.nativeElement.value;
     }, this.doneTypingInterval);
-
   }
   OnSearchFocus = (isFoucs: boolean): boolean => {
     if (isFoucs) {
-      this.document.getElementById("search-result")?.classList.remove("invisible");
-    }
-    else {
-      this.document.getElementById("search-result")?.classList.add("invisible");
+      this.document
+        .getElementById('search-result')
+        ?.classList.remove('invisible');
+    } else {
+      this.document.getElementById('search-result')?.classList.add('invisible');
     }
 
     return true;
-  }
+  };
 }

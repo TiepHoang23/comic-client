@@ -50,6 +50,7 @@ export class CarouselLandingComponent implements OnInit {
       this.nextSlide();
     }, 5000);
   }
+
   selectSlide(index: number) {
     this.selectedIndex = index;
   }
@@ -58,10 +59,18 @@ export class CarouselLandingComponent implements OnInit {
     this.selectedIndex =
       (this.selectedIndex - 1 + this.carouselItems.length) %
       this.carouselItems.length;
+    this.rotateCarouselItems();
   }
 
   nextSlide() {
     this.selectedIndex = (this.selectedIndex + 1) % this.carouselItems.length;
+    this.rotateCarouselItems();
+  }
+
+  private rotateCarouselItems() {
+    const firstItem = this.carouselItems[0];
+    this.carouselItems.splice(0, 1);
+    this.carouselItems.push(firstItem);
   }
 
   // private resetAutoSlide() {

@@ -28,6 +28,7 @@ import { StarRatingComponent } from './components/modules/comic-detail/page/star
 import { GridComicComponent } from './components/common/grid-comic/grid-comic.component';
 import { ChapterListComponent } from './components/modules/comic-detail/page/list-chapter/chapter-list.component';
 import { RecentReadComponent } from './components/common/recent-read/recent-read.component';
+import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
 
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
@@ -54,6 +55,7 @@ import { RecentReadComponent } from './components/common/recent-read/recent-read
     GridComicComponent,
     ChapterListComponent,
     RecentReadComponent,
+    GenreCatagoriesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],
