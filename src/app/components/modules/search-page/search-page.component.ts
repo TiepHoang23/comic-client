@@ -22,6 +22,9 @@ export class SearchPageComponent {
     sorts: sorts,
   };
   showFilters: boolean = false;
+  showFiltersOptions1: boolean = false;
+  showFiltersOptions2: boolean = false;
+
   sortType!: SortType;
   statusType!: ComicStatus;
   constructor(

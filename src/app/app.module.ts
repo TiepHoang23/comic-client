@@ -22,14 +22,14 @@ import { ComicCardComponent } from './components/common/comic-card/comic-card.co
 import { TopListComponent } from './components/modules/comic-detail/page/top-list/top-list.component';
 import { CarouselLandingComponent } from './components/modules/carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
-import { NumeralPipe } from './pines/numeral.pipe';
 import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
 import { StarRatingComponent } from './components/modules/comic-detail/page/star-rating/star-rating.component';
 import { GridComicComponent } from './components/common/grid-comic/grid-comic.component';
 import { ChapterListComponent } from './components/modules/comic-detail/page/list-chapter/chapter-list.component';
 import { RecentReadComponent } from './components/common/recent-read/recent-read.component';
 import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
-
+import { NumeralPipe } from './pines/numeral.pipe';
+import { DateAgoPipe } from './pines/date-ago.pine';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -50,6 +50,7 @@ import { GenreCatagoriesComponent } from './components/common/genre-catagories/g
     CarouselLayoutComponent,
     PaginationComponent,
     NumeralPipe,
+    DateAgoPipe,
     HistoryPageComponent,
     StarRatingComponent,
     GridComicComponent,
@@ -62,4 +63,4 @@ import { GenreCatagoriesComponent } from './components/common/genre-catagories/g
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,32 +1,13 @@
 <div class="border border-accent-10 w-full md:w-[30rem] lg:w-[42rem] xl:w-[44rem] 2xl:w-[50rem] 3xl:w-[64rem] max-h-96 lg:max-h-[32rem] overflow-y-auto py-2 px-4 z-50 bg-accent rounded-md shadow-2xl shadow-black/50 space-y-4 transition-transform top-full"
     id="headlessui-popover-panel-6" tabindex="-1" data-headlessui-state="open" style="right: 0px;">
-    <div class="relative grid gap-2 lg:grid-cols-[1fr_6rem]">
-        <div class="relative">
-            <input type="text"
-                class="block w-full my-1 bg-accent-10 outline-none outline-1 outline-transparent focus:outline-primary transition-[outline-color] text-sm py-2 pl-8 rounded-md"
-                placeholder="Search tags">
-            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-[0.875rem] w-4 h-4 pointer-events-none"
-                viewBox="0 0 24 24">
-                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0m18 11l-6-6"></path>
-            </svg>
-        </div>
-        <button
-            class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden danger text soft text-sm my-auto"
-            style="height: 2.2rem; min-height: 1.75rem; min-width: 1.75rem;">
-            <span class="flex relative items-center justify-center font-medium select-none w-full"
-                style="pointer-events: none; justify-content: center;">Reset</span>
-        </button>
-    </div>
-    <p class="text-midTone text-sm italic">
+    <p class="text-midTone text-sm italic font-semibold flex">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             class="feather feather-info icon small text-icon-contrast text-undefined" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 16v-4m0-4h.01"></path>
         </svg>
-        Click on any tag once to include it. Click on it again to exclude it. Click once more to clear it.
-        <span class="ml-2 not-italic text-primary cursor-pointer hover:underline"> Dismiss </span>
+        <span class="ml-2 not-italic">Danh sách theo tên thể loại</span>
     </p>
     <div class="space-y-1">
         <div class="flex gap-2 items-center">
@@ -55,3 +36,9 @@
                     <span class="my-auto select-none text-xs relative bottom-[1px]">{{ genre.title }}</span>
                 </div>
             </li>
+        </ul>
+    </div>
+    <div class="space-y-1">
+
+    </div>
+</div>

@@ -75,7 +75,7 @@ export class ComicDetailComponent implements OnInit {
           id: chapter.id,
           chapterTitle,
           chapterDescription,
-          updateAt: moment(chapter.updateAt).format('DD/MM'),
+          updateAt: chapter.updateAt,
           viewCount: chapter.viewCount,
         };
       });

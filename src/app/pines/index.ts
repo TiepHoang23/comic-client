@@ -1,2 +1,3 @@
 import { NumeralPipe } from './numeral.pipe';
-export default { NumeralPipe };
+import { DateAgoPipe } from './date-ago.pine';
+export default { NumeralPipe, DateAgoPipe };
