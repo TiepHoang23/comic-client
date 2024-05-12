@@ -30,6 +30,7 @@ import { RecentReadComponent } from './components/common/recent-read/recent-read
 import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
 import { NumeralPipe } from './pines/numeral.pipe';
 import { DateAgoPipe } from './pines/date-ago.pine';
+import { SelectorComponent } from './components/common/selector/selector.component';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -57,6 +58,7 @@ import { DateAgoPipe } from './pines/date-ago.pine';
     ChapterListComponent,
     RecentReadComponent,
     GenreCatagoriesComponent,
+    SelectorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [provideClientHydration(), provideHttpClient()],

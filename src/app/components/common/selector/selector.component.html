@@ -1,0 +1,59 @@
+<div>
+  <label
+    id="headlessui-listbox-label-1"
+    data-headlessui-state=""
+    class="text-midTone xl:text-base text-sm"
+    >Sắp xếp theo</label
+  >
+  <button
+    id="headlessui-listbox-button-2"
+    type="button"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    data-headlessui-state=""
+    class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
+    (click)="showFilterOption = !showFilterOption"
+  >
+    <span class="text-left truncate" title="None">{{ _labelTitle }}</span
+    ><svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-5 h-5 my-auto text-midTone"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m8 9l4-4l4 4m0 6l-4 4l-4-4"
+      ></path>
+    </svg>
+  </button>
+  <ul
+    [ngClass]="{ hidden: !showFilterOption }"
+    id="listbox-options-3"
+    aria-labelledby="headlessui-listbox-button-2"
+    aria-orientation="vertical"
+    role="listbox"
+    tabindex="0"
+    data-headlessui-state="open"
+    class="absolute border w-full max-h-64 xl:max-h-[32rem] overflow-y-auto z-50 left-0 rounded-md shadow-2xl shadow-black/50 py-1 focus:outline-none top-full bg-white border-accent-10"
+  >
+    <li
+      *ngFor="let option of options"
+      (click)="OnSelectorChange({ option: option, data: option })"
+      class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone"
+      id="headlessui-listbox-option-353"
+      role="option"
+      tabindex="-1"
+      aria-selected="false"
+      data-headlessui-state=""
+    >
+      <div
+        class="h-3 w-[2px] rounded-full my-auto transition-[background-color] bg-transparent"
+      ></div>
+      <span class="truncate">{{ option }} </span>
+    </li>
+  </ul>
+</div>
