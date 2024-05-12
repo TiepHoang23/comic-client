@@ -1,11 +1,10 @@
 <div id="content" class="container w-full mx-auto">
-  <!-- <app-carousel-layout></app-carousel-layout> -->
-
   <app-carousel-landing
     *ngIf="listTopComics"
-    class="flex justify-center w-full h-full py-20 overflow-hidden"
+    class="my-5 flex w-full h-full md:pb-[35%] lg:pb-[30%] xl:pb-[25%] relative"
     [dataSlide]="listTopComics"
   ></app-carousel-landing>
+  <!-- <app-carousel-layout></app-carousel-layout> -->
 
   <div class="flex flex-col-reverse lg:flex-row">
     <div class="basis-9/12">

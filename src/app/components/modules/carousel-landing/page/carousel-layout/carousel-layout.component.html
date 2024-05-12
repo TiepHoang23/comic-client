@@ -1,6 +1,5 @@
 <div
-  class="w-full h-0 relative rounded-md overflow-hidden bg-white shadow-md border-3 border-white"
-  style="padding-bottom: 75%"
+  class="h-full relative overflow-hidden bg-slate-950 shadow-md border-x-2 border-y-4 border-black"
 >
   <div
     class="angry-grid grid grid-cols-4 grid-rows-4 gap-1 rounded absolute w-full h-full"
@@ -11,17 +10,17 @@
     >
       <img
         id="item-col-1"
-        class="object-cover h-full"
+        class="object-cover h-full w-full"
         src="{{ comics?.[0]?.coverImage }}"
       />
     </a>
     <a
       [routerLink]="['truyen-tranh',comics?.[1]?.url]"
-      class="grid-item col-span-1 row-span-2 col-start-1 row-start-3"
+      class="grid-item col-span-1 row-span-2 col-start-1 row-start-3 w-full"
     >
       <img
         id="item-col-1"
-        class="object-cover h-full"
+        class="object-cover h-full w-full"
         src="{{ comics?.[1]?.coverImage }}"
       />
     </a>
@@ -31,7 +30,7 @@
     >
       <img
         id="item-0"
-        class="object-cover h-full"
+        class="object-cover h-full w-full"
         src="{{ comics?.[2]?.coverImage }}"
       />
     </a>
@@ -41,7 +40,7 @@
     >
       <img
         id="item-3"
-        class="object-cover h-full"
+        class="object-cover h-full w-full"
         src="{{ comics?.[3]?.coverImage }}"
       />
     </a>
@@ -51,7 +50,7 @@
     >
       <img
         id="item-3"
-        class="object-cover h-full"
+        class="object-cover h-full w-full"
         src="{{ comics?.[4]?.coverImage }}"
       />
     </a>

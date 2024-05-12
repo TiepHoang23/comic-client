@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Comic } from '../../../dataSource/schema/comic';
 import chunk from 'lodash/chunk';
+import { DOCUMENT } from '@angular/common';
+import { forEach } from 'lodash';
 
 @Component({
   selector: 'app-carousel-landing',
@@ -8,38 +10,39 @@ import chunk from 'lodash/chunk';
   styleUrls: ['./carousel-landing.component.scss'], // Change styleUrl to styleUrls
 })
 export class CarouselLandingComponent implements OnInit {
+
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+  ) { }
   @Input() dataSlide?: Comic[] = [];
-  carouselItems: Array<{
-    slideIndex: number;
-    comic?: Comic[];
-  }> = [
-      {
-        slideIndex: 1,
-      },
-      {
-        slideIndex: 2,
-      },
-      {
-        slideIndex: 3,
-      }
-    ];
+  carouselItems: Array<Comic[]> = [];
 
   selectedIndex = 0;
+  lastTime: number = 0;
+
   isTransitioning: boolean = false;
   private interval: any;
+  current: number = 0;
 
   ngOnChanges() {
-    this.carouselItems = this.carouselItems?.map((slide, index) => {
-      const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
-      return {
-        slideIndex: slide.slideIndex,
-        comic: comicChunk[index],
-      };
-    });
-    // this.startAutoSlide();
+
+    const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
+    this.carouselItems = comicChunk;
+    this.carouselItems.push(...comicChunk);
+
+    this.resetAutoSlide();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
+  slideElements: Element[] = [];
+  ngAfterViewInit() {
+    this.slideElements = Array.from(this.document.getElementsByClassName('carousel-item'));
+    this.recalputate();
+
+  }
 
   ngOnDestroy() {
     clearInterval(this.interval);
@@ -47,34 +50,43 @@ export class CarouselLandingComponent implements OnInit {
 
   private startAutoSlide() {
     this.interval = setInterval(() => {
-      this.nextSlide();
+      this.recalputate();
     }, 4000);
   }
 
-  selectSlide(index: number) {
-    this.selectedIndex = index;
+
+  recalputate(isNext = true) {
+
+    let now = Date.now();
+    if (now - this.lastTime < 700) {
+      return;
+    }
+    this.lastTime = now;
+    if (isNext) {
+      let last = this.slideElements.pop()!;
+      this.slideElements = [last, ...this.slideElements];
+
+    }
+    else {
+      let first = this.slideElements.shift()!;
+      this.slideElements = [...this.slideElements, first];
+    }
+
+
+    this.slideElements.forEach((e: any, index) => {
+      e.style.left = `${(index - 1) * 100 / 3}%`;
+      if (index == 0) {
+        e.style["z-index"] = 0
+      }
+      else
+        e.style["z-index"] = 5 - index
+
+    })
+
   }
 
-  prevSlide() {
-    this.selectedIndex =
-      (this.selectedIndex - 1 + this.carouselItems.length) %
-      this.carouselItems.length;
-    this.rotateCarouselItems();
+  private resetAutoSlide() {
+    clearInterval(this.interval); // Clear the existing interval
+    this.startAutoSlide(); // Restart the automatic sliding
   }
-
-  nextSlide() {
-    this.selectedIndex = (this.selectedIndex + 1) % this.carouselItems.length;
-    this.rotateCarouselItems();
-  }
-
-  private rotateCarouselItems() {
-    const firstItem = this.carouselItems[0];
-    this.carouselItems.splice(0, 1);
-    this.carouselItems.push(firstItem);
-  }
-
-  // private resetAutoSlide() {
-  //   clearInterval(this.interval); // Clear the existing interval
-  //   this.startAutoSlide(); // Restart the automatic sliding
-  // }
 }
