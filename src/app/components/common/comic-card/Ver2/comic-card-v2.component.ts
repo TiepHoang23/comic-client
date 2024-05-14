@@ -8,6 +8,6 @@ import { Comic } from '../../../../dataSource/schema/comic';
   styleUrl: './comic-card-v2.component.scss'
 })
 export class ComicCardV2Component {
-
+  @Input() comic?: Comic;
   constructor() { }
 }

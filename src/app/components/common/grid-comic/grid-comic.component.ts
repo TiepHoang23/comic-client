@@ -21,12 +21,12 @@ export class GridComicComponent {
   @Input() listComics!: Comic[];
   @Input() _class!: string;
   @Input() _title!: string;
-
+  girdType: number = 0;
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) { }
   ngOnChanges(changes: any) {
     if (this.listComics && this.listComics.length === 0) {
       this.listComics = Array(this.num_preview).fill(undefined);
@@ -35,5 +35,12 @@ export class GridComicComponent {
 
   ngOnInit(): void {
     this.listComics = Array(this.num_preview).fill(undefined);
+  }
+  ChangeGridType(target: any, type: number) {
+    this.girdType = type;
+    target.classList.toggle('active');
+
+    var sibling = target.nextSibling;
+    sibling.classList.toggle('active');
   }
 }
