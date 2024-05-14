@@ -1,12 +1,15 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { Component, Inject, inject } from '@angular/core';
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
-import { Page } from '../../../dataSource/schema/Page';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Chapter } from '../../../dataSource/schema/Chapter';
 import { ComicStatus, SortType } from '../../../dataSource/enum';
+import {
+  IAdvancedFilters,
+  IFilter,
+  advancedFiltersOptions,
+} from '../../utils/constants';
+import { Genre } from '../../../dataSource/schema/Genre';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'search-page',
@@ -17,16 +20,25 @@ export class SearchPageComponent {
   listComics!: Comic[];
   isLoading: boolean = true;
   totalpage!: number;
-  dataView: any = {
-    status: status,
-    sorts: sorts,
+  totalResult!: number;
+
+  dataView: IAdvancedFilters = {
+    status: advancedFiltersOptions.status,
+    sorts: advancedFiltersOptions.sorts,
+    tops: advancedFiltersOptions.tops,
   };
+  listGenres!: Genre[];
   showFilters: boolean = false;
   showFiltersOptions1: boolean = false;
   showFiltersOptions2: boolean = false;
+  showFiltersOptions3: boolean = false;
+  showFiltersOptions4: boolean = false;
 
   sortType!: SortType;
   statusType!: ComicStatus;
+
+  filterTags: any[] = [];
+  queryParams: Map<string, IFilter[]> = new Map();
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
@@ -43,14 +55,16 @@ export class SearchPageComponent {
       let sort = Number(params['sort']) || SortType.TopAll;
       let status = Number(params['status']) || ComicStatus.ALL;
       let genre = Number(params['genre']) || -1;
-      console.log(page, sort, status, genre);
-
       this.isLoading = true;
-      this.OnFilterChange(page, sort, status, genre);
+      this.OnSearchComic(page, sort, status, genre);
+    });
+
+    this.comicService.getGenres().subscribe((genres) => {
+      this.listGenres = genres;
     });
   }
 
-  OnFilterChange(page: number, sort: number, status: number, genre: number) {
+  OnSearchComic(page: number, sort: number, status: number, genre: number) {
     this.listComics = [];
     this.comicService
       .getComics(page, 40, genre, sort, status)
@@ -60,11 +74,14 @@ export class SearchPageComponent {
         this.listComics = res.data.comics;
       });
   }
-  OnSortTypeChange(type: number) {
-    this.router.navigate([], {
-      queryParams: { sort: type, page: 1 },
-      queryParamsHandling: 'merge',
-    });
+  OnFilterChange({ option, data }: { option: string; data: IFilter }) {
+    const filters = this.queryParams.get(option) || [];
+    const isExistingTags = filters.map((f) => f.value).includes(data.value);
+    if (isExistingTags) {
+      return;
+    }
+    this.queryParams.set(option, [...filters, data]);
+    this.filterTags = Array.from(this.queryParams.values()).flat();
   }
   OnStatusChange(type: number) {
     this.router.navigate([], {
@@ -73,57 +90,3 @@ export class SearchPageComponent {
     });
   }
 }
-
-const status = [
-  {
-    Name: 'Tất Cả',
-    Status: ComicStatus.ALL,
-  },
-  {
-    Name: 'Đang Ra',
-    Status: ComicStatus.ONGOING,
-  },
-  {
-    Name: 'Hoàn Thành',
-    Status: ComicStatus.COMPLETED,
-  },
-];
-
-const sorts = [
-  {
-    Name: 'Mới cập nhật',
-    Type: SortType.LastUpdate,
-  },
-  {
-    Name: 'Top All',
-    Type: SortType.TopAll,
-  },
-  {
-    Name: 'Chapter',
-    Type: SortType.Chapter,
-  },
-  {
-    Name: 'Theo dõi',
-    Type: SortType.TopFollow,
-  },
-  {
-    Name: 'Bình luận',
-    Type: SortType.TopComment,
-  },
-  {
-    Name: 'Truyện mới',
-    Type: SortType.NewComic,
-  },
-  {
-    Name: 'Top ngày',
-    Type: SortType.TopDay,
-  },
-  {
-    Name: 'Top tuần',
-    Type: SortType.TopWeek,
-  },
-  {
-    Name: 'Top tháng',
-    Type: SortType.TopMonth,
-  },
-];

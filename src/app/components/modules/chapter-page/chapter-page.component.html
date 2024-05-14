@@ -1,3 +1,15 @@
+  <div
+    class="container flex items-center font-bold text-base  mt-3"
+  >
+    <span><a routerLink="/"> Trang chủ </a> </span>
+    <span class="mx-2"><svg class="h-6 w-6 "  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg>
+    </span>
+    <span><a> Truyện tranh </a></span>
+    <span class="mx-2">
+<svg class="h-6 w-6 "  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="9 18 15 12 9 6" /></svg>
+    </span>
+    <span>{{ comic?.title }}</span>
+  </div>
 <button
   class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
   (click)="ToggleMenu(true)"
