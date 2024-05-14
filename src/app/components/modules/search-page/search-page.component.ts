@@ -43,7 +43,11 @@ export class SearchPageComponent {
     private comicService: ComicService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+    this.queryParams.set('status', advancedFiltersOptions.status);
+    this.queryParams.set('tops', advancedFiltersOptions.tops);
+    this.queryParams.set('sorts', advancedFiltersOptions.sorts);
+  }
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
@@ -81,8 +85,21 @@ export class SearchPageComponent {
       return;
     }
     this.queryParams.set(option, [...filters, data]);
-    this.filterTags = Array.from(this.queryParams.values()).flat();
+    this.filterTags = Array.from(this.queryParams.values())
+      .flat()
+      .filter((f) => f.selected);
   }
+  removeFilterTag({ option, data }: { option: string; data: IFilter }) {
+    const filters = this.queryParams.get(option) || [];
+    this.queryParams.set(
+      option,
+      filters.filter((f) => f.value !== data.value),
+    );
+    this.filterTags = Array.from(this.queryParams.values())
+      .flat()
+      .filter((f) => f.selected);
+  }
+
   OnStatusChange(type: number) {
     this.router.navigate([], {
       queryParams: { status: type, page: 1 },

@@ -68,6 +68,7 @@
         stroke-width="2"
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
+        (click)="removeFilterTag(tag)"
       >
         <path d="M18 6 6 18M6 6l12 12"></path></svg
       ><span class="text-sm">{{ tag.name }}</span>
@@ -128,7 +129,11 @@
             (click)="
               OnFilterChange({
                 option: 'sort',
-                data: { name: sort.name, value: sort.value }
+                data: {
+                  name: sort.name,
+                  value: sort.value,
+                  selected: !sort.selected
+                }
               })
             "
             class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone {{
@@ -239,7 +244,16 @@
         >
           <li
             *ngFor="let top of dataView.tops"
-            (click)="OnFilterChange({ option: 'top', data: top })"
+            (click)="
+              OnFilterChange({
+                option: 'top',
+                data: {
+                  name: top.name,
+                  value: top.value,
+                  selected: !top.selected
+                }
+              })
+            "
             class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone"
             id="headlessui-listbox-option-353"
             role="option"
@@ -382,7 +396,16 @@
         >
           <li
             *ngFor="let status of dataView.status"
-            (click)="OnFilterChange({ option: 'status', data: status })"
+            (click)="
+              OnFilterChange({
+                option: 'status',
+                data: {
+                  name: status.name,
+                  value: status.value,
+                  selected: true
+                }
+              })
+            "
             id="headlessui-listbox-option-386"
             role="option"
             tabindex="-1"
