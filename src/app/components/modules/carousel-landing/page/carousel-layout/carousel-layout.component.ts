@@ -16,12 +16,7 @@ export class CarouselLayoutComponent {
   }
 
   preloadImages(): void {
-    console.log({ comics: this.comics });
     this.comics?.forEach((comic, index) => {
-
-
-      // this.images[index] = comic.coverImage;
-
     });
   }
 }

@@ -18,20 +18,22 @@ export class CarouselLandingComponent implements OnInit {
   @Input() dataSlide?: Comic[] = [];
   carouselItems: Array<Comic[]> = [];
 
-  selectedIndex = 0;
   lastTime: number = 0;
 
   isTransitioning: boolean = false;
   private interval: any;
-  current: number = 0;
 
   ngOnChanges() {
 
     const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
     this.carouselItems = comicChunk;
-    this.carouselItems.push(...comicChunk);
-
+    this.carouselItems.push(...comicChunk, ...comicChunk);
     this.resetAutoSlide();
+    // if (this.carouselItems) {
+
+    //   this.recalpulate();
+    // }
+
   }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class CarouselLandingComponent implements OnInit {
   slideElements: Element[] = [];
   ngAfterViewInit() {
     this.slideElements = Array.from(this.document.getElementsByClassName('carousel-item'));
-    this.recalputate();
+    this.recalpulate();
 
   }
 
@@ -50,12 +52,12 @@ export class CarouselLandingComponent implements OnInit {
 
   private startAutoSlide() {
     this.interval = setInterval(() => {
-      this.recalputate();
+      this.recalpulate();
     }, 4000);
   }
 
 
-  recalputate(isNext = true) {
+  recalpulate(isNext = true): void {
 
     let now = Date.now();
     if (now - this.lastTime < 700) {
