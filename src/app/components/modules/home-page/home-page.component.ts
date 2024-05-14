@@ -22,10 +22,10 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTopComics();
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
       this.OnChangePage(page);
-      this.getTopComics();
     });
   }
 

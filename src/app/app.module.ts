@@ -30,6 +30,7 @@ import { RecentReadComponent } from './components/common/recent-read/recent-read
 import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
 import { NumeralPipe } from './pines/numeral.pipe';
 import { DateAgoPipe } from './pines/date-ago.pine';
+import { ComicCardV2Component } from './components/common/comic-card/Ver2/comic-card-v2.component';
 import { SelectorComponent } from './components/common/selector/selector.component';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
@@ -45,6 +46,7 @@ import { SelectorComponent } from './components/common/selector/selector.compone
     SearchPageComponent,
     HomePageComponent,
     ComicCardComponent,
+    ComicCardV2Component,
     ComicDetailComponent,
     TopListComponent,
     CarouselLandingComponent,
@@ -65,4 +67,4 @@ import { SelectorComponent } from './components/common/selector/selector.compone
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule {}
+export class AppModule { }
