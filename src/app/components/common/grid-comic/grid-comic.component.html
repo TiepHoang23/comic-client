@@ -3,7 +3,7 @@
     <h3 class="text-2xl font-semibold">{{ _title }}</h3>
   </div>
   <div class="flex ml-auto bg-slate-200">
-    <div class="p-2 cursor-pointer">
+    <!-- <div class="p-2 cursor-pointer" (click)="ChangeGridType(0)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -20,8 +20,12 @@
           d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
         ></path>
       </svg>
-    </div>
-    <div class="p-2 cursor-pointer">
+    </div> -->
+    <div
+      class="p-2 cursor-pointer {{ girdType == 1 ? 'active' : '' }}"
+      value="1"
+      (click)="ChangeGridType($event.target, 1)"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -39,7 +43,11 @@
         ></path>
       </svg>
     </div>
-    <div class="p-2 cursor-pointer active">
+    <div
+      class="p-2 cursor-pointer {{ girdType == 0 ? 'active' : '' }}"
+      value="0"
+      (click)="ChangeGridType($event.target, 0)"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -59,8 +67,19 @@
     </div>
   </div>
 </div>
+@if(girdType == 0) {
 <div class="{{ _class }}">
   <div *ngFor="let comic of listComics">
     <app-comic-card [comic]="comic"></app-comic-card>
   </div>
 </div>
+
+}@else {
+
+<div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
+  <comic-card-v2
+    *ngFor="let comic of listComics"
+    [comic]="comic"
+  ></comic-card-v2>
+</div>
+}
