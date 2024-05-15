@@ -1,29 +1,29 @@
-<div class="-mt-4 z-50" (click)="close()">
+<div class="-mt-4 z-[11]" (click)="close()">
   <div>
     @if (searchValue !== "") {
-      <div class="flex items-center my-4">
-        <div class="font-bold text-xl flex-grow">Kết quả</div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-arrow-right icon text-icon-contrast text-undefined"
-          viewBox="0 0 24 24"
-        >
-          <path d="M5 12h14m-7-7 7 7-7 7"></path>
-        </svg>
-      </div>
+    <div class="flex items-center my-4">
+      <div class="font-bold text-xl flex-grow">Kết quả</div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="feather feather-arrow-right icon text-icon-contrast text-undefined"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14m-7-7 7 7-7 7"></path>
+      </svg>
+    </div>
     } @else {
-      <div class="flex items-center">
-        <div class="text-md flex-grow mt-3 text-gray-400">
-          Kết quả tìm kiếm...
-        </div>
+    <div class="flex items-center">
+      <div class="text-md flex-grow mt-3 text-gray-400">
+        Kết quả tìm kiếm...
       </div>
+    </div>
     }
     <section class="bg-gray-100">
       <div
@@ -48,7 +48,7 @@
                     {{ comic.title }}
                   </p>
                   <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
-                    {{ comic.description | slice: 0 : 100 }}...
+                    {{ comic.description | slice : 0 : 100 }}...
                   </p>
                 </div>
                 <!-- </div> -->
