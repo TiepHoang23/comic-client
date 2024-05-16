@@ -35,12 +35,14 @@ export class GridComicComponent {
 
   ngOnInit(): void {
     this.listComics = Array(this.num_preview).fill(undefined);
+    this.girdType = Number(localStorage.getItem("gridType")) || 0;
   }
   ChangeGridType(target: any, type: number) {
+    if (this.girdType == type) return
     this.girdType = type;
     target.classList.toggle('active');
-
     var sibling = target.nextSibling;
     sibling.classList.toggle('active');
+    localStorage.setItem("gridType", type.toString());
   }
 }

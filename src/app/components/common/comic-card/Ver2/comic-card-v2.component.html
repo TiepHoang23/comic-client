@@ -1,6 +1,6 @@
 <div
   *ngIf="comic"
-  class="relative w-full flex bg-slate-100 rounded-xl h-48 overflow-hidden"
+  class="relative w-full flex bg-slate-100 rounded-xl h-44 overflow-hidden"
 >
   <div class="flex-shrink-0 h-full p-2 overflow-hidden">
     <img
@@ -12,7 +12,7 @@
   <div class="flex flex-col pl-2 pr-4 py-1">
     <a
       [routerLink]="['/truyen-tranh', comic.url]"
-      class="font-bold uppercase mb-1 text-xl"
+      class="font-bold uppercase my-1 text-base"
       ><h4>{{ comic.title }}</h4></a
     >
 
@@ -36,11 +36,11 @@
       </a>
     </div>
     <div class="flex gap-4 mt-2">
-      <div class="">
+      <div class="text-sm text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           fill="none"
           stroke="currentColor"
           stroke-linecap="round"
@@ -55,11 +55,11 @@
           ></path></svg
         >{{ comic.rating }}
       </div>
-      <div class="">
+      <div class="text-sm text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           fill="none"
           viewBox="0 0 24 24"
           class="icon small text-icon-contrast text-undefined"
@@ -74,11 +74,11 @@
         </svg>
         {{ comic.rating }}
       </div>
-      <div class="uppercase">
+      <div class="text-sm text-center uppercase">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           fill="none"
           stroke="currentColor"
           stroke-linecap="round"
@@ -92,18 +92,11 @@
         </svg>
         <span>{{ comic.viewCount | numeral }}</span>
       </div>
-      <a
-        data-v-c5cce44b=""
-        title="View 46 comments"
-        href="https://forums.mangadex.org/threads/143244"
-        target="_blank"
-        rel="noopener nofollow noreferrer"
-        class="text-sm comment-container"
-        ><svg
-          data-v-c5cce44b=""
+      <div class="text-sm text-center comment-container">
+        <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           fill="none"
           viewBox="0 0 24 24"
           class="icon small text-icon-contrast text-undefined"
@@ -115,8 +108,9 @@
             stroke-width="2"
             d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
           ></path></svg
-        ><span data-v-c5cce44b="">46</span></a
-      ><!---->
+        >46
+      </div>
+      <!---->
     </div>
     <div>
       <p class="line-clamp-3 text-sm">
