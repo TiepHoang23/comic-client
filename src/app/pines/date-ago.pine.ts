@@ -30,10 +30,9 @@ export class DateAgoPipe implements PipeTransform {
     }
     const fromDate = moment(date);
     const now = moment();
-    const isOverMonth = now.diff(fromDate, 'months') > 6;
-    const isInYear = now.diff(fromDate, 'years') >= 1;
+    const isOverMonth = now.diff(fromDate, 'months') >= 1;
 
-    if (isOverMonth || isInYear) {
+    if (isOverMonth) {
       return fromDate.format(FORMAT_DATE);
     }
     const distance = formatDistanceToNow(new Date(date), {

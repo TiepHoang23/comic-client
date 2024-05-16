@@ -18,21 +18,20 @@
 
     <div class="flex space-x-1">
       <a
-        *ngFor="let tag of comic?.genres | slice : 0 : 3; index as i"
+        *ngFor="let tag of comic?.genres | slice: 0 : 3; index as i"
         class="tag bg-accent"
       >
-        @if(i==0) {
-        <span
-          class="bg-yellow-400 text-xs font-bold rounded-md shadow-md shrink px-2 uppercase text-yellow-50"
-          >{{ tag.title }}</span
-        >
-
-        }@else {
-        <span
-          class="bg-white text-xs font-bold rounded-md shadow-md shrink px-2 uppercase"
-        >
-          {{ tag.title }}
-        </span>
+        @if (i == 0) {
+          <span
+            class="bg-yellow-400 text-xs font-bold rounded-md shadow-md shrink px-2 uppercase text-yellow-50"
+            >{{ tag.title }}</span
+          >
+        } @else {
+          <span
+            class="bg-white text-xs font-bold rounded-md shadow-md shrink px-2 uppercase"
+          >
+            {{ tag.title }}
+          </span>
         }
       </a>
     </div>
@@ -89,8 +88,9 @@
           viewBox="0 0 24 24"
         >
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"></path>
-          <circle cx="12" cy="12" r="3"></circle></svg
-        ><span>{{ comic.viewCount | numeral : "0.0a" }}</span>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span>{{ comic.viewCount | numeral }}</span>
       </div>
       <a
         data-v-c5cce44b=""

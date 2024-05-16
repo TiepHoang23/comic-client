@@ -5,7 +5,7 @@ import numeral from 'numeral';
   name: 'numeral',
 })
 export class NumeralPipe implements PipeTransform {
-  transform(value: any, format: string = '0,0'): string {
+  transform(value: any, format: string = '0,0a'): string {
     return numeral(value).format(format);
   }
 }
