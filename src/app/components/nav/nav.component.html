@@ -1,8 +1,8 @@
-<header class="bg-white p-3 border-gray-200">
+<header class="bg-white p-3 border-b-[#faa200] border-2">
   <div class="container mx-auto flex justify-between">
     <!-- Logo or brand name -->
     <div
-      class="text-amber-500 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-amber-100 rounded-full w-10 h-10 text-center"
+      class="text-amber-500 shrink-0 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-amber-100 rounded-full w-10 h-10 text-center"
     >
       N
     </div>
@@ -35,11 +35,13 @@
       <div class="hidden space-x-1 text-white lg:flex h-8">
         <button
           class="flex hover:bg-amber-600 items-center bg-gray-800 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          (click)="onLoginClick()"
         >
           <span>Đăng nhập</span>
         </button>
         <button
           class="flex hover:text-amber-600 items-center bg-white border border-gray-300 rounded-r-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          (click)="onRegisterClick()"
         >
           <span>Đăng ký</span>
         </button>
@@ -49,7 +51,7 @@
 </header>
 <!-- Navigation links -->
 
-<nav class="bg-[#faa200] text-sm text-white">
+<nav class="bg-[#faa200] text-sm text-white hidden md:block">
   <ul
     class="h-10 flex items-center mx-auto container rounded"
     itemscope=""
@@ -58,7 +60,7 @@
     <li class="h-full hover:bg-white rounded-t-lg mt-1">
       <a
         routerLink="/"
-        class="px-4 h-full hover:bg-[#fff] hover:fill-black items-center flex fill-white rounded-t-lg"
+        class="pr-4 h-full hover:bg-[#fff] hover:fill-black items-center flex fill-white rounded-t-lg"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           height="16"

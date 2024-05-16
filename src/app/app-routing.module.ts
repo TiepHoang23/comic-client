@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'truyen-tranh/:comicid/chapter/:chapterid',
     component: ChapterPageComponent,
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./components/modules/authentication/auth.module').then(m => m.AuthModule),
   }
 ];
 

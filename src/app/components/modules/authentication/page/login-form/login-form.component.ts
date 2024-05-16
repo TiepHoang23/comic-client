@@ -1,62 +1,60 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   UntypedFormGroup,
   UntypedFormBuilder,
   UntypedFormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
 } from '@angular/forms';
-import { tap, delay, finalize, catchError } from 'rxjs/operators';
+import { tap, delay, finalize, catchError, first } from 'rxjs/operators';
 import { of, Subscription } from 'rxjs';
+import { AccountService } from '../../../../../dataSource/services/account.service';
+import { json } from 'stream/consumers';
 
 // import { AuthService } from '@core/service/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent implements OnDestroy {
-  error: string = '';
-  isLoading: boolean = false;
-  loginForm: UntypedFormGroup = new UntypedFormGroup({});
 
-  private sub = new Subscription();
-
+  form!: FormGroup;
+  loading = false;
+  submitted = false;
   constructor(
-    private formBuilder: UntypedFormBuilder,
-    private router: Router // private authService: AuthService
+    private router: Router, // private authService: AuthService
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private accountService: AccountService
   ) {
-    this.buildForm();
-  }
-
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  login() {
-    this.isLoading = true;
-
-    const credentials = this.loginForm.value;
-
-    // this.sub = this.authService
-    //   .login(credentials)
-    //   .pipe(
-    //     delay(1500),
-    //     tap(() => this.router.navigate(['/home'])),
-    //     finalize(() => (this.isLoading = false)),
-    //     catchError((error) => of((this.error = error)))
-    //   )
-    //   .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  private buildForm(): void {
-    this.loginForm = new UntypedFormGroup({
-      username: new UntypedFormControl(''),
-      password: new UntypedFormControl(''),
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
+
+
+
+  ngOnDestroy(): void {
+
+  }
+  onSubmit() {
+    if (!this.form.valid) return;
+
+    let email = this.form.value.email
+    let password = this.form.value.password
+    this.accountService.Login(email, password).pipe(first()).subscribe((res: any) => {
+      if (res.status === 1) {
+        localStorage.setItem("auth", JSON.stringify(res.data))
+        this.router.navigate(['/'])
+      }
+
+    })
+
+  }
+
 }
