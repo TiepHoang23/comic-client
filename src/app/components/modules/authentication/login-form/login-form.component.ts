@@ -1,17 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  UntypedFormControl,
   FormGroup,
   FormBuilder,
   Validators,
 } from '@angular/forms';
 import { tap, delay, finalize, catchError, first } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
-import { AccountService } from '../../../../../dataSource/services/account.service';
-import { json } from 'stream/consumers';
+// import { of, Subscription } from 'rxjs';
+import { AccountService } from '../../../../dataSource/services/account.service';
+// import { json } from 'stream/consumers';
 
 // import { AuthService } from '@core/service/auth.service';
 
