@@ -3,6 +3,7 @@ import { Genre } from '../../dataSource/schema/Genre';
 // import { Observable } from 'rxjs';
 import { ComicService } from '../../dataSource/services/comic.service';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 // import { EventEmitter } from 'stream';
 // import { Target } from '@angular/compiler';
 // import { partition } from 'lodash';
@@ -22,11 +23,18 @@ export class NavComponent {
   constructor(
     private comicService: ComicService,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+    private router: Router
+  ) { }
   ngOnInit() {
     this.comicService.getGenres().subscribe((genres) => {
       this.listGenres = genres;
     });
+  }
+  onLoginClick() {
+    this.router.navigate(['auth/login']);
+  }
+  onRegisterClick() {
+    this.router.navigate(['auth/register']);
   }
   OnSearchChange(e: Event) {
     clearTimeout(this.typingTimer);
