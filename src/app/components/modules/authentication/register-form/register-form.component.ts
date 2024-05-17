@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from 'express';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../../../dataSource/services/account.service';
 import { first } from 'rxjs';
 
@@ -18,8 +17,7 @@ export class RegisterFormComponent {
   constructor(
     private router: Router, // private authService: AuthService
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private accountService: AccountService
+    // private accountService: AccountService
   ) {
     this.form = this.formBuilder.group({
       "name": ['', Validators.required],
@@ -35,12 +33,12 @@ export class RegisterFormComponent {
 
   }
   onSubmit() {
+    console.log(this.form);
     if (!this.form.valid) return;
 
     let email = this.form.value.email
     let password = this.form.value.password
     
-    console.log(email, password);
     
   }
 }
