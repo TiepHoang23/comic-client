@@ -11,14 +11,14 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
 import { PaginationComponent } from './components/common/pagination/pagination.component';
 import { HomePageComponent } from './components/modules/home-page/home-page.component';
 import { ComicDetailComponent } from './components/modules/comic-detail/comic-detail.component';
-import { ComicCardComponent } from './components/common/comic-card/comic-card.component';
+import { ComicCardComponent } from './components/common/comic-card/Ver1/comic-card.component';
 import { TopListComponent } from './components/modules/comic-detail/page/top-list/top-list.component';
 import { CarouselLandingComponent } from './components/modules/carousel-landing/carousel-landing.component';
 import { CarouselLayoutComponent } from './components/modules/carousel-landing/page/carousel-layout/carousel-layout.component';
@@ -32,6 +32,8 @@ import { NumeralPipe } from './pines/numeral.pipe';
 import { DateAgoPipe } from './pines/date-ago.pine';
 import { ComicCardV2Component } from './components/common/comic-card/Ver2/comic-card-v2.component';
 import { SelectorComponent } from './components/common/selector/selector.component';
+import { FollowedPageComponent } from './components/modules/followed-page/followed-page.component';
+import { AuthInterceptor } from './dataSource/services/http-interceptors/auth-interceptor';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -61,9 +63,14 @@ import { SelectorComponent } from './components/common/selector/selector.compone
     RecentReadComponent,
     GenreCatagoriesComponent,
     SelectorComponent,
+    FollowedPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
-  providers: [provideClientHydration(), provideHttpClient()],
+  providers: [
+    provideClientHydration(),
+    provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })

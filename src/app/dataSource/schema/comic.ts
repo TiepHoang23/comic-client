@@ -22,6 +22,7 @@ export interface Comic {
   updateAt?: string;
   genres: Genre[];
   chapters: Chapter[];
+  isFollow?: boolean;
 }
 
 export interface ComicList {

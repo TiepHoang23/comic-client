@@ -5,12 +5,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT, Location } from '@angular/common';
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
 import moment from 'moment-timezone';
 import { Observable, of } from 'rxjs';
+import { AccountService } from '../../../dataSource/services/account.service';
 
 type ComicChapters = {
   id: number;
@@ -27,6 +28,7 @@ type ComicChapters = {
 })
 export class ComicDetailComponent implements OnInit {
   comic!: Comic;
+  isFollowed!: boolean;
   comicChapters!: ComicChapters[];
   allchapter!: ComicChapters[];
   listTopComics?: Comic[];
@@ -37,10 +39,12 @@ export class ComicDetailComponent implements OnInit {
   @ViewChild('SrollElement') SearchField!: ElementRef;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private ComicService: ComicService,
     private location: Location,
+    private accountService: AccountService,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -65,8 +69,9 @@ export class ComicDetailComponent implements OnInit {
   getComic(id: string): void {
     this.ComicService.getComicById(id).subscribe((res) => {
       this.comic = res.data ?? ({} as Comic);
-      this.saveHistory(this.comic);
+      this.isFollowed = this.comic.isFollow || false;
 
+      this.saveHistory(this.comic);
       this.allchapter = (res.data?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
           chapter.title?.split(':') ?? [];
@@ -114,7 +119,20 @@ export class ComicDetailComponent implements OnInit {
     // Implement your logic here
     console.log('Rating changed:', rating);
   }
-  goBack(): void {
-    this.location.back();
+  Follow(isFollow: boolean): void {
+    if (this.accountService.GetUser() === null) {
+
+      this.router.navigate(['/auth/login']);
+    }
+    else {
+      console.log(isFollow);
+      this.accountService.Follow(this.comic.id, isFollow).subscribe(
+        (res: any) => {
+          if (res.status === 1) {
+            this.comic.isFollow = !this.comic.isFollow
+          }
+        }
+      );
+    }
   }
 }

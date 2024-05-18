@@ -70,7 +70,11 @@
 @if(girdType == 0) {
 <div class="{{ _class }}">
   <div *ngFor="let comic of listComics">
-    <app-comic-card [comic]="comic"></app-comic-card>
+    <app-comic-card
+      [comic]="comic"
+      [ClickEvent]="ClickEvent"
+      [EventName]="EventName"
+    ></app-comic-card>
   </div>
 </div>
 

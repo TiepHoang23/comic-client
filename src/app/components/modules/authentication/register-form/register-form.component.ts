@@ -17,12 +17,12 @@ export class RegisterFormComponent {
   constructor(
     private router: Router, // private authService: AuthService
     private formBuilder: FormBuilder,
-    // private accountService: AccountService
+    private accountService: AccountService
   ) {
     this.form = this.formBuilder.group({
-      "name": ['', Validators.required],
-      "email": ['', Validators.required],
-      "password": ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
       "confirm-password": ['', Validators.required],
     });
   }
@@ -38,7 +38,14 @@ export class RegisterFormComponent {
 
     let email = this.form.value.email
     let password = this.form.value.password
-    
-    
+    let confirmPassword = this.form.value['confirm-password']
+    if (password !== confirmPassword) return
+    let name = this.form.value.name
+    this.accountService.Register(name, email, password).pipe(first()).subscribe((res: any) => {
+
+      if (res.status === 1) {
+        this.router.navigate(['/'])
+      }
+    });
   }
 }

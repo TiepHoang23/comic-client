@@ -22,6 +22,9 @@ export class GridComicComponent {
   @Input() _class!: string;
   @Input() _title!: string;
   girdType: number = 0;
+
+  @Input() ClickEvent!: any;
+  @Input() EventName!: string;
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
@@ -36,6 +39,9 @@ export class GridComicComponent {
   ngOnInit(): void {
     this.listComics = Array(this.num_preview).fill(undefined);
     this.girdType = Number(localStorage.getItem("gridType")) || 0;
+
+    console.log(this.ClickEvent);
+
   }
   ChangeGridType(target: any, type: number) {
     if (this.girdType == type) return

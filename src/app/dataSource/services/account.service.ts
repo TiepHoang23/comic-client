@@ -12,21 +12,39 @@ import { IUser } from '../schema/User';
   providedIn: 'root',
 })
 export class AccountService {
-  user: IUser | null = null;
+  getAuthorizationToken(): string | undefined {
+    return this.GetUser()?.token;
+  }
+  user?: IUser
   constructor(
     private httpclient: HttpClient,
   ) { }
-
-  GetUser() {
-    this.user = JSON.parse(localStorage.getItem('auth') || '');
-
-    return this.user;
+  isAuthenticated(): boolean {
+    return !!this.GetUser();
   }
 
+
+  GetUser() {
+    this.user = JSON.parse(localStorage.getItem('auth')!);
+    return this.user;
+  }
+  Follow(comicid: Number, isFollow: boolean) {
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Follow?comicid=${comicid}&follow=${isFollow}`, {});
+  }
+  FollowedComics() {
+    return this.httpclient.get(`${globalConfig.API_HOST}/User/FollowedComics`);
+  }
   Login(email: string, password: string) {
     return this.httpclient.get(`${globalConfig.API_HOST}/Auth/Login?email=${email}&password=${password}`);
   }
   Logout() {
     localStorage.removeItem('auth');
+  }
+  Register(name: string, email: string, password: string) {
+    return this.httpclient.post(`${globalConfig.API_HOST}/Auth/Register`, {
+      name,
+      email,
+      password,
+    });
   }
 }

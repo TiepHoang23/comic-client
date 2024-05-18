@@ -8,6 +8,7 @@ import { ComicDetailComponent } from './components/modules/comic-detail/comic-de
 import { ComicService } from './dataSource/services/comic.service';
 import { SearchPageComponent } from './components/modules/search-page/search-page.component';
 import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
+import { FollowedPageComponent } from './components/modules/followed-page/followed-page.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,10 @@ const routes: Routes = [
         path: 'lich-su',
         component: HistoryPageComponent,
       },
-
+      {
+        path: 'theo-doi',
+        component: FollowedPageComponent,
+      },
     ]
   },
   {
