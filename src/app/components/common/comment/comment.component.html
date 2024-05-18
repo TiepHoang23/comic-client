@@ -1,0 +1,222 @@
+<div
+  class="container flex flex-col w-fullbg-white rounded-lg bg-[#f7f7f7] border px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto"
+>
+  @if(!isLogin) {
+  <a
+    class="m-3 p-2 mx-auto rounded bg-blue-500 text-white"
+    [routerLink]="['/auth/login']"
+  >
+    Đăng nhập để bình luận
+  </a>
+
+  }
+  <div
+    class="my-4 w-full flex flex-row flex-wrap justify-between items-end border-b-2 border-black"
+  >
+    <div
+      class="border-b-2 -mb-[1.2px] h-full border-[#00B38F]"
+      data-comments-count="2810"
+    >
+      <span class="wpdtc" title="2810">2.8K</span> BÌNH LUẬN
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    @if(isLogin) {
+    <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
+      <div class="w-full mb-2 mt-6 flex">
+        <div class="px-3 pt-1">
+          <div class="flex gap-3 items-center">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+              class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+            />
+          </div>
+        </div>
+        <textarea
+          class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+          name="content"
+          placeholder="Comment"
+          required
+          formControlName="content"
+        ></textarea>
+      </div>
+
+      <div class="w-full flex justify-end">
+        <button
+          class="w-24 h-8 text-white bg-blue-500 hover:bg-blue-700 rounded"
+          type="submit"
+        >
+          Gửi
+        </button>
+      </div>
+    </form>
+    }
+    <div *ngFor="let comment of listComments" class="flex flex-col gap-1">
+      <div class="flex w-full">
+        <div class="px-3 pt-1">
+          <div class="flex items-center">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+              class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+            />
+          </div>
+        </div>
+        <div
+          class="w-full shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
+        >
+          <div class="flex border-b-2 border-orange-500 w-full mb-2">
+            <span class="font-bold">{{ comment.userName }}</span>
+            <span class="ml-2 text-gray-600">{{
+              comment.commentedAt | dateAgo
+            }}</span>
+          </div>
+          <div class="text-gray-600">
+            {{ comment.content }}
+          </div>
+          <div class="flex flex-row flex-nowrap justify-between items-center">
+            <div
+              class="flex flex-row flex-nowrap justify-start items-center pr-5"
+            >
+              <div class="w-4 h-4">
+                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fill="none" d="M0 0h24v24H0V0z"></path>
+                  <path
+                    d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="mx-1" title="0">0</div>
+              <div class="w-4 h-4">
+                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <button
+              class="text-right text-blue-500"
+              (click)="reply(comment.id)"
+            >
+              Phản hồi
+            </button>
+            <div class="flex-grow"></div>
+
+            <div
+              class=""
+              wpd-tooltip="Xem phản hồi"
+              wpd-tooltip-position="left"
+            >
+              <button class="text-right">Xem phản hồi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pl-16 gap-1 flex flex-col">
+        <div class="flex w-full" *ngFor="let reply of comment.replies">
+          <div class="px-3 pt-1">
+            <div class="flex items-center">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+                class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+              />
+            </div>
+          </div>
+          <div
+            class="w-full shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
+          >
+            <div class="flex border-b-2 border-orange-500 w-full mb-2">
+              <span class="font-bold">{{ reply.userName }}</span>
+              <span class="ml-2 text-gray-600">{{
+                reply.commentedAt | dateAgo
+              }}</span>
+            </div>
+            <div class="text-gray-600">
+              {{ reply.content }}
+            </div>
+            <div class="flex flex-row flex-nowrap justify-between items-center">
+              <div
+                class="flex flex-row flex-nowrap justify-start items-center pr-5"
+              >
+                <div class="w-4 h-4">
+                  <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z"></path>
+                    <path
+                      d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="mx-1" title="0">0</div>
+                <div class="w-4 h-4">
+                  <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path
+                      d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+
+              <button
+                class="text-right text-blue-500"
+                (click)="reply(comment.id)"
+              >
+                Phản hồi
+              </button>
+              <div class="flex-grow"></div>
+
+              <!-- <div
+                class=""
+                wpd-tooltip="Xem phản hồi"
+                wpd-tooltip-position="left"
+              >
+                <button class="text-right">Xem phản hồi</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <form
+          (submit)="onSubmit(comment.id)"
+          [formGroup]="form"
+          *ngIf="replyId === comment.id"
+        >
+          <div class="w-full flex items-center">
+            <div class="px-3 pt-1">
+              <div class="flex gap-3 items-center">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
+                  class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+                />
+              </div>
+            </div>
+            <textarea
+              class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-12 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+              name="content"
+              placeholder="Comment"
+              required
+              formControlName="content"
+            ></textarea>
+          </div>
+
+          <div class="w-full flex justify-end">
+            <button
+              class="w-24 h-8 text-white bg-blue-500 hover:bg-blue-700 rounded"
+              type="submit"
+            >
+              Gửi
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- Reply Container  -->
+
+      <!-- Reply Container  -->
+    </div>
+    <div class="text-gray-300 font-bold pl-14 h-2"></div>
+
+    <!-- Reply Container  -->
+    <div class="text-gray-300 font-bold pl-14 h-2"></div>
+  </div>
+</div>

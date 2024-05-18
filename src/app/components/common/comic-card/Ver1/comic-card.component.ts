@@ -9,12 +9,13 @@ import { Comic } from '../../../../dataSource/schema/comic';
 export class ComicCardComponent {
   @Input() comic?: Comic;
   @Input() EventName?: string;
-  @Input() ClickEvent?: any;
   @Output() comicHover = new EventEmitter<{
     comic: Comic | undefined;
     position: { x: number; y: number };
   }>();
-  constructor() {}
+  @Output() clickEvent = new EventEmitter<Number>();
+
+  constructor() { }
 
   onHoverComic(hover: boolean, event?: MouseEvent) {
     if (hover && event) {
@@ -31,6 +32,6 @@ export class ComicCardComponent {
   }
 
   onClick() {
-    this.ClickEvent(this.comic);
+    this.clickEvent.emit(this.comic?.id);
   }
 }

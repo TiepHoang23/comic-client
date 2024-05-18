@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comic } from '../../../dataSource/schema/comic';
 
 @Component({
@@ -11,7 +11,7 @@ export class GridComicComponent {
   @Input() listComics!: Comic[];
   @Input() _class!: string;
   @Input() _title!: string;
-  @Input() ClickEvent!: any;
+  @Output() ClickEvent = new EventEmitter<Number>();
   @Input() EventName!: string;
   hoverComic: { comic: Comic | undefined; position: { x: number; y: number } } =
     {
@@ -20,7 +20,7 @@ export class GridComicComponent {
     };
   girdType: number = 0;
 
-  constructor() {}
+  constructor() { }
   ngOnChanges() {
     if (this.listComics && this.listComics.length === 0) {
       this.listComics = Array(this.num_preview).fill(undefined);
@@ -42,11 +42,8 @@ export class GridComicComponent {
     this.girdType = Number(localStorage.getItem('gridType')) || 0;
   }
   ChangeGridType(target: any, type: number) {
-    if (this.girdType == type) return;
+    if (this.girdType == type) return
+    localStorage.setItem("gridType", type.toString());
     this.girdType = type;
-    let sibling = target.nextSibling;
-    target.classList.toggle('active');
-    sibling.classList.toggle('active');
-    localStorage.setItem('gridType', type.toString());
   }
 }

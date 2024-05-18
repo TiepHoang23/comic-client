@@ -10,7 +10,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 // import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
@@ -35,6 +34,9 @@ import { SelectorComponent } from './components/common/selector/selector.compone
 import { FollowedPageComponent } from './components/modules/followed-page/followed-page.component';
 import { AuthInterceptor } from './dataSource/services/http-interceptors/auth-interceptor';
 import { PopupDetailComicComponent } from './components/common/grid-comic/page/popup-detail-comic/popup-detail-comic.component';
+import { CommentComponent } from './components/common/comment/comment.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -66,8 +68,9 @@ import { PopupDetailComicComponent } from './components/common/grid-comic/page/p
     SelectorComponent,
     FollowedPageComponent,
     PopupDetailComicComponent,
+    CommentComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, ReactiveFormsModule],
   providers: [
     provideClientHydration(),
     provideHttpClient(),

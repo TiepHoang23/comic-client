@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Output, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ComicService } from '../../../dataSource/services/comic.service';
@@ -18,18 +18,28 @@ export class FollowedPageComponent {
     private accountService: AccountService,
     private route: ActivatedRoute) {
   }
-
+  // @Output() Click: any;
   ngOnInit(): void {
 
     this.accountService
       .FollowedComics().subscribe((res: any) => {
         this.comics = res.data;
       })
+    console.log(this.accountService);
 
   }
+  getInstance() {
+    return this
+  }
 
-  onUnFollowClick(comic: Comic) {
-    console.log(comic);
+  onUnFollowClick(id: Number) {
+
+
+    this.accountService.Follow(id, false).subscribe((res: any) => {
+      if (res.status === 1) {
+        this.comics = this.comics.filter((c) => c.id !== id);
+      }
+    });
 
   }
 

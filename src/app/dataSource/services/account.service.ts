@@ -12,6 +12,14 @@ import { IUser } from '../schema/User';
   providedIn: 'root',
 })
 export class AccountService {
+
+  AddComment(chapterId: number, content: any, parentCommentId: number) {
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Comment`, {
+      chapterId,
+      content,
+      parentCommentId,
+    });
+  }
   getAuthorizationToken(): string | undefined {
     return this.GetUser()?.token;
   }
@@ -37,6 +45,10 @@ export class AccountService {
   Login(email: string, password: string) {
     return this.httpclient.get(`${globalConfig.API_HOST}/Auth/Login?email=${email}&password=${password}`);
   }
+  GetCommentsByComicId(comicId: number) {
+    return this.httpclient.get(`${globalConfig.API_HOST}/User/Comments/comic/${comicId}`);
+  }
+
   Logout() {
     localStorage.removeItem('auth');
   }

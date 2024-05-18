@@ -39,6 +39,15 @@ export class HistoryPageComponent {
   }
 
 
+  onRemoveClick(id: Number) {
+    this.comics = this.comics.filter((c) => c.id !== id)
+    let history = localStorage.getItem("history") as string
+    let his = JSON.parse(history) as Comic[]
+    his = his.filter((c) => c.id !== id)
+    localStorage.setItem("history", JSON.stringify(his))
+  }
+
+
   // this.comicService.getComicById(chapterid).subscribe((res: any) => {
   //   this.comic = res.data
 

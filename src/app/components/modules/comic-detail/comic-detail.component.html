@@ -1,8 +1,10 @@
 <!-- <ng-container *ngIf="comic"> -->
 
-<div class="h-full flex flex-col relative border-spacing-3 overflow-hidden">
+<div
+  class="h-full w-full flex flex-col relative border-spacing-3 overflow-hidden"
+>
   <div
-    class="container flex items-center font-bold text-base text-gray-50 mt-3"
+    class="container mx-auto flex items-center font-bold text-base text-gray-50 mt-3"
   >
     <span><a routerLink="/"> Trang chủ </a> </span>
     <span class="mx-2"
@@ -51,7 +53,7 @@
   <!-- Dark overlay -->
 
   <div
-    class="flex rounded-t-3xl container mt-10 z-5 bg-white"
+    class="flex rounded-t-3xl container mx-auto mt-10 z-5 bg-white"
     style="
       border-top: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
       border-left: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
@@ -75,7 +77,7 @@
         <button
           *ngIf="!comic.isFollow"
           type="button"
-          class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 flex space-x-1 items-center"
+          class="py-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center"
           (click)="Follow(true)"
         >
           <svg
@@ -255,7 +257,7 @@
 
       <div class="read-action flex space-x-2 mt-3">
         <a
-          class="btn btn-warning text-white flex items-center space-x-2 w-32 max-w-xs"
+          class="bg-yellow-400 rounded px-4 text-white flex items-center space-x-2"
           routerLink="/truyen-tranh/{{ comic.url }}"
         >
           <svg
@@ -274,7 +276,7 @@
         </a>
 
         <a
-          class="btn border border-blue-500 rounded text-blue-500 font-semibold text-sm"
+          class="bg-blue-500 px-4 p-2 border rounded text-blue-50 font-semibold text-sm"
         >
           Đọc mới nhất</a
         >
@@ -374,7 +376,7 @@
   </div>
   <!-- </div> -->
 </div>
-<div class="grid grid-cols-3 gap-4 container">
+<div class="grid grid-cols-3 gap-4 container mx-auto">
   <div class="col-span-2">
     <h3 class="list-title font-semibold uppercase mt-3 flex">
       <svg
@@ -445,5 +447,10 @@
     <app-top-list [listTopComics]="listTopComics"></app-top-list>
   </div>
 </div>
-
+@if (comic) {
+<comment-component
+  [comicId]="comic.id"
+  [lastchapterID]="comic.chapters[0].id"
+></comment-component>
+}
 <!-- </ng-container> -->
