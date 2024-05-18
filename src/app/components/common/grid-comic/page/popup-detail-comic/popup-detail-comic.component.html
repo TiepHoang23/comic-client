@@ -1,0 +1,123 @@
+<div
+  *ngIf="comic"
+  class="relative max-w-[30rem] flex bg-slate-100 rounded-xl h-full overflow-hidden bg-opacity-95"
+>
+  <div class="flex flex-col pl-3 pr-4 py-2 mb-2">
+    <div class="w-full flex justify-between gap-2">
+      <a
+        [routerLink]="['/truyen-tranh', comic.url]"
+        class="font-bold uppercase my-1 text-base"
+        ><h4>{{ comic.title }}</h4></a
+      >
+      <div
+        class="text-sm text-center comment-container flex gap-2 items-center"
+      >
+        @if (comic.status === 0) {
+          <div
+            class="animate-ping h-1 w-1 rounded-full bg-sky-400 opacity-75"
+          ></div>
+          <div>Đang tiến hành</div>
+        } @else {
+          <svg
+            class="animate-ping opacity-75"
+            xmlns="http://www.w3.org/2000/svg"
+            height="6"
+            width="6"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="#2debb2"
+              d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+            />
+          </svg>
+          <div>Đã hoàn thành</div>
+        }
+      </div>
+    </div>
+
+    <div class="flex space-x-1 w-full flex-wrap">
+      <a
+        *ngFor="let tag of comic?.genres | slice: 0 : 10; index as i"
+        class="tag bg-accent"
+      >
+        @if (i == 0) {
+          <span
+            class="bg-amber-600 cursor-pointer text-xs font-bold rounded shadow-sm px-2 uppercase text-white"
+            >{{ tag.title }}</span
+          >
+        } @else {
+          <span
+            class="bg-white text-[0.7rem] cursor-pointer font-semibold rounded shadow-sm px-2 uppercase"
+          >
+            {{ tag.title }}
+          </span>
+        }
+      </a>
+    </div>
+    <div class="flex gap-3">
+      <div class="text-sm text-center flex gap-1 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-star icon rel"
+          viewBox="0 0 24 24"
+          style="color: currentcolor"
+        >
+          <path
+            d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
+          ></path></svg
+        >{{ comic.rating }}
+      </div>
+      <div class="text-sm text-center flex gap-1 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="icon small text-icon-contrast text-undefined"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+          ></path>
+        </svg>
+        {{ comic.rating }}
+      </div>
+      <div class="text-sm text-center uppercase flex gap-1 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-eye icon small text-icon-contrast text-undefined"
+          viewBox="0 0 24 24"
+        >
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        {{ comic.viewCount | numeral }}
+      </div>
+
+      <!---->
+    </div>
+    <div class="mt-2">
+      <p class="line-clamp-3 text-sm">
+        {{ comic.description }}
+      </p>
+    </div>
+  </div>
+</div>

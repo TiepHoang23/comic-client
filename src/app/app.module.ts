@@ -34,6 +34,7 @@ import { ComicCardV2Component } from './components/common/comic-card/Ver2/comic-
 import { SelectorComponent } from './components/common/selector/selector.component';
 import { FollowedPageComponent } from './components/modules/followed-page/followed-page.component';
 import { AuthInterceptor } from './dataSource/services/http-interceptors/auth-interceptor';
+import { PopupDetailComicComponent } from './components/common/grid-comic/page/popup-detail-comic/popup-detail-comic.component';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -64,6 +65,7 @@ import { AuthInterceptor } from './dataSource/services/http-interceptors/auth-in
     GenreCatagoriesComponent,
     SelectorComponent,
     FollowedPageComponent,
+    PopupDetailComicComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [

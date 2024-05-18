@@ -1,15 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  SimpleChanges,
-  ViewChild,
-  input,
-} from '@angular/core';
-import { Observable } from 'rxjs';
-import { ComicService } from '../../../dataSource/services/comic.service';
+import { Component, Input } from '@angular/core';
 import { Comic } from '../../../dataSource/schema/comic';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'grid-comic',
@@ -21,34 +11,42 @@ export class GridComicComponent {
   @Input() listComics!: Comic[];
   @Input() _class!: string;
   @Input() _title!: string;
-  girdType: number = 0;
-
   @Input() ClickEvent!: any;
   @Input() EventName!: string;
-  constructor(
-    private comicService: ComicService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) { }
-  ngOnChanges(changes: any) {
+  hoverComic: { comic: Comic | undefined; position: { x: number; y: number } } =
+    {
+      comic: undefined,
+      position: { x: 0, y: 0 },
+    };
+  girdType: number = 0;
+
+  constructor() {}
+  ngOnChanges() {
     if (this.listComics && this.listComics.length === 0) {
       this.listComics = Array(this.num_preview).fill(undefined);
     }
   }
 
+  onHoverComic({
+    comic,
+    position,
+  }: {
+    comic: Comic | undefined;
+    position: { x: number; y: number };
+  }) {
+    this.hoverComic.comic = comic;
+    this.hoverComic.position = { x: position.x, y: position.y };
+  }
   ngOnInit(): void {
     this.listComics = Array(this.num_preview).fill(undefined);
-    this.girdType = Number(localStorage.getItem("gridType")) || 0;
-
-    console.log(this.ClickEvent);
-
+    this.girdType = Number(localStorage.getItem('gridType')) || 0;
   }
   ChangeGridType(target: any, type: number) {
-    if (this.girdType == type) return
+    if (this.girdType == type) return;
     this.girdType = type;
+    let sibling = target.nextSibling;
     target.classList.toggle('active');
-    var sibling = target.nextSibling;
     sibling.classList.toggle('active');
-    localStorage.setItem("gridType", type.toString());
+    localStorage.setItem('gridType', type.toString());
   }
 }

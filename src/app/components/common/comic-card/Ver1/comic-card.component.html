@@ -21,9 +21,11 @@
           class="object-cover w-full absolute"
         />
         <div
+          (mouseenter)="onHoverComic(true, $event)"
+          (mouseleave)="onHoverComic(false, $event)"
           class="w-full backdrop-blur-sm bg-gradient-to-t from-black absolute bottom-0 flex justify-start"
         >
-          <div class="text-white p-1 w-full">
+          <div class="text-white p-1 w-full group">
             <p class="title font-bold line-clamp-1 hover:line-clamp-none">
               {{ comic.title }}
             </p>
@@ -47,11 +49,6 @@
                   {{ comic.viewCount | numeral }}
                 </span>
               </div>
-              <!-- <a
-                  [routerLink]="['/comic', comic.id]"
-                  class="read text-sm flex justify-end"
-                  >Đọc Ngay</a
-                > -->
             </div>
           </div>
         </div>
@@ -100,7 +97,6 @@
         </svg>
       </div>
     </div>
-    <!-- <p class="text-sm font-semibold">1m</p> -->
 
     <div class="invisible card-body details">
       <div class="flex text-gray-500 space-x-8">
