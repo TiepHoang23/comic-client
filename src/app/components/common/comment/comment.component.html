@@ -25,10 +25,13 @@
     <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
       <div class="w-full mb-2 mt-6 flex">
         <div class="px-3 pt-1">
-          <div class="flex gap-3 items-center">
+          <div class="flex gap-3 items-center w-16">
             <img
-              src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
-              class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+              src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
+              class="object-cover p-0.5 w-16 h-16 rounded-full"
+              style="
+                background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+              "
             />
           </div>
         </div>
@@ -51,26 +54,39 @@
       </div>
     </form>
     }
-    <div *ngFor="let comment of listComments" class="flex flex-col gap-1">
+    <div
+      [@inOutAnimation]="'in'"
+      *ngFor="let comment of listComments"
+      class="flex flex-col gap-1 transition-all"
+    >
       <div class="flex w-full">
         <div class="px-3 pt-1">
-          <div class="flex items-center">
+          <div class="flex items-center w-16">
             <img
-              src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
-              class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+              src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
+              class="object-cover p-0.5 w-16 h-16 rounded-full"
+              style="
+                background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+              "
             />
           </div>
         </div>
         <div
-          class="w-full shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
+          class="w-[calc(100%-88px)] flex flex-col shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
         >
-          <div class="flex border-b-2 border-orange-500 w-full mb-2">
+          <div class="flex border-b-2 border-orange-500 mb-2 justify-between">
             <span class="font-bold">{{ comment.userName }}</span>
-            <span class="ml-2 text-gray-600">{{
+            <span
+              class="ml-2 hover:underline hover:text-gray-800 font-thin text-gray-500"
+            >
+              <a href=""> [chapter-{{ comment.chapterID }}] </a>
+            </span>
+            <span class="flex-1"></span>
+            <span class="ml-2 text-gray-600 font-thin text-sm">{{
               comment.commentedAt | dateAgo
             }}</span>
           </div>
-          <div class="text-gray-600">
+          <div class="text-gray-600 break-words">
             {{ comment.content }}
           </div>
           <div class="flex flex-row flex-nowrap justify-between items-center">
@@ -97,37 +113,53 @@
             </div>
 
             <button
-              class="text-right text-blue-500"
+              class="text-right font-thin text-gray-500 hover:text-gray-800"
               (click)="reply(comment.id)"
             >
               Phản hồi
             </button>
             <div class="flex-grow"></div>
 
-            <div
-              class=""
-              wpd-tooltip="Xem phản hồi"
-              wpd-tooltip-position="left"
-            >
-              <button class="text-right">Xem phản hồi</button>
+            <div *ngIf="comment.replies && comment.replies.length > 0">
+              <button
+                class="text-right font-thin text-gray-500 hover:text-gray-800 text-sm"
+                (click)="ViewReplyCmt(comment.id)"
+              >
+                Xem ({{ comment.replies.length }}) phản hồi
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="pl-16 gap-1 flex flex-col">
-        <div class="flex w-full" *ngFor="let reply of comment.replies">
+      <div
+        #ViewReplyEle
+        [attr.reply-block]="comment.id"
+        class="pl-16 gap-1 flex flex-col overflow-hidden {{
+          replyId == comment.id ? '' : 'h-0'
+        }}"
+      >
+        <div
+          [@inOutAnimation]="'in'"
+          class="flex w-full"
+          *ngFor="let reply of comment.replies"
+        >
           <div class="px-3 pt-1">
-            <div class="flex items-center">
+            <div class="flex items-center w-16">
               <img
-                src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
-                class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+                src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
+                class="object-cover p-0.5 w-16 h-16 rounded-full"
+                style="
+                  background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+                "
               />
             </div>
           </div>
           <div
             class="w-full shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
           >
-            <div class="flex border-b-2 border-orange-500 w-full mb-2">
+            <div
+              class="flex border-b-2 border-orange-500 w-full mb-2 justify-between"
+            >
               <span class="font-bold">{{ reply.userName }}</span>
               <span class="ml-2 text-gray-600">{{
                 reply.commentedAt | dateAgo
@@ -160,20 +192,12 @@
               </div>
 
               <button
-                class="text-right text-blue-500"
+                class="text-right font-thin text-gray-500 hover:text-gray-800"
                 (click)="reply(comment.id)"
               >
                 Phản hồi
               </button>
               <div class="flex-grow"></div>
-
-              <!-- <div
-                class=""
-                wpd-tooltip="Xem phản hồi"
-                wpd-tooltip-position="left"
-              >
-                <button class="text-right">Xem phản hồi</button>
-              </div> -->
             </div>
           </div>
         </div>
@@ -184,10 +208,13 @@
         >
           <div class="w-full flex items-center">
             <div class="px-3 pt-1">
-              <div class="flex gap-3 items-center">
+              <div class="flex gap-3 items-center w-16">
                 <img
                   src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
-                  class="object-cover w-16 h-16 rounded-full border-2 border-emerald-400 shadow-emerald-400"
+                  class="object-cover p-0.5 w-16 h-16 rounded-full"
+                  style="
+                    background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+                  "
                 />
               </div>
             </div>

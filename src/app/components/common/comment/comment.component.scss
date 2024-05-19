@@ -1,0 +1,17 @@
+@keyframes  animationHiddenFrame {
+0% 
+{
+    height: auto;
+};
+
+100%
+{
+    height: 0%;
+};
+}
+
+.HiddenAnimation
+{
+    
+    animation:  animationHiddenFrame 2s linear 2s infinite alternate;
+}

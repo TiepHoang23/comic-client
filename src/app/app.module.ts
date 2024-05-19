@@ -37,6 +37,7 @@ import { PopupDetailComicComponent } from './components/common/grid-comic/page/p
 import { CommentComponent } from './components/common/comment/comment.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -70,7 +71,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PopupDetailComicComponent,
     CommentComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule],
   providers: [
     provideClientHydration(),
     provideHttpClient(),
