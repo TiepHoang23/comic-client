@@ -40,7 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs';
-import { Router, Scroll } from '@angular/router';
+import { NavigationEnd, Router, Scroll } from '@angular/router';
+import { log } from 'console';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -91,24 +92,24 @@ import { Router, Scroll } from '@angular/router';
   // exports: [AppModule]
 })
 export class AppModule {
-  constructor(private router: Router,private viewportScroller: ViewportScroller) {
-    viewportScroller.setOffset([0, 0]);
+  constructor(private router: Router, private viewportScroller: ViewportScroller) {
+
     this.router.events
       .pipe(filter((e) => e instanceof Scroll))
       .subscribe((e: any) => {
-        if (e.anchor) {
-          // anchor navigation
-          /* setTimeout is the core line to solve the solution */
-          setTimeout(() => {
-            viewportScroller.scrollToAnchor(e.anchor);
-          });
-        } else if (e.position) {
+        console.log(e);
+        if (e.position) {
           // backward navigation
           viewportScroller.scrollToPosition(e.position);
-        } else {
-          // forward navigation
-          viewportScroller.scrollToPosition([0, 0]);
-        }
+        } else
+          if (e.anchor) {
+
+            viewportScroller.scrollToAnchor(e.anchor);
+
+          } else {
+            // forward navigation
+            viewportScroller.scrollToPosition([0, 0]);
+          }
       });
   }
 }

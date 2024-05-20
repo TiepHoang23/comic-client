@@ -5,6 +5,7 @@ import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomePageComponent implements OnInit {
   listComics: Comic[] = [];
   totalpage!: number;
   listTopComics?: Comic[];
-  currentPage = '1';
+  currentPage = 1;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -28,10 +29,10 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getTopComics();
     console.log(123);
-    
+
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
-      this.currentPage = String(page);
+      this.currentPage = page;
       this.RefreshPage(page);
     });
   }
@@ -40,16 +41,16 @@ export class HomePageComponent implements OnInit {
 
   RefreshPage(page: number): void {
     this.listComics = [];
-    
-    this.ComicService.getComics(page).subscribe((res: any) => {
+
+    this.ComicService.getComics(page, 40, 21, 1, -1).subscribe((res: any) => {
       if (!this.totalpage) {
         this.totalpage = res.data.totalpage;
       }
       this.listComics = res.data.comics;
-    });
+    })
   }
   OnChangePage(page: number) {
-    this.router.navigate([''], { queryParams: { page: page } });
+    this.router.navigate([''], { queryParams: { page: page }, fragment: 'listComic' });
   }
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 15 }).subscribe((topComics) => {

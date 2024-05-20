@@ -11,11 +11,11 @@ import { ComicService } from '../../../dataSource/services/comic.service';
 })
 export class PaginationComponent implements OnInit {
   pages!: string[];
-  @Input() currentPage: string = '1';
+  @Input() currentPage: number = 1;
   @Input() totalpage!: number;
   @Output() OnChange = new EventEmitter<number>();
-  constructor(private route: ActivatedRoute) {}
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) { }
+  ngOnInit(): void { }
   ngOnChanges() {
     if (this.totalpage) {
       this.PageSetup(Number(this.currentPage));
@@ -23,12 +23,13 @@ export class PaginationComponent implements OnInit {
   }
   PageSetup(page: number) {
     this.pages = [];
+    if (this.totalpage <= 5) {
+      for (let index = 1; index <= this.totalpage; index++)
+        this.pages.push(index.toString());
+      return;
+    }
     if (page <= 3) {
-      for (
-        let index = Math.max(1, page - 2);
-        index <= Math.max(page + 2, 3);
-        index++
-      )
+      for (let index = Math.max(1, page - 2); index <= Math.max(page + 2, 3); index++)
         this.pages.push(index.toString());
       this.pages.push('...', this.totalpage.toString());
     } else {
@@ -56,10 +57,12 @@ export class PaginationComponent implements OnInit {
 
   OnChangePage(page: string) {
     let _pageint = Number(page);
+    _pageint = Math.min(this.totalpage, _pageint);
+    _pageint = Math.max(1, _pageint);
     if (this.totalpage) {
       this.PageSetup(_pageint);
       this.OnChange.emit(_pageint);
-      this.currentPage = page;
+      this.currentPage = _pageint;
     }
   }
 }

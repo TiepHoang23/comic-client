@@ -1,7 +1,7 @@
 <div
-  class="flex flex-col items-center justify-between border-t border-gray-200  px-4 mt-4 py-3 sm:px-6"
+  class="flex flex-col items-center justify-between border-t border-gray-200 px-4 mt-4 py-3 sm:px-6"
 >
-  <div class="flex flex-1 justify-between sm:hidden">
+  <!-- <div class="flex flex-1 justify-between sm:hidden">
     <a
       href="#"
       class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -12,15 +12,15 @@
       class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
       >Next</a
     >
-  </div>
-  <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+  </div> -->
+  <div class="flex flex-1items-center justify-between">
     <nav
       class="isolate inline-flex -space-x-px rounded-md shadow-sm"
       aria-label="Pagination"
     >
       <a
-        href="#"
-        class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+        (click)="OnChangePage((currentPage - 1).toString())"
+        class="cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
       >
         <span class="sr-only">Previous</span>
         <svg
@@ -43,14 +43,16 @@
         (click)="OnChangePage(page)"
         aria-current="page"
         class="relative {{
-          currentPage === page ? 'bg-orange-500 text-white' : 'text-gray-900'
-        }} hidden items-center mx-1 px-3 py-2 text-sm font-semibold text-gray-900  md:inline-flex hover:bg-gray-200"
+          currentPage.toString() === page
+            ? 'bg-orange-400 text-white'
+            : 'text-gray-900'
+        }} cursor-pointer  items-center mx-1 px-3 py-2 text-sm font-semibold text-gray-900  hover:bg-orange-500"
         >{{ page }}</a
       >
 
       <a
-        href="?page=1"
-        class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+        (click)="OnChangePage((currentPage + 1).toString())"
+        class="cursor-pointer relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
       >
         <span class="sr-only">Next</span>
         <svg

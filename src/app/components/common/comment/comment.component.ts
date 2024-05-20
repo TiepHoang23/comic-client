@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
+import { Comment } from '../../../dataSource/schema/Comment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../../dataSource/services/account.service';
 import {
@@ -49,18 +50,7 @@ import { DOCUMENT } from '@angular/common';
           ])
         ),
       ]),
-      transition(':leave', [
-        animate(
-          300,
-          keyframes([
-            style({ opacity: 1, offset: 0 }),
-            style({ opacity: 0.75, offset: 0.25 }),
-            style({ opacity: 0.5, offset: 0.5 }),
-            style({ opacity: 0.25, offset: 0.75 }),
-            style({ opacity: 0, offset: 1 }),
-          ])
-        ),
-      ]),
+
     ]),
   ],
 })
@@ -70,10 +60,13 @@ export class CommentComponent implements OnInit {
   comicId!: number;
   @Input()
   lastchapterID!: number;
-  listComments!: any;
+  listComments: Comment[] = [];
   replyId: number = -1;
   isLogin!: boolean;
   BeginState: boolean = true;
+
+  currentPage: number = 1;
+  totalpage: number = 2;
 
   @ViewChildren('ViewReplyEle') ViewReplyEles!: QueryList<ElementRef>;
   constructor(
@@ -92,7 +85,7 @@ export class CommentComponent implements OnInit {
   }
   WindowScroll = (event: any) => {
     console.log(this.myElement.nativeElement.offsetTop);
-    
+
     let ScreenBottomOffset =
       (this.document?.defaultView?.scrollY || 0) +
       (this.document?.defaultView?.innerHeight || 0);
@@ -106,8 +99,8 @@ export class CommentComponent implements OnInit {
       this.document.removeEventListener('scroll', this.WindowScroll);
     }
   };
-  ngAfterViewInit() {}
-  ngAfterContentInit() {}
+  ngAfterViewInit() { }
+  ngAfterContentInit() { }
   refreshcomments() {
     this.accountService
       .GetCommentsByComicId(this.comicId)
@@ -128,27 +121,28 @@ export class CommentComponent implements OnInit {
             let parentComment = this.listComments.find(
               (comment: any) => comment.id === parentCommentId
             );
-            if (parentComment.replies) parentComment.replies.push(res.data);
-            else parentComment.replies = [res.data];
+            if (parentComment) {
+
+              if (parentComment.replies) parentComment.replies.push(res.data);
+              else parentComment.replies = [res.data];
+            }
           }
         }
       });
     this.form.reset();
   }
-  reply(commentId: number) {
+  replyCmt(commentId: number) {
     this.replyId = commentId;
     let El = this.ViewReplyEles.find(
       (element) =>
-        element.nativeElement.getAttribute('reply-block') ===
-        commentId.toString()
+        element.nativeElement.getAttribute('reply-block') === commentId.toString()
     );
     El?.nativeElement.classList.remove('h-0');
   }
   ViewReplyCmt(commentId: number) {
     let El = this.ViewReplyEles.find(
       (element) =>
-        element.nativeElement.getAttribute('reply-block') ===
-        commentId.toString()
+        element.nativeElement.getAttribute('reply-block') === commentId.toString()
     );
     El?.nativeElement.classList.toggle('h-0');
   }

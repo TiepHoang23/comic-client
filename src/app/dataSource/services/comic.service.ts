@@ -6,6 +6,7 @@ import { Genre } from '../schema/Genre';
 import { HttpClient } from '@angular/common/http';
 import globalConfig from '../../../../GlobalConfig';
 import { IServiceResponse } from '../schema/ResponseType';
+import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ComicService {
   constructor(
     private httpclient: HttpClient,
     private jsonApiService: fetchComicService,
-  ) {}
+  ) { }
 
   getComics(
     page: number = 1,
@@ -27,12 +28,19 @@ export class ComicService {
       return this.jsonApiService.get('/comics');
     }
     const params = {
-      page: page.toString(),
+      page: _.random(1, 200).toString(),
       step: step.toString(),
-      genre: genre.toString(),
+      genre: '-1',
       sort: sort.toString(),
-      status: status.toString(),
+      status: '-1',
     };
+    // const params = {
+    //   page: page.toString(),
+    //   step: step.toString(),
+    //   genre: genre.toString(),
+    //   sort: sort.toString(),
+    //   status: status.toString(),
+    // };
     const searchParams = new URLSearchParams(params).toString();
     return this.httpclient.get(
       `${globalConfig.API_HOST}/comics?${searchParams}`,
@@ -61,10 +69,10 @@ export class ComicService {
       return this.jsonApiService.get('/top-comics');
     }
     const params = {
-      page: '1',
+      page: _.random(1, 100).toString(),
       step: top.toString(),
       genre: '-1',
-      sort: '8',
+      sort: _.random(1, 8).toString(),
       status: '-1',
     };
     const searchParams = new URLSearchParams(params).toString();

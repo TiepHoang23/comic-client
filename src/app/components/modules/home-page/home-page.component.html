@@ -6,10 +6,9 @@
   ></app-carousel-landing>
   <!-- <app-carousel-layout></app-carousel-layout> -->
 
-  <div  id = "listComic" class="flex flex-col-reverse lg:flex-row">
-    <div class="basis-9/12">
+  <div class="flex flex-col-reverse lg:flex-row">
+    <div id="listComic" class="basis-9/12">
       <grid-comic
-       
         [listComics]="listComics"
         [num_preview]="40"
         [_title]="'Truyện mới cập nhật'"
@@ -24,5 +23,10 @@
       <recent-read-component></recent-read-component>
     </div>
   </div>
-  <pagination-component (OnChange)="OnChangePage($event)" [currentPage]="currentPage" [totalpage]="totalpage"> </pagination-component>
+  <pagination-component
+    (OnChange)="OnChangePage($event)"
+    [currentPage]="currentPage"
+    [totalpage]="totalpage"
+  >
+  </pagination-component>
 </div>

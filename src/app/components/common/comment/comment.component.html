@@ -114,7 +114,7 @@
 
             <button
               class="text-right font-thin text-gray-500 hover:text-gray-800"
-              (click)="reply(comment.id)"
+              (click)="replyCmt(comment.id)"
             >
               Phản hồi
             </button>
@@ -193,7 +193,7 @@
 
               <button
                 class="text-right font-thin text-gray-500 hover:text-gray-800"
-                (click)="reply(comment.id)"
+                (click)="replyCmt(comment.id)"
               >
                 Phản hồi
               </button>
@@ -246,5 +246,11 @@
     <!-- Reply Container  -->
     <div class="text-gray-300 font-bold pl-14 h-2"></div>
   </div>
-  <pagination-component [totalpage]="10"> </pagination-component>
+
+  <pagination-component
+    *ngIf="totalpage > 1"
+    [currentPage]="currentPage"
+    [totalpage]="totalpage"
+  >
+  </pagination-component>
 </div>

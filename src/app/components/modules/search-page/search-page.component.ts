@@ -107,10 +107,11 @@ export class SearchPageComponent {
     });
   }
   OnChangePage(page: number) {
-    
+
     this.router.navigate([], {
       queryParams: { page: page },
       queryParamsHandling: 'merge',
+      fragment: 'listComic',
     })
   }
 }
