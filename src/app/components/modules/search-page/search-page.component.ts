@@ -9,7 +9,7 @@ import {
   advancedFiltersOptions,
 } from '../../utils/constants';
 import { Genre } from '../../../dataSource/schema/Genre';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'search-page',
@@ -21,7 +21,7 @@ export class SearchPageComponent {
   isLoading: boolean = true;
   totalpage!: number;
   totalResult!: number;
-
+  currentPage: number = 1;
   dataView: IAdvancedFilters = {
     status: advancedFiltersOptions.status,
     sorts: advancedFiltersOptions.sorts,
@@ -93,7 +93,7 @@ export class SearchPageComponent {
     const filters = this.queryParams.get(option) || [];
     this.queryParams.set(
       option,
-      filters.filter((f) => f.value !== data.value),
+      filters.filter((f) => f.value !== data.value)
     );
     this.filterTags = Array.from(this.queryParams.values())
       .flat()
@@ -105,5 +105,12 @@ export class SearchPageComponent {
       queryParams: { status: type, page: 1 },
       queryParamsHandling: 'merge',
     });
+  }
+  OnChangePage(page: number) {
+    
+    this.router.navigate([], {
+      queryParams: { page: page },
+      queryParamsHandling: 'merge',
+    })
   }
 }

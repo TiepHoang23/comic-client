@@ -426,7 +426,9 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-row mt-10">
+  <div 
+  id = "searchPage"
+  class="flex flex-row mt-10">
     <div class="basis-9/12">
       <grid-comic
         [listComics]="listComics"
@@ -443,5 +445,5 @@
 
     <div class="basis-3/12 animate-pulse ml-4 bg-slate-300"></div>
   </div>
-  <pagination-component [totalpage]="totalpage"> </pagination-component>
+  <pagination-component (OnChange)="OnChangePage($event)" [currentPage]="currentPage.toString()" [totalpage]="totalpage"> </pagination-component>
 </div>

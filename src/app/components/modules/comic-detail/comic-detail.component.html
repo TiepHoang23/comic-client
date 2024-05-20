@@ -98,7 +98,7 @@
           <button
             *ngIf="comic.isFollow"
             type="button"
-            class="py-2 px-4 bg-green-500 text-white rounded hover:bg-blue-600 flex space-x-1 items-center"
+            class="py-1 px-4 bg-green-500 text-white rounded hover:bg-green-600 flex space-x-1 items-center"
             (click)="Follow(false)"
           >
             Đang theo dõi
@@ -395,18 +395,18 @@
       <span class="ml-2"> Danh sách chương</span>
     </h3>
     <div
-      #SrollElement
-      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 relative snap-proximity snap-y overflow-y-auto mt-4"
+      #ChaptersScrollElement
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 relative snap-proximity snap-y overflow-y-auto overflow-x-hidden mt-4"
       style="scroll-snap-type: y mandatory; height: 500px"
     >
       <div
         id="overlay"
-        class="absolute -z-50 row-start-1"
+        class="absolute -z-50"
         style="width: 100%; height: 1000px"
       ></div>
       <div
         class="mr-3"
-        *ngFor="let chapter of comicChapters"
+        *ngFor="let chapter of preLoadChapters"
         [ngClass]="{ 'chapter-1-50': $index >= 1 && $index <= 50 }"
         style="scroll-snap-align: start"
         id="chapter-{{ $index }}"
@@ -435,8 +435,8 @@
   </div>
   <div class="col-span-3 xl:col-span-2 row-start-3">
     <grid-comic
-      [listComics]="listTopComics!"
-      [num_preview]="10"
+      [listComics]="listTopComics! |slice:0:6"
+      [num_preview]="6"
       [_title]="'Truyện tương tự'"
       [_class]="
         'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'

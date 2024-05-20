@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col items-center justify-between border-t border-gray-200 bg-white px-4 mt-4 py-3 sm:px-6"
+  class="flex flex-col items-center justify-between border-t border-gray-200  px-4 mt-4 py-3 sm:px-6"
 >
   <div class="flex flex-1 justify-between sm:hidden">
     <a
@@ -40,9 +40,7 @@
 
       <a
         *ngFor="let page of pages"
-        [routerLink]="[]"
-        [queryParams]="{ page: page }"
-        queryParamsHandling="merge"
+        (click)="OnChangePage(page)"
         aria-current="page"
         class="relative {{
           currentPage === page ? 'bg-orange-500 text-white' : 'text-gray-900'

@@ -38,6 +38,9 @@ import { CommentComponent } from './components/common/comment/comment.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs';
+import { Router, Scroll } from '@angular/router';
 // import { NumeralPipe } from './pines/numeral.pipe';
 // import { PageComponent } from './app/components/modules/comic-detail/page/page.component';
 
@@ -69,15 +72,43 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SelectorComponent,
     FollowedPageComponent,
     PopupDetailComicComponent,
-    CommentComponent
+    CommentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [
     provideClientHydration(),
     provideHttpClient(),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private router: Router,private viewportScroller: ViewportScroller) {
+    viewportScroller.setOffset([0, 0]);
+    this.router.events
+      .pipe(filter((e) => e instanceof Scroll))
+      .subscribe((e: any) => {
+        if (e.anchor) {
+          // anchor navigation
+          /* setTimeout is the core line to solve the solution */
+          setTimeout(() => {
+            viewportScroller.scrollToAnchor(e.anchor);
+          });
+        } else if (e.position) {
+          // backward navigation
+          viewportScroller.scrollToPosition(e.position);
+        } else {
+          // forward navigation
+          viewportScroller.scrollToPosition([0, 0]);
+        }
+      });
+  }
+}
