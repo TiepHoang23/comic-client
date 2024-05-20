@@ -4,7 +4,7 @@
   class="h-full w-full flex flex-col relative border-spacing-3 overflow-hidden"
 >
   <div
-    class="container w-1/2 lg:w-full mx-auto flex items-center font-bold text-base text-gray-50 mt-3"
+    class="container w-1/2 lg:w-full mx-auto flex font-bold text-base text-gray-50 mt-3"
   >
     <span><a routerLink="/"> Trang chủ </a> </span>
     <span class="mx-2"
@@ -53,7 +53,7 @@
   <!-- Dark overlay -->
 
   <div
-    class="lg:flex xl:flex rounded-t-3xl container mx-auto mt-10 w-3/4 lg:w-full z-5 bg-white"
+    class="lg:flex xl:flex rounded-t-3xl mx-auto container md:w-3/4 w-full lg:w-full mt-12 lg:mt-10 z-5 bg-white"
     style="
       border-top: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
       border-left: 0.138889rem solid hsla(0, 0%, 42%, 0.8);
@@ -61,10 +61,10 @@
     "
   >
     @if (comic) {
-      <div class="">
-        <div class="flex justify-center">
+      <div class="lg:ml-10">
+        <div class="flex justify-center relative h-[250px] lg:h-auto">
           <div
-            class="flex shadow-md justify-center rounded relative bottom-5 border-gray-200 border-2 overflow-hidden"
+            class="flex shadow-md rounded absolute lg:relative bottom-8 translate-y-4 lg:translate-y-0 lg:bottom-5 border-gray-200 border-2 overflow-hidden"
             style="width: 200px; height: 300px"
           >
             <img
@@ -107,9 +107,9 @@
       </div>
 
       <div
-        class="flex flex-col justify-center items-center lg:items-start mx-4 mt-3"
+        class="flex flex-col justify-center items-center lg:items-start mx-4"
       >
-        <h1 class="other-name font-semibold uppercase text-2xl">
+        <h1 class="other-name font-bold uppercase text-2xl text-pretty">
           {{ comic.title }}
         </h1>
         <p class="col-xs-8 uppercase font-thin">{{ comic.author }}</p>
@@ -209,7 +209,7 @@
             <!-- Assuming comic.categories is an array of category names -->
             <ng-container *ngFor="let category of comic.genres">
               <a
-                class="category font-semibold hover:text-gray-500 h-6 px-2 mx-1 text-sm bg-gray-100 hover:border-transparent rounded"
+                class="category uppercase font-semibold hover:text-white px-2 text-sm text-gray-600 bg-gray-100 hover:bg-amber-500 rounded shadow-sm"
                 type="button"
                 href="#"
                 >{{ category.title }}</a
@@ -240,9 +240,7 @@
         </div>
         <div class="follow"></div>
 
-        <div
-          class="description inline w-2/3 text-center lg:text-left lg:w-full"
-        >
+        <div class="description inline lg:text-left lg:w-full mx-3 lg:m-0">
           <div
             [class.line-clamp-3]="!isOpen"
             class="shortened line-clamp-3 mt-2 text-sm mr-4"
@@ -278,9 +276,7 @@
             <span class="font-semibold text-sm">Đọc từ đầu</span>
           </a>
 
-          <a
-            class="bg-blue-500 px-4 p-2 border rounded text-blue-50 font-semibold text-sm"
-          >
+          <a class="px-4 p-2 border rounded text-black font-semibold text-sm">
             Đọc mới nhất</a
           >
         </div>
@@ -435,7 +431,7 @@
   </div>
   <div class="col-span-3 xl:col-span-2 row-start-3">
     <grid-comic
-      [listComics]="listTopComics! |slice:0:6"
+      [listComics]="listTopComics! | slice: 0 : 6"
       [num_preview]="6"
       [_title]="'Truyện tương tự'"
       [_class]="
