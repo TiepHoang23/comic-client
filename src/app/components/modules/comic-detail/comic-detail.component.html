@@ -4,10 +4,10 @@
   class="h-full w-full flex flex-col relative border-spacing-3 overflow-hidden"
 >
   <div
-    class="container w-1/2 lg:w-full mx-auto flex font-bold text-base text-gray-50 mt-3"
+    class="container text-sm ml-auto w-full lg:w-full flex font-bold text-gray-50 mt-3 mb-2"
   >
     <span><a routerLink="/"> Trang chủ </a> </span>
-    <span class="mx-2"
+    <span class=""
       ><svg
         class="h-6 w-6 text-gray-50"
         viewBox="0 0 24 24"
@@ -21,7 +21,7 @@
       </svg>
     </span>
     <span><a> Truyện tranh </a></span>
-    <span class="mx-2">
+    <span class="">
       <svg
         class="h-6 w-6 text-gray-50"
         viewBox="0 0 24 24"
@@ -35,7 +35,7 @@
       </svg>
     </span>
     @if (comic) {
-      <span>{{ comic.title }}</span>
+      <span class="line-clamp-1">{{ comic.title }}</span>
     }
   </div>
   <div class="absolute inset-0 h-full border-spacing-2 -z-10 blur-sm">
@@ -79,7 +79,7 @@
           <button
             *ngIf="!comic.isFollow"
             type="button"
-            class="py-1 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center"
+            class="py-1 px-4 gap-1 bg-cyan-600 text-white rounded hover:bg-cyan-500 flex items-center"
             (click)="Follow(true)"
           >
             <svg
@@ -98,16 +98,28 @@
           <button
             *ngIf="comic.isFollow"
             type="button"
-            class="py-1 px-4 bg-green-500 text-white rounded hover:bg-green-600 flex space-x-1 items-center"
+            class="py-1 px-4 bg-lime-600 text-white rounded hover:bg-lime-500 flex space-x-1 gap-1 items-center"
             (click)="Follow(false)"
           >
+            <svg
+              class="h-5 w-5 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
             Đang theo dõi
           </button>
         </div>
       </div>
 
       <div
-        class="flex flex-col justify-center items-center lg:items-start mx-4"
+        class="flex flex-col justify-center items-center lg:items-start mx-4 mb-5"
       >
         <h1 class="other-name font-bold uppercase text-2xl text-pretty">
           {{ comic.title }}
@@ -116,21 +128,25 @@
         <app-star-rating [initialRating]="comic.rating"></app-star-rating>
         <ul class="list-info space-y-2 text-sm mt-2">
           <div
-            class="flex flex-wrap justify-center lg:justify-start space-x-7 text-sm"
+            class="flex flex-wrap justify-center lg:justify-start gap-5 text-sm"
           >
             <li>
               <p class="name text"><i class="fa fa-eye"></i> Chapters:</p>
-              <div class="flex space-x-2 items-center">
+              <div class="flex space-x-1 items-center">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="14"
-                  width="15.75"
-                  viewBox="0 0 576 512"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
                   <path
-                    d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                   />
                 </svg>
+
                 <p class="number font-semibold">
                   {{ comic.chapters.length }}
                 </p>
@@ -138,15 +154,16 @@
             </li>
             <li>
               <p class="name text">Lượt xem:</p>
-              <div class="flex space-x-2 items-center">
+              <div class="flex space-x-1 items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="14"
                   width="15.75"
                   viewBox="0 0 576 512"
                 >
+                  <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                   <path
-                    d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"
+                    d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"
                   />
                 </svg>
                 <p class="font-semibold uppercase">
@@ -156,15 +173,16 @@
             </li>
             <li>
               <p class="name text">Xếp hạng:</p>
-              <div class="flex space-x-2 items-center">
+              <div class="flex space-x-1 items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="14"
                   width="10.5"
                   viewBox="0 0 384 512"
                 >
+                  <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                   <path
-                    d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"
+                    d="M0 48C0 21.5 21.5 0 48 0l0 48V441.4l130.1-92.9c8.3-6 19.6-6 27.9 0L336 441.4V48H48V0H336c26.5 0 48 21.5 48 48V488c0 9-5 17.2-13 21.3s-17.6 3.4-24.9-1.8L192 397.5 37.9 507.5c-7.3 5.2-16.9 5.9-24.9 1.8S0 497 0 488V48z"
                   />
                 </svg>
                 <p class="ratingValue font-semibold">
@@ -175,47 +193,56 @@
 
             <li>
               <p class="name col-xs-4"><i class="fa fa-rss"></i> Tình trạng:</p>
-              <div class="flex space-x-2 items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="12"
-                  width="12"
-                  viewBox="0 0 512 512"
-                >
-                  <ng-container *ngIf="comic.status == 0; else elseBlock">
-                    <path
-                      d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"
-                    />
-                  </ng-container>
-                  <ng-template #elseBlock>
-                    <path
-                      fill="#63E6BE"
-                      d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
-                    />
-                  </ng-template>
-                </svg>
-                <p class="ratingValue font-semibold">
-                  {{ comic.status === 0 ? "Đang tiến hành" : "Đã hoàn thành" }}
-                </p>
+              <div class="flex space-x-2 items-center font-semibold">
+                @if (comic.status === 0) {
+                  <span
+                    class="relative flex h-2 w-2 justify-center items-center"
+                  >
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-65"
+                    ></span>
+                    <span
+                      class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"
+                    ></span>
+                  </span>
+                  <div class="text-sm">Đang tiến hành</div>
+                } @else {
+                  <span
+                    class="relative flex h-2 w-2 justify-center items-center"
+                  >
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-65"
+                    ></span>
+                    <!-- <span class="relative inline-flex rounded-full h-2 w-2"> -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="12"
+                      width="12"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="#2debb2"
+                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                      />
+                    </svg>
+                    <!-- </span> -->
+                  </span>
+
+                  <div class="text-sm">Đã hoàn thành</div>
+                }
               </div>
             </li>
-            <!-- <li class="mrt5 mrb10 flex space-x-2">
-                <p class="name text">Xếp hạng:</p>
-               
-              </li> -->
           </div>
-          <li class="kind flex flex-wrap space-x-2">
-            <!-- <p class="col-xs-8"> -->
-            <!-- Assuming comic.categories is an array of category names -->
+          <li
+            class="kind flex justify-center xl:justify-normal flex-wrap space-x-2"
+          >
             <ng-container *ngFor="let category of comic.genres">
               <a
-                class="category uppercase font-semibold hover:text-white px-2 text-sm text-gray-600 bg-gray-100 hover:bg-amber-500 rounded shadow-sm"
-                type="button"
+                class="category uppercase font-semibold hover:text-white mt-1 px-2 text-gray-600 hover:bg-amber-500 rounded border-gray-300 border border-dashed"
                 href="#"
                 >{{ category.title }}</a
               >
             </ng-container>
-            <!-- </p> -->
           </li>
         </ul>
 
@@ -224,19 +251,15 @@
             <div
               class="star"
               data-id="83850"
-              data-allowrating="true"
+              data-allow-rating="true"
               style="cursor: pointer"
-            >
-              <!-- You may need to implement the star rating logic here -->
-            </div>
+            ></div>
           </div>
           <div
             class="col-xs-6 lazy-module"
             data-type="facebook"
             style="overflow: hidden"
-          >
-            <!-- Facebook like button code -->
-          </div>
+          ></div>
         </div>
         <div class="follow"></div>
 
@@ -258,7 +281,7 @@
 
         <div class="read-action flex space-x-2 mt-3">
           <a
-            class="bg-yellow-400 rounded px-4 text-white flex items-center space-x-2"
+            class="bg-amber-500 rounded px-4 text-white flex items-center space-x-2"
             routerLink="/truyen-tranh/{{ comic.url }}"
           >
             <svg
@@ -276,7 +299,9 @@
             <span class="font-semibold text-sm">Đọc từ đầu</span>
           </a>
 
-          <a class="px-4 p-2 border rounded text-black font-semibold text-sm">
+          <a
+            class="px-4 p-2 border border-gray-500 rounded text-black font-semibold text-sm"
+          >
             Đọc mới nhất</a
           >
         </div>
@@ -376,7 +401,7 @@
   <!-- </div> -->
 </div>
 <div class="grid grid-cols-3 gap-4 container mx-auto">
-  <div class="col-span-3 xl:col-span-2">
+  <div class="col-span-3 xl:col-span-2 m-2">
     <h3 class="list-title font-semibold uppercase mt-3 flex">
       <svg
         xmlns="http://www.w3.org/2000/svg"
