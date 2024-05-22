@@ -18,6 +18,7 @@ const routes: Routes = [
       {
         path: '',
         component: HomePageComponent,
+        title: 'Truyên mới cập nhật - [host]',
       },
       {
         path: 'truyen-tranh/:id',
@@ -30,10 +31,12 @@ const routes: Routes = [
       {
         path: 'lich-su',
         component: HistoryPageComponent,
+        title: 'Lịch sử đọc truyện - [host]',
       },
       {
         path: 'theo-doi',
         component: FollowedPageComponent,
+        title: 'Truyện đang theo dõi - [host]',
       },
       {
         path: 'truyen-tranh/:comicid/chapter/:chapterid',
@@ -49,6 +52,7 @@ const routes: Routes = [
         (m) => m.AuthModule
       ),
   },
+  { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
 
 @NgModule({

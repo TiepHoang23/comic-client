@@ -15,6 +15,7 @@ import { Observable, of } from 'rxjs';
 import { AccountService } from '../../../dataSource/services/account.service';
 import { offset } from '@popperjs/core';
 import { HistoryService } from '../../../services/history.service';
+import { Title } from '@angular/platform-browser';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -49,7 +50,7 @@ export class ComicDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private ComicService: ComicService,
-    private location: Location,
+    private titleService: Title,
     private accountService: AccountService,
     private historyService: HistoryService,
     @Inject(DOCUMENT) private document: Document,
@@ -76,7 +77,7 @@ export class ComicDetailComponent implements OnInit {
     this.ComicService.getComicById(id).subscribe((res) => {
       this.comic = res.data ?? ({} as Comic);
       this.isFollowed = this.comic.isFollow || false;
-
+      this.titleService.setTitle(`${this.comic.title} - Truyện Tranh`);
       this.saveHistory(this.comic);
       this.allchapters = (res.data?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
@@ -89,9 +90,12 @@ export class ComicDetailComponent implements OnInit {
           updateAt: chapter.updateAt,
           viewCount: chapter.viewCount,
         };
-      });
+      },
+      );
+
       this.SetUpScroll();
-    });
+    }
+  );
     // const id = this.route.snapshot.paramMap.get('id') || '';
   }
 
