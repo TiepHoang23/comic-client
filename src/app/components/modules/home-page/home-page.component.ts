@@ -28,7 +28,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTopComics();
-    console.log(123);
 
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;

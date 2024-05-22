@@ -10,12 +10,8 @@ import { forEach } from 'lodash';
   styleUrls: ['./carousel-landing.component.scss'], // Change styleUrl to styleUrls
 })
 export class CarouselLandingComponent implements OnInit {
-
-
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-  ) { }
-  @Input() dataSlide?: Comic[] = [];
+  constructor(@Inject(DOCUMENT) private document: Document) {}
+  @Input() dataSlide?: Comic[];
   carouselItems: Array<Comic[]> = [];
 
   lastTime: number = 0;
@@ -23,27 +19,25 @@ export class CarouselLandingComponent implements OnInit {
   isTransitioning: boolean = false;
   private interval: any;
 
-  ngOnChanges() {
-
+  ngOnChanges(change: any) {
+    if (!this.dataSlide) return;
     const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
     this.carouselItems = comicChunk;
     this.carouselItems.push(...comicChunk, ...comicChunk);
-    this.resetAutoSlide();
-    // if (this.carouselItems) {
-
-    //   this.recalpulate();
-    // }
-
+    this.resetAutoSlide();    
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   slideElements: Element[] = [];
-  ngAfterViewInit() {
-    this.slideElements = Array.from(this.document.getElementsByClassName('carousel-item'));
-    this.recalpulate();
-
+  ngAfterViewChecked() {
+    if (this.slideElements.length === 0) {
+      this.slideElements = Array.from(
+        this.document.getElementsByClassName('carousel-item')
+      );
+      if (this.slideElements.length > 0) {
+        this.recalpulate();
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -56,35 +50,27 @@ export class CarouselLandingComponent implements OnInit {
     }, 4000);
   }
 
-
   recalpulate(isNext = true): void {
-
     let now = Date.now();
     if (now - this.lastTime < 700) {
       return;
     }
     this.lastTime = now;
+
     if (isNext) {
       let last = this.slideElements.pop()!;
       this.slideElements = [last, ...this.slideElements];
-
-    }
-    else {
+    } else {
       let first = this.slideElements.shift()!;
       this.slideElements = [...this.slideElements, first];
     }
 
-
     this.slideElements.forEach((e: any, index) => {
-      e.style.left = `${(index - 1) * 100 / 3}%`;
+      e.style.left = `${((index - 1) * 100) / 3}%`;
       if (index == 0) {
-        e.style["z-index"] = 0
-      }
-      else
-        e.style["z-index"] = 5 - index
-
-    })
-
+        e.style['z-index'] = 0;
+      } else e.style['z-index'] = 5 - index;
+    });
   }
 
   private resetAutoSlide() {

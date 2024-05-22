@@ -13,37 +13,27 @@ export class GridComicComponent {
   @Input() _title!: string;
   @Output() ClickEvent = new EventEmitter<Number>();
   @Input() EventName!: string;
-  hoverComic: { comic: Comic | undefined; position: { x: number; y: number } } =
-    {
-      comic: undefined,
-      position: { x: 0, y: 0 },
-    };
+  hoverComic!: Comic;
+
   girdType: number = 0;
 
-  constructor() { }
+  constructor() {}
   ngOnChanges() {
     if (this.listComics && this.listComics.length === 0) {
       this.listComics = Array(this.num_preview).fill(undefined);
     }
   }
 
-  onHoverComic({
-    comic,
-    position,
-  }: {
-    comic: Comic | undefined;
-    position: { x: number; y: number };
-  }) {
-    this.hoverComic.comic = comic;
-    this.hoverComic.position = { x: position.x, y: position.y };
+  onHoverComic(comic: Comic) {
+    this.hoverComic = comic;
   }
   ngOnInit(): void {
     this.listComics = Array(this.num_preview).fill(undefined);
     this.girdType = Number(localStorage.getItem('gridType')) || 0;
   }
   ChangeGridType(target: any, type: number) {
-    if (this.girdType == type) return
-    localStorage.setItem("gridType", type.toString());
+    if (this.girdType == type) return;
+    localStorage.setItem('gridType', type.toString());
     this.girdType = type;
   }
 }

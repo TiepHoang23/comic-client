@@ -5,6 +5,7 @@ import { ComicService } from '../../../dataSource/services/comic.service';
 import { ActivatedRoute } from '@angular/router';
 import { Comic } from '../../../dataSource/schema/comic';
 import { url } from 'inspector';
+import { HistoryService } from '../../../services/history.service';
 
 @Component({
   selector: 'history-tag',
@@ -13,42 +14,45 @@ import { url } from 'inspector';
 })
 export class HistoryPageComponent {
   comics: Comic[] = [];
-  constructor(private comicService: ComicService, private route: ActivatedRoute) {
-  }
+  page: number = 1;
+  totalpage: number = 1;
+  comicPerPage = 12;
+  constructor(
+    private comicService: ComicService,
+    private route: ActivatedRoute,
+    private hisService: HistoryService
+  ) {}
 
   ngOnInit(): void {
-
-    if (localStorage.getItem("history") === null) return
-
-    let history = localStorage.getItem("history") as string
-    let his = JSON.parse(history) as Comic[]
-    // this.comicService.getComicsByIds(his).subscribe((res: any) => {
-    //   this.comics = res.data
-    // })
-    let list = []
+    let his = this.hisService.GetHistory();
+    this.totalpage = Math.floor((his.length - 1) / this.comicPerPage) + 1;
+    his = his.slice(
+      (this.page - 1) * this.comicPerPage,
+      this.page * this.comicPerPage
+    );
+    let list = [];
     his.forEach((element, i) => {
       this.comicService.getComicById(element.url).subscribe((res: any) => {
-        list.push(res.data)
+        list.push(res.data);
         if (i === his.length - 1) {
-          this.comics = list
+          this.comics = list;
         }
-
-      })
+      });
     });
-    // this.comics = his.map((id) => ({} as Comic))
   }
-
-
+  OnChangePage(page: number) {
+    this.page = page;
+    this.ngOnInit();
+  }
   onRemoveClick(id: Number) {
-    this.comics = this.comics.filter((c) => c.id !== id)
-    let history = localStorage.getItem("history") as string
-    let his = JSON.parse(history) as Comic[]
-    his = his.filter((c) => c.id !== id)
-    localStorage.setItem("history", JSON.stringify(his))
+    this.hisService.RemoveHistory(id);
+    this.comics = this.comics.filter((c) => c.id !== id);
+    let totalpage =
+      Math.floor((this.hisService.GetHistorySize() - 1) / this.comicPerPage) +
+      1;
+    if (this.totalpage != totalpage) {
+      this.totalpage = totalpage;
+      this.OnChangePage(this.page - 1);
+    }
   }
-
-
-  // this.comicService.getComicById(chapterid).subscribe((res: any) => {
-  //   this.comic = res.data
-
 }

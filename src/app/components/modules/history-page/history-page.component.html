@@ -1,7 +1,7 @@
 <div class="container mx-auto">
   <grid-comic
     [listComics]="comics"
-    [num_preview]="40"
+    [num_preview]="comicPerPage"
     [_title]="'Truyện đã xem'"
     [_class]="
       'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
@@ -10,5 +10,6 @@
     [EventName]="'Xóa'"
   >
   </grid-comic>
-  <pagination-component [totalpage]="10"> </pagination-component>
+  
+  <pagination-component *ngIf="totalpage > 1" [totalpage]="totalpage" [currentPage]="page" (OnChange)="OnChangePage($event)"> </pagination-component>
 </div>

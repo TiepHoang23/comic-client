@@ -15,7 +15,6 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-
       {
         path: '',
         component: HomePageComponent,
@@ -36,16 +35,20 @@ const routes: Routes = [
         path: 'theo-doi',
         component: FollowedPageComponent,
       },
-    ]
+      {
+        path: 'truyen-tranh/:comicid/chapter/:chapterid',
+        component: ChapterPageComponent,
+      },
+    ],
   },
-  {
-    path: 'truyen-tranh/:comicid/chapter/:chapterid',
-    component: ChapterPageComponent,
-  },
+
   {
     path: 'auth',
-    loadChildren: () => import('./components/modules/authentication/auth.module').then(m => m.AuthModule),
-  }
+    loadChildren: () =>
+      import('./components/modules/authentication/auth.module').then(
+        (m) => m.AuthModule
+      ),
+  },
 ];
 
 @NgModule({

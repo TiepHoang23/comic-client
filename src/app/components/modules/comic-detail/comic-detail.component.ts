@@ -14,6 +14,7 @@ import moment from 'moment-timezone';
 import { Observable, of } from 'rxjs';
 import { AccountService } from '../../../dataSource/services/account.service';
 import { offset } from '@popperjs/core';
+import { HistoryService } from '../../../services/history.service';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -50,6 +51,7 @@ export class ComicDetailComponent implements OnInit {
     private ComicService: ComicService,
     private location: Location,
     private accountService: AccountService,
+    private historyService: HistoryService,
     @Inject(DOCUMENT) private document: Document,
   ) {}
 
@@ -65,15 +67,9 @@ export class ComicDetailComponent implements OnInit {
   }
 
   saveHistory(comic: Comic) {
-    if (localStorage.getItem('history') === null) {
-      localStorage.setItem('history', JSON.stringify([comic]));
-      return;
-    }
-    let history = localStorage.getItem('history') as string;
-    let his = JSON.parse(history) as Comic[];
-    if (his.find((c) => c.id === comic.id)) return;
-    his.push(comic);
-    localStorage.setItem('history', JSON.stringify(his));
+    
+    this.historyService.SaveHistory(comic);
+
   }
 
   getComic(id: string): void {

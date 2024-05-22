@@ -14,6 +14,8 @@ import { AccountService } from '../../../dataSource/services/account.service';
 })
 export class FollowedPageComponent {
   comics: Comic[] = [];
+  currentpage: number = 1
+  totalpage: number = 1
   constructor(private comicService: ComicService,
     private accountService: AccountService,
     private route: ActivatedRoute) {

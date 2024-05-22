@@ -1,36 +1,216 @@
-<div class="container flex items-center font-bold text-base mt-3">
-  <span><a routerLink="/"> Trang chủ </a> </span>
-  <span class="mx-2"
-    ><svg
-      class="h-6 w-6"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  </span>
-  <span><a> Truyện tranh </a></span>
-  <span class="mx-2">
-    <svg
-      class="h-6 w-6"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  </span>
-  @if(comic) {
-  <span>{{ comic.title }}</span>
-  }
+<div class=" bg-[#333] min-h-screen">
+  <div class="mx-auto container flex flex-col items-center font-bold text-base">
+    <div class="bg-white h-10 mb-5 flex items-center w-full">
+      <div class="bg-[#699afe] w-10 h-10 flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          class="w-4 h-4"
+        >
+          <path
+            fill="white"
+            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+          ></path>
+        </svg>
+      </div>
+      <div class="ml-1 text-xs truncate">
+        Vui lòng <b>F5</b> hoặc <b>Reload</b> lại trang nếu không tải được ảnh.
+      </div>
+    </div>
+    <div class="mb-10 bg-white p-5 text-center w-full rounded-md">
+      <ol
+        class="flex pb-10 items-center h-full w-full flex-wrap"
+        itemscope=""
+        itemtype="https://schema.org/BreadcrumbList"
+      >
+        <li
+          class="flex h-full items-center"
+          itemprop="itemListElement"
+          itemscope=""
+          itemtype="https://schema.org/ListItem"
+        >
+          <a
+            href="https://doctruyenonline.vn/truyen-tranh"
+            class="pr-1 hover:underline"
+            aria-label="home"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+              ></path></svg></a
+          ><a
+            href="https://doctruyenonline.vn/truyen-tranh"
+            class="hover:underline"
+            title="Đọc truyện online"
+            itemprop="item"
+            ><span itemprop="name">Truyện Tranh</span></a
+          ><meta itemprop="position" content="1" />
+        </li>
+        <li
+          class="breadcrumb flex"
+          itemprop="itemListElement"
+          itemscope=""
+          itemtype="https://schema.org/ListItem"
+        >
+          <a
+            href="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1"
+            class="hover:underline capitalize"
+            title="Thiên Tài Bóng Đá, Tiền Đạo Số 1"
+            itemprop="item"
+            ><span
+              class="block max-w-[250px] lg:max-w-full truncate"
+              itemprop="name"
+              >Thiên Tài Bóng Đá, Tiền Đạo Số 1</span
+            ></a
+          ><meta itemprop="position" content="2" />
+        </li>
+        <li
+          class="breadcrumb flex"
+          itemprop="itemListElement"
+          itemscope=""
+          itemtype="https://schema.org/ListItem"
+        >
+          <a
+            href="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1/chapter-268"
+            class="hover:underline capitalize"
+            title="Chapter 268"
+            itemprop="item"
+            ><span
+              class="block max-w-[250px] lg:max-w-full truncate"
+              itemprop="name"
+              >Chapter 268</span
+            ></a
+          ><meta itemprop="position" content="3" />
+        </li>
+      </ol>
+      <div class="mb-5">
+        <h1 class="text-center text-xl">
+          <a
+            href="/truyen-tranh/thien-tai-bong-da-tien-dao-so-1"
+            title="Thiên Tài Bóng Đá, Tiền Đạo Số 1"
+            class="cursor-pointer text-[#7a6ff1] font-semibold"
+            >Thiên Tài Bóng Đá, Tiền Đạo Số 1</a
+          ><span
+            >&nbsp;-
+            <!-- -->Chapter 268</span
+          >
+        </h1>
+        <i>[Đăng lúc: 2024-05-22]</i>
+      </div>
+      <button
+        class="bg-[#f0ad4e] px-3 py-2 rounded-lg flex text-white mx-auto my-5"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            fill="white"
+            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+          ></path></svg
+        >Báo Lỗi
+      </button>
+      <div
+        class="p-4 bg-[#d9edf7] border border-solid border-[#bce8f1] items-center mb-3 text-[#31708f] rounded-lg flex justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            fill="#31708f"
+            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+          ></path></svg
+        ><i>Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter</i>
+      </div>
+      <div id="position-btn"></div>
+      <div
+        class="flex items-center justify-center top-0 left-0 right-0 z-10 bg-white py-2 px-3 lg:px-0"
+        id="group-btn-chapter"
+      >
+        <a href="https://doctruyenonline.vn/truyen-tranh" title="Truyện tranh"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 576 512"
+            class="w-[24px] h-[24px] mr-3 fill-[#7a6ff1] hover:fill-[#7a6ff1cd]"
+          >
+            <path
+              d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185V64c0-17.7-14.3-32-32-32H448c-17.7 0-32 14.3-32 32v36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v64 24c0 22.1 17.9 40 40 40h24 32.5c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1h16c22.1 0 40-17.9 40-40V455.8c.3-2.6 .5-5.3 .5-8.1l-.7-160.2h32z"
+            ></path></svg></a
+        ><a
+          href="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1#danh-sach-chap"
+          title="Danh Sách Chapter"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 512 512"
+            class="w-[24px] h-[24px] mr-3 fill-[#7a6ff1] hover:fill-[#7a6ff1cd]"
+          >
+            <path
+              d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"
+            ></path></svg></a
+        ><a
+          href="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1/chapter-267"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 256 512"
+            class="w-[35px] h-[34px] bg-[#7a6ff1] hover:bg-[#7a6ff1cd] flex justify-center rounded-l-lg hover:opacity-75"
+          >
+            <path
+              fill="white"
+              d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"
+            ></path></svg></a
+        ><select
+          class="h-[34px] mx-3 w-[200px] lg:w-[245px] border border-solid border-[#ccc]"
+        >
+          <option
+            value="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1/chapter-268"
+            selected=""
+          >
+            Chapter 268
+          </option>
+          <option
+            value="https://doctruyenonline.vn/truyen-tranh/thien-tai-bong-da-tien-dao-so-1/chapter-267"
+          >
+            Chapter 267
+          </option>
+        </select>
+        <div
+          class="w-[35px] h-[34px] bg-[#ccc] flex justify-center rounded-r-lg mr-3"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 256 512"
+            class="w-[35px] h-[34px]"
+          >
+            <path
+              fill="white"
+              d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <button
   class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
   (click)="ToggleMenu(true)"
@@ -560,45 +740,4 @@
       </span>
     </button>
   </div>
-</div>
-<div class="" (click)="ToggleMenu(false)">
-  <div class="mb-10 bg-white p-5 text-center">
-    <h1 class="text-center text-xl">
-      <a
-        href="/truyen-tranh/toi-se-bi-tru-khu-cung-hoang-de"
-        title="{{ comic.title }}"
-        class="cursor-pointer text-[#7a6ff1] font-semibold"
-        >{{ comic.title }}</a
-      ><span
-        >&nbsp;-
-        <!-- -->{{ mainChapter.title }}</span
-      >
-    </h1>
-    <i>[Đăng lúc: {{ mainChapter.updateAt | date : "HH:mm dd/MM/yyyy " }}]</i>
-  </div>
-
-  <div
-    class="p-4 bg-[#d9edf7] border border-solid border-[#bce8f1] items-center mb-3 text-[#31708f] rounded-lg flex justify-center"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="16"
-      width="16"
-      viewBox="0 0 512 512"
-      class="mr-1"
-    >
-      <path
-        fill="#31708f"
-        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
-      ></path></svg
-    ><i>Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter</i>
-  </div>
-  <div id="position-btn"></div>
-
-  <img
-    *ngFor="let pageimg of ListChapterImg"
-    src="{{ pageimg.url }}"
-    alt="banner chapter"
-    class="mx-auto"
-  />
 </div>

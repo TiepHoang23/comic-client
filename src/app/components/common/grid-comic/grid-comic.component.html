@@ -77,20 +77,7 @@
       (comicHover)="onHoverComic($event)"
     ></app-comic-card>
   </div>
-  <div
-    [ngClass]="{
-      'opacity-0': !hoverComic.comic,
-      'opacity-100': hoverComic.comic
-    }"
-    *ngIf="hoverComic.comic"
-    [ngStyle]="{
-      'top.px': hoverComic.position.y,
-      'left.px': hoverComic.position.x
-    }"
-    class="mt-2 z-20 fixed transition-all duration-700 ease-in-out"
-  >
-    <app-popup-detail-comic [comic]="hoverComic.comic"></app-popup-detail-comic>
-  </div>
+
 </div>
 } @else {
 <div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
@@ -100,3 +87,12 @@
   ></comic-card-v2>
 </div>
 }
+
+
+<app-popup-detail-comic
+  *ngIf="hoverComic"
+  class="mt-2 z-20 fixed  duration-100"
+  [comic]="hoverComic"
+>
+   
+</app-popup-detail-comic>

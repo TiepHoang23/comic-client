@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
+import { HistoryService } from '../../../services/history.service';
 
 
 
@@ -17,15 +18,12 @@ export class RecentReadComponent implements OnInit {
   listComics: Comic[] = [];
   constructor(
     private route: ActivatedRoute,
+
+    private hisService: HistoryService
   ) {
   }
   ngOnInit(): void {
-
-    if (localStorage.getItem("history") === null) return
-
-    let history = localStorage.getItem("history") as string
-    this.listComics = (JSON.parse(history) as Comic[]).slice(0, 5) ?? []
-
+    this.listComics = this.hisService.GetHistory().slice(0, 5) ?? [];
   }
   ngOnChanges() {
 
