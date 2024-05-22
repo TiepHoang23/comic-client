@@ -1,25 +1,25 @@
 <!-- app-top-list.component.html -->
-<ul class="flex flex-row xl:flex-col list-unstyled w-full">
+<ul class="flex flex-row xl:flex-col list-unstyled">
   <li
     *ngFor="let topComic of listTopComics; let i = index"
-    class="flex items-center hover:bg-gradient-to-r from-gray-300"
+    class="xl:flex items-center hover:bg-gradient-to-r from-gray-300 w-56"
   >
-    <div
+    <!-- <div
       class="txt-rank bg-gray-500 rounded-full w-8 h-8 ml-3 text-center text-white"
     >
       {{ i + 1 }}
-    </div>
+    </div> -->
     <div
-      class="t-item comic-item flex flex-row items-center m-2"
+      class="t-item comic-item xl:flex xl:flex-row items-center m-2"
       [attr.data-id]="topComic.id"
     >
       <a
-        class="thumb mr-2 line-clamp-1 h-24 w-19 max-w-full"
+        class="thumb mr-2 h-24 w-19 max-w-full line-clamp-1 shrink-0"
         [title]="topComic.title"
         [href]="'/comic/' + topComic.id"
       >
         <img
-          class="h-24 w-19 max-w-full rounded object-cover"
+          class="xl:h-24 xl:w-19 max-w-full rounded object-cover -translate-y-1/4"
           [src]="topComic.coverImage"
           [alt]="topComic.title"
         />

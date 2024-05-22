@@ -400,8 +400,8 @@
   </div>
   <!-- </div> -->
 </div>
-<div class="grid grid-cols-3 gap-4 container mx-auto">
-  <div class="col-span-3 xl:col-span-2 m-2">
+<div class="grid grid-cols-4 gap-4 container mx-auto">
+  <div class="col-span-4 xl:col-span-3 m-2">
     <h3 class="list-title font-semibold uppercase mt-3 flex">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -417,8 +417,8 @@
     </h3>
     <div
       #ChaptersScrollElement
-      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 relative snap-proximity snap-y overflow-y-auto overflow-x-hidden mt-4"
-      style="scroll-snap-type: y mandatory; height: 500px"
+      class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 relative snap-proximity snap-y overflow-y-auto overflow-x-hidden mt-4"
+      style="scroll-snap-type: y mandatory; max-height: 300px"
     >
       <div
         id="overlay"
@@ -434,7 +434,7 @@
       >
         <a href="/truyen-tranh/{{ comic.url }}/chapter/{{ chapter.id }}">
           <div
-            class="h-14 flex items-center col-span-1 bg-gray-100 text-sm hover:bg-gray-200 rounded-lg px-2 py-1 cursor-pointer tooltip-trigger select-none"
+            class="h-14 flex items-center col-span-2 bg-gray-100 text-sm hover:bg-gray-200 rounded-lg px-2 py-1 cursor-pointer tooltip-trigger select-none"
           >
             <div class="p-1">
               <!-- Chapter Title -->
@@ -453,8 +453,7 @@
         <!-- Link to Comments -->
       </div>
     </div>
-  </div>
-  <div class="col-span-3 xl:col-span-2 row-start-3">
+
     <grid-comic
       [listComics]="listTopComics! | slice: 0 : 6"
       [num_preview]="6"
@@ -465,19 +464,26 @@
     >
     </grid-comic>
   </div>
-
-  <div
-    *ngIf="listTopComics"
-    class="row-start-2 xl:row-auto overflow-hidden scroll-mx-1 col-span-3 flex flex-col items-center w-full xl:col-span-1 border border-gray-300 mt-3"
-  >
-    <div class="text-xl font-bold mt-2">TOP TUẦN</div>
-    <app-top-list
-      class="w-full h-full snap-x overflow-x-auto"
-      style="scroll-snap-type: x mandatory"
-      [listTopComics]="listTopComics"
-    ></app-top-list>
+  <div class="col-span-4 xl:col-span-1">
+    <div class="text-xl font-bold mt-2 w-full text-center">TOP TUẦN</div>
+    <div
+      *ngIf="listTopComics"
+      class="xl:row-auto scroll-mx-1 overflow-x-auto items-center w-full border border-gray-300 mt-3"
+      style="scroll-snap-type: x mandatory; display: flex; flex-direction: row"
+    >
+      <app-top-list
+        [listTopComics]="listTopComics"
+        style="
+          scroll-snap-align: start;
+          flex: 0 0 auto;
+          display: flex;
+          flex-direction: row;
+        "
+      ></app-top-list>
+    </div>
   </div>
 </div>
+
 @if (comic) {
   <comment-component
     [comicId]="comic.id"

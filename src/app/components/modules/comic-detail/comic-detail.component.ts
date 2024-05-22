@@ -57,7 +57,6 @@ export class ComicDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.route.params.subscribe((params) => {
       let id = params['id'];
       this.getComic(id);
@@ -68,9 +67,7 @@ export class ComicDetailComponent implements OnInit {
   }
 
   saveHistory(comic: Comic) {
-    
     this.historyService.SaveHistory(comic);
-
   }
 
   getComic(id: string): void {
@@ -82,7 +79,6 @@ export class ComicDetailComponent implements OnInit {
       this.allchapters = (res.data?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
           chapter.title?.split(':') ?? [];
-        // const isToDay = new Date(chapter.updateAt)..toDateString() === new Date().toDateString()
         return {
           id: chapter.id,
           chapterTitle,
@@ -90,12 +86,10 @@ export class ComicDetailComponent implements OnInit {
           updateAt: chapter.updateAt,
           viewCount: chapter.viewCount,
         };
-      },
-      );
+      });
 
       this.SetUpScroll();
-    }
-  );
+    });
     // const id = this.route.snapshot.paramMap.get('id') || '';
   }
 
@@ -121,19 +115,19 @@ export class ComicDetailComponent implements OnInit {
       let nRow =
         Math.floor((this.allchapters.length - 1) / this.chapter_grid_size) + 1;
       this.maxChapterPage = Math.ceil(
-        (this.allchapters.length + 1) / this.preload_chapter_num - 1
+        (this.allchapters.length + 1) / this.preload_chapter_num - 1,
       );
       this.overlayEl.style.height = `${nRow * this.height_each_element}px`;
     }
   }
   SetUpScroll() {
     this.preLoadChapters.push(
-      ...this.allchapters.slice(0, this.preload_chapter_num)
+      ...this.allchapters.slice(0, this.preload_chapter_num),
     );
     let nRow =
       Math.floor((this.allchapters.length - 1) / this.chapter_grid_size) + 1;
     this.maxChapterPage = Math.ceil(
-      (this.allchapters.length + 1) / this.preload_chapter_num - 1
+      (this.allchapters.length + 1) / this.preload_chapter_num - 1,
     );
     this.overlayEl.style.height = `${nRow * this.height_each_element}px`;
     this.currentChapterPage = 1;
@@ -152,7 +146,7 @@ export class ComicDetailComponent implements OnInit {
 
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 6 }).subscribe(
-      (topComics) => (this.listTopComics = topComics?.data?.comics)
+      (topComics) => (this.listTopComics = topComics?.data?.comics),
     );
   }
   onRatingChanged(rating: number) {
