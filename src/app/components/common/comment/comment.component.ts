@@ -69,6 +69,7 @@ export class CommentComponent implements OnInit {
   totalpage: number = 2;
 
   @ViewChildren('ViewReplyEle') ViewReplyEles!: QueryList<ElementRef>;
+
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,

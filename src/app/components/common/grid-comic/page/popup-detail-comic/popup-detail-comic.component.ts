@@ -29,8 +29,8 @@ import {
 })
 export class PopupDetailComicComponent {
   @Input() comic: Comic = {} as Comic;
-  constructor(private element: ElementRef<any>) {}
-  ngOnInit() {}
+  constructor(private element: ElementRef<any>) { }
+  ngOnInit() { }
   @HostListener('window:mousemove', ['$event'])
   onmousemove(event: MouseEvent) {
     if (
@@ -46,8 +46,6 @@ export class PopupDetailComicComponent {
       Math.max(event.clientX - 0.5 * this.element.nativeElement.offsetWidth, 0),
       window.innerWidth - this.element.nativeElement.offsetWidth
     );
-
-
     this.element.nativeElement.style.left = pos + 'px';
   }
 }
