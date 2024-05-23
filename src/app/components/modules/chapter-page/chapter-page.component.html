@@ -199,8 +199,10 @@
         </div>
       </div>
     </div>
+    <div class="flex-grow min-h-screen mx:0 lg:mx-50">
+      <img  loading="lazy" *ngFor="let page of ListChapterImg" class="w-full min-h-96 object-contain" src="{{ page.url }}" alt="{{page.url}}">
+    </div>
   </div>
-  <div class="flex-grow min-h-screen"></div>
   @if (comic) {
   <comment-component
     [comicId]="comic.id"
@@ -740,33 +742,3 @@
   </div>
 </div>
 
-<div class="fixed bottom-0 left-0 h-12 bg-black w-full text-white" style="z-index: 9999">
-  <a href="/" class="home"><i class="fa fa-home" aria-hidden="true"></i></a>
-  <a onclick="" class="home changeserver"
-    ><i class="fa fa-undo error"></i><span>1</span> </a
-  ><a
-    class="prev disable control-button"
-    onclick="alert('Hết Chương Rồi Bạn Ơi!!!')"
-    ><i class="fa fa-chevron-left"></i
-  ></a>
-  <select class="chapter_list middle selectEpisode">
-    <option
-      selected="selected"
-      value="https://truyenqqviet.com/truyen-tranh/bong-hinh-lam-tham-15551-chap-1.html"
-    >
-      Chương 1
-    </option>
-  </select>
-  <a
-    class="next disable control-button"
-    onclick="alert('Hết Chương Rồi Bạn Ơi!!!')"
-    ><i class="fa fa-chevron-right"></i
-  ></a>
-  <a
-    href="javascript:void(0);"
-    class="button is-danger is-rounded btn-subscribe subscribeBook"
-    data-id="15551"
-    data-page="detail"
-    ><i class="fa fa-heart"></i> <span>Theo dõi</span></a
-  >
-</div>
