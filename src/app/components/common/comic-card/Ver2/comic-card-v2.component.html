@@ -4,6 +4,7 @@
 >
   <div class="flex-shrink-0 h-full p-2 overflow-hidden">
     <img
+      loading="lazy"
       class="shadow-md object-cover w-auto h-full rounded-md"
       src="{{ comic.coverImage }}"
       alt="Cover image"
@@ -21,20 +22,20 @@
 
     <div class="flex space-x-1">
       <a
-        *ngFor="let tag of comic?.genres | slice: 0 : 3; index as i"
+        *ngFor="let tag of comic?.genres | slice : 0 : 3; index as i"
         class="tag bg-accent"
       >
         @if (i == 0) {
-          <span
-            class="bg-amber-600 cursor-pointer text-xs font-bold rounded shadow-sm px-2 uppercase text-white"
-            >{{ tag.title }}</span
-          >
+        <span
+          class="bg-amber-600 cursor-pointer text-xs font-bold rounded shadow-sm px-2 uppercase text-white"
+          >{{ tag.title }}</span
+        >
         } @else {
-          <span
-            class="bg-white text-[0.7rem] cursor-pointer font-semibold rounded shadow-sm px-2 uppercase"
-          >
-            {{ tag.title }}
-          </span>
+        <span
+          class="bg-white text-[0.7rem] cursor-pointer font-semibold rounded shadow-sm px-2 uppercase"
+        >
+          {{ tag.title }}
+        </span>
         }
       </a>
     </div>
@@ -99,24 +100,24 @@
         class="text-sm text-center comment-container flex gap-2 items-center"
       >
         @if (comic.status === 0) {
-          <div
-            class="animate-ping h-1 w-1 rounded-full bg-sky-400 opacity-75"
-          ></div>
-          <div>Đang tiến hành</div>
+        <div
+          class="animate-ping h-1 w-1 rounded-full bg-sky-400 opacity-75"
+        ></div>
+        <div>Đang tiến hành</div>
         } @else {
-          <svg
-            class="animate-ping opacity-75"
-            xmlns="http://www.w3.org/2000/svg"
-            height="6"
-            width="6"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#2debb2"
-              d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
-            />
-          </svg>
-          <div>Đã hoàn thành</div>
+        <svg
+          class="animate-ping opacity-75"
+          xmlns="http://www.w3.org/2000/svg"
+          height="6"
+          width="6"
+          viewBox="0 0 512 512"
+        >
+          <path
+            fill="#2debb2"
+            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+          />
+        </svg>
+        <div>Đã hoàn thành</div>
         }
       </div>
       <!---->

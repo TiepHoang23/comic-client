@@ -54,7 +54,7 @@ export class ComicDetailComponent implements OnInit {
     private accountService: AccountService,
     private historyService: HistoryService,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -121,6 +121,7 @@ export class ComicDetailComponent implements OnInit {
     }
   }
   SetUpScroll() {
+    this.preLoadChapters = [];
     this.preLoadChapters.push(
       ...this.allchapters.slice(0, this.preload_chapter_num),
     );
