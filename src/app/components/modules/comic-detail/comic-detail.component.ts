@@ -96,12 +96,12 @@ export class ComicDetailComponent implements OnInit {
   CalcGirdSize() {
     if (window.innerWidth < 768) {
       //sm breakpoint
-      this.chapter_grid_size = 1;
+      this.chapter_grid_size = 2;
     } else if (window.innerWidth < 1100) {
       // xl break point
-      this.chapter_grid_size = 2;
-    } else {
       this.chapter_grid_size = 3;
+    } else  {
+      this.chapter_grid_size = 4;
     }
 
     return this.chapter_grid_size;
