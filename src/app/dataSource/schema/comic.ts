@@ -11,6 +11,7 @@ import { Genre } from "./Genre";
 export interface Comic {
   id: number;
   title: string;
+  otherName?: string;
   url: string;
   author?: string;
   description?: string | null;
