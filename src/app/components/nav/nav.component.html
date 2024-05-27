@@ -1,8 +1,8 @@
-<header class="bg-white p-3 border-b-[#faa200] border-2">
+<header class="bg-white p-3 border-b-primary border-2">
   <div class="container mx-auto flex justify-between">
     <!-- Logo or brand name -->
     <div
-      class="text-amber-500 shrink-0 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-amber-100 rounded-full w-10 h-10 text-center"
+      class="text-primary-100 shrink-0 text-3xl font-bold size-lg hover:scale-125 duration-300 cursor-pointer ease-in-out bg-slate-200 rounded-full w-10 h-10 text-center"
     >
       N
     </div>
@@ -22,7 +22,7 @@
 
         <div
           id="search-result"
-          class="transition-[width] invisible absolute rounded-md z-[13] flex w-full mt-10 flex-col bg-gray-100 px-4 py-3 shadow-xl"
+          class="transition-[width] invisible absolute rounded-md z-[13] flex w-full mt-10 flex-col bg-slate-100 px-4 py-3 shadow-xl"
         >
           <!-- Nhập từ khóa tìm kiếm -->
           <list-search-comic
@@ -108,13 +108,13 @@
 </header>
 <!-- Navigation links -->
 
-<nav class="bg-[#faa200] text-sm text-white hidden md:block">
+<nav class="bg-primary-100 text-sm text-white hidden md:block">
   <ul
     class="h-10 flex items-center mx-auto container rounded"
     itemscope=""
     itemtype="http://www.schema.org/SiteNavigationElement"
   >
-    <li class="h-full hover:bg-white rounded-t-lg mt-1">
+    <li class="h-full hover:bg-white rounded-t-lg">
       <a
         routerLink="/"
         class="pr-4 h-full hover:bg-[#fff] hover:fill-black items-center flex fill-white rounded-t-lg"
@@ -131,7 +131,7 @@
       </a>
     </li>
     <li
-      class="h-full hover:bg-white hover:text-[#000000] fill-white hover:fill-black rounded-t-lg mt-1"
+      class="h-full hover:bg-white hover:text-[#000000] fill-white hover:fill-black rounded-t-lg"
     >
       <div class="cursor-pointer px-3 h-full items-center flex relative group">
         <span class="flex items-center font-semibold gap-1">
@@ -150,11 +150,11 @@
         >
       </div>
     </li>
-    <li class="h-full hover:bg-white font-semibold rounded-t-lg mt-1">
+    <li class="h-full hover:bg-white rounded-t-lg">
       <div
         class="cursor-pointer px-3 h-full hover:fill-black fill-white items-center flex hover:text-[#000000] relative group gap-1"
       >
-        <span class="flex items-center">
+        <span class="flex items-center font-semibold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="14"
@@ -178,7 +178,7 @@
         </div>
       </div>
     </li>
-    <li class="h-full hover:bg-white font-semibold rounded-t-lg mt-1">
+    <li class="h-full hover:bg-white font-semibold rounded-t-lg">
       <a
         [routerLink]="['/theo-doi']"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#000000] hover:fill-black fill-white rounded-t-lg"
@@ -197,7 +197,7 @@
         Theo dõi</a
       >
     </li>
-    <li class="h-full hover:bg-white font-semibold rounded-t-lg mt-1">
+    <li class="h-full hover:bg-white font-semibold rounded-t-lg">
       <a
         href="https://doctruyenonline.vn/truyen-tranh/tim-truyen?status=2&amp;sort=2&amp;page=1"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#000000] fill-white rounded-t-lg"
@@ -216,7 +216,7 @@
         >Xếp Hạng</a
       >
     </li>
-    <li class="h-full hover:bg-white font-semibold mt-1 rounded-t-lg">
+    <li class="h-full hover:bg-white font-semibold rounded-t-lg">
       <a
         routerLink="/tim-truyen"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#000000] rounded-t-lg"
@@ -237,7 +237,7 @@
       >
     </li>
 
-    <li class="h-full hover:bg-white font-semibold rounded mt-1">
+    <li class="h-full hover:bg-white font-semibold rounded">
       <a
         routerLink="lich-su"
         class="px-3 h-full hover:bg-[#fff] items-center flex hover:text-[#000000] hover:fill-[#000000] fill-white gap-1 rounded-t-lg"

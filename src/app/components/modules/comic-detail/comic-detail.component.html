@@ -1,7 +1,7 @@
 <!-- <ng-container *ngIf="comic"> -->
 
 <div
-  class="h-full w-full flex flex-col relative border-spacing-3 overflow-hidden"
+  class="h-full w-full flex flex-col relative border-spacing-3 overflow-hidden text-secondary-100"
 >
   <div
     class="container text-sm ml-auto w-full lg:w-full flex font-bold text-gray-50 mt-3 mb-2"
@@ -98,11 +98,11 @@
           <button
             *ngIf="comic.isFollow"
             type="button"
-            class="py-1 px-4 bg-lime-600 text-white rounded hover:bg-lime-500 flex space-x-1 gap-1 items-center"
+            class="py-1 px-4 border-red-500 border text-red-500 rounded hover:opacity-75 flex space-x-1 gap-1 items-center"
             (click)="Follow(false)"
           >
             <svg
-              class="h-5 w-5 text-white"
+              class="h-5 w-5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -238,7 +238,7 @@
           >
             <ng-container *ngFor="let category of comic.genres">
               <a
-                class="category uppercase font-semibold hover:text-white mt-1 px-2 text-gray-600 hover:bg-amber-500 rounded border-gray-300 border border-dashed"
+                class="category uppercase font-semibold hover:text-white mt-1 px-2 text-gray-600 hover:bg-primary-100 rounded border-gray-300 border border-dashed"
                 href="#"
                 >{{ category.title }}</a
               >
@@ -281,7 +281,7 @@
 
         <div class="read-action flex space-x-2 mt-3">
           <a
-            class="bg-amber-500 rounded px-4 text-white flex items-center space-x-2"
+            class="bg-primary-100 rounded px-4 hover:opacity-90 text-white flex items-center space-x-2"
             routerLink="/truyen-tranh/{{ comic.url }}"
           >
             <svg
@@ -300,7 +300,7 @@
           </a>
 
           <a
-            class="px-4 p-2 border border-gray-500 rounded text-black font-semibold text-sm"
+            class="px-4 p-2 border border-gray-500 cursor-pointer rounded text-black font-semibold text-sm hover:text-white hover:bg-secondary-100"
           >
             Đọc mới nhất</a
           >

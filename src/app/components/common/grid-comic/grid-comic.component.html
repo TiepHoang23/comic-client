@@ -68,31 +68,28 @@
   </div>
 </div>
 @if (girdType === 0) {
-<div class="{{ _class }}">
-  <div *ngFor="let comic of listComics">
-    <app-comic-card
-      [comic]="comic"
-      (clickEvent)="ClickEvent.emit($event)"
-      [EventName]="EventName"
-      (comicHover)="onHoverComic($event)"
-    ></app-comic-card>
+  <div class="{{ _class }}">
+    <div *ngFor="let comic of listComics">
+      <app-comic-card
+        [comic]="comic"
+        (clickEvent)="ClickEvent.emit($event)"
+        [EventName]="EventName"
+        (comicHover)="onHoverComic($event)"
+      ></app-comic-card>
+    </div>
   </div>
-
-</div>
 } @else {
-<div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
-  <comic-card-v2
-    *ngFor="let comic of listComics"
-    [comic]="comic"
-  ></comic-card-v2>
-</div>
+  <div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
+    <comic-card-v2
+      *ngFor="let comic of listComics"
+      [comic]="comic"
+    ></comic-card-v2>
+  </div>
 }
-
 
 <app-popup-detail-comic
   *ngIf="hoverComic"
-  class="mt-2 z-20 fixed  duration-100"
+  class="mt-2 z-20 fixed duration-100"
   [comic]="hoverComic"
 >
-   
 </app-popup-detail-comic>

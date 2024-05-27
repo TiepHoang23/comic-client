@@ -29,9 +29,9 @@
 
           <a
             [routerLink]="['/truyen-tranh', item.url]"
-            class="capitalize flex text-sm items-center hover:underline text-[#be8c28]"
+            class="capitalize flex text-sm items-center hover:underline text-primary-300"
           >
-            {{ item.chapters[0].title }}
+            <p class="line-clamp-1">{{ item.chapters[0].title }}</p>
           </a>
         </div>
       </div>
