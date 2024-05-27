@@ -1,66 +1,59 @@
-<div class="-mt-4 z-[11]" (click)="close()">
-  <div>
-    @if (searchValue !== "") {
-    <div class="flex items-center my-4">
-      <div class="font-bold text-xl flex-grow">Kết quả</div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-arrow-right icon text-icon-contrast text-undefined"
-        viewBox="0 0 24 24"
-      >
-        <path d="M5 12h14m-7-7 7 7-7 7"></path>
-      </svg>
-    </div>
-    } @else {
-    <div class="flex items-center">
-      <div class="text-md flex-grow mt-3 text-gray-400">
-        Kết quả tìm kiếm...
-      </div>
-    </div>
-    }
-    <section class="bg-gray-100">
-      <div
-        *ngFor="let comic of listSearch"
-        class="rounded bg-white shadow-lg mb-2 hover:outline-slate-500 hover:outline-1 hover:outline"
-      >
-        <a [routerLink]="['truyen-tranh', comic.url]">
-          <div class="px-2 py-1">
-            <!-- <ul class="-my-8"> -->
-            <div
-              class="flex flex-row space-y-3 py-1 text-left sm:space-x-5 sm:space-y-0"
-            >
-              <img
-                class="h-16 w-12 rounded-lg object-cover"
-                src="{{ comic.coverImage }}"
-                alt="{{ comic.title }}"
-              />
-
-              <div class="relative flex flex-1 flex-col justify-between">
-                <div class="pr-8 sm:pr-5">
-                  <p class="text-base font-semibold text-gray-900">
-                    {{ comic.title }}
-                  </p>
-                  <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
-                    {{ comic.description | slice : 0 : 100 }}...
-                  </p>
-                </div>
-                <!-- </div> -->
-              </div>
-            </div>
-            <!-- </ul> -->
-          </div>
-        </a>
-      </div>
-    </section>
+<div class="-mt-2">
+  @if (searchValue !== "") {
+  <div class="flex items-center my-4">
+    <div class="font-bold text-xl flex-grow">Kết quả</div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      class="feather feather-arrow-right icon text-icon-contrast text-undefined"
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 12h14m-7-7 7 7-7 7"></path>
+    </svg>
   </div>
-  <div
-    class="fixed -z-50 top-0 bottom-0 right-0 left-0 bg-gray-800 opacity-30"
-  ></div>
+  } @else {
+  <div class="flex items-center">
+    <div class="text-md flex-grow mt-3 text-gray-400">Kết quả tìm kiếm...</div>
+  </div>
+  }
+  <section class="">
+    <div
+      *ngFor="let comic of listSearch"
+      class="rounded-lg bg-gray-100 border-2 shadow-xl mb-2 hover:outline-slate-500 hover:outline-1 hover:outline"
+    >
+      <a [routerLink]="['truyen-tranh', comic.url]" (click)="close()">
+        <div class="px-2 py-1">
+          <!-- <ul class="-my-8"> -->
+          <div
+            class="flex flex-row space-y-3 py-1 text-left sm:space-x-5 sm:space-y-0"
+          >
+            <img
+              class="h-16 w-12 rounded-lg object-cover"
+              src="{{ comic.coverImage }}"
+              alt="{{ comic.title }}"
+            />
+
+            <div class="relative flex flex-1 flex-col justify-between">
+              <div class="pr-8 sm:pr-5">
+                <p class="text-base font-semibold text-gray-900">
+                  {{ comic.title }}
+                </p>
+                <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
+                  {{ comic.description | slice : 0 : 100 }}...
+                </p>
+              </div>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- </ul> -->
+        </div>
+      </a>
+    </div>
+  </section>
 </div>

@@ -15,6 +15,7 @@ export class ListSearchComicComponent implements OnInit {
   @Output() CloseEvent = new EventEmitter<string>();
   constructor(private comicService: ComicService,) {
 
+
   }
   close() {
     this.CloseEvent.emit();
@@ -22,7 +23,8 @@ export class ListSearchComicComponent implements OnInit {
   ngOnInit() {
 
   }
-  ngOnChanges() {
+  ngOnChanges(change: any) {
+    console.log(change);
     if (this.searchValue != "") {
       this.comicService.getSearchComic(this.searchValue).subscribe(
         (res: any) => {
