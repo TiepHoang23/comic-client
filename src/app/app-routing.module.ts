@@ -59,6 +59,13 @@ const routes: Routes = [
         (m) => m.AdminModule
       ),
   },
+  {
+    path: 'tai-khoan',
+    loadChildren: () =>
+      import('./components/modules/user-page/user.module').then(
+        (m) => m.UserModule
+      ),
+  },
   { path: '**', pathMatch: 'full', redirectTo: '' },
 
 ];
