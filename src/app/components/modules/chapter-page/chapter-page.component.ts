@@ -6,7 +6,6 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { ComicService } from '../../../dataSource/services/comic.service';
 import { Comic } from '../../../dataSource/schema/comic';
@@ -29,12 +28,14 @@ export class ChapterPageComponent {
   SearchField!: ElementRef;
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
   @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
+  @ViewChild('controlBar', { static: true }) controlBar!: ElementRef;
 
   private readonly zoomStep: number = 0.2;
   private readonly minZoomLevel: number = 0;
   private readonly maxZoomLevel: number = 1;
 
   public zoomLevel: number = 0.5;
+  public defaultZoomLevel: number = 0.3;
   public isLimitZoom: boolean = false;
 
   constructor(
@@ -47,7 +48,7 @@ export class ChapterPageComponent {
   }
 
   ngOnInit(): void {
-    this.zoomLevel = 0;
+    this.zoomLevel = this.defaultZoomLevel;
     this.route.params.subscribe((params) => {
       let chapterid = Number(params['chapterid']);
       this.comicService.getChapterImgs(chapterid).subscribe((res: any) => {
@@ -78,7 +79,6 @@ export class ChapterPageComponent {
   }
 
   ZoomImage(zoomIn: boolean): void {
-    const containerWidth = this.screenContainer.nativeElement.offsetWidth;
     if (zoomIn) {
       this.zoomLevel = Math.min(
         this.zoomLevel + this.zoomStep,
@@ -90,26 +90,84 @@ export class ChapterPageComponent {
         this.minZoomLevel,
       );
     }
-    if (this.zoomLevel === this.minZoomLevel) {
+    if (this.zoomLevel <= this.minZoomLevel && !zoomIn) {
       this.isLimitZoom = false;
       return;
     }
     const imageContainerWidth = this.imageContainer.nativeElement.offsetWidth;
+    const containerWidth = this.screenContainer.nativeElement.offsetWidth;
     const scaledWidth = this.zoomLevel * imageContainerWidth;
 
     if (scaledWidth >= containerWidth && zoomIn) {
       this.isLimitZoom = true;
-      this.zoomLevel -= this.zoomStep;
       return;
     }
   }
 
   resetView(): void {
     this.isLimitZoom = false;
-    this.zoomLevel = this.minZoomLevel;
+    this.zoomLevel = this.minZoomLevel + this.defaultZoomLevel;
   }
 
-  getZoomPercentage(): string {
-    return Math.round(this.zoomLevel * 100) + 100 + '%';
+  getZoomPercentage(): number {
+    return Math.round((this.zoomLevel - this.defaultZoomLevel) * 100) + 100;
+  }
+
+  @HostListener('document:keydown.arrowleft', ['$event'])
+  onNextChapter(): void {
+    this.navigateChapter(true);
+  }
+  @HostListener('document:keydown.arrowright', ['$event'])
+  onPreviousChapter(): void {
+    this.navigateChapter(false);
+  }
+
+  navigateChapter(next: boolean): void {
+    const currentChapterIndex = this.comic.chapters.findIndex(
+      (chapter) => chapter.id === this.mainChapter.id,
+    );
+    const targetChapterIndex = next
+      ? currentChapterIndex + 1
+      : currentChapterIndex - 1;
+
+    if (
+      targetChapterIndex >= 0 &&
+      targetChapterIndex < this.comic.chapters.length
+    ) {
+      const targetChapter = this.comic.chapters[targetChapterIndex];
+      this.OnChangeChapter(targetChapter.id);
+    }
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeydownHandler(): void {
+    this.exitFullscreen();
+  }
+  enterFullscreen(): void {
+    // this.zoomLevel = 0.5;
+    const elem = this.imageContainer.nativeElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      // Firefox
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      // Chrome, Safari, and Opera
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      // IE/Edge
+      elem.msRequestFullscreen();
+    }
+  }
+
+  exitFullscreen(): void {
+    if (this.document.exitFullscreen) {
+      this.document.exitFullscreen();
+    }
+  }
+
+  scrollToTop(event: Event): void {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

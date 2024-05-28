@@ -1,0 +1,21 @@
+// :host {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100vh;
+//   }
+  
+ 
+#image-container {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  } 
+//   .image-container img {
+//     display: block;
+//     max-width: 100%;
+//     height: auto;
+//     transition: transform 0.2s ease-in-out;
+//   }
+  

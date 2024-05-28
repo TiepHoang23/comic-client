@@ -119,6 +119,7 @@
           ></path></svg
         >Báo Lỗi
       </button>
+
       <div
         class="p-4 bg-[#d9edf7] border border-solid border-[#bce8f1] items-center mb-3 text-[#31708f] rounded-lg flex justify-center"
       >
@@ -138,6 +139,7 @@
       <div id="position-btn"></div>
     </div>
     <div
+      #controlBar
       class="flex items-center w-full justify-center top-0 left-0 right-0 z-10 bg-white py-2 px-3 lg:px-0"
       id="group-btn-chapter"
     >
@@ -251,12 +253,44 @@
 
         <!-- <span>100%</span> -->
         <div
-          *ngIf="zoomLevel > 0"
+          *ngIf="getZoomPercentage() !== 100"
           id="zoom-progress"
           class="absolute bg-white rounded shadow-sm mt-10 p-2 space-x-2 flex items-center"
         >
-          <div class="rounded text-secondary-100 text-sm font-thin">
-            {{ getZoomPercentage() }}
+          <div class="flex items-center gap-4">
+            <p class="text-secondary-100 text-sm font-thin">
+              {{ getZoomPercentage() }}%
+            </p>
+            <div class="flex gap-2">
+              <svg
+                class="h-4 w-4 text-secondary-100 font-bold"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                (click)="ZoomImage(false)"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              <svg
+                class="h-4 w-4 text-secondary-100"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                (click)="ZoomImage(true)"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </div>
           </div>
 
           <button
@@ -283,7 +317,11 @@
         </div>
       </button>
 
-      <button title="Full Screen" class="ml-2 p-1 rounded">
+      <button
+        title="Full Screen"
+        class="ml-2 p-1 rounded"
+        (click)="enterFullscreen()"
+      >
         <svg
           class="h-6 w-6 text-black hover:text-primary-100"
           width="24"
@@ -304,12 +342,16 @@
       </button>
     </div>
   </div>
-  <div #imageContainer class="flex-grow min-h-screen mx-0 lg:mx-50">
+  <div
+    #imageContainer
+    id="image-container"
+    class="flex-grow min-h-screen mx-0 lg:mx-50"
+  >
     <img
       *ngFor="let page of ListChapterImg; let i = index"
       [src]="page.url"
       [alt]="page.url"
-      [style.width]="'calc(75% + ' + (zoomLevel * 100) / 4 + '%)'"
+      [style.width]="'calc(50% + ' + (zoomLevel * 100) / 2 + '%)'"
       class="relative object-contain transition-transform duration-200 ease-in-out cursor-zoom-in mx-auto"
     />
   </div>
@@ -320,7 +362,28 @@
     ></comment-component>
   }
 </div>
-
+<a
+  (click)="scrollToTop($event)"
+  class="fixed bottom-10 right-10 z-40 mr-4 mb-4"
+  title="Back To Top"
+  ><svg
+    class="h-10 w-10 text-white bg-secondary-100 rounded cursor-pointer hover:scale-110 p-1"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    stroke-width="2"
+    stroke="currentColor"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" />
+    <path
+      d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"
+    />
+    <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />
+    <circle cx="15" cy="9" r="1" /></svg
+></a>
 <button
   class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
   (click)="ToggleMenu(true)"
