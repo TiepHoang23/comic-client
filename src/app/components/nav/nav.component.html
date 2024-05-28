@@ -9,27 +9,31 @@
 
     <!-- Search input -->
     <div class="flex space-x-3 items-center">
-      <div class="relative z-[12] flex justify-end h-8 w-[36rem]">
+      <div class="relative z-[12] flex justify-end h-8 w-[36rem] bg-white">
         <!-- <div class="relative"> -->
         <input
           #SearchInput
           (focus)="OnSearchFocus(true)"
           (input)="OnSearchChange($event)"
           type="text"
-          class="custom-transition"
+          class="custom-transition bg-white"
           placeholder="Tìm kiếm..."
         />
 
-        <div
-          id="search-result"
-          class="transition-[width] invisible absolute rounded-md z-[13] flex w-full mt-10 flex-col bg-slate-100 px-4 py-3 shadow-xl"
+        <!-- Nhập từ khóa tìm kiếm -->
+        <list-search-comic
+          *ngIf="isSearching"
+          class="transition-[width] absolute rounded-md z-[20] flex w-full mt-10 flex-col bg-white px-4 py-3 shadow-xl"
+          [searchValue]="searchText"
+          (CloseEvent)="OnSearchFocus(false)"
         >
-          <!-- Nhập từ khóa tìm kiếm -->
-          <list-search-comic
-            [searchValue]="searchText"
-            (CloseEvent)="OnSearchFocus(false)"
-          ></list-search-comic>
-        </div>
+        </list-search-comic>
+        <div
+          *ngIf="isSearching"
+          (click)="OnSearchFocus(false)"
+          class="fixed -z-10 top-0 bottom-0 right-0 left-0 bg-gray-800 opacity-30"
+        ></div>
+
         <!-- </div> -->
       </div>
       <div *ngIf="!user" class="hidden space-x-1 text-white lg:flex h-8">
