@@ -5,13 +5,9 @@ import { UpdatePageComponent } from './update-page/update-page.component';
 const routes: Routes = [
   {
     path: '',
-    children: [
 
-      {
-        path: '',
-        component: UpdatePageComponent,
-      }
-    ]
+    component: UpdatePageComponent,
+
   },
 ];
 

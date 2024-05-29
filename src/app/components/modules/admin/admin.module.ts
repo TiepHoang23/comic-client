@@ -7,4 +7,4 @@ import { ReactiveFormsModule } from '@angular/forms';
   // declarations: [],
   imports: [AdminRoutingModule, CommonModule, ReactiveFormsModule],
 })
-export class AdminModule {}
+export class AdminModule { }
