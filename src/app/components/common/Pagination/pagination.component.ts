@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import { OverlayContainer } from '@angular/cdk/overlay';
-import { map } from 'rxjs/operators';
-import { ComicService } from '../../../dataSource/services/comic.service';
 
 @Component({
   selector: 'pagination-component',

@@ -1,15 +1,10 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
-import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
-import { NavComponent } from './components/nav/nav.component';
-import { HomePageComponent } from './components/modules/home-page/home-page.component';
-import { ComicDetailComponent } from './components/modules/comic-detail/comic-detail.component';
-import { ComicService } from './dataSource/services/comic.service';
-import { SearchPageComponent } from './components/modules/search-page/search-page.component';
-import { HistoryPageComponent } from './components/modules/history-page/history-page.component';
-import { FollowedPageComponent } from './components/modules/followed-page/followed-page.component';
-
+import { HistoryPageComponent } from './modules/history-page/history-page.component';
+import { FollowedPageComponent } from './modules/followed-page/followed-page.component';
+import { SearchPageComponent } from './modules/search-page/search-page.component';
+import { ChapterPageComponent } from './modules/chapter-page/chapter-page.component';
 const routes: Routes = [
   {
     path: '',
@@ -17,16 +12,21 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomePageComponent,
+        loadChildren: () =>
+          import('./modules/home/home.module').then((m) => m.HomeModule),
         title: 'Truyên mới cập nhật - [host]',
       },
       {
         path: 'truyen-tranh/:id',
-        component: ComicDetailComponent,
+        loadChildren: () =>
+          import('./modules/comic-detail/comic-detail.module').then(
+            (m) => m.DetailModule
+          ),
       },
       {
         path: 'tim-truyen',
-        component: SearchPageComponent,
+        loadChildren: () =>
+          import('./modules/search-page/search.module').then((m) => m.SearchModule),
       },
       {
         path: 'lich-su',
@@ -40,7 +40,10 @@ const routes: Routes = [
       },
       {
         path: 'truyen-tranh/:comicid/chapter/:chapterid',
-        component: ChapterPageComponent,
+        loadChildren: () =>
+          import('./modules/chapter-page/chapter.module').then(
+            (m) => m.ChapterModule
+          ),
       },
     ],
   },
@@ -48,38 +51,27 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('./components/modules/authentication/auth.module').then(
-        (m) => m.AuthModule
-      ),
+      import('./modules/authentication/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'admin',
     loadChildren: () =>
-      import('./components/modules/admin/admin.module').then(
-        (m) => m.AdminModule
-      ),
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'tai-khoan',
     loadChildren: () =>
-      import('./components/modules/user-page/user.module').then(
-        (m) => m.UserModule
-      ),
+      import('./modules/user/user.module').then((m) => m.UserModule),
   },
   { path: '**', pathMatch: 'full', redirectTo: '' },
-
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes,
-      {
-        anchorScrolling: 'enabled',
-      }
-    ),
+    RouterModule.forRoot(routes, {
+      anchorScrolling: 'enabled',
+    }),
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
