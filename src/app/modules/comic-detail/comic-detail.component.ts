@@ -16,7 +16,7 @@ import { Comic } from '../../dataSource/schema/comic';
 import { ComicService } from '../../dataSource/services/comic.service';
 import { AccountService } from '../../dataSource/services/account.service';
 import { HistoryService } from '../../services/history.service';
-import { ToastService } from '../../services/toast.service';
+import { ToastService, ToastType } from '../../services/toast.service';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -45,6 +45,7 @@ export class ComicDetailComponent implements OnInit {
   preload_chapter_num: number = 90;
   chapter_grid_size: number = 3;
   height_each_element: number = 68;
+  followtime: number = 0;
   @ViewChild('ChaptersScrollElement') SearchField!: ElementRef<HTMLDivElement>;
   overlayEl!: HTMLElement;
   constructor(
@@ -102,7 +103,7 @@ export class ComicDetailComponent implements OnInit {
     } else if (window.innerWidth < 1100) {
       // xl break point
       this.chapter_grid_size = 3;
-    } else  {
+    } else {
       this.chapter_grid_size = 4;
     }
 
@@ -157,18 +158,27 @@ export class ComicDetailComponent implements OnInit {
     console.log('Rating changed:', rating);
   }
   Follow(isFollow: boolean): void {
+    let now = Date.now();
     if (this.accountService.GetUser() === null) {
       this.router.navigate(['/auth/login']);
-    } else {
-      console.log(isFollow);
-      this.accountService
-        .Follow(this.comic.id, isFollow)
-        .subscribe((res: any) => {
-          if (res.status === 1) {
-            this.comic.isFollow = !this.comic.isFollow;
-            this.toastService.show('thanh cong','Cập nhật thành công!');
-          }
-        });
+      return;
     }
+    if (this.followtime + 5000 > now) {
+      this.toastService.show(ToastType.Info, `Thao tác quá nhanh  </br> Hãy theo dõi sau ${(now - this.followtime + 5000) / 1000}  giây`);
+      return
+    }
+    this.followtime = now;
+    this.accountService
+      .Follow(this.comic.id, isFollow)
+      .subscribe((res: any) => {
+        if (res.status === 1) {
+          this.comic.isFollow = !this.comic.isFollow;
+          this.toastService.show(ToastType.Success, this.comic.isFollow ? 'Đã theo dõi' : 'Đã hủy theo dõi');
+        }
+        else {
+          this.toastService.show(ToastType.Error, res.message);
+        }
+      });
   }
 }
+
