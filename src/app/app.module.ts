@@ -27,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
 import { HistoryPageComponent } from './modules/history-page/history-page.component';
 import { FollowedPageComponent } from './modules/followed-page/followed-page.component';
 import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
+import { ToastComponent } from './components/common/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
     NavComponent,
     FooterComponent,
     ListSearchComicComponent,
-
+    ToastComponent,
     HistoryPageComponent,
     FollowedPageComponent,
   ],

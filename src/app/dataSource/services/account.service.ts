@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Comic } from '../schema/comic';
-import { fetchComicService } from './mockcomic.service';
 import { Genre } from '../schema/Genre';
 import { HttpClient } from '@angular/common/http';
 import globalConfig from '../../../../GlobalConfig';
@@ -48,7 +47,6 @@ export class AccountService {
   GetCommentsByComicId(comicId: number) {
     return this.httpclient.get(`${globalConfig.API_HOST}/User/Comments/comic/${comicId}`);
   }
-
   Logout() {
     localStorage.removeItem('auth');
   }

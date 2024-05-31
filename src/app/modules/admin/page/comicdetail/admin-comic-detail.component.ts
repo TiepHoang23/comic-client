@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Comic } from '../../../../dataSource/schema/comic';
 import { AdminService } from '../../../../dataSource/services/admin.service';
 import { ActivatedRoute } from '@angular/router';
+import { ComicService } from '../../../../dataSource/services/comic.service';
 
 @Component({
   selector: 'admin-comic-detail',
@@ -10,21 +11,39 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin-comic-detail.component.scss'],
 })
 export class AdminComicDetailComponent {
-  comic!: any[];
-
+  comic!: any;
+  similarComics!: Comic[];
   constructor(
     private adminService: AdminService,
+    private comicService: ComicService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
     let url = this.route.snapshot.params['slug'];
-    console.log(this.route);
     this.adminService.GetComic(url).subscribe((res: any) => {
+      if (res.status == 1) {
+        this.comic = res.data;
+
+        this.comicService
+          .getSimilarComic(this.comic.slug)
+          .subscribe((res: any) => {
+            this.similarComics = res.data;
+            console.log(this.similarComics);
+          });
+      }
+    });
+  }
+  mapingComic(slug1: string, slug2: string) {
+    this.adminService.MapComic(slug1, slug2).subscribe((res: any) => {
       console.log(res);
-      
-      if(res)
-        
-        this.comic = res;
+    });
+
+    return false;
+  }
+
+  onAddComicClick(comic: string) {
+    this.adminService.AddComic(comic).subscribe((res: any) => {
+      console.log(res);
     });
   }
 }

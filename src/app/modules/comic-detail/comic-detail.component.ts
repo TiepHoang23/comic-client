@@ -16,6 +16,7 @@ import { Comic } from '../../dataSource/schema/comic';
 import { ComicService } from '../../dataSource/services/comic.service';
 import { AccountService } from '../../dataSource/services/account.service';
 import { HistoryService } from '../../services/history.service';
+import { ToastService } from '../../services/toast.service';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -53,6 +54,7 @@ export class ComicDetailComponent implements OnInit {
     private titleService: Title,
     private accountService: AccountService,
     private historyService: HistoryService,
+    private toastService: ToastService,
     @Inject(DOCUMENT) private document: Document,
   ) { }
 
@@ -164,6 +166,7 @@ export class ComicDetailComponent implements OnInit {
         .subscribe((res: any) => {
           if (res.status === 1) {
             this.comic.isFollow = !this.comic.isFollow;
+            this.toastService.show('thanh cong','Cập nhật thành công!');
           }
         });
     }

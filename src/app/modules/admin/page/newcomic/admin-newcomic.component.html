@@ -1,7 +1,4 @@
 <div class="grid gap-[12px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8">
-
-
-  
   <div *ngFor="let comic of listComics"
     class="bg-white shadow-md h-full flex flex-col rounded-lg overflow-hidden relative"
   >
@@ -41,17 +38,6 @@
          {{comic.update_at | date : 'dd/MM/yyyy'}}
       </span>
     </div>
-    <div
-      class="p-1 absolute text-white cursor-pointer font-bold flex-row text-center justify-between items-center card-footer text-[0.75rem] bg-slate-400 hover:bg-red-500"
-    >
-      Maping
-    </div>
-    <div
- 
-      class="p-1 absolute right-0 text-white cursor-pointer font-bold flex-row text-center justify-between items-center card-footer text-[0.75rem] bg-slate-400 hover:bg-red-500"
-         (click)="onAddComicClick(comic.slug)"
-      >
-      Thêm mới
-    </div>
+
   </div>
 </div>
