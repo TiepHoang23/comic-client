@@ -16,7 +16,6 @@ import { RouterModule } from '@angular/router';
   ],
 
   imports: [
-
     RouterModule.forChild([{ path: '', component: HomePageComponent }]),
     CommonModule,
     SharedModule,

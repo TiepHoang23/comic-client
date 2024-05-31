@@ -23,7 +23,8 @@ export class ChapterPageComponent {
   ListChapterImg: Page[];
   comic!: Comic;
   mainChapter!: Chapter;
-  @HostListener('window:scroll', [])
+  isHovered!: boolean;
+
   @ViewChildren('MenuNavigation')
   SearchField!: ElementRef;
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
@@ -46,9 +47,10 @@ export class ChapterPageComponent {
   ) {
     this.ListChapterImg = [];
   }
-
   ngOnInit(): void {
     this.zoomLevel = this.defaultZoomLevel;
+    // Signal to cancel the previous request
+
     this.route.params.subscribe((params) => {
       let chapterid = Number(params['chapterid']);
       this.comicService.getChapterImgs(chapterid).subscribe((res: any) => {
@@ -69,12 +71,12 @@ export class ChapterPageComponent {
   onChangeChapter(event: any) {
     this.OnChangeChapter(event.target.value);
   }
-  OnChangeChapter(chapterid: number) {
+  OnChangeChapter(chapterId: number) {
     this.router.navigate([
       'truyen-tranh',
       this.comic.url,
       'chapter',
-      chapterid,
+      chapterId,
     ]);
   }
 
@@ -169,5 +171,9 @@ export class ChapterPageComponent {
   scrollToTop(event: Event): void {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  toggleHover(state: boolean) {
+    this.isHovered = state;
   }
 }

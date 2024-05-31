@@ -10,7 +10,11 @@ import { LayoutComponent } from './components/layout/layout.component';
 // import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavComponent } from './components/nav/nav.component';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
 // import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
 import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
@@ -31,7 +35,7 @@ import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
     NavComponent,
     FooterComponent,
     ListSearchComicComponent,
-    
+
     HistoryPageComponent,
     FollowedPageComponent,
   ],
@@ -53,7 +57,7 @@ import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
 export class AppModule {
   constructor(
     private router: Router,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
   ) {
     this.router.events
       .pipe(filter((e) => e instanceof Scroll))

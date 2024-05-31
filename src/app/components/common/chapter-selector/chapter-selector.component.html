@@ -1,0 +1,47 @@
+<div class="relative inline-block w-auto lg:w-[245px] text-sm font-normal">
+  <div
+    *ngIf="mainChapter"
+    class="border border-solid border-[#ccc] rounded px-3 py-2 cursor-pointer flex justify-between items-center"
+    (click)="toggleDropdown()"
+  >
+    {{ mainChapter?.title ? "#" + mainChapter.title : "Select Chapter" }}
+    <svg
+      class="h-8 w-8 transition-transform duration-200 text-gray-500"
+      [ngClass]="{ 'rotate-180': isDropdownOpen, 'rotate-0': !isDropdownOpen }"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  </div>
+  <div
+    *ngIf="isDropdownOpen"
+    class="absolute mt-1 w-full bg-white border border-solid border-[#ccc] rounded-lg shadow-lg z-10"
+  >
+    <input
+      *ngIf="filteredChapters.length > 0"
+      type="text"
+      (input)="onSearch($event)"
+      class="w-full px-3 py-2 border-b border-solid border-[#ccc] outline-none"
+      placeholder="Tìm Chapter..."
+    />
+    <div #dropdownList class="max-h-60 overflow-y-auto text-start gap-2">
+      <div
+        *ngFor="let chapter of filteredChapters"
+        (click)="selectChapter(chapter)"
+        class="my-2 mx-1 rounded-sm line-clamp-1 px-4 py-1 cursor-pointer  {{
+          chapter.id == mainChapter.id
+            ? 'bg-primary-100 text-white'
+            : 'hover:bg-gray-200 text-secondary-100'
+        }}"
+        #chapterItem
+      >
+        #{{ chapter.title }}
+      </div>
+    </div>
+  </div>
+</div>

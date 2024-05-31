@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectorComponent } from './selector.component';
+import { ImageLoaderComponent } from './image-loader.component';
 
-describe('SelectorComponent', () => {
-  let component: SelectorComponent;
-  let fixture: ComponentFixture<SelectorComponent>;
+describe('ImageLoaderComponent', () => {
+  let component: ImageLoaderComponent;
+  let fixture: ComponentFixture<ImageLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SelectorComponent]
+      declarations: [ImageLoaderComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SelectorComponent);
+    fixture = TestBed.createComponent(ImageLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

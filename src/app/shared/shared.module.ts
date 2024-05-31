@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterLink } from '@angular/router';
 import { CommentComponent } from '../components/common/comment/comment.component';
 import { GenreCatagoriesComponent } from '../components/common/genre-catagories/genre-catagories.component';
+import { ImageLoaderComponent } from '../components/common/image-loader/image-loader.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { GenreCatagoriesComponent } from '../components/common/genre-catagories/
     PopupDetailComicComponent,
     CommentComponent,
     GenreCatagoriesComponent,
+    ImageLoaderComponent,
   ],
   imports: [CommonModule, RouterLink, HttpClientModule, ReactiveFormsModule],
   exports: [
@@ -39,6 +41,7 @@ import { GenreCatagoriesComponent } from '../components/common/genre-catagories/
     PopupDetailComicComponent,
     CommentComponent,
     GenreCatagoriesComponent,
+    ImageLoaderComponent,
   ],
 })
 export class SharedModule {}
