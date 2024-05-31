@@ -18,17 +18,8 @@ export class AdminNewComicComponent {
   }
   ngOnInit(): void {
     this.adminService.GetNewComics().subscribe((res: any) => {
-      this.listComics = res;
+       this.listComics = res.data;
     });
   }
-  onAddComicClick(comic: string) {
-    this.adminService
-      .AddComic(comic)
-      .subscribe((res: any) =>
-      {
-         this.adminService.GetNewComics().subscribe((res: any) => {
-           this.listComics = res;
-         });
-      });
-  }
+ 
 }
