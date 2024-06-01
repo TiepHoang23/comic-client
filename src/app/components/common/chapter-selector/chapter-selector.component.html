@@ -33,7 +33,7 @@
       <div
         *ngFor="let chapter of filteredChapters"
         (click)="selectChapter(chapter)"
-        class="my-2 mx-1 rounded-sm line-clamp-1 px-4 py-1 cursor-pointer  {{
+        class="my-2 mx-1 rounded-sm line-clamp-1 px-4 py-1 cursor-pointer {{
           chapter.id == mainChapter.id
             ? 'bg-primary-100 text-white'
             : 'hover:bg-gray-200 text-secondary-100'

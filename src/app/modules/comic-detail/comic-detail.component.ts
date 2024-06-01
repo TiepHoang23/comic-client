@@ -56,7 +56,7 @@ export class ComicDetailComponent implements OnInit {
     private historyService: HistoryService,
     private toastService: ToastService,
     @Inject(DOCUMENT) private document: Document,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -102,7 +102,7 @@ export class ComicDetailComponent implements OnInit {
     } else if (window.innerWidth < 1100) {
       // xl break point
       this.chapter_grid_size = 3;
-    } else  {
+    } else {
       this.chapter_grid_size = 4;
     }
 
@@ -166,9 +166,19 @@ export class ComicDetailComponent implements OnInit {
         .subscribe((res: any) => {
           if (res.status === 1) {
             this.comic.isFollow = !this.comic.isFollow;
-            this.toastService.show('thanh cong','Cập nhật thành công!');
+            this.toastService.show('thanh cong', 'Cập nhật thành công!');
           }
         });
+    }
+  }
+  onSearchChapter(e: any) {
+    const value: string = e.target.value;
+    if (value) {
+      this.preLoadChapters = this.allchapters.filter((chapter) =>
+        chapter.chapterTitle?.includes(value),
+      );
+    } else {
+      this.preLoadChapters = [...this.allchapters];
     }
   }
 }
