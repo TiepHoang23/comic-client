@@ -15,7 +15,7 @@ import { Comic } from '../../dataSource/schema/comic';
 import { Chapter } from '../../dataSource/schema/Chapter';
 import { ComicService } from '@services/comic.service';
 import { ImageService } from '@services/image.service';
-
+import { HistoryService } from '@services/history.service';
 
 @Component({
   selector: 'app-chapter',
@@ -47,6 +47,7 @@ export class ChapterPageComponent {
     private route: ActivatedRoute,
     private router: Router,
     private imageService: ImageService,
+    private historyService: HistoryService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.ListChapterImg = [];
@@ -61,12 +62,19 @@ export class ChapterPageComponent {
         this.ListChapterImg = res.data.pages;
         this.comic = res.data.comic;
         this.mainChapter = res.data;
+
+        this.historyService.SaveHistory(this.comic, {
+          id: this.mainChapter.id,
+          title: this.mainChapter.title,
+          slug: this.mainChapter.slug,
+          updateAt: this.mainChapter.updateAt,
+          viewCount: this.mainChapter.viewCount,
+        });
       });
       this.imageService.CancelAll();
     });
   }
-  ngOnChanges(change : SimpleChange): void {
-  }
+  ngOnChanges(change: SimpleChange): void {}
   ToggleMenu(isToggle: boolean) {
     if (isToggle) {
       this.SearchField.nativeElement.classList.toggle('translate-x-full');
@@ -131,7 +139,7 @@ export class ChapterPageComponent {
   }
 
   navigateChapter(next: boolean): void {
-    const currentChapterIndex = this.comic.chapters.findIndex(
+    const currentChapterIndex = this.comic.chapters!.findIndex(
       (chapter) => chapter.id === this.mainChapter.id,
     );
     const targetChapterIndex = next
@@ -140,9 +148,9 @@ export class ChapterPageComponent {
 
     if (
       targetChapterIndex >= 0 &&
-      targetChapterIndex < this.comic.chapters.length
+      targetChapterIndex < this.comic.chapters!.length
     ) {
-      const targetChapter = this.comic.chapters[targetChapterIndex];
+      const targetChapter = this.comic.chapters![targetChapterIndex];
       this.OnChangeChapter(targetChapter.id);
     }
   }

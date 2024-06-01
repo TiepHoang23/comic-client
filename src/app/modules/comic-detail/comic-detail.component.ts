@@ -80,10 +80,13 @@ export class ComicDetailComponent implements OnInit {
       this.comic = res.data ?? ({} as Comic);
       this.isFollowed = this.comic.isFollow || false;
       this.titleService.setTitle(`${this.comic.title} - Truyện Tranh`);
+
       this.saveHistory(this.comic);
-      this.allchapters = (res.data?.chapters ?? []).map((chapter) => {
+      this.allchapters = (this.comic?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
           chapter.title?.split(':') ?? [];
+
+        console.log(chapter);
         return {
           id: chapter.id,
           chapterTitle,
@@ -92,6 +95,7 @@ export class ComicDetailComponent implements OnInit {
           viewCount: chapter.viewCount,
         };
       });
+
       this.getSimilarComics();
       this.SetUpScroll();
     });
@@ -148,6 +152,7 @@ export class ComicDetailComponent implements OnInit {
         this.preLoadChapters.push(...this.allchapters.slice(Loffset, Roffset));
       }
     };
+    console.log(this.allchapters);
   }
 
   getTopComics(): void {
@@ -193,5 +198,15 @@ export class ComicDetailComponent implements OnInit {
           this.toastService.show(ToastType.Error, res.message);
         }
       });
+  }
+  onSearchChapter(e: any) {
+    const value: string = e.target.value;
+    if (value) {
+      this.preLoadChapters = this.allchapters.filter((chapter) =>
+        chapter.chapterTitle?.includes(value),
+      );
+    } else {
+      this.preLoadChapters = [...this.allchapters];
+    }
   }
 }

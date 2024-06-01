@@ -196,7 +196,7 @@
           (click)="navigateChapter(false)"
           [ngClass]="{
             'text-white bg-primary-100':
-              mainChapter.chapterNumber != comic.chapters.length
+              mainChapter.chapterNumber != comic.chapters!.length
           }"
         >
           <svg
@@ -348,7 +348,7 @@
   @if (comic) {
     <comment-component
       [comicId]="comic.id"
-      [lastchapterID]="comic.chapters[0].id"
+      [lastchapterID]="comic.chapters![0].id"
     ></comment-component>
   }
 </div>

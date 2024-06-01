@@ -27,8 +27,8 @@
         <p class="chapter top font-thin text-sm">
           <a
             [routerLink]="['/comic', topComic.id]"
-            [title]="topComic.chapters[0].title"
-            >{{ topComic.chapters[0].title }}</a
+            [title]="topComic?.chapters?.[0]?.title"
+            >{{ topComic.chapters?.[0]?.title }}</a
           >
         </p>
         <div

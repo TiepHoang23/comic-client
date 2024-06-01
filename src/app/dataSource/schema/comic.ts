@@ -5,8 +5,8 @@
 //   thumbnail: string;
 // }
 
-import { Chapter } from "./Chapter";
-import { Genre } from "./Genre";
+import { Chapter } from './Chapter';
+import { Genre } from './Genre';
 
 export interface Comic {
   id: number;
@@ -22,7 +22,7 @@ export interface Comic {
   // createAt?: string;
   updateAt?: string;
   genres: Genre[];
-  chapters: Chapter[];
+  chapters?: Chapter[];
   isFollow?: boolean;
 }
 

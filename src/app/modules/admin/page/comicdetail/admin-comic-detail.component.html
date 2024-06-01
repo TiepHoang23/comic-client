@@ -18,53 +18,55 @@
     <div class="flex mt-4 md:mt-6">
       <button
         (click)="onAddComicClick(comic.slug)"
-        class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 "
-        >Thêm mới</button
-      >
-      <button
-       
         class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >Xóa
-        </button
       >
+        Thêm mới
+      </button>
+      <button
+        class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+      >
+        Xóa
+      </button>
     </div>
   </div>
   <div class="flex flex-col w-full h-full">
     <div
       class="w-full h-full p-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
-    <span>Chương mới nhất: {{comic.chapters[0].chater_name}}</span>
-</div>
+      <span>Chương mới nhất: {{ comic.chapters[0].chater_name }}</span>
+    </div>
   </div>
 </div>
 
-
 <!-- Grid comic similar -->
-<div class="grid gap-[12px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 w-full  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-  <div *ngFor="let _comic of similarComics"
+<div
+  class="grid gap-[12px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+>
+  <div
+    *ngFor="let _comic of similarComics"
     class="bg-white shadow-md h-full flex flex-col rounded-lg overflow-hidden relative"
   >
-
     <div
       class="relative w-full h-0 overflow-hidden transition-transform duration-300 transform-gpu hover:-translate-y-2"
       style="padding-bottom: 140%"
     >
       <a
-        [routerLink]="['/truyen-tranh',_comic.url]"
+        [routerLink]="['/truyen-tranh', _comic.url]"
         routerLinkActive="active"
         class="flex h-full w-full"
       >
-        <img [src]='_comic.coverImage' loading="lazy" class="object-cover
-        w-full absolute" />
+        <img
+          [src]="_comic.coverImage"
+          loading="lazy"
+          class="object-cover w-full absolute"
+        />
         <div
           class="w-full backdrop-blur-sm bg-gradient-to-t from-black absolute bottom-0 flex justify-start"
         >
           <div class="text-white p-1 w-full group">
             <p class="title font-bold line-clamp-1 hover:line-clamp-none">
-              {{_comic.title}}
+              {{ _comic.title }}
             </p>
-
-    
           </div>
         </div>
       </a>
@@ -74,22 +76,20 @@
       class="p-2 flex justify-between card-footer text-[0.75rem] bg-slate-100 h-full"
     >
       <p class="chapter font-semibold line-clamp-1">
-        {{_comic.chapters[_comic.chapters.length-1].title}}
+        {{ _comic.chapters![_comic.chapters!.length - 1].title }}
       </p>
       <span class="text-end text-[0.75rem] inline text-gray-700">
-         {{_comic.updateAt | date : 'dd/MM/yyyy'}}
+        {{ _comic.updateAt | date: "dd/MM/yyyy" }}
       </span>
     </div>
     <div
-    (click)="mapingComic(comic.slug,_comic.url)"
+      (click)="mapingComic(comic.slug, _comic.url)"
       class="p-1 absolute text-white cursor-pointer font-bold flex-row text-center justify-between items-center card-footer text-[0.75rem] bg-slate-400 hover:bg-red-500"
     >
       Maping
     </div>
   </div>
 </div>
-
-
 
 <div
   class="w-full p-5 h-96 overflow-scroll bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"

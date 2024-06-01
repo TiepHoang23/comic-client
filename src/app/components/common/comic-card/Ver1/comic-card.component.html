@@ -61,8 +61,11 @@
     <div
       class="p-2 flex justify-between card-footer text-[0.75rem] bg-slate-100 h-full"
     >
-      <p *ngIf="comic.chapters && comic.chapters.length >0" class="chapter font-semibold line-clamp-1">
-        {{ comic.chapters[0].title.split(":")[0] }}
+      <p
+        *ngIf="comic.chapters && comic.chapters.length > 0"
+        class="chapter font-semibold line-clamp-1"
+      >
+        {{ comic.chapters[0].title!.split(":")[0] }}
       </p>
       <span class="text-end text-[0.75rem] inline text-gray-700">
         {{ comic.updateAt | dateAgo }}
