@@ -13,10 +13,12 @@ import { Observable, of } from 'rxjs';
 import { offset } from '@popperjs/core';
 import { Title } from '@angular/platform-browser';
 import { Comic } from '../../dataSource/schema/comic';
-import { ComicService } from '../../dataSource/services/comic.service';
-import { AccountService } from '../../dataSource/services/account.service';
-import { HistoryService } from '../../services/history.service';
-import { ToastService, ToastType } from '../../services/toast.service';
+
+
+import { HistoryService } from '@services/history.service';
+import { ComicService } from '@services/comic.service';
+import { AccountService } from '@services/account.service';
+import { ToastService, ToastType } from '@services/toast.service';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -37,6 +39,7 @@ export class ComicDetailComponent implements OnInit {
   preLoadChapters: ComicChapters[] = [];
   allchapters!: ComicChapters[];
   listTopComics?: Comic[];
+  SimilarComics?: Comic[] = [];
   $index = 0;
   isOpen = false;
   // preload variable
@@ -90,7 +93,7 @@ export class ComicDetailComponent implements OnInit {
           viewCount: chapter.viewCount,
         };
       });
-
+      this.getSimilarComics();
       this.SetUpScroll();
     });
     // const id = this.route.snapshot.paramMap.get('id') || '';
@@ -151,6 +154,17 @@ export class ComicDetailComponent implements OnInit {
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 6 }).subscribe(
       (topComics) => (this.listTopComics = topComics?.data?.comics),
+    );
+  }
+  getSimilarComics(): void {
+    this.ComicService.getSimilarComic(this.comic.id).subscribe(
+      (res:any) => {
+        console.log(res);
+        
+        this.SimilarComics = res.data
+
+      }
+      
     );
   }
   onRatingChanged(rating: number) {

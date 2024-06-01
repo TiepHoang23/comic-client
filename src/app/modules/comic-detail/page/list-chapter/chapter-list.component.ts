@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ComicService } from '@services/comic.service';
 import moment from 'moment';
-import { ComicService } from '../../../../dataSource/services/comic.service';
+
 
 @Component({
   selector: 'chapter-list',

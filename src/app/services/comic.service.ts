@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Comic } from '../schema/comic';
-import { Genre } from '../schema/Genre';
+import { Comic } from '../dataSource/schema/comic';
+import { Genre } from '../dataSource/schema/Genre';
 import { HttpClient } from '@angular/common/http';
-import globalConfig from '../../../../GlobalConfig';
-import { IServiceResponse } from '../schema/ResponseType';
+import globalConfig from '../../../GlobalConfig';
+import { IServiceResponse } from '../dataSource/schema/ResponseType';
 import _ from 'lodash';
 
 @Injectable({
@@ -77,9 +77,14 @@ export class ComicService {
       `${globalConfig.API_HOST}/api/search?keyword=${key}`,
     );
   }
-  getSimilarComic(key: string) {
+  getDuplicateComic(key: string) {
     return this.httpclient.get(
       `${globalConfig.API_HOST}/Comic/Similar/${key}`,
+    );
+  }
+  getSimilarComic(idcomic: number) {
+    return this.httpclient.get(
+      `${globalConfig.API_HOST}/Comic/${idcomic}/similar`,
     );
   }
 

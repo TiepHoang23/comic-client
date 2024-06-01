@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
-  private controllers = new Map<string, AbortController>();
+  private controllers = new Map<string, Subscription>();
 
   constructor(private http: HttpClient) {}
 
-  loadImage(url: string) {
-    const controller = new AbortController();
-    this.controllers.set(url, controller);
-    let data: any = {
-      responseType: 'blob',
-      signal: controller.signal,
-    };
-    return this.http.get(url, data);
+  loadImage(url: string, onload: (res: HttpResponse<Blob>) => void) {
+    this.controllers.set(
+      url,
+      this.http
+        .get(url, {
+          responseType: 'blob',
+          observe: 'response',
+        })
+        .subscribe((res) => onload(res))
+    );
   }
 
-  abortImageLoad(url: string) {
-    const controller = this.controllers.get(url);
-    console.log('aborting', controller);
-
-    if (controller) {
-      controller.abort();
+  CancelLoad(url: string) {
+    if (this.controllers.has(url)) {
+      this.controllers.get(url)!.unsubscribe();
       this.controllers.delete(url);
     }
   }
 
-  clearAll() {
-    this.controllers.forEach((controller) => controller.abort());
+  CancelAll() {
+    this.controllers.forEach((controller) => controller.unsubscribe());
     this.controllers.clear();
   }
 }

@@ -8,7 +8,8 @@ import { Comic } from '../../dataSource/schema/comic';
 import { IAdvancedFilters, IFilter, advancedFiltersOptions } from '../../components/utils/constants';
 import { Genre } from '../../dataSource/schema/Genre';
 import { ComicStatus, SortType } from '../../dataSource/enum';
-import { ComicService } from '../../dataSource/services/comic.service';
+import { ComicService } from '@services/comic.service';
+
 
 @Component({
   selector: 'search-page',

@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  SimpleChange,
   ViewChild,
   ViewChildren,
 } from '@angular/core';
@@ -12,7 +13,9 @@ import { DOCUMENT } from '@angular/common';
 import { Page } from '../../dataSource/schema/Page';
 import { Comic } from '../../dataSource/schema/comic';
 import { Chapter } from '../../dataSource/schema/Chapter';
-import { ComicService } from '../../dataSource/services/comic.service';
+import { ComicService } from '@services/comic.service';
+import { ImageService } from '@services/image.service';
+
 
 @Component({
   selector: 'app-chapter',
@@ -43,6 +46,7 @@ export class ChapterPageComponent {
     private comicService: ComicService,
     private route: ActivatedRoute,
     private router: Router,
+    private imageService: ImageService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.ListChapterImg = [];
@@ -58,9 +62,11 @@ export class ChapterPageComponent {
         this.comic = res.data.comic;
         this.mainChapter = res.data;
       });
+      this.imageService.CancelAll();
     });
   }
-  ngOnChanges(): void {}
+  ngOnChanges(change : SimpleChange): void {
+  }
   ToggleMenu(isToggle: boolean) {
     if (isToggle) {
       this.SearchField.nativeElement.classList.toggle('translate-x-full');

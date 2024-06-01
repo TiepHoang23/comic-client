@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comic } from '../../../../dataSource/schema/comic';
-import { AdminService } from '../../../../dataSource/services/admin.service';
+import { AdminService } from '@services/admin.service';
+
 
 
 

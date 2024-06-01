@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ComicService } from '../../../dataSource/services/comic.service';
+
 import { Comic } from '../../../dataSource/schema/comic';
+import { ComicService } from '@services/comic.service';
 
 @Component({
   selector: 'list-search-comic',

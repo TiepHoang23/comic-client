@@ -6,7 +6,9 @@
     "types": [
       "node",
       "@angular/localize"
-    ]
+    ],
+    
+    
   },
   "files": [
     "src/main.ts",

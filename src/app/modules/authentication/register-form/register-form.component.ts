@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from '@services/account.service';
 import { first } from 'rxjs';
-import { AccountService } from '../../../dataSource/services/account.service';
+
 
 @Component({
   selector: 'app-register-form',

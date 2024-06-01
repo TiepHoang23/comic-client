@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { themes } from '../../core/constants';
-import { ThemeService } from '../../services/theme.service';
+import { ThemeService } from '@services/theme.service';
+
 
 
 @Component({

@@ -342,7 +342,7 @@
       *ngFor="let page of ListChapterImg; let i = index"
       [imageUrl]="page.url"
       [style.width]="'calc(50% + ' + (zoomLevel * 100) / 2 + '%)'"
-      class="relative object-contain transition-transform duration-200 ease-in-out cursor-zoom-in mx-auto"
+      class="block relative object-contain transition-transform duration-200 ease-in-out cursor-zoom-in mx-auto"
     ></app-image-loader>
   </div>
   @if (comic) {

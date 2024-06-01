@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Comic } from '../../dataSource/schema/comic';
-import { ComicService } from '../../dataSource/services/comic.service';
-import { AccountService } from '../../dataSource/services/account.service';
-import { ToastService, ToastType } from '../../services/toast.service';
+import { ComicService } from '@services/comic.service';
+import { AccountService } from '@services/account.service';
+import { ToastService, ToastType } from '@services/toast.service';
 
 @Component({
   selector: 'followed-tag',

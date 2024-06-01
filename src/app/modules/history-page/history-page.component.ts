@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { url } from 'inspector';
 import { Comic } from '../../dataSource/schema/comic';
-import { ComicService } from '../../dataSource/services/comic.service';
-import { HistoryService } from '../../services/history.service';
+import { HistoryService } from '@services/history.service';
+import { ComicService } from '@services/comic.service';
+
 
 @Component({
   selector: 'history-tag',

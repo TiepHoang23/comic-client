@@ -2,9 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // import { OverlayContainer } from '@angular/cdk/overlay';
 import { map } from 'rxjs/operators';
-import { ComicService } from '../../../dataSource/services/comic.service';
+
 import { Comic } from '../../../dataSource/schema/comic';
-import { HistoryService } from '../../../services/history.service';
+import { HistoryService } from '@services/history.service';
+
+
 
 
 
