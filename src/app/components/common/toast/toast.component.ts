@@ -7,7 +7,8 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { ToastService } from '../../../services/toast.service';
+import { ToastService } from '@services/toast.service';
+
 
 @Component({
   selector: 'app-toast',

@@ -17,8 +17,6 @@ import {
 } from '@angular/common/http';
 // import { ChapterPageComponent } from './components/modules/chapter-page/chapter-page.component';
 import { ListSearchComicComponent } from './components/nav/list-search-comic/list-search-comic.component';
-import { GenreCatagoriesComponent } from './components/common/genre-catagories/genre-catagories.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs';

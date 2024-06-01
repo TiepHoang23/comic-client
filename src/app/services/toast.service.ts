@@ -1,9 +1,15 @@
 // src/app/toast.service.ts
 import { Injectable } from '@angular/core';
 
+export enum ToastType {
+  Success = 'success',
+  Error = 'error',
+  Info = 'info',
+  Warning = 'warning',
+}
 interface Toast {
   id: number;
-  title: string;
+  type: ToastType
   message: string;
   state: 'enter' | 'leave'; // Add state property
 }
@@ -15,11 +21,11 @@ export class ToastService {
   toasts: Toast[] = [];
   private nextId = 0;
 
-  show(title: string, message: string): void {
+  show(type: ToastType, message: string): void {
     const id = this.nextId++;
-    const toast: Toast = { id, title, message, state: 'enter' }; // Initialize with 'enter' state
+    const toast: Toast = { id, message, type, state: 'enter' }; // Initialize with 'enter' state
     this.toasts.push(toast);
-    setTimeout(() => this.startLeaveAnimation(toast), 3000); // Start leave animation after 5 seconds
+    setTimeout(() => this.startLeaveAnimation(toast), 10000); // Start leave animation after 5 seconds
   }
 
   startLeaveAnimation(toast: Toast): void {

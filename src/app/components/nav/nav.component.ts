@@ -1,11 +1,11 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Genre } from '../../dataSource/schema/Genre';
 // import { Observable } from 'rxjs';
-import { ComicService } from '../../dataSource/services/comic.service';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../dataSource/schema/User';
-import { AccountService } from '../../dataSource/services/account.service';
+import { ComicService } from '@services/comic.service';
+import { AccountService } from '@services/account.service';
 // import { EventEmitter } from 'stream';
 // import { Target } from '@angular/compiler';
 // import { partition } from 'lodash';

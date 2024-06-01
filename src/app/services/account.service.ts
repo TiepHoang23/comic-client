@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Comic } from '../schema/comic';
-import { Genre } from '../schema/Genre';
+import { Comic } from '../dataSource/schema/comic';
+import { Genre } from '../dataSource/schema/Genre';
 import { HttpClient } from '@angular/common/http';
-import globalConfig from '../../../../GlobalConfig';
-import { IServiceResponse } from '../schema/ResponseType';
-import { IUser } from '../schema/User';
+import globalConfig from '../../../GlobalConfig';
+import { IServiceResponse } from '../dataSource/schema/ResponseType';
+import { IUser } from '../dataSource/schema/User';
 
 @Injectable({
   providedIn: 'root',

@@ -22,6 +22,12 @@
       "ES2022",
       "dom"
     ]
+    ,
+    "baseUrl": "./",
+    "paths": {
+      "@services/*": ["src/app/services/*"],
+      // "@components/*": ["src/app/components/*", "src/app/components/common/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

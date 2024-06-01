@@ -13,10 +13,11 @@ import { Observable, of } from 'rxjs';
 import { offset } from '@popperjs/core';
 import { Title } from '@angular/platform-browser';
 import { Comic } from '../../dataSource/schema/comic';
-import { ComicService } from '../../dataSource/services/comic.service';
-import { AccountService } from '../../dataSource/services/account.service';
-import { HistoryService } from '../../services/history.service';
-import { ToastService } from '../../services/toast.service';
+
+import { HistoryService } from '@services/history.service';
+import { ComicService } from '@services/comic.service';
+import { AccountService } from '@services/account.service';
+import { ToastService, ToastType } from '@services/toast.service';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -37,6 +38,7 @@ export class ComicDetailComponent implements OnInit {
   preLoadChapters: ComicChapters[] = [];
   allchapters!: ComicChapters[];
   listTopComics?: Comic[];
+  SimilarComics?: Comic[] = [];
   $index = 0;
   isOpen = false;
   // preload variable
@@ -45,6 +47,7 @@ export class ComicDetailComponent implements OnInit {
   preload_chapter_num: number = 90;
   chapter_grid_size: number = 3;
   height_each_element: number = 68;
+  followtime: number = 0;
   @ViewChild('ChaptersScrollElement') SearchField!: ElementRef<HTMLDivElement>;
   overlayEl!: HTMLElement;
   constructor(
@@ -89,7 +92,7 @@ export class ComicDetailComponent implements OnInit {
           viewCount: chapter.viewCount,
         };
       });
-
+      this.getSimilarComics();
       this.SetUpScroll();
     });
     // const id = this.route.snapshot.paramMap.get('id') || '';
@@ -152,33 +155,43 @@ export class ComicDetailComponent implements OnInit {
       (topComics) => (this.listTopComics = topComics?.data?.comics),
     );
   }
+  getSimilarComics(): void {
+    this.ComicService.getSimilarComic(this.comic.id).subscribe((res: any) => {
+      console.log(res);
+
+      this.SimilarComics = res.data;
+    });
+  }
   onRatingChanged(rating: number) {
     // Implement your logic here
     console.log('Rating changed:', rating);
   }
   Follow(isFollow: boolean): void {
+    let now = Date.now();
     if (this.accountService.GetUser() === null) {
       this.router.navigate(['/auth/login']);
-    } else {
-      console.log(isFollow);
-      this.accountService
-        .Follow(this.comic.id, isFollow)
-        .subscribe((res: any) => {
-          if (res.status === 1) {
-            this.comic.isFollow = !this.comic.isFollow;
-            this.toastService.show('thanh cong', 'Cập nhật thành công!');
-          }
-        });
+      return;
     }
-  }
-  onSearchChapter(e: any) {
-    const value: string = e.target.value;
-    if (value) {
-      this.preLoadChapters = this.allchapters.filter((chapter) =>
-        chapter.chapterTitle?.includes(value),
+    if (this.followtime + 5000 > now) {
+      this.toastService.show(
+        ToastType.Info,
+        `Thao tác quá nhanh  </br> Hãy theo dõi sau ${(now - this.followtime + 5000) / 1000}  giây`,
       );
-    } else {
-      this.preLoadChapters = [...this.allchapters];
+      return;
     }
+    this.followtime = now;
+    this.accountService
+      .Follow(this.comic.id, isFollow)
+      .subscribe((res: any) => {
+        if (res.status === 1) {
+          this.comic.isFollow = !this.comic.isFollow;
+          this.toastService.show(
+            ToastType.Success,
+            this.comic.isFollow ? 'Đã theo dõi' : 'Đã hủy theo dõi',
+          );
+        } else {
+          this.toastService.show(ToastType.Error, res.message);
+        }
+      });
   }
 }

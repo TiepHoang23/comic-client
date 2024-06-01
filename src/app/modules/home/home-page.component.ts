@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import _ from 'lodash';
 import { Comic } from '../../dataSource/schema/comic';
-import { ComicService } from '../../dataSource/services/comic.service';
+import { ComicService } from '@services/comic.service';
+
 
 @Component({
   selector: 'app-home',

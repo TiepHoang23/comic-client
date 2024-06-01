@@ -1,5 +1,8 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { ImageService } from '../../../services/image.service';
+
+import { Subscription, delay, of } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { ImageService } from '@services/image.service';
 
 @Component({
   selector: 'app-image-loader',
@@ -8,35 +11,29 @@ import { ImageService } from '../../../services/image.service';
 export class ImageLoaderComponent implements OnDestroy {
   @Input()
   imageUrl!: string;
-  imageSrc: string | null = null;
-
+  imageSrc: string = '';
   constructor(private imageService: ImageService) {}
+
+  
   ngOnInit() {
     this.loadImage();
   }
 
-  loadImage() {
+  loadImage(): void {
     if (!this.imageUrl) return;
-    console.log(this.imageUrl);
+    this.imageService.loadImage(this.imageUrl, this.OnLoaded);
+  }
 
-    this.imageService.loadImage(this.imageUrl).subscribe(
-      (blob: any) => {
-        console.log('Image loaded', blob);
-
-        const objectURL = URL.createObjectURL(blob);
-        this.imageSrc = objectURL;
-      },
-      (error) => {
-        if (error.name === 'AbortError') {
-          console.log('Image loading aborted');
-        } else {
-          console.error('Error loading image', error);
-        }
-      },
-    );
+  OnLoaded =(res :HttpResponse<Blob>) :void =>{
+    
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result as string;
+    };
+    reader.readAsDataURL(res.body as Blob);
   }
 
   ngOnDestroy() {
-    this.imageService.abortImageLoad(this.imageUrl);
+    this.imageService.CancelLoad(this.imageUrl);
   }
 }

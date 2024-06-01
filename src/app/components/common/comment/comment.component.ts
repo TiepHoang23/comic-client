@@ -14,11 +14,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 // import { OverlayContainer } from '@angular/cdk/overlay';
 import { map } from 'rxjs/operators';
-import { ComicService } from '../../../dataSource/services/comic.service';
+
 import { Comic } from '../../../dataSource/schema/comic';
 import { Comment } from '../../../dataSource/schema/Comment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../../dataSource/services/account.service';
+
 import {
   animate,
   keyframes,
@@ -30,6 +30,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
+import { AccountService } from '@services/account.service';
 
 @Component({
   selector: 'comment-component',

@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comic } from '../../../../dataSource/schema/comic';
-import { AdminService } from '../../../../dataSource/services/admin.service';
 import { ActivatedRoute } from '@angular/router';
-import { ComicService } from '../../../../dataSource/services/comic.service';
+import { AdminService } from '@services/admin.service';
+import { ComicService } from '@services/comic.service';
 
 @Component({
   selector: 'admin-comic-detail',
@@ -25,7 +25,7 @@ export class AdminComicDetailComponent {
         this.comic = res.data;
 
         this.comicService
-          .getSimilarComic(this.comic.slug)
+          .getDuplicateComic(this.comic.slug)
           .subscribe((res: any) => {
             this.similarComics = res.data;
             console.log(this.similarComics);
