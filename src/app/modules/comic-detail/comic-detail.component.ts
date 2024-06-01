@@ -18,6 +18,8 @@ import { HistoryService } from '@services/history.service';
 import { ComicService } from '@services/comic.service';
 import { AccountService } from '@services/account.service';
 import { ToastService, ToastType } from '@services/toast.service';
+import chunk from 'lodash/chunk';
+import { Target } from '@angular/compiler';
 // import {theme } from '../../../../../tailwind.config';
 type ComicChapters = {
   id: number;
@@ -37,6 +39,8 @@ export class ComicDetailComponent implements OnInit {
   isFollowed!: boolean;
   preLoadChapters: ComicChapters[] = [];
   allchapters!: ComicChapters[];
+  range!: Number[];
+  // rangeChapters! Number[][];:
   listTopComics?: Comic[];
   SimilarComics?: Comic[] = [];
   $index = 0;
@@ -85,8 +89,6 @@ export class ComicDetailComponent implements OnInit {
       this.allchapters = (this.comic?.chapters ?? []).map((chapter) => {
         const [chapterTitle, chapterDescription] =
           chapter.title?.split(':') ?? [];
-
-        console.log(chapter);
         return {
           id: chapter.id,
           chapterTitle,
@@ -95,7 +97,15 @@ export class ComicDetailComponent implements OnInit {
           viewCount: chapter.viewCount,
         };
       });
-
+      // this.rangeChapters = chunk(
+      //   this.allchapters.map((c) => c.id).reverse(),
+      //   50,
+      // );
+      // console.log(this.rangeChapters);
+      this.range = Array.from(
+        { length: (this.allchapters.length - 1) / 50 + 1 },
+        (_, i) => i,
+      );
       this.getSimilarComics();
       this.SetUpScroll();
     });
@@ -154,6 +164,21 @@ export class ComicDetailComponent implements OnInit {
     };
     console.log(this.allchapters);
   }
+  selectChapterRange(event: any) {
+    const selectedValue =
+      this.range.length - 1 - Number((event.target as HTMLSelectElement).value); // Type assertion
+
+    let value = (selectedValue * 50) / this.chapter_grid_size;
+    this.height_each_element;
+
+    this.chapter_grid_size;
+
+    this.SearchField.nativeElement.scrollTo({
+      top: this.height_each_element * value,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
 
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 6 }).subscribe(
@@ -209,4 +234,13 @@ export class ComicDetailComponent implements OnInit {
       this.preLoadChapters = [...this.allchapters];
     }
   }
+  // selectChapterRange(e?: any) {
+  //   const rangeIndex = e.target.value;
+  //   if (rangeIndex >= 0 && rangeIndex < this.rangeChapters.length) {
+  //     const selectedRange = this.rangeChapters[rangeIndex];
+  //     this.preLoadChapters = this.allchapters.filter((chapter) =>
+  //       selectedRange.includes(chapter.id),
+  //     );
+  //   }
+  // }
 }
