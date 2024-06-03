@@ -8,6 +8,7 @@ import { Chapter } from '../dataSource/schema/Chapter';
 })
 export class HistoryService {
   listHistory: Comic[] = [];
+  maxHistory = 48;
   constructor() {
     if (localStorage.getItem('history') === null) {
       localStorage.setItem('history', JSON.stringify([]));
@@ -30,6 +31,7 @@ export class HistoryService {
       }
     } else {
       this.listHistory.unshift(comic);
+      this.listHistory = this.listHistory.slice(0, this.maxHistory);
       if (chapter) {
         comic.chapters = [chapter];
       }

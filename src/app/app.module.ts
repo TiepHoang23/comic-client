@@ -54,23 +54,5 @@ import { ToastComponent } from './components/common/toast/toast.component';
   // exports: [AppModule]
 })
 export class AppModule {
-  constructor(
-    private router: Router,
-    private viewportScroller: ViewportScroller,
-  ) {
-    this.router.events
-      .pipe(filter((e) => e instanceof Scroll))
-      .subscribe((e: any) => {
-        console.log(e);
-        if (e.position) {
-          // backward navigation
-          viewportScroller.scrollToPosition(e.position);
-        } else if (e.anchor) {
-          viewportScroller.scrollToAnchor(e.anchor);
-        } else {
-          // forward navigation
-          viewportScroller.scrollToPosition([0, 0]);
-        }
-      });
-  }
+  
 }

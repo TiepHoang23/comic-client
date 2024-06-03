@@ -10,5 +10,5 @@
     [EventName]="'Hủy theo dõi'"
   >
   </grid-comic>
-  <pagination-component [totalpage]="10"> </pagination-component>
+  <pagination-component *ngIf="totalpage > 1" [totalpage]="totalpage"> </pagination-component>
 </div>
