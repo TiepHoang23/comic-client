@@ -16,6 +16,7 @@ import { Chapter } from '../../dataSource/schema/Chapter';
 import { ComicService } from '@services/comic.service';
 import { ImageService } from '@services/image.service';
 import { HistoryService } from '@services/history.service';
+import { LoadingService } from '@services/loading.service';
 
 @Component({
   selector: 'app-chapter',
@@ -48,6 +49,7 @@ export class ChapterPageComponent {
     private router: Router,
     private imageService: ImageService,
     private historyService: HistoryService,
+    private loadingService: LoadingService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.ListChapterImg = [];
@@ -69,12 +71,14 @@ export class ChapterPageComponent {
           slug: this.mainChapter.slug,
           updateAt: this.mainChapter.updateAt,
           viewCount: this.mainChapter.viewCount,
-        });
+        })
+      }).add(() => {
+        this.loadingService.stop();
       });
       this.imageService.CancelAll();
     });
   }
-  ngOnChanges(change: SimpleChange): void {}
+  ngOnChanges(change: SimpleChange): void { }
   ToggleMenu(isToggle: boolean) {
     if (isToggle) {
       this.SearchField.nativeElement.classList.toggle('translate-x-full');

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Comic } from '../../../dataSource/schema/comic';
 import { HistoryService } from '@services/history.service';
+import { LoadingService } from '@services/loading.service';
 
 @Component({
   selector: 'loading-bar-component',
@@ -12,11 +13,16 @@ import { HistoryService } from '@services/history.service';
   styleUrls: ['./loading-bar.component.scss'],
 })
 export class LoadingBarComponent implements OnInit {
+  // public static Instance: LoadingBarComponent;
+  isLoading = false;
+
   constructor(
-    private route: ActivatedRoute,
-  ) {}
-  ngOnInit(): void {
-  
+    public loadingService: LoadingService
+  ) {
+
   }
-  ngOnChanges() {}
+  ngOnInit(): void {
+
+  }
+
 }

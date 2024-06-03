@@ -1,8 +1,9 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, Scroll } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, Scroll } from '@angular/router';
 import { filter } from 'rxjs';
-
+import { LoadingBarComponent } from './components/common/loading-bar/loading-bar.component';
+import { LoadingService } from '@services/loading.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,9 @@ import { filter } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'comic-client';
 
-  constructor(   private router: Router, private viewportScroller: ViewportScroller) {
+  constructor(private router: Router, private viewportScroller: ViewportScroller
+    , private loadingService: LoadingService
+  ) {
     this.router.events
       .pipe(filter((e) => e instanceof Scroll))
       .subscribe((e: any) => {
@@ -26,9 +29,15 @@ export class AppComponent implements OnInit {
         }
       });
 
-   }
+  }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
 
+        this.loadingService.start();
+
+      }
+    });
   }
 }
