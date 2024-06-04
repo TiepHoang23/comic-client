@@ -1,5 +1,9 @@
-<div *ngIf="loadingService.isLoading" class="w-full fixed top-0 right-0">
-  <div class="h-1 w-full bg-pink-100 overflow-hidden">
-    <div class="progress w-full h-full bg-primary-100 left-right"></div>
+<div *ngIf="isLoading" class="w-full fixed top-0 right-0 z-50">
+  <div class="w-full bg-gray-200 rounded-full h-1 mb-4 dark:bg-gray-700">
+    <div
+      #ProgressBar
+      class="transition-all bg-primary-200 h-1  dark:bg-blue-500"
+      style="width: 0%"
+    ></div>
   </div>
 </div>

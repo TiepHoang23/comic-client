@@ -182,7 +182,7 @@ export class ComicDetailComponent implements OnInit {
 
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 6 }).subscribe(
-      (topComics) => (this.listTopComics = topComics?.data?.comics),
+      (topComics:any) => (this.listTopComics = topComics?.data?.comics),
     );
   }
   getSimilarComics(): void {

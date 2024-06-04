@@ -55,6 +55,4 @@ import { LoadingBarComponent } from './components/common/loading-bar/loading-bar
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule {
-
-}
+export class AppModule {}

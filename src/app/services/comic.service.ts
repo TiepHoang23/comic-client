@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import globalConfig from '../../../GlobalConfig';
 import { IServiceResponse } from '../dataSource/schema/ResponseType';
 import _ from 'lodash';
-import { LoadingService } from './loading.service';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ import { LoadingService } from './loading.service';
 export class ComicService {
   constructor(
     private httpclient: HttpClient,
-    private loadingService: LoadingService
+    private httpService: HttpService,
   ) { }
 
   getComics(
@@ -40,27 +40,30 @@ export class ComicService {
     //   status: status.toString(),
     // };
     const searchParams = new URLSearchParams(params).toString();
-    return this.httpclient.get(
+    let req = this.httpService.get(
       `${globalConfig.API_HOST}/comics?${searchParams}`,
     )
+    return req;
   }
 
   getComicById(id: string): Observable<IServiceResponse<Comic>> {
 
 
-    return this.httpclient.get(
-      `${globalConfig.API_HOST}/comic/${id}`,
+    return this.httpService.get(
+      `${globalConfig.API_HOST}/comic/${id}`
     ) as Observable<IServiceResponse<Comic>>;
   }
   getChapterImgs(id: number) {
-    return this.httpclient.get(`${globalConfig.API_HOST}/Comic/chapter/${id}`);
+    return this.httpService.get(`${globalConfig.API_HOST}/Comic/chapter/${id}`);
   }
   getChapterById(id: string) {
-    return this.httpclient.get(`${globalConfig.API_HOST}/Comic/${id}/chapters`);
+    return this.httpService.get(
+      `${globalConfig.API_HOST}/Comic/${id}/chapters`
+    );
   }
   getTopComics({
     top = 10,
-  }): Observable<IServiceResponse<{ comics: Comic[] }>> {
+  }){
 
     const params = {
       page: _.random(1, 100).toString(),
@@ -70,9 +73,9 @@ export class ComicService {
       status: '-1',
     };
     const searchParams = new URLSearchParams(params).toString();
-    return this.httpclient.get(
-      `${globalConfig.API_HOST}/comics?${searchParams}`,
-    ) as Observable<IServiceResponse<{ comics: Comic[] }>>;
+    return this.httpService.get(
+      `${globalConfig.API_HOST}/comics?${searchParams}`
+    ) 
   }
   getSearchComic(key: string) {
     return this.httpclient.get(
@@ -85,9 +88,10 @@ export class ComicService {
     );
   }
   getSimilarComic(idcomic: number) {
-    return this.httpclient.get(
-      `${globalConfig.API_HOST}/Comic/${idcomic}/similar`,
+    let req = this.httpService.get(
+      `${globalConfig.API_HOST}/Comic/${idcomic}/similar`
     );
+    return req;
   }
 
   getGenres(): Observable<Array<Genre>> {

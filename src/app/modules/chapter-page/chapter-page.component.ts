@@ -16,7 +16,6 @@ import { Chapter } from '../../dataSource/schema/Chapter';
 import { ComicService } from '@services/comic.service';
 import { ImageService } from '@services/image.service';
 import { HistoryService } from '@services/history.service';
-import { LoadingService } from '@services/loading.service';
 
 @Component({
   selector: 'app-chapter',
@@ -49,7 +48,6 @@ export class ChapterPageComponent {
     private router: Router,
     private imageService: ImageService,
     private historyService: HistoryService,
-    private loadingService: LoadingService,
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.ListChapterImg = [];
@@ -72,9 +70,7 @@ export class ChapterPageComponent {
           updateAt: this.mainChapter.updateAt,
           viewCount: this.mainChapter.viewCount,
         })
-      }).add(() => {
-        this.loadingService.stop();
-      });
+      })
       this.imageService.CancelAll();
     });
   }
