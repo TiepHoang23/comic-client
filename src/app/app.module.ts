@@ -26,6 +26,7 @@ import { HistoryPageComponent } from './modules/history-page/history-page.compon
 import { FollowedPageComponent } from './modules/followed-page/followed-page.component';
 import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
 import { ToastComponent } from './components/common/toast/toast.component';
+import { LoadingBarComponent } from './components/common/loading-bar/loading-bar.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ToastComponent } from './components/common/toast/toast.component';
     ToastComponent,
     HistoryPageComponent,
     FollowedPageComponent,
+    LoadingBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,24 +55,4 @@ import { ToastComponent } from './components/common/toast/toast.component';
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule {
-  constructor(
-    private router: Router,
-    private viewportScroller: ViewportScroller,
-  ) {
-    this.router.events
-      .pipe(filter((e) => e instanceof Scroll))
-      .subscribe((e: any) => {
-        console.log(e);
-        if (e.position) {
-          // backward navigation
-          viewportScroller.scrollToPosition(e.position);
-        } else if (e.anchor) {
-          viewportScroller.scrollToAnchor(e.anchor);
-        } else {
-          // forward navigation
-          viewportScroller.scrollToPosition([0, 0]);
-        }
-      });
-  }
-}
+export class AppModule {}

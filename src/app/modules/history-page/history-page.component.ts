@@ -25,35 +25,43 @@ export class HistoryPageComponent {
   ) {}
 
   ngOnInit(): void {
-    let his = this.hisService.GetHistory();
-    this.totalpage = Math.floor((his.length - 1) / this.comicPerPage) + 1;
-    his = his.slice(
-      (this.page - 1) * this.comicPerPage,
-      this.page * this.comicPerPage
-    );
-    let list = [];
-    his.forEach((element, i) => {
-      this.comicService.getComicById(element.url).subscribe((res: any) => {
-        list.push(res.data);
-        if (i === his.length - 1) {
-          this.comics = list;
-        }
-      });
-    });
+   
+    this.RefeshPage();
+  }
+  RefeshPage() {
+    
+     let his = this.hisService.GetHistory();
+     this.totalpage = Math.floor((his.length - 1) / this.comicPerPage) + 1;
+     his = his.slice(
+       (this.page - 1) * this.comicPerPage,
+       this.page * this.comicPerPage
+     );
+     let list = [];
+     his.forEach((element, i) => {
+       this.comicService.getComicById(element.url).subscribe((res: any) => {
+         list.push(res.data);
+         if (i === his.length - 1) {
+           this.comics = list;
+         }
+       });
+     });
   }
   OnChangePage(page: number) {
     this.page = page;
-    this.ngOnInit();
+    this.RefeshPage();
   }
   onRemoveClick(id: Number) {
     this.hisService.RemoveHistory(id);
-    this.comics = this.comics.filter((c) => c.id !== id);
     let totalpage =
       Math.floor((this.hisService.GetHistorySize() - 1) / this.comicPerPage) +
       1;
-    if (this.totalpage != totalpage) {
+    console.log(this.page, totalpage);
+    
+    if (this.totalpage != totalpage && this.page === this.totalpage) {
       this.totalpage = totalpage;
       this.OnChangePage(this.page - 1);
+    } else {
+      this.OnChangePage(this.page);
     }
   }
 }

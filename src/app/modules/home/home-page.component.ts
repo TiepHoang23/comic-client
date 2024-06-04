@@ -52,8 +52,8 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([''], { queryParams: { page: page }, fragment: 'listComic' });
   }
   getTopComics(): void {
-    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics) => {
-      this.listTopComics = topComics?.data?.comics;
+    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics:any) => {
+      this.listTopComics = topComics.data.comics;
     });
   }
 }

@@ -26,9 +26,9 @@ export class FollowedPageComponent {
   }
   reqFollowComics() {
     this.accountService.FollowedComics().subscribe((res: any) => {
-      this.comics = res.data;
-      console.log(this.comics);
-
+      this.comics = res.data.comics;
+      this.totalpage = res.data.totalpage;
+      this.currentpage = res.data.Page;
     });
   }
   getInstance() {

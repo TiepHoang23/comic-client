@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Subscription } from 'rxjs';
 export class ImageService {
   private controllers = new Map<string, Subscription>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpService) {}
 
   loadImage(url: string, onload: (res: HttpResponse<Blob>) => void) {
     this.controllers.set(
@@ -18,7 +19,7 @@ export class ImageService {
           responseType: 'blob',
           observe: 'response',
         })
-        .subscribe((res) => onload(res))
+        .subscribe((res:any) => onload(res))
     );
   }
 
