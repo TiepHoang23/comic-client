@@ -41,7 +41,6 @@ export class ComicDetailComponent implements OnInit {
   allchapters!: ComicChapters[];
   range!: Number[];
   // rangeChapters! Number[][];:
-  listTopComics?: Comic[];
   SimilarComics?: Comic[] = [];
   $index = 0;
   isOpen = false;
@@ -69,7 +68,6 @@ export class ComicDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       let id = params['id'];
       this.getComic(id);
-      this.getTopComics();
     });
     this.CalcGirdSize();
     this.overlayEl = this.document.getElementById('overlay')!;
@@ -180,11 +178,6 @@ export class ComicDetailComponent implements OnInit {
     });
   }
 
-  getTopComics(): void {
-    this.ComicService.getTopComics({ top: 6 }).subscribe(
-      (topComics:any) => (this.listTopComics = topComics?.data?.comics),
-    );
-  }
   getSimilarComics(): void {
     this.ComicService.getSimilarComic(this.comic.id).subscribe((res: any) => {
       this.SimilarComics = res.data;
