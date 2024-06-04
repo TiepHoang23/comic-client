@@ -23,40 +23,32 @@ interface Toast {
   providedIn: 'root',
 })
 export class HttpService {
-  public tasks: Array<Observable<Object>> = [];
+  public tasks: Array<string> = [];
 
-  constructor(private httpclient: HttpClient,private router: Router) {
+  constructor(private httpclient: HttpClient, private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-       this.ClearAll();
+        this.ClearAll();
       }
     });
   }
-  
+
   get(url: string, options = {}) {
-    let task = this.httpclient.get(url, options);
-    this.TaskAdd(task);
+    let task = this.httpclient.get(url, options)
     return task;
   }
-  TaskAdd(task : Observable<Object>) {
+  TaskAdd(task: string) {
     this.tasks.push(task);
-    task.subscribe({
-      error: (e) => () => {
-        this.tasks = this.tasks.filter((t: any) => t !== task);
-      },
-      complete: () => {
-        this.tasks = this.tasks.filter((t: any) => t !== task);
-      },
-    });
+
   }
   ClearAll() {
     this.tasks = [];
   }
 
-  TaskRemove(task : Observable<Object>) {
+  TaskRemove(task: string) {
     this.tasks = this.tasks.filter((t: any) => t !== task);
   }
- 
+
   hasTasks = () => this.tasks.length > 0;
   post(url: string, body: any) {
     return this.httpclient.post(url, body);

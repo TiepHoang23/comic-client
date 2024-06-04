@@ -11,7 +11,7 @@ module.exports = {
       md: '768px',
       lg: '940px',
       xl: '1100px',
-      '2xl': '1300px',
+      '2xl': '1200px',
     },
     extend: {
       colors: {

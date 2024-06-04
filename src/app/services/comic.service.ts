@@ -63,7 +63,7 @@ export class ComicService {
   }
   getTopComics({
     top = 10,
-  }){
+  }) {
 
     const params = {
       page: _.random(1, 100).toString(),
@@ -75,7 +75,7 @@ export class ComicService {
     const searchParams = new URLSearchParams(params).toString();
     return this.httpService.get(
       `${globalConfig.API_HOST}/comics?${searchParams}`
-    ) 
+    )
   }
   getSearchComic(key: string) {
     return this.httpclient.get(

@@ -6,12 +6,16 @@ import { HttpClient } from '@angular/common/http';
 import globalConfig from '../../../GlobalConfig';
 import { IServiceResponse } from '../dataSource/schema/ResponseType';
 import { IUser } from '../dataSource/schema/User';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
 
+  constructor(
+    private httpclient: HttpService,
+  ) { }
   AddComment(chapterId: number, content: any, parentCommentId: number) {
     return this.httpclient.post(`${globalConfig.API_HOST}/User/Comment`, {
       chapterId,
@@ -23,9 +27,6 @@ export class AccountService {
     return this.GetUser()?.token;
   }
   user?: IUser
-  constructor(
-    private httpclient: HttpClient,
-  ) { }
   isAuthenticated(): boolean {
     return !!this.GetUser();
   }

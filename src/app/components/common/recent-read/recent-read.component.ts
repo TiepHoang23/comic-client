@@ -17,9 +17,9 @@ export class RecentReadComponent implements OnInit {
     private route: ActivatedRoute,
 
     private hisService: HistoryService,
-  ) {}
+  ) { }
   ngOnInit(): void {
-    this.listComics = this.hisService.GetHistory().slice(0, 5) ?? [];
+    this.listComics = this.hisService.GetHistory().slice(0, 3) ?? [];
   }
-  ngOnChanges() {}
+  ngOnChanges() { }
 }

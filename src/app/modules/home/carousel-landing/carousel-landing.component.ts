@@ -10,10 +10,11 @@ import { forEach } from 'lodash';
   styleUrls: ['./carousel-landing.component.scss'], // Change styleUrl to styleUrls
 })
 export class CarouselLandingComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private document: Document) { }
   @Input() dataSlide?: Comic[];
   carouselItems: Array<Comic[]> = [];
 
+  slideElements: Element[] = [];
   lastTime: number = 0;
 
   isTransitioning: boolean = false;
@@ -24,11 +25,13 @@ export class CarouselLandingComponent implements OnInit {
     const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
     this.carouselItems = comicChunk;
     this.carouselItems.push(...comicChunk, ...comicChunk);
-    this.resetAutoSlide();    
+    this.resetAutoSlide();
   }
 
-  ngOnInit(): void {}
-  slideElements: Element[] = [];
+  ngOnInit(): void { }
+  ngAfterViewInit() {
+  }
+
   ngAfterViewChecked() {
     if (this.slideElements.length === 0) {
       this.slideElements = Array.from(
