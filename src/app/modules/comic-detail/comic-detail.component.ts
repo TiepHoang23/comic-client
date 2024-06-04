@@ -187,8 +187,6 @@ export class ComicDetailComponent implements OnInit {
   }
   getSimilarComics(): void {
     this.ComicService.getSimilarComic(this.comic.id).subscribe((res: any) => {
-      console.log(res);
-
       this.SimilarComics = res.data;
     });
   }
