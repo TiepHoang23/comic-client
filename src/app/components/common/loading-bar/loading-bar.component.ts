@@ -18,17 +18,19 @@ export class LoadingBarComponent implements OnInit {
   isLoading = false;
   starting = false;
   maxtask = 0;
+  starttime = 0;
   @ViewChild('ProgressBar') ProgressBar!: ElementRef;
   timer: any;
   constructor(
     public loadingService: HttpService,
     private router: Router,
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.isLoading = true;
         this.maxtask = 0;
+        this.starttime = Date.now();
       }
 
       if (
@@ -62,7 +64,9 @@ export class LoadingBarComponent implements OnInit {
           this.ProgressBar.nativeElement.style.width = `${value}%`;
         }
       }
-      if (this.starting && this.loadingService.hasTasks() === false) {
+      if (this.starting && !this.loadingService.hasTasks()
+        || ((Date.now() - this.starttime > 1000) && !this.starting)
+      ) {
         this.starting = false;
         this.ProgressBar.nativeElement.style.width = '100%';
         setTimeout(() => {
@@ -74,5 +78,5 @@ export class LoadingBarComponent implements OnInit {
   ngOnChanges(change: any) {
     // console.log(this.loadingService.tasks);
   }
-  startLoading() {}
+  startLoading() { }
 }

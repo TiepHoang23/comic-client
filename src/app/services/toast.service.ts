@@ -21,11 +21,11 @@ export class ToastService {
   toasts: Toast[] = [];
   private nextId = 0;
 
-  show(type: ToastType, message: string): void {
+  show(type: ToastType, message: string, duration = 3000): void {
     const id = this.nextId++;
     const toast: Toast = { id, message, type, state: 'enter' }; // Initialize with 'enter' state
     this.toasts.push(toast);
-    setTimeout(() => this.startLeaveAnimation(toast), 10000); // Start leave animation after 5 seconds
+    setTimeout(() => this.startLeaveAnimation(toast), duration); // Start leave animation after 5 seconds
   }
 
   startLeaveAnimation(toast: Toast): void {

@@ -49,7 +49,7 @@ export class HomePageComponent implements OnInit {
     })
   }
   OnChangePage(page: number) {
-    this.router.navigate([''], { queryParams: { page: page }, fragment: 'listComic' });
+    this.router.navigate([''], { queryParams: { page: page }, fragment: 'comics' });
   }
   getTopComics(): void {
     this.ComicService.getTopComics({ top: 15 }).subscribe((topComics: any) => {

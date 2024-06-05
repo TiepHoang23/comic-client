@@ -1,5 +1,5 @@
 .active
 {
-    background-color: black;
-    color: white;
+    @apply bg-secondary-100 text-white;
 }
+

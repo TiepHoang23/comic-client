@@ -1,8 +1,8 @@
-<div class="flex my-6 flex-row justify-between gap-6">
-  <div class="m-0">
-    <h3 class="text-2xl font-semibold">{{ _title }}</h3>
+<div class="flex mt-6 mb-4 flex-row justify-between gap-6">
+  <div class="grid-nav">
+    <h4 class="text-lg text-white font-semibold">{{ _title }}</h4>
   </div>
-  <div class="flex ml-auto bg-slate-200">
+  <div class="flex ml-auto bg-slate-300">
     <!-- <div class="p-2 cursor-pointer" (click)="ChangeGridType(0)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -68,23 +68,23 @@
   </div>
 </div>
 @if (girdType === 0) {
-  <div class="{{ _class }}">
-    <div *ngFor="let comic of listComics">
-      <app-comic-card
-        [comic]="comic"
-        (clickEvent)="ClickEvent.emit($event)"
-        [EventName]="EventName"
-        (comicHover)="onHoverComic($event)"
-      ></app-comic-card>
-    </div>
-  </div>
-} @else {
-  <div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
-    <comic-card-v2
-      *ngFor="let comic of listComics"
+<div class="{{ _class }}">
+  <div *ngFor="let comic of listComics">
+    <app-comic-card
       [comic]="comic"
-    ></comic-card-v2>
+      (clickEvent)="ClickEvent.emit($event)"
+      [EventName]="EventName"
+      (comicHover)="onHoverComic($event)"
+    ></app-comic-card>
   </div>
+</div>
+} @else {
+<div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
+  <comic-card-v2
+    *ngFor="let comic of listComics"
+    [comic]="comic"
+  ></comic-card-v2>
+</div>
 }
 
 <app-popup-detail-comic

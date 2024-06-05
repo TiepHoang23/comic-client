@@ -64,7 +64,7 @@ export class ComicDetailComponent implements OnInit {
     private historyService: HistoryService,
     private toastService: ToastService,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -197,7 +197,7 @@ export class ComicDetailComponent implements OnInit {
     if (this.followtime + 5000 > now) {
       this.toastService.show(
         ToastType.Info,
-        `Thao tác quá nhanh  </br> Hãy theo dõi sau ${(now - this.followtime + 5000) / 1000}  giây`,
+        `Thao tác quá nhanh!`,
       );
       return;
     }
