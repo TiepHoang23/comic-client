@@ -52,6 +52,8 @@ export class ComicDetailComponent implements OnInit {
   height_each_element: number = 68;
   followtime: number = 0;
   @ViewChild('ChaptersScrollElement') SearchField!: ElementRef<HTMLDivElement>;
+  @ViewChild('searchChapterInput')
+  searchChapterInput!: ElementRef<HTMLInputElement>;
   overlayEl!: HTMLElement;
   constructor(
     private route: ActivatedRoute,
@@ -160,7 +162,6 @@ export class ComicDetailComponent implements OnInit {
         this.preLoadChapters.push(...this.allchapters.slice(Loffset, Roffset));
       }
     };
-    console.log(this.allchapters);
   }
   selectChapterRange(event: any) {
     const selectedValue =
@@ -216,14 +217,14 @@ export class ComicDetailComponent implements OnInit {
       });
   }
   onSearchChapter(e: any) {
-    const value: string = e.target.value;
-    if (value) {
-      this.preLoadChapters = this.allchapters.filter((chapter) =>
-        chapter.chapterTitle?.includes(value),
-      );
-    } else {
-      this.preLoadChapters = [...this.allchapters];
+    const value: string = e.target.value?.toLowerCase();
+    if (!value) {
+      this.preLoadChapters = this.allchapters;
+      return;
     }
+    this.preLoadChapters = this.allchapters.filter((chapter) =>
+      chapter.chapterTitle?.toLowerCase().includes(value),
+    );
   }
   // selectChapterRange(e?: any) {
   //   const rangeIndex = e.target.value;

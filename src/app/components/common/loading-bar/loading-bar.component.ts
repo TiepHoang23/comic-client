@@ -20,7 +20,10 @@ export class LoadingBarComponent implements OnInit {
   maxtask = 0;
   @ViewChild('ProgressBar') ProgressBar!: ElementRef;
   timer: any;
-  constructor(public loadingService: HttpService, private router: Router) { }
+  constructor(
+    public loadingService: HttpService,
+    private router: Router,
+  ) {}
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -28,15 +31,17 @@ export class LoadingBarComponent implements OnInit {
         this.maxtask = 0;
       }
 
-      if (event instanceof NavigationCancel || event instanceof NavigationError) {
+      if (
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
         this.isLoading = false;
       }
     });
   }
 
   ngAfterViewInit() {
-    console.log(123);
-
+    // console.log(123);
   }
   ngAfterViewChecked() {
     if (this.isLoading) {
@@ -44,17 +49,18 @@ export class LoadingBarComponent implements OnInit {
       if (taskLength >= this.maxtask) {
         this.maxtask = taskLength;
         this.ProgressBar.nativeElement.style.width = `calc(10%)`;
-
-      }
-      else {
+      } else {
         if (taskLength + 1 > 0) {
           this.starting = true;
-          let value =
-            Math.max(Math.min(((this.maxtask - taskLength - 1) * 100) / this.maxtask, 30), 70);
+          let value = Math.max(
+            Math.min(
+              ((this.maxtask - taskLength - 1) * 100) / this.maxtask,
+              30,
+            ),
+            70,
+          );
           this.ProgressBar.nativeElement.style.width = `${value}%`;
         }
-
-
       }
       if (this.starting && this.loadingService.hasTasks() === false) {
         this.starting = false;
@@ -64,10 +70,9 @@ export class LoadingBarComponent implements OnInit {
         }, 500);
       }
     }
-
   }
   ngOnChanges(change: any) {
     // console.log(this.loadingService.tasks);
   }
-  startLoading() { }
+  startLoading() {}
 }
