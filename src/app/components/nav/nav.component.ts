@@ -28,8 +28,8 @@ export class NavComponent {
     private comicService: ComicService,
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+  ) {}
   ngOnInit() {
     this.comicService.getGenres().subscribe((genres) => {
       this.listGenres = genres;
@@ -42,9 +42,7 @@ export class NavComponent {
   onRegisterClick() {
     this.router.navigate(['auth/register']);
   }
-  ngOnChanges(change: any) {
-
-  }
+  ngOnChanges(change: any) {}
   onLogoutClick() {
     this.accountService.Logout();
   }
@@ -59,11 +57,13 @@ export class NavComponent {
   }
   OnSearchFocus = (isFoucs: boolean): boolean => {
     this.isSearching = isFoucs;
-    console.log(this.isSearching);
-    if (isFoucs)
-      this.SearchField.nativeElement.classList.add('!w-full');
-    else
-      this.SearchField.nativeElement.classList.remove('!w-full');
+    if (isFoucs) this.SearchField.nativeElement.classList.add('!w-full');
+    else this.SearchField.nativeElement.classList.remove('!w-full');
     return true;
   };
+
+  clearSearch(): void {
+    this.searchText = '';
+    this.SearchField.nativeElement.value = '';
+  }
 }
