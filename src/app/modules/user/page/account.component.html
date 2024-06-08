@@ -485,7 +485,11 @@
             <h3 class="mb-4 text-xl font-semibold dark:text-white">
               Thông tin chung
             </h3>
-            <form action="#">
+            <form
+              [formGroup]="infoForm"
+              (ngSubmit)="$event.preventDefault(); onUpdateInfo()"
+              *ngIf="user"
+            >
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
                   <label
@@ -500,7 +504,22 @@
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Bonnie"
                     required=""
+                    [value]="user.firstName"
+                    formControlName="firstName"
                   />
+                  <div
+                    *ngIf="
+                      (infoForm.get('firstName')?.invalid &&
+                        infoForm.get('firstName')?.dirty) ||
+                      infoForm.get('firstName')?.touched
+                    "
+                  >
+                    <small
+                      *ngIf="infoForm.get('firstName')?.hasError('required')"
+                      class="text-red-400"
+                      >Vui lòng nhập Tên người dùng</small
+                    >
+                  </div>
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <label
@@ -515,7 +534,22 @@
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Green"
                     required=""
+                    [value]="user.lastName"
+                    formControlName="lastName"
                   />
+                  <div
+                    *ngIf="
+                      (infoForm.get('lastName')?.invalid &&
+                        infoForm.get('lastName')?.dirty) ||
+                      infoForm.get('lastName')?.touched
+                    "
+                  >
+                    <small
+                      *ngIf="infoForm.get('lastName')?.hasError('required')"
+                      class="text-red-400"
+                      >Vui lòng nhập Họ người dùng
+                    </small>
+                  </div>
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">
@@ -531,7 +565,27 @@
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="example@company.com"
                     required=""
+                    [value]="user.email"
+                    formControlName="email"
                   />
+                  <div
+                    *ngIf="
+                      (infoForm.get('email')?.invalid &&
+                        infoForm.get('email')?.dirty) ||
+                      infoForm.get('email')?.touched
+                    "
+                  >
+                    <small
+                      *ngIf="infoForm.get('email')?.hasError('required')"
+                      class="text-red-400"
+                      >Vui lòng nhập email người dùng
+                    </small>
+                    <small
+                      *ngIf="infoForm.get('email')?.hasError('email')"
+                      class="text-red-400"
+                      >Email không chính xác
+                    </small>
+                  </div>
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">
@@ -541,19 +595,37 @@
                     >Năm sinh</label
                   >
                   <input
-                    type="number"
+                    type="date"
                     name="birthday"
                     id="birthday"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="15/08/1990"
                     required=""
+                    [value]="user.dob"
+                    formControlName="dob"
                   />
+                  <div
+                    *ngIf="
+                      (infoForm.get('dob')?.invalid &&
+                        infoForm.get('dob')?.dirty) ||
+                      infoForm.get('dob')?.touched
+                    "
+                  >
+                    <small
+                      *ngIf="infoForm.get('dob')?.hasError('required')"
+                      class="text-red-400"
+                      >Vui lòng nhập Họ người dùng
+                    </small>
+                  </div>
                 </div>
 
                 <div class="col-span-6 sm:col-full">
                   <button
                     class="bg-slate-200 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     type="submit"
+                    [disabled]="
+                      infoForm.valid == false || infoForm.dirty == false
+                    "
                   >
                     Lưu
                   </button>
@@ -567,7 +639,7 @@
             <h3 class="mb-4 text-xl font-semibold dark:text-white">
               Đổi mật khấu
             </h3>
-            <form action="#">
+            <form [formGroup]="passwordForm" (ngSubmit)="onUpdatePassword()">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
                   <label
@@ -576,13 +648,30 @@
                     >Mật khẩu hiện tại</label
                   >
                   <input
-                    type="text"
+                    type="password"
                     name="current-password"
                     id="current-password"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="••••••••"
                     required=""
+                    formControlName="oldPassword"
                   />
+                  <div
+                    *ngIf="
+                      (passwordForm.get('oldPassword')?.invalid &&
+                        passwordForm.get('oldPassword')?.dirty) ||
+                      passwordForm.get('oldPassword')?.touched ||
+                      submitFailed
+                    "
+                  >
+                    <small
+                      *ngIf="
+                        passwordForm.get('oldPassword')?.hasError('required')
+                      "
+                      class="text-red-400"
+                      >Vui lòng nhập lại mật khẩu</small
+                    >
+                  </div>
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <label
@@ -598,7 +687,24 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="••••••••"
                     required=""
+                    formControlName="newPassword"
                   />
+                  <div
+                    *ngIf="
+                      (passwordForm.get('newPassword')?.invalid &&
+                        passwordForm.get('newPassword')?.dirty) ||
+                      passwordForm.get('newPassword')?.touched ||
+                      submitFailed
+                    "
+                  >
+                    <small
+                      *ngIf="
+                        passwordForm.get('newPassword')?.hasError('required')
+                      "
+                      class="text-red-400"
+                      >Vui lòng nhập lại mật khẩu</small
+                    >
+                  </div>
                   <div
                     data-popover=""
                     id="popover-password"
@@ -693,13 +799,30 @@
                     >Nhập lại mật khẩu mới</label
                   >
                   <input
-                    type="text"
+                    type="password"
                     name="confirm-password"
                     id="confirm-password"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="••••••••"
                     required=""
+                    formControlName="rePassword"
                   />
+                  <div
+                    *ngIf="
+                      (passwordForm.get('rePassword')?.invalid &&
+                        passwordForm.get('rePassword')?.dirty) ||
+                      passwordForm.get('rePassword')?.touched ||
+                      submitFailed
+                    "
+                  >
+                    <small
+                      *ngIf="
+                        passwordForm.get('rePassword')?.hasError('required')
+                      "
+                      class="text-red-400"
+                      >Vui lòng nhập lại mật khẩu</small
+                    >
+                  </div>
                 </div>
                 <div class="col-span-6 sm:col-full">
                   <button

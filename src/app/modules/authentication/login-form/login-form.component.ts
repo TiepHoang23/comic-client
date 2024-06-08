@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { tap, delay, finalize, catchError, first } from 'rxjs/operators';
 import { AccountService } from '@services/account.service';
+import { ToastService, ToastType } from '@services/toast.service';
 // import { of, Subscription } from 'rxjs';
 
 // import { json } from 'stream/consumers';
@@ -27,10 +28,11 @@ export class LoginFormComponent implements OnDestroy {
     private router: Router, // private authService: AuthService
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -41,14 +43,22 @@ export class LoginFormComponent implements OnDestroy {
 
   }
   onSubmit() {
-    if (!this.form.valid) return;
+    if (!this.form.valid) {
+      this.submitted = true
+      return;
+    }
 
     let email = this.form.value.email
     let password = this.form.value.password
     this.accountService.Login(email, password).pipe(first()).subscribe((res: any) => {
       if (res.status === 1) {
+        this.submitted = false
         localStorage.setItem("auth", JSON.stringify(res.data))
         this.router.navigate(['/'])
+      }
+      else {
+        this.submitted = true
+        this.toastService.show(ToastType.Error, res.message);
       }
 
     })

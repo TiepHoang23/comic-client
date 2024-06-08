@@ -35,6 +35,9 @@ export class AccountService {
     this.user = JSON.parse(localStorage.getItem('auth')!);
     return this.user;
   }
+  GetUserInfor() {
+    return this.httpclient.get(`${globalConfig.API_HOST}/User`);
+  }
   Follow(comicid: Number, isFollow: boolean) {
     return this.httpclient.post(`${globalConfig.API_HOST}/User/Follow?comicid=${comicid}&follow=${isFollow}`, {});
   }
@@ -56,5 +59,17 @@ export class AccountService {
       email,
       password,
     });
+  }
+  UpdateAvatar(avatar: FormData) {
+
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Update/avatar`, avatar);
+
+
+  }
+  UpdateInfo(user: IUser) {
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Update`, user);
+  }
+  UpdatePassword(updatepassword: any) {
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Update/password`, updatepassword)
   }
 }

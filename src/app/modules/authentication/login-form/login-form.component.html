@@ -34,6 +34,24 @@
               placeholder="Nhập địa chỉ email"
             />
           </div>
+          <div
+            *ngIf="
+              (form.get('email')?.invalid && form.get('email')?.dirty) ||
+              form.get('email')?.touched ||
+              submitted
+            "
+          >
+            <small
+              *ngIf="form.get('email')?.hasError('required')"
+              class="text-red-400"
+              >Vui lòng nhập mail đăng nhập</small
+            >
+            <small
+              *ngIf="form.get('email')?.hasError('email') && submitted"
+              class="text-red-400"
+              >Vui lòng nhập đúng gmail</small
+            >
+          </div>
         </div>
 
         <div>
@@ -51,6 +69,19 @@
               class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Nhập mật khẩu"
             />
+          </div>
+          <div
+            *ngIf="
+              (form.get('password')?.invalid && form.get('password')?.dirty) ||
+              form.get('password')?.touched ||
+              submitted
+            "
+          >
+            <small
+              *ngIf="form.get('password')?.hasError('required')"
+              class="text-red-400"
+              >Vui lòng nhập mail đăng nhập</small
+            >
           </div>
         </div>
 

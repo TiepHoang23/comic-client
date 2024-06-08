@@ -12,9 +12,9 @@ export class ImageLoaderComponent implements OnDestroy {
   @Input()
   imageUrl!: string;
   imageSrc: string = '';
-  constructor(private imageService: ImageService) {}
+  constructor(private imageService: ImageService) { }
 
-  
+
   ngOnInit() {
     this.loadImage();
   }
@@ -24,11 +24,13 @@ export class ImageLoaderComponent implements OnDestroy {
     this.imageService.loadImage(this.imageUrl, this.OnLoaded);
   }
 
-  OnLoaded =(res :HttpResponse<Blob>) :void =>{
-    
+  OnLoaded = (res: HttpResponse<Blob>): void => {
+
     const reader = new FileReader();
     reader.onload = () => {
       this.imageSrc = reader.result as string;
+      console.log(this.imageSrc);
+
     };
     reader.readAsDataURL(res.body as Blob);
   }

@@ -5,6 +5,7 @@ export interface IUser {
   firstName?: string;
   lastName?: string;
   avatar?: string;
+  dob?: string
   gender: number;
   token?: string;
 }
