@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,8 +11,11 @@ export class PaginationComponent implements OnInit {
   @Input() currentPage: number = 1;
   @Input() totalpage!: number;
   @Output() OnChange = new EventEmitter<number>();
-  constructor(private route: ActivatedRoute) {}
-  ngOnInit(): void {}
+  showSearch = false;
+  @ViewChild('SearchInput')
+  SearchInputElement!: ElementRef;
+  constructor(private route: ActivatedRoute) { }
+  ngOnInit(): void { }
   ngOnChanges() {
     if (this.totalpage) {
       this.PageSetup(Number(this.currentPage));
@@ -57,6 +60,11 @@ export class PaginationComponent implements OnInit {
   }
 
   OnChangePage(page: string) {
+    if (page === "...") {
+      this.showSearch = true
+      return;
+    }
+    this.showSearch = false;
     let _pageint = Number(page);
     _pageint = Math.min(this.totalpage, _pageint);
     _pageint = Math.max(1, _pageint);
@@ -64,6 +72,11 @@ export class PaginationComponent implements OnInit {
       this.PageSetup(_pageint);
       this.OnChange.emit(_pageint);
       this.currentPage = _pageint;
+    }
+  }
+  onFocus(value: boolean) {
+    if (!value) {
+      this.showSearch = false;
     }
   }
 }

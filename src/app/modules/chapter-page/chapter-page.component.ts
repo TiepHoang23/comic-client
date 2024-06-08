@@ -69,12 +69,12 @@ export class ChapterPageComponent {
           slug: this.mainChapter.slug,
           updateAt: this.mainChapter.updateAt,
           viewCount: this.mainChapter.viewCount,
-        });
-      });
+        })
+      })
       this.imageService.CancelAll();
     });
   }
-  ngOnChanges(change: SimpleChange): void {}
+  ngOnChanges(change: SimpleChange): void { }
   ToggleMenu(isToggle: boolean) {
     if (isToggle) {
       this.SearchField.nativeElement.classList.toggle('translate-x-full');

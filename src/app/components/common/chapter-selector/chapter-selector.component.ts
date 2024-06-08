@@ -42,7 +42,11 @@ export class ChapterSelectorComponent {
 
   onSearch(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.searchTerm = target.value.toLowerCase();
+    this.searchTerm = target.value?.toLowerCase();
+    if (!this.searchTerm) {
+      this.filteredChapters = this.comic.chapters;
+      return;
+    }
     this.filteredChapters = this.comic.chapters.filter((chapter: any) =>
       chapter.title.toLowerCase().includes(this.searchTerm),
     );

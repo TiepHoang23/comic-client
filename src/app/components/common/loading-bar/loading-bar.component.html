@@ -1,0 +1,9 @@
+<div [ngClass]="{ hidden: !isLoading }" class="w-full fixed top-0 right-0 z-50">
+  <div class="w-full bg-gray-200 rounded-full h-0.5 mb-4 dark:bg-gray-700">
+    <div
+      #ProgressBar
+      class="transition-all bg-primary-100 h-0.5 dark:bg-blue-500"
+      style="width: 0%"
+    ></div>
+  </div>
+</div>

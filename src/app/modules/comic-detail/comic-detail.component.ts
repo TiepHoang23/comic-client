@@ -41,7 +41,6 @@ export class ComicDetailComponent implements OnInit {
   allchapters!: ComicChapters[];
   range!: Number[];
   // rangeChapters! Number[][];:
-  listTopComics?: Comic[];
   SimilarComics?: Comic[] = [];
   $index = 0;
   isOpen = false;
@@ -53,6 +52,8 @@ export class ComicDetailComponent implements OnInit {
   height_each_element: number = 68;
   followtime: number = 0;
   @ViewChild('ChaptersScrollElement') SearchField!: ElementRef<HTMLDivElement>;
+  @ViewChild('searchChapterInput')
+  searchChapterInput!: ElementRef<HTMLInputElement>;
   overlayEl!: HTMLElement;
   constructor(
     private route: ActivatedRoute,
@@ -63,13 +64,12 @@ export class ComicDetailComponent implements OnInit {
     private historyService: HistoryService,
     private toastService: ToastService,
     @Inject(DOCUMENT) private document: Document,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       let id = params['id'];
       this.getComic(id);
-      this.getTopComics();
     });
     this.CalcGirdSize();
     this.overlayEl = this.document.getElementById('overlay')!;
@@ -162,7 +162,6 @@ export class ComicDetailComponent implements OnInit {
         this.preLoadChapters.push(...this.allchapters.slice(Loffset, Roffset));
       }
     };
-    console.log(this.allchapters);
   }
   selectChapterRange(event: any) {
     const selectedValue =
@@ -180,15 +179,8 @@ export class ComicDetailComponent implements OnInit {
     });
   }
 
-  getTopComics(): void {
-    this.ComicService.getTopComics({ top: 6 }).subscribe(
-      (topComics) => (this.listTopComics = topComics?.data?.comics),
-    );
-  }
   getSimilarComics(): void {
     this.ComicService.getSimilarComic(this.comic.id).subscribe((res: any) => {
-      console.log(res);
-
       this.SimilarComics = res.data;
     });
   }
@@ -205,7 +197,7 @@ export class ComicDetailComponent implements OnInit {
     if (this.followtime + 5000 > now) {
       this.toastService.show(
         ToastType.Info,
-        `Thao tác quá nhanh  </br> Hãy theo dõi sau ${(now - this.followtime + 5000) / 1000}  giây`,
+        `Thao tác quá nhanh!`,
       );
       return;
     }
@@ -225,14 +217,14 @@ export class ComicDetailComponent implements OnInit {
       });
   }
   onSearchChapter(e: any) {
-    const value: string = e.target.value;
-    if (value) {
-      this.preLoadChapters = this.allchapters.filter((chapter) =>
-        chapter.chapterTitle?.includes(value),
-      );
-    } else {
-      this.preLoadChapters = [...this.allchapters];
+    const value: string = e.target.value?.toLowerCase();
+    if (!value) {
+      this.preLoadChapters = this.allchapters;
+      return;
     }
+    this.preLoadChapters = this.allchapters.filter((chapter) =>
+      chapter.chapterTitle?.toLowerCase().includes(value),
+    );
   }
   // selectChapterRange(e?: any) {
   //   const rangeIndex = e.target.value;

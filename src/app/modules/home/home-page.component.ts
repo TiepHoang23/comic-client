@@ -41,7 +41,7 @@ export class HomePageComponent implements OnInit {
   RefreshPage(page: number): void {
     this.listComics = [];
 
-    this.ComicService.getComics(page, 40, 21, 1, -1).subscribe((res: any) => {
+    this.ComicService.getComics(page, 30, 21, 1, -1).subscribe((res: any) => {
       if (!this.totalpage) {
         this.totalpage = res.data.totalpage;
       }
@@ -49,11 +49,11 @@ export class HomePageComponent implements OnInit {
     })
   }
   OnChangePage(page: number) {
-    this.router.navigate([''], { queryParams: { page: page }, fragment: 'listComic' });
+    this.router.navigate([''], { queryParams: { page: page }, fragment: 'comics' });
   }
   getTopComics(): void {
-    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics) => {
-      this.listTopComics = topComics?.data?.comics;
+    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics: any) => {
+      this.listTopComics = topComics.data.comics;
     });
   }
 }

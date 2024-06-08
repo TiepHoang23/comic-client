@@ -1,7 +1,7 @@
 <div id="content" class="container mx-auto mt-10">
   <div class="grid gap-2 md:grid-cols-[1fr_12rem] font-semibold">
     <!-- Search Form -->
-    <form class="md-inputwrap" action="/titles" method="GET">
+    <form class="" action="/titles" method="GET">
       <input
         class="placeholder-current bg-gray-200 w-full h-10 rounded px-4"
         type="search"
@@ -21,7 +21,7 @@
     <!-- Show Filters Button -->
     <button
       (click)="toggleFilters()"
-      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent bg-amber-500 text-white"
+      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent bg-primary-100 text-white"
       style="min-height: 2.5rem; min-width: 100%"
     >
       <span
@@ -436,13 +436,15 @@
           '(' + (totalpage - 1) * 40 + listComics.length + ') kết quả tìm kiếm'
         "
         [_class]="
-          'grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+          'grid gap-[12px] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
         "
       >
       </grid-comic>
     </div>
 
-    <div class="basis-3/12 animate-pulse ml-4 bg-slate-300"></div>
+    <div class="basis-3/12 ml-4">
+      <app-top-list class="mt-5 block"></app-top-list>
+    </div>
   </div>
   <pagination-component
     (OnChange)="OnChangePage($event)"
