@@ -3,6 +3,7 @@ import { Comic } from '../../../dataSource/schema/comic';
 import chunk from 'lodash/chunk';
 import { DOCUMENT } from '@angular/common';
 import { forEach } from 'lodash';
+import { ComicService } from '@services/comic.service';
 
 @Component({
   selector: 'app-carousel-landing',
@@ -10,8 +11,6 @@ import { forEach } from 'lodash';
   styleUrls: ['./carousel-landing.component.scss'], // Change styleUrl to styleUrls
 })
 export class CarouselLandingComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) private document: Document) { }
-  @Input() dataSlide?: Comic[];
   carouselItems: Array<Comic[]> = [];
 
   slideElements: Element[] = [];
@@ -19,23 +18,26 @@ export class CarouselLandingComponent implements OnInit {
 
   isTransitioning: boolean = false;
   private interval: any;
-
+  constructor(
+    private comicService: ComicService) { }
+  ngOnInit(): void {
+    this.comicService.getrecommendComics().subscribe((res: any) => {
+      let dataSlide = res.data;
+      this.carouselItems = chunk(dataSlide, 5);
+    })
+  }
   ngOnChanges(change: any) {
-    if (!this.dataSlide) return;
-    const comicChunk = chunk(this.dataSlide, 5); // get 5 comics per slide
-    this.carouselItems = comicChunk;
-    this.carouselItems.push(...comicChunk, ...comicChunk);
     this.resetAutoSlide();
   }
 
-  ngOnInit(): void { }
+
   ngAfterViewInit() {
   }
 
   ngAfterViewChecked() {
     if (this.slideElements.length === 0) {
       this.slideElements = Array.from(
-        this.document.getElementsByClassName('carousel-item')
+        document.getElementsByClassName('carousel-item')
       );
       if (this.slideElements.length > 0) {
         this.recalpulate();

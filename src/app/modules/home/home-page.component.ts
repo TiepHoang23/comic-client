@@ -15,7 +15,6 @@ import { ComicService } from '@services/comic.service';
 export class HomePageComponent implements OnInit {
   listComics: Comic[] = [];
   totalpage!: number;
-  listTopComics?: Comic[];
   currentPage = 1;
   constructor(
     private route: ActivatedRoute,
@@ -27,8 +26,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTopComics();
-
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
       this.currentPage = page;
@@ -50,10 +47,5 @@ export class HomePageComponent implements OnInit {
   }
   OnChangePage(page: number) {
     this.router.navigate([''], { queryParams: { page: page }, fragment: 'comics' });
-  }
-  getTopComics(): void {
-    this.ComicService.getTopComics({ top: 15 }).subscribe((topComics: any) => {
-      this.listTopComics = topComics.data.comics;
-    });
   }
 }

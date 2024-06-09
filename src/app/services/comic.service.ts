@@ -45,6 +45,9 @@ export class ComicService {
     )
     return req;
   }
+  getrecommendComics() {
+    return this.httpService.get(`${globalConfig.API_HOST}/comic/recommend`);
+  }
 
   getComicById(id: string): Observable<IServiceResponse<Comic>> {
 
