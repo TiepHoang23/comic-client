@@ -2,7 +2,7 @@
 module.exports = {
   prefix: '',
   mode: 'jit',
-
+  darkMode: 'selector',
   content: ['./src/**/*.{html,ts}'],
 
   theme: {
@@ -15,6 +15,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        "light-bg": "#fff",
+        "dark-bg": "#191A1C",
         primary: {
           50: '#FFC49B',
           100: '#F86E4C',

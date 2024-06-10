@@ -22,6 +22,14 @@ export class ThemeService {
     }
   }
 
+  ToggleTheme() {
+    this.isDarkTheme.next(!this.isDarkTheme.value);
+    if (typeof window !== 'undefined') {
+      localStorage?.setItem('isDarkTheme', this.isDarkTheme.value.toString());
+    }
+
+  }
+
   getDarkTheme(): Observable<boolean> {
     return this.isDarkTheme;
   }
