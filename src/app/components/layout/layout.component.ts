@@ -13,10 +13,12 @@ import { ThemeService } from '@services/theme.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
-  currentTheme: string = 'default-light-theme';
+  currentTheme: string = 'dark';
 
   currentActiveTheme$ = this.themeService.getDarkTheme().pipe(
     map((isDarkTheme: boolean) => {
+      console.log(isDarkTheme);
+
       const [lightTheme, darkTheme] = themes;
 
       this.currentTheme = isDarkTheme ? lightTheme.name : darkTheme.name;
@@ -39,7 +41,7 @@ export class LayoutComponent {
 
   // private overlayContainer;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemeService) { }
 
   // ngOnInit(): void {
   //   if (this.overlayContainer) {

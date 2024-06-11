@@ -1,4 +1,4 @@
-<div class="border border-gray-200 rounded-lg bg-slate-100">
+<div class="border border-gray-200 dark:border-gray-900 dark:bg-neutral-700 rounded-lg bg-slate-100 dark:">
   <div
     class="flex justify-between rounded font-bold mt-2 w-full text-center text-[0.75rem] p-2"
   >
@@ -32,12 +32,12 @@
   </div>
 
   <div
-    class="xl:row-auto scroll-mx-1 overflow-x-auto items-center w-full bg-slate-100 rounded p-2"
+    class="xl:row-auto scroll-mx-1 overflow-x-auto items-center w-full bg-slate-100 dark:bg-neutral-800 rounded-b p-2"
   >
-    <ul class="flex flex-row justify-center xl:flex-col list-unstyled gap-2">
+    <ul class="flex flex-row justify-center xl:flex-col list-unstyled gap-2 dark:text-white">
       <li
         *ngFor="let topComic of listTopComics; let i = index"
-        class="xl:flex items-center hover:bg-gradient-to-r h-1/3 from-gray-300 to-gray-100 w-full hover:border border-gray-200 bg-white rounded-sm"
+        class="xl:flex items-center hover:bg-gradient-to-r  h-1/3 from-gray-300 dark:from-neutral-800 dark:bg-neutral-900 to-gray-100 w-full hover:border border-gray-200 dark:hover:border-gray-600 bg-white rounded-sm"
       >
         <div
           class="t-item comic-item xl:flex xl:flex-row items-center mx-2 h-28"

@@ -69,6 +69,12 @@
 
         <!-- </div> -->
       </div>
+      <img
+        (click)="themeService.ToggleTheme()"
+        alt=""
+        src="assets/dark-mode.svg"
+        class="w-8 h-8 cursor-pointer"
+      />
       <div *ngIf="!user" class="hidden space-x-1 text-white lg:flex h-8">
         <button
           class="flex hover:bg-amber-600 items-center bg-gray-800 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"

@@ -7,6 +7,7 @@ import { IUser } from '../../dataSource/schema/User';
 import { ComicService } from '@services/comic.service';
 import { AccountService } from '@services/account.service';
 import { ImageService } from '@services/image.service';
+import { ThemeService } from '@services/theme.service';
 // import { EventEmitter } from 'stream';
 // import { Target } from '@angular/compiler';
 // import { partition } from 'lodash';
@@ -31,6 +32,7 @@ export class NavComponent {
     private router: Router,
     private route: ActivatedRoute,
     private imageService: ImageService
+    public themeService: ThemeService
   ) { }
   ngOnInit() {
     this.comicService.getGenres().subscribe((genres) => {

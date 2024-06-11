@@ -1,8 +1,8 @@
 export const themes = [
   {
-    name: 'default-light-theme',
+    name: '',
   },
   {
-    name: 'default-dark-theme',
+    name: 'dark',
   },
 ];
