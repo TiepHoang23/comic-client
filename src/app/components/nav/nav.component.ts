@@ -31,7 +31,7 @@ export class NavComponent {
     private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
-    private imageService: ImageService
+    private imageService: ImageService,
     public themeService: ThemeService
   ) { }
   ngOnInit() {
