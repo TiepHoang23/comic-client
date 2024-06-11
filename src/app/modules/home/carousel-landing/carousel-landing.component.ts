@@ -1,23 +1,36 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
 import { Comic } from '../../../dataSource/schema/comic';
 import chunk from 'lodash/chunk';
 import { DOCUMENT } from '@angular/common';
 import { forEach } from 'lodash';
 import { ComicService } from '@services/comic.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-carousel-landing',
   templateUrl: './carousel-landing.component.html',
   styleUrls: ['./carousel-landing.component.scss'], // Change styleUrl to styleUrls
+  animations: [
+    // animation triggers
+    trigger('slideAnimation', [
+      state('in', style({ transform: 'translateY(0)' })),
+      state('out', style({ transform: 'translateY(100%)' })),
+      transition('in => out', animate('200ms ease-in')),
+      transition('out => in', animate('200ms ease-out')),
+    ]),
+  ],
 })
 export class CarouselLandingComponent implements OnInit {
   carouselItems: Array<Comic[]> = [];
 
   slideElements: Element[] = [];
   lastTime: number = 0;
-
   isTransitioning: boolean = false;
+
+  ComicHover?: Comic;
   private interval: any;
+  _state = 'out';
+  timer: any;
   constructor(
     private comicService: ComicService) { }
   ngOnInit(): void {
@@ -26,11 +39,22 @@ export class CarouselLandingComponent implements OnInit {
       this.carouselItems = chunk(dataSlide, 5);
     })
   }
+
+  OnComicLeave() {
+    this._state = 'out';
+    clearTimeout(this.timer);
+  }
   ngOnChanges(change: any) {
     this.resetAutoSlide();
   }
 
-
+  OnComicHover(comic: Comic) {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this._state = 'in';
+    }, 750);
+    this.ComicHover = comic;
+  }
   ngAfterViewInit() {
   }
 
@@ -47,6 +71,7 @@ export class CarouselLandingComponent implements OnInit {
 
   ngOnDestroy() {
     clearInterval(this.interval);
+    clearTimeout(this.timer);
   }
 
   private startAutoSlide() {

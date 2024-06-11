@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comic } from '../../../../../dataSource/schema/comic';
 
 @Component({
@@ -9,6 +9,7 @@ import { Comic } from '../../../../../dataSource/schema/comic';
 export class CarouselLayoutComponent {
   images: string[] = [];
   @Input() comics?: Comic[] = [];
+  @Output() comicHover = new EventEmitter<Comic>();
   constructor() { }
 
   ngOnInit(): void {
@@ -18,5 +19,11 @@ export class CarouselLayoutComponent {
   preloadImages(): void {
     this.comics?.forEach((comic, index) => {
     });
+  }
+  OnComicHover(comic: Comic) {
+    this.comicHover.emit(comic);
+  }
+  OnComicLeave() {
+
   }
 }
