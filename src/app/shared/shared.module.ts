@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
 import { CommentComponent } from '../components/common/comment/comment.component';
 import { GenreCatagoriesComponent } from '../components/common/genre-catagories/genre-catagories.component';
 import { ImageLoaderComponent } from '../components/common/image-loader/image-loader.component';
-import { TopListComponent } from '../modules/comic-detail/page/top-list/top-list.component';
+import { TopListComponent } from '../components/common/top-list/top-list.component';
 
 @NgModule({
   declarations: [

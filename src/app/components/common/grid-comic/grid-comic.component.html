@@ -1,28 +1,10 @@
 <div class="flex mt-6 mb-4 flex-row justify-between gap-6">
-  <div class="grid-nav">
+  <div class="grid-nav rk:bg-neutral-900da">
     <h4 class="text-lg text-white font-semibold">{{ _title }}</h4>
   </div>
   <div class="flex ml-auto bg-slate-300">
-    <!-- <div class="p-2 cursor-pointer" (click)="ChangeGridType(0)">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-        class=""
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
-        ></path>
-      </svg>
-    </div> -->
     <div
-      class="p-2 cursor-pointer {{ girdType == 1 ? 'active' : '' }}"
+      class="p-1.5 cursor-pointer {{ girdType == 1 ? 'active' : '' }}"
       value="1"
       (click)="ChangeGridType($event.target, 1)"
     >
@@ -44,7 +26,7 @@
       </svg>
     </div>
     <div
-      class="p-2 cursor-pointer {{ girdType == 0 ? 'active' : '' }}"
+      class="p-1.5 cursor-pointer {{ girdType == 0 ? 'active' : '' }}"
       value="0"
       (click)="ChangeGridType($event.target, 0)"
     >

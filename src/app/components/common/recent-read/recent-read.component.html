@@ -1,7 +1,7 @@
 <div
-  class="px-3 pb-2 pt-2 mt-6 mb:3 border overflow-hidden bg-slate-100 lg:block rounded-lg"
+  class="dark:text-white dark:border-gray-900 bg-slate-100 dark:bg-neutral-800 px-3 pb-2 pt-2 mt-6 mb:3 border overflow-hidden lg:block rounded-lg"
 >
-  <div class="border-b border-solid border-[#ccc] mb-1">
+  <div class="border-b border-solid border-[#ccc] dark:border-gray-700 mb-1">
     <h4 class="flex items-center border-b border-[black] text-base font-bold">
       Đọc gần đây
     </h4>
@@ -9,7 +9,7 @@
 
   <div *ngFor="let item of listComics" class="hover:bg-black">
     <div
-      class="border rounded-md flex items-center w-full h-[48px] my-2 mb-1 bg-white"
+      class="border dark:border-gray-700 rounded-md flex items-center w-full h-[48px] my-2 mb-1 bg-white dark:bg-neutral-900"
     >
       <img
         src="{{ item.coverImage }}"

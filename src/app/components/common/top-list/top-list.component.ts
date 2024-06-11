@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Comic } from '../../../../dataSource/schema/comic';
+import { Comic } from '../../../dataSource/schema/comic';
 import { ComicService } from '@services/comic.service';
 import { TopType } from 'src/app/dataSource/enum';
 

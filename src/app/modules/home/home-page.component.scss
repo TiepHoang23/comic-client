@@ -1,11 +1,4 @@
 .grid-nav
 {
     @apply min-h-full relative px-4 text-center flex bg-secondary-100 items-center justify-center;
-
-    &::after
-    {
-        @apply absolute border-[20px] left-full border-slate-200 border-l-secondary-100;
-        content: '';
-    }
-
 }
