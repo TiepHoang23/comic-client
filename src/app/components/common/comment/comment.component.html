@@ -1,9 +1,9 @@
 <div
-  class="container flex flex-col w-fullbg-white rounded-lg bg-[#f7f7f7] border px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto"
+  class="container flex flex-col w-full bg-slate-100 dark:bg-neutral-800 border dark:border-black dark:text-white px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto"
 >
   @if(!isLogin) {
   <a
-    class="m-3 p-2 mx-auto rounded bg-blue-500 text-white"
+    class="m-3 p-2 mx-auto rounded bg-primary-100 text-white"
     [routerLink]="['/auth/login']"
   >
     Đăng nhập để bình luận
@@ -14,10 +14,10 @@
     class="my-4 w-full flex flex-row flex-wrap justify-between items-end border-b-2 border-black"
   >
     <div
-      class="border-b-2 -mb-[1.2px] h-full border-[#00B38F]"
+      class="border-b-2 -mb-[1.2px] h-full border-primary-100"
       data-comments-count="2810"
     >
-      <span class="wpdtc" title="2810">2.8K</span> BÌNH LUẬN
+      <span class="wpdtc" title="2810">{{ 100 }}</span> BÌNH LUẬN
     </div>
   </div>
   <div class="flex flex-col gap-2">
@@ -36,7 +36,7 @@
           </div>
         </div>
         <textarea
-          class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+          class="bg-gray-100 dark:bg-dark-bg rounded border border-gray-400 leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-neutral-700"
           name="content"
           placeholder="Comment"
           required
@@ -46,7 +46,7 @@
 
       <div class="w-full flex justify-end">
         <button
-          class="w-24 h-8 text-white bg-blue-500 hover:bg-blue-700 rounded"
+          class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded"
           type="submit"
         >
           Gửi
@@ -68,9 +68,8 @@
       <div
         #ViewReplyEle
         [attr.reply-block]="comment.id"
-        class="pl-[52px] md:pl-[72px] gap-1 flex flex-col overflow-hidden {{
-          replyId == comment.id ? '' : 'h-0'
-        }}"
+        class="pl-[52px] md:pl-[72px] gap-1 flex flex-col overflow-hidden"
+        [ngClass]="{ 'h-0': replyId != comment.id }"
       >
         <ng-container
           *ngFor="let reply of comment.replies"
@@ -97,7 +96,7 @@
               </div>
             </div>
             <textarea
-              class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-12 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+              class="dark:bg-dark-bg dark:focus:bg-neutral-700 bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-12 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
               name="content"
               placeholder="Comment"
               required
@@ -107,7 +106,7 @@
 
           <div class="w-full flex justify-end">
             <button
-              class="w-24 h-8 text-white bg-blue-500 hover:bg-blue-700 rounded"
+              class="w-16 h-6 text-white bg-primary-100 hover:bg-primary-200 rounded"
               type="submit"
             >
               Gửi
@@ -140,20 +139,18 @@
         <img
           src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
           class="object-cover p-0.5 w-12 h-12 md:w-16 md:h-16 rounded-full"
-          style="
-            background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
-          "
+          style="background: url('assets/effects/than_hoa.webp')"
         />
       </div>
     </div>
     <div
-      class="text-sm lg:text-base w-[calc(100%-56px)] md:w-[calc(100%-72px)] flex flex-col shadow-xl bg-white space-y-1 rounded-xl border border-gray-200 leading-normal resize-none py-2 px-3"
+      class="text-sm lg:text-base w-[calc(100%-56px)] md:w-[calc(100%-72px)] flex flex-col bg-white dark:bg-dark-bg space-y-1 rounded borde leading-normal resize-none py-2 px-3"
     >
-      <div class="flex border-b-2 border-orange-500 mb-2 justify-between">
-        <span class="font-bold">{{ comment.userName }}</span>
+      <div class="flex border-b-2 border-primary-50 mb-2 justify-between">
+        <span class="font-bold text-primary-100">{{ comment.userName }}</span>
         <span
           *ngIf="hide === false"
-          class="ml-2 hover:underline hover:text-gray-800 font-thin text-gray-500"
+          class="ml-2 hover:underline hover:text-gray-800 dark:text-gray-400 font-thin text-gray-600"
         >
           <a
             [routerLink]="[
@@ -167,11 +164,11 @@
           </a>
         </span>
         <span class="flex-1"></span>
-        <span class="ml-2 text-gray-600 text-sm font-thin">{{
+        <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm font-thin">{{
           comment.commentedAt | dateAgo
         }}</span>
       </div>
-      <div class="text-gray-600 break-words">
+      <div class="text-gray-600 dark:text-gray-100 break-words">
         {{ comment.content }}
       </div>
       <div class="flex flex-row flex-nowrap justify-between items-center">
@@ -196,7 +193,7 @@
         </div>
 
         <button
-          class="text-right font-thin text-gray-500 hover:text-gray-800"
+          class="text-right font-thin text-gray-500 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-200"
           (click)="replyCmt(comment.id)"
         >
           Phản hồi

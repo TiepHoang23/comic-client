@@ -1,12 +1,12 @@
 <div class="w-full h-full absolute pl-0 pr-0 overflow-hidden">
   <button
     *ngIf="carouselItems.length > 0"
-    class="bg-black w-1/4 absolute z-10 opacity-70 h-full"
+    class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full"
     (click)="recalpulate(true)"
   ></button>
   <button
     *ngIf="carouselItems.length > 0"
-    class="bg-black w-1/4 absolute z-10 opacity-70 h-full right-0"
+    class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full right-0"
     (click)="recalpulate(false)"
   ></button>
   <div
@@ -17,7 +17,7 @@
   </div>
   <div
     *ngIf="carouselItems.length === 0"
-    class="w-full h-full bg-black dark:bg-white flex justify-center items-center"
+    class="w-full h-full bg-dark-bg dark:bg-white flex justify-center items-center"
   >
     <svg class="h-20 w-20 animate-spin stroke-gray-500" viewBox="0 0 256 256">
       <line
