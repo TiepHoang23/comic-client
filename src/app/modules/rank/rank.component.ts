@@ -32,27 +32,30 @@ export class RankComponent {
   sortType!: SortType;
   statusType!: ComicStatus;
 
-  filterTags: any[] = [];
+
   queryParams: Map<string, IFilter[]> = new Map();
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.queryParams.set('status', rankFiltersOptions.status);
 
-    this.queryParams.set('sorts', rankFiltersOptions.sorts);
+    const selectedStatus = rankFiltersOptions.status.find((f: any) => f.selected == true);
+    this.queryParams.set('status', selectedStatus ? [selectedStatus] : []);
+    const selectedSorts = rankFiltersOptions.sorts.find((f: any) => f.selected == true);
+    this.queryParams.set('sorts', selectedSorts ? [selectedSorts] : []);
   }
 
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
       let status = Number(params['status']) || ComicStatus.ALL;
       let sort = Number(params['sort']) || SortType.TopAll
       this.isLoading = true;
+      this.currentPage = page
       this.OnSearchComic(page, sort, status);
-
     });
 
 
@@ -72,22 +75,25 @@ export class RankComponent {
     if (data.selected) return
 
     const optionKey = option as keyof IRankFilters;
-
+    // set false các filter đã true trc đó
     const currentSelectedFilter = this.dataView[optionKey].find(f => f.selected);
     if (currentSelectedFilter) {
       currentSelectedFilter.selected = false;
     }
     data.selected = true
 
-    const filters = this.queryParams.get(optionKey) || [];
+    this.queryParams.set(optionKey, [data]);
 
 
-    this.queryParams.set(optionKey, [...filters, data]);
-    this.filterTags = Array.from(this.queryParams.values())
-      .flat()
-      .filter((f) => f.selected);
+    const filterTags = Array.from(this.queryParams.values()).flat()
 
-    console.log(this.filterTags);
+    this.router.navigate([], {
+      queryParams: { status: filterTags[0].value, sort: filterTags[1].value },
+      queryParamsHandling: 'merge',
+      fragment: 'listComic',
+    })
+
+
   }
 
 

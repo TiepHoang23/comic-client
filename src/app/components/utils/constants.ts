@@ -86,6 +86,7 @@ export const rankFiltersOptions: IRankFilters = {
     {
       name: 'Tất Cả',
       value: ComicStatus.ALL,
+      selected: true,
     },
     {
       name: 'Đang Ra',
@@ -101,6 +102,7 @@ export const rankFiltersOptions: IRankFilters = {
     {
       name: 'Top All',
       value: SortType.TopAll,
+      selected: true,
     },
     {
       name: 'Top ngày',
