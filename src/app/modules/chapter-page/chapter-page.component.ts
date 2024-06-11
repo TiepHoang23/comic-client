@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   Inject,
+  Renderer2,
   SimpleChange,
   ViewChild,
   ViewChildren,
@@ -30,17 +31,20 @@ export class ChapterPageComponent {
 
   @ViewChildren('MenuNavigation')
   SearchField!: ElementRef;
+
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
+  @ViewChild('controlBar') controlBar!: ElementRef;
+
   @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
-  @ViewChild('controlBar', { static: true }) controlBar!: ElementRef;
 
   private readonly zoomStep: number = 0.2;
   private readonly minZoomLevel: number = 0;
   private readonly maxZoomLevel: number = 1;
-
+  private isSticky = false;
   public zoomLevel: number = 0.5;
   public defaultZoomLevel: number = 0.3;
   public isLimitZoom: boolean = false;
+  private lastScrollTop = 0;
 
   constructor(
     private comicService: ComicService,
@@ -49,11 +53,14 @@ export class ChapterPageComponent {
     private imageService: ImageService,
     private historyService: HistoryService,
     @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
   ) {
     this.ListChapterImg = [];
   }
   ngOnInit(): void {
     this.zoomLevel = this.defaultZoomLevel;
+    this.isSticky = false;
+    console.log(this.controlBar);
     // Signal to cancel the previous request
 
     this.route.params.subscribe((params) => {
@@ -69,12 +76,12 @@ export class ChapterPageComponent {
           slug: this.mainChapter.slug,
           updateAt: this.mainChapter.updateAt,
           viewCount: this.mainChapter.viewCount,
-        })
-      })
+        });
+      });
       this.imageService.CancelAll();
     });
   }
-  ngOnChanges(change: SimpleChange): void { }
+  ngOnChanges(change: SimpleChange): void {}
   ToggleMenu(isToggle: boolean) {
     if (isToggle) {
       this.SearchField.nativeElement.classList.toggle('translate-x-full');
@@ -160,7 +167,6 @@ export class ChapterPageComponent {
     this.exitFullscreen();
   }
   enterFullscreen(): void {
-    // this.zoomLevel = 0.5;
     const elem = this.imageContainer.nativeElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -189,5 +195,33 @@ export class ChapterPageComponent {
 
   toggleHover(state: boolean) {
     this.isHovered = state;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.scrollY;
+    const elementOffset = this.controlBar.nativeElement.offsetHeight;
+
+    if (windowScroll > elementOffset) {
+      if (windowScroll < this.lastScrollTop) {
+        this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
+        this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
+
+        this.isSticky = true;
+      } else {
+        this.renderer.removeClass(this.controlBar.nativeElement, 'sticky');
+        this.renderer.addClass(this.controlBar.nativeElement, 'opacity-0');
+
+        this.isSticky = false;
+      }
+    } else if (windowScroll <= elementOffset && this.isSticky) {
+      this.renderer.removeClass(this.controlBar.nativeElement, 'sticky');
+      this.renderer.removeClass(this.controlBar.nativeElement, 'opacity-95');
+      this.renderer.removeClass(this.controlBar.nativeElement, 'opacity-0');
+
+      this.isSticky = false;
+    }
+
+    this.lastScrollTop = windowScroll <= 0 ? 0 : windowScroll;
   }
 }
