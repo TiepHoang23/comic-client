@@ -62,15 +62,19 @@ export class AccountService {
     });
   }
   UpdateAvatar(avatar: FormData) {
-
-    return this.httpclient.post(`${globalConfig.API_HOST}/User/Update/avatar`, avatar);
-
-
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Update/avatar`, avatar)
+  }
+  SaveUser(user: IUser) {
+    localStorage.setItem("auth", JSON.stringify(user))
   }
   UpdateInfo(user: IUser) {
     return this.httpclient.post(`${globalConfig.API_HOST}/User/Update`, user);
   }
   UpdatePassword(updatepassword: any) {
     return this.httpclient.post(`${globalConfig.API_HOST}/User/Update/password`, updatepassword)
+  }
+  addTimestampToUrl(url: string): string {
+    const timestamp = new Date().getTime();
+    return `${url}?timestamp=${timestamp}`;
   }
 }

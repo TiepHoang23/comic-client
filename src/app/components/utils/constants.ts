@@ -10,6 +10,7 @@ export type IAdvancedFilters = {
   status: IFilter[];
   sorts: IFilter[];
   tops: IFilter[];
+
 };
 
 export const advancedFiltersOptions: IAdvancedFilters = {
@@ -69,4 +70,65 @@ export const advancedFiltersOptions: IAdvancedFilters = {
       value: SortType.TopMonth,
     },
   ],
+
+};
+
+
+export type IRankFilters = {
+  status: IFilter[];
+  sorts: IFilter[];
+
+}
+
+
+export const rankFiltersOptions: IRankFilters = {
+  status: [
+    {
+      name: 'Tất Cả',
+      value: ComicStatus.ALL,
+    },
+    {
+      name: 'Đang Ra',
+      value: ComicStatus.ONGOING,
+    },
+    {
+      name: 'Hoàn Thành',
+      value: ComicStatus.COMPLETED,
+    },
+  ],
+
+  sorts: [
+    {
+      name: 'Top All',
+      value: SortType.TopAll,
+    },
+    {
+      name: 'Top ngày',
+      value: SortType.TopDay,
+    },
+    {
+      name: 'Top tuần',
+      value: SortType.TopWeek,
+    },
+    {
+      name: 'Top tháng',
+      value: SortType.TopMonth,
+    },
+
+    {
+      name: 'Chapter',
+      value: SortType.Chapter,
+    },
+
+    {
+      name: 'Truyện mới',
+      value: SortType.NewComic,
+    },
+    {
+      name: 'Ngày cập nhật',
+      value: SortType.LastUpdate,
+    },
+  ],
+
+
 };

@@ -412,6 +412,10 @@
                   <img
                     class="rounded-lg w-28 h-28"
                     [src]="avatar"
+                    (error)="
+                      avatar =
+                        'https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg'
+                    "
                     alt="Jese picture"
                   />
 
@@ -488,7 +492,6 @@
             <form
               [formGroup]="infoForm"
               (ngSubmit)="$event.preventDefault(); onUpdateInfo()"
-              *ngIf="user"
             >
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">

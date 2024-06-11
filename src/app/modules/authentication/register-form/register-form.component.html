@@ -35,6 +35,19 @@
               required
               formControlName="name"
             />
+            <div
+              *ngIf="
+                (form.get('name')?.invalid && form.get('name')?.dirty) ||
+                form.get('name')?.touched ||
+                submitted
+              "
+            >
+              <small
+                *ngIf="form.get('name')?.hasError('required')"
+                class="text-red-400"
+                >Vui lòng nhập tên</small
+              >
+            </div>
           </div>
           <div>
             <label
@@ -52,6 +65,24 @@
               required
               formControlName="email"
             />
+            <div
+              *ngIf="
+                (form.get('email')?.invalid && form.get('email')?.dirty) ||
+                form.get('email')?.touched ||
+                submitted
+              "
+            >
+              <small
+                *ngIf="form.get('email')?.hasError('required')"
+                class="text-red-400"
+                >Vui lòng nhập mail đăng nhập</small
+              >
+              <small
+                *ngIf="form.get('email')?.hasError('email') && submitted"
+                class="text-red-400"
+                >Vui lòng nhập đúng gmail</small
+              >
+            </div>
           </div>
           <div>
             <label
@@ -69,6 +100,20 @@
               required
               formControlName="password"
             />
+            <div
+              *ngIf="
+                (form.get('password')?.invalid &&
+                  form.get('password')?.dirty) ||
+                form.get('password')?.touched ||
+                submitted
+              "
+            >
+              <small
+                *ngIf="form.get('password')?.hasError('required')"
+                class="text-red-400"
+                >Vui lòng nhập mật khẩu</small
+              >
+            </div>
           </div>
           <div>
             <label
@@ -86,6 +131,20 @@
               required
               formControlName="confirm-password"
             />
+            <div
+              *ngIf="
+                (form.get('confirm-password')?.invalid &&
+                  form.get('confirm-password')?.dirty) ||
+                form.get('confirm-password')?.touched ||
+                submitted
+              "
+            >
+              <small
+                *ngIf="form.get('confirm-password')?.hasError('required')"
+                class="text-red-400"
+                >Vui lòng xác nhận lại mật khẩu</small
+              >
+            </div>
           </div>
           <div class="flex items-start">
             <div class="flex items-center h-5">
@@ -95,6 +154,7 @@
                 type="checkbox"
                 class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                 required
+                formControlName="accept"
               />
             </div>
             <div class="ml-3 text-sm">
@@ -107,6 +167,19 @@
                   href="#"
                   >Terms and Conditions</a
                 ></label
+              >
+            </div>
+            <div
+              *ngIf="
+                (form.get('accept')?.invalid && form.get('accept')?.dirty) ||
+                form.get('accept')?.touched ||
+                submitted
+              "
+            >
+              <small
+                *ngIf="form.get('accept')?.hasError('required')"
+                class="text-red-400"
+                >Vui lòng đọc và đống ý chính sách</small
               >
             </div>
           </div>

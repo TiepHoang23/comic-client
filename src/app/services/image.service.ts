@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -9,8 +9,13 @@ import { HttpService } from './http.service';
 export class ImageService {
   private controllers = new Map<string, Subscription>();
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService) { }
+  private imageUrlSubject = new BehaviorSubject<string>('');
+  imageUrl$ = this.imageUrlSubject.asObservable();
 
+  updateImageUrl(url: string) {
+    this.imageUrlSubject.next(url);
+  }
   loadImage(url: string, onload: (res: HttpResponse<Blob>) => void) {
     this.controllers.set(
       url,
@@ -19,7 +24,7 @@ export class ImageService {
           responseType: 'blob',
           observe: 'response',
         })
-        .subscribe((res:any) => onload(res))
+        .subscribe((res: any) => onload(res))
     );
   }
 
