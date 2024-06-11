@@ -5,6 +5,7 @@ import { HistoryPageComponent } from './modules/history-page/history-page.compon
 import { FollowedPageComponent } from './modules/followed-page/followed-page.component';
 import { SearchPageComponent } from './modules/search-page/search-page.component';
 import { ChapterPageComponent } from './modules/chapter-page/chapter-page.component';
+import { RankComponent } from './modules/rank/rank.component';
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +28,12 @@ const routes: Routes = [
         path: 'tim-truyen',
         loadChildren: () =>
           import('./modules/search-page/search.module').then((m) => m.SearchModule),
+      },
+      {
+        path: 'xep-hang',
+        component: RankComponent,
+        title: "Xep hang - [host]",
+
       },
       {
         path: 'lich-su',
@@ -74,4 +81,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

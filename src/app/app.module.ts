@@ -27,6 +27,7 @@ import { FollowedPageComponent } from './modules/followed-page/followed-page.com
 import { AuthInterceptor } from './core/http-interceptors/auth-interceptor';
 import { ToastComponent } from './components/common/toast/toast.component';
 import { LoadingBarComponent } from './components/common/loading-bar/loading-bar.component';
+import { RankComponent } from './modules/rank/rank.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoadingBarComponent } from './components/common/loading-bar/loading-bar
     HistoryPageComponent,
     FollowedPageComponent,
     LoadingBarComponent,
+    RankComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,4 +57,4 @@ import { LoadingBarComponent } from './components/common/loading-bar/loading-bar
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule {}
+export class AppModule { }

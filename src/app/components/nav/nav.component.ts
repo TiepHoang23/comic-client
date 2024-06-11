@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../dataSource/schema/User';
 import { ComicService } from '@services/comic.service';
 import { AccountService } from '@services/account.service';
+import { ImageService } from '@services/image.service';
 // import { EventEmitter } from 'stream';
 // import { Target } from '@angular/compiler';
 // import { partition } from 'lodash';
@@ -21,7 +22,7 @@ export class NavComponent {
   doneTypingInterval = 200;
   typingTimer: any;
   isSearching = false;
-
+  avatar!: string
   user?: IUser;
   @ViewChild('SearchInput') SearchField!: ElementRef;
   constructor(
@@ -29,12 +30,22 @@ export class NavComponent {
     private accountService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+    private imageService: ImageService
+  ) { }
   ngOnInit() {
     this.comicService.getGenres().subscribe((genres) => {
       this.listGenres = genres;
     });
     this.user = this.accountService.GetUser();
+
+    this.avatar = this.accountService.addTimestampToUrl(this.user!.avatar!)
+    this.imageService.imageUrl$.subscribe(url => {
+      if (url)
+        this.avatar = url;
+
+    });
+
+
   }
   onLoginClick() {
     this.router.navigate(['auth/login']);
@@ -42,7 +53,7 @@ export class NavComponent {
   onRegisterClick() {
     this.router.navigate(['auth/register']);
   }
-  ngOnChanges(change: any) {}
+  ngOnChanges(change: any) { }
   onLogoutClick() {
     this.accountService.Logout();
   }

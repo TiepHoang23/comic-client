@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '@services/account.service';
+import { ImageService } from '@services/image.service';
 import { ToastService, ToastType } from '@services/toast.service';
 import { first } from 'rxjs';
 import { IUser } from 'src/app/dataSource/schema/User';
@@ -29,7 +30,10 @@ export class UserPageComponent implements OnInit {
   })
 
   submitFailed = false;
-  constructor(private accountService: AccountService, private toast: ToastService, private elementRef: ElementRef) {
+  constructor(private accountService: AccountService,
+    private toast: ToastService,
+    private elementRef: ElementRef,
+    private imageService: ImageService) {
 
 
   }
@@ -49,10 +53,13 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.accountService.GetUserInfor().subscribe((res: any) => {
       if (res.status) {
         this.user = res.data;
         this.avatar = this.user?.avatar ? this.user?.avatar : this.avatar;
+        this.avatar = this.accountService.addTimestampToUrl(this.avatar);
         this.user.dob = this.formatDateToISO(this.user.dob);
         this.updateInfoForm();
 
@@ -83,11 +90,17 @@ export class UserPageComponent implements OnInit {
       const reader = new FileReader();
       if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0];
+        console.log(file);
+
         const avatar: FormData = new FormData();
         avatar.append('image', file, file.name);
         this.accountService.UpdateAvatar(avatar).pipe(first()).subscribe((res: any) => {
           if (res.status == 200) {
+
             this.avatar = res.data
+            this.user.token = this.accountService.getAuthorizationToken()
+            this.imageService.updateImageUrl(this.avatar);
+            this.accountService.SaveUser(this.user)
             this.toast.show(ToastType.Success, res.message);
 
           } else {

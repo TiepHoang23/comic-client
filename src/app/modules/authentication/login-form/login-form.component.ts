@@ -53,7 +53,8 @@ export class LoginFormComponent implements OnDestroy {
     this.accountService.Login(email, password).pipe(first()).subscribe((res: any) => {
       if (res.status === 1) {
         this.submitted = false
-        localStorage.setItem("auth", JSON.stringify(res.data))
+       
+        this.accountService.SaveUser(res.data)
         this.router.navigate(['/'])
       }
       else {

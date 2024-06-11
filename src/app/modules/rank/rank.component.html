@@ -1,0 +1,81 @@
+<div id="content" class="container mx-auto mt-10">
+  <div
+    class="flex items-center gap-2 md:grid-cols-[1fr_12rem] font-semibold justify-center items-center"
+  >
+    <h1 class="text-2xl font-bold text-center">Tìm Truyện Tranh</h1>
+  </div>
+
+  <div class="flex py-2 gap-2 justify-center items-center mt-2">
+    <button
+      *ngFor="let status of dataView.status"
+      (click)="
+        OnFilterChange({
+          option: 'status',
+          data: status
+        })
+      "
+      aria-selected="false"
+      role="option"
+      type="button"
+      class="flex  items-center min-w-max justify-center px-4 h-8 rounded-md border border-solid border-[#ccc] md:mx-3 
+      {{ status.selected === true ? 'custom-active' : '' }}
+      "
+    >
+      {{ status.name }}
+    </button>
+  </div>
+
+  <div class="flex py-2 gap-2 justify-center items-center mt-3">
+    <label for="">Sắp xếp theo: </label>
+    <div
+      class="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+    >
+      <button
+        *ngFor="let sort of dataView.sorts"
+        (click)="
+          OnFilterChange({
+            option: 'sorts',
+            data: sort
+          })
+        "
+        aria-selected="false"
+        role="option"
+        type="button"
+        class="flex  items-center min-w-max min-h-fit justify-center px-2 h-8 rounded-md border border-solid border-[#ccc] md:mx-1
+       
+        {{ sort.selected === true ? 'custom-active' : '' }} "
+      >
+        {{ sort.name }}
+      </button>
+    </div>
+  </div>
+  <ul
+    class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden border-b border-b-accent-10"
+  ></ul>
+
+  <div class="flex flex-row mt-10">
+    <div id="listComic" class="basis-9/12">
+      <grid-comic
+        [listComics]="listComics"
+        [num_preview]="40"
+        [_title]="
+          '(' + (totalpage - 1) * 40 + listComics.length + ') kết quả tìm kiếm'
+        "
+        [_class]="
+          'grid gap-[12px] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
+        "
+      >
+      </grid-comic>
+    </div>
+
+    <div class="basis-3/12 ml-4">
+      <app-top-list class="mt-5 block"></app-top-list>
+    </div>
+  </div>
+  <pagination-component
+    (OnChange)="OnChangePage($event)"
+    [currentPage]="currentPage"
+    [totalpage]="totalpage"
+  >
+  </pagination-component>
+</div>
