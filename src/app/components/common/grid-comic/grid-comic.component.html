@@ -1,10 +1,11 @@
 <div class="flex mt-6 mb-4 flex-row justify-between gap-6">
-  <div class="grid-nav rk:bg-neutral-900da">
+  <div class="grid-nav bg-dark-bg dark:bg-black">
     <h4 class="text-lg text-white font-semibold">{{ _title }}</h4>
   </div>
-  <div class="flex ml-auto bg-slate-300">
+  <div class="flex ml-auto bg-slate-300 dark:bg-neutral-700">
     <div
-      class="p-1.5 cursor-pointer {{ girdType == 1 ? 'active' : '' }}"
+      class="p-1.5"
+      [ngClass]="{ active: girdType == 1, 'cursor-pointer': girdType != 1 }"
       value="1"
       (click)="ChangeGridType($event.target, 1)"
     >
@@ -26,7 +27,8 @@
       </svg>
     </div>
     <div
-      class="p-1.5 cursor-pointer {{ girdType == 0 ? 'active' : '' }}"
+      class="p-1.5 cursor-pointer"
+      [ngClass]="{ active: girdType == 0, 'cursor-pointer': girdType != 0 }"
       value="0"
       (click)="ChangeGridType($event.target, 0)"
     >

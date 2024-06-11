@@ -71,7 +71,9 @@
       <p class="chapter font-semibold line-clamp-1 dark:text-white">
         {{ comic.chapters[0].title!.split(":")[0] }}
       </p>
-      <span class="text-end text-[0.75rem] inline text-gray-700 dark:text-gray-400">
+      <span
+        class="text-end text-[0.75rem] inline text-gray-700 dark:text-gray-400"
+      >
         {{ comic.updateAt | dateAgo }}
       </span>
     </a>
@@ -88,7 +90,7 @@
 <ng-template #empty>
   <div class="shadow-md h-full rounded-lg overflow-hidden">
     <div
-      class="animate-pulse bg-gray-300 relative w-full h-0 overflow-hidden"
+      class="animate-pulse bg-gray-300 dark:bg-neutral-700 relative w-full h-0 overflow-hidden"
       style="padding-bottom: 140%"
     >
       <div

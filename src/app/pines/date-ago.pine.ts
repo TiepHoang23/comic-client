@@ -17,7 +17,8 @@ const translateToVNAgo = (dateString: string): string => {
     .replace(/minute[s]*/, 'phút')
     .replace(/second[s]*/, 'giây')
     .replace(/month[s]*/, 'tháng')
-    .replace(/year[s]*/, 'năm');
+    .replace(/year[s]*/, 'năm')
+    .replace(/less than a[s]*/, 'ít hơn 1');
 };
 
 @Pipe({
