@@ -14,7 +14,6 @@ export class ImageLoaderComponent implements OnDestroy {
   imageSrc: string = '';
   constructor(private imageService: ImageService) { }
 
-
   ngOnInit() {
     this.loadImage();
   }
@@ -25,7 +24,6 @@ export class ImageLoaderComponent implements OnDestroy {
   }
 
   OnLoaded = (res: HttpResponse<Blob>): void => {
-
     const reader = new FileReader();
     reader.onload = () => {
       this.imageSrc = reader.result as string;
@@ -33,7 +31,7 @@ export class ImageLoaderComponent implements OnDestroy {
 
     };
     reader.readAsDataURL(res.body as Blob);
-  }
+  };
 
   ngOnDestroy() {
     this.imageService.CancelLoad(this.imageUrl);
