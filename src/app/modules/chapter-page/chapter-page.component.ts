@@ -57,10 +57,17 @@ export class ChapterPageComponent {
   ) {
     this.ListChapterImg = [];
   }
+  elementOffset = 0;
+  ngAfterViewChecked(): void {
+    console.log(this.controlBar);
+
+    if (this.controlBar && this.elementOffset === 0) {
+      this.elementOffset = this.controlBar.nativeElement.offsetTop;
+    }
+  }
   ngOnInit(): void {
     this.zoomLevel = this.defaultZoomLevel;
     this.isSticky = false;
-    console.log(this.controlBar);
     // Signal to cancel the previous request
 
     this.route.params.subscribe((params) => {
@@ -200,9 +207,7 @@ export class ChapterPageComponent {
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.scrollY;
-    const elementOffset = this.controlBar.nativeElement.offsetHeight;
-
-    if (windowScroll > elementOffset) {
+    if (windowScroll > this.elementOffset) {
       if (windowScroll < this.lastScrollTop) {
         this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
         this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
@@ -214,7 +219,7 @@ export class ChapterPageComponent {
 
         this.isSticky = false;
       }
-    } else if (windowScroll <= elementOffset && this.isSticky) {
+    } else {
       this.renderer.removeClass(this.controlBar.nativeElement, 'sticky');
       this.renderer.removeClass(this.controlBar.nativeElement, 'opacity-95');
       this.renderer.removeClass(this.controlBar.nativeElement, 'opacity-0');

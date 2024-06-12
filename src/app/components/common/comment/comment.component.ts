@@ -48,10 +48,9 @@ import { AccountService } from '@services/account.service';
             style({ opacity: 0.5, offset: 0.5 }),
             style({ opacity: 0.75, offset: 0.75 }),
             style({ opacity: 1, offset: 1 }),
-          ])
+          ]),
         ),
       ]),
-
     ]),
   ],
 })
@@ -76,7 +75,7 @@ export class CommentComponent implements OnInit {
     private accountService: AccountService,
     private route: ActivatedRoute,
     private myElement: ElementRef,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {
     this.form = this.formBuilder.group({
       content: ['', Validators.required],
@@ -86,8 +85,6 @@ export class CommentComponent implements OnInit {
     this.isLogin = this.accountService.isAuthenticated();
   }
   WindowScroll = (event: any) => {
-    console.log(this.myElement.nativeElement.offsetTop);
-
     let ScreenBottomOffset =
       (this.document?.defaultView?.scrollY || 0) +
       (this.document?.defaultView?.innerHeight || 0);
@@ -101,8 +98,8 @@ export class CommentComponent implements OnInit {
       this.document.removeEventListener('scroll', this.WindowScroll);
     }
   };
-  ngAfterViewInit() { }
-  ngAfterContentInit() { }
+  ngAfterViewInit() {}
+  ngAfterContentInit() {}
   refreshcomments() {
     this.accountService
       .GetCommentsByComicId(this.comicId)
@@ -121,10 +118,9 @@ export class CommentComponent implements OnInit {
             this.listComments.unshift(res.data);
           } else {
             let parentComment = this.listComments.find(
-              (comment: any) => comment.id === parentCommentId
+              (comment: any) => comment.id === parentCommentId,
             );
             if (parentComment) {
-
               if (parentComment.replies) parentComment.replies.push(res.data);
               else parentComment.replies = [res.data];
             }
@@ -137,14 +133,16 @@ export class CommentComponent implements OnInit {
     this.replyId = commentId;
     let El = this.ViewReplyEles.find(
       (element) =>
-        element.nativeElement.getAttribute('reply-block') === commentId.toString()
+        element.nativeElement.getAttribute('reply-block') ===
+        commentId.toString(),
     );
     El?.nativeElement.classList.remove('h-0');
   }
   ViewReplyCmt(commentId: number) {
     let El = this.ViewReplyEles.find(
       (element) =>
-        element.nativeElement.getAttribute('reply-block') === commentId.toString()
+        element.nativeElement.getAttribute('reply-block') ===
+        commentId.toString(),
     );
     El?.nativeElement.classList.toggle('h-0');
   }

@@ -14,29 +14,20 @@ export class ListSearchComicComponent implements OnInit {
   searchValue: string = '';
 
   @Output() CloseEvent = new EventEmitter<string>();
-  constructor(private comicService: ComicService,) {
-
-
-  }
+  constructor(private comicService: ComicService) {}
   close() {
     this.CloseEvent.emit();
   }
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   ngOnChanges(change: any) {
-    console.log(change);
-    if (this.searchValue != "") {
-      this.comicService.getSearchComic(this.searchValue).subscribe(
-        (res: any) => {
-          this.listSearch = res.data
-        }
-      )
-
-    }
-    else {
-      this.listSearch = []
+    if (this.searchValue != '') {
+      this.comicService
+        .getSearchComic(this.searchValue)
+        .subscribe((res: any) => {
+          this.listSearch = res.data;
+        });
+    } else {
+      this.listSearch = [];
     }
   }
-
 }
