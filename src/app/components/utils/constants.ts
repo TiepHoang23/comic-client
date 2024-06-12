@@ -6,14 +6,14 @@ export type IFilter = {
   value: ComicStatus | SortType | number;
 };
 
-export type IAdvancedFilters = {
+export type IFilters = {
   status: IFilter[];
   sorts: IFilter[];
-  tops: IFilter[];
+
 
 };
 
-export const advancedFiltersOptions: IAdvancedFilters = {
+export const advancedFiltersOptions: IFilters = {
   status: [
     {
       name: 'Tất Cả',
@@ -54,9 +54,6 @@ export const advancedFiltersOptions: IAdvancedFilters = {
       name: 'Truyện mới',
       value: SortType.NewComic,
     },
-  ],
-
-  tops: [
     {
       name: 'Top ngày',
       value: SortType.TopDay,
@@ -71,17 +68,14 @@ export const advancedFiltersOptions: IAdvancedFilters = {
     },
   ],
 
+
+
 };
 
 
-export type IRankFilters = {
-  status: IFilter[];
-  sorts: IFilter[];
-
-}
 
 
-export const rankFiltersOptions: IRankFilters = {
+export const rankFiltersOptions: IFilters = {
   status: [
     {
       name: 'Tất Cả',

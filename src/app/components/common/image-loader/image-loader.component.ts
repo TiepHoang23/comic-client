@@ -29,7 +29,7 @@ export class ImageLoaderComponent implements OnDestroy {
     const reader = new FileReader();
     reader.onload = () => {
       this.imageSrc = reader.result as string;
-      console.log(this.imageSrc);
+      // console.log(this.imageSrc);
 
     };
     reader.readAsDataURL(res.body as Blob);
