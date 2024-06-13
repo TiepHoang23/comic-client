@@ -28,23 +28,24 @@ export class ChapterPageComponent {
   comic!: Comic;
   mainChapter!: Chapter;
   isHovered!: boolean;
-
-  @ViewChildren('MenuNavigation')
-  SearchField!: ElementRef;
+  isToggle!: boolean;
 
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
   @ViewChild('controlBar') controlBar!: ElementRef;
 
+  @ViewChild('MenuNavigation')
+  MenuNavigation!: ElementRef;
   @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
 
   private readonly zoomStep: number = 0.2;
   private readonly minZoomLevel: number = 0;
   private readonly maxZoomLevel: number = 1;
-  private isSticky = false;
+  public isSticky = false;
   public zoomLevel: number = 0.5;
   public defaultZoomLevel: number = 0.3;
   public isLimitZoom: boolean = false;
   private lastScrollTop = 0;
+  elementOffset = 0;
 
   constructor(
     private comicService: ComicService,
@@ -57,10 +58,7 @@ export class ChapterPageComponent {
   ) {
     this.ListChapterImg = [];
   }
-  elementOffset = 0;
   ngAfterViewChecked(): void {
-    console.log(this.controlBar);
-
     if (this.controlBar && this.elementOffset === 0) {
       this.elementOffset = this.controlBar.nativeElement.offsetTop;
     }
@@ -68,6 +66,7 @@ export class ChapterPageComponent {
   ngOnInit(): void {
     this.zoomLevel = this.defaultZoomLevel;
     this.isSticky = false;
+    this.isToggle = false;
     // Signal to cancel the previous request
 
     this.route.params.subscribe((params) => {
@@ -88,12 +87,19 @@ export class ChapterPageComponent {
       this.imageService.CancelAll();
     });
   }
-  ngOnChanges(change: SimpleChange): void {}
-  ToggleMenu(isToggle: boolean) {
-    if (isToggle) {
-      this.SearchField.nativeElement.classList.toggle('translate-x-full');
+
+  ToggleMenu(stage: boolean) {
+    this.isToggle = stage;
+    if (stage) {
+      this.renderer.removeClass(
+        this.MenuNavigation.nativeElement,
+        'translate-x-full',
+      );
     } else {
-      this.SearchField.nativeElement.classList.add('translate-x-full');
+      this.renderer.addClass(
+        this.MenuNavigation.nativeElement,
+        'translate-x-full',
+      );
     }
   }
   onChangeChapter(event: any) {
@@ -171,7 +177,9 @@ export class ChapterPageComponent {
 
   @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(): void {
-    this.exitFullscreen();
+    if (this.document.exitFullscreen) {
+      this.document.exitFullscreen();
+    }
   }
   enterFullscreen(): void {
     const elem = this.imageContainer.nativeElement;
@@ -186,12 +194,6 @@ export class ChapterPageComponent {
     } else if (elem.msRequestFullscreen) {
       // IE/Edge
       elem.msRequestFullscreen();
-    }
-  }
-
-  exitFullscreen(): void {
-    if (this.document.exitFullscreen) {
-      this.document.exitFullscreen();
     }
   }
 

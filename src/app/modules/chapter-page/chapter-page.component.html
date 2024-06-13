@@ -186,13 +186,6 @@
           <line x1="12" y1="8" x2="12" y2="12" />
           <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
-        <!-- <div
-            class="text-sm absolute top-full bottom-20 w-96 h-8 left-1/2 bg-secondary-100 text-white rounded"
-            [ngClass]="{ 'opacity-100': isHovered, 'opacity-0': !isHovered }"
-            [class.transition-opacity]="true"
-            [class.duration-300]="true"
-          >
-          </div> -->
       </div>
       <a href="">
         <svg
@@ -405,7 +398,7 @@
 ></a>
 <button
   class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
-  (click)="ToggleMenu(true)"
+  (click)="ToggleMenu(!isToggle)"
 >
   <svg
     class="w-6 h-6 text-gray-800 dark:text-white"
@@ -425,285 +418,36 @@
 </button>
 <div
   #MenuNavigation
-  *ngIf="comic"
   class="fixed transition-transform translate-x-full px-2.5 py-2 right-0 top-0 bottom-0 w-72 h-screen bg-gray-50 shadow-md shadow-slate-300"
 >
   <!---->
 
   <div class="flex flex-col gap-y-2 mb-2 md:mb-4">
-    <div class="flex">
+    <div class="flex items-center gap-2">
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8"
         width="24"
         height="24"
-        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
         stroke="currentColor"
+        fill="none"
         stroke-linecap="round"
         stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-book-open icon text-icon-contrast text-undefined mr-4 my-auto"
-        viewBox="0 0 24 24"
       >
+        <path stroke="none" d="M0 0h24v24H0z" />
         <path
-          d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zm20 0h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
-        ></path></svg
-      ><a
-        href="/truyen-tranh/{{ comic.url }}"
-        class="flex items-center text-primary break-words"
-        title=""
-        >{{ comic.title }}</a
-      >
+          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+        />
+        <circle cx="12" cy="12" r="3" /></svg
+      >Cài đặt nâng cao
     </div>
-    <div class="flex items-center break-words">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-        class="icon text-icon-contrast text-undefined mr-4"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-        ></path>
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 2v7h7"
-        ></path>
-      </svg>
-      {{ mainChapter.title }}
-    </div>
-  </div>
-  <div class="flex mb-1">
-    <button
-      class="rounded bg-gray-200 custom-opacity relative md-btn flex items-center overflow-hidden accent"
-      style="min-height: 3rem; min-width: 2rem"
-    >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: center"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-chevron-left icon"
-          viewBox="0 0 24 24"
-          style="color: currentcolor"
-        >
-          <path d="m14.25 18-6-6 6-6"></path></svg
-      ></span>
-    </button>
-    <div class="mx-2 flex-grow">
-      <div class="relative">
-        <label
-          class="absolute pointer-events-none opacity-90 z-[3] text-xs left-4 top-2"
-          >Page</label
-        >
-        <div
-          class="relative z-[2] pt-6 pb-1 px-4 bg-accent cursor-pointer select-none rounded-md trnasition duration-75 border border-transparent"
-        >
-          <span>1</span
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            class="feather feather-chevron-down icon text-icon-contrast text-undefined chevron absolute right-4 top-3 transition-transform duration-150"
-            viewBox="0 0 24 24"
-            style="transform: rotate(0deg)"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </div>
-        <div
-          class="absolute z-50 transition duration-150 top-14 rounded-md shadow-lg left-0 w-full overflow-auto bg-accent pointer-events-none opacity-0 -translate-y-2"
-        >
-          <ul class="my-2 mx-1">
-            <li>
-              <!---->
-              <ul>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-primary text-white"
-                  data-value="0"
-                >
-                  1
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="1"
-                >
-                  2
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="2"
-                >
-                  3
-                </li>
-                <li
-                  class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-                  data-value="3"
-                >
-                  4
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <button
-      class="rounded custom-opacity relative md-btn flex items-center bg-gray-200 overflow-hidden accent"
-      style="min-height: 3rem; min-width: 2rem"
-    >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: center"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-chevron-right icon"
-          viewBox="0 0 24 24"
-          style="color: currentcolor"
-        >
-          <path d="m10 18 6-6-6-6"></path></svg
-      ></span>
-    </button>
-  </div>
-  <div class="flex" id="chapter-selector">
-    <a
-      href="/chapter/25d5538b-251a-460b-9d26-dd07dc145dc2"
-      rel="noopener nofollow noreferrer"
-      class="bg-gray-200 rounded custom-opacity relative md-btn flex items-center overflow-hidden accent"
-      style="min-height: 3rem; min-width: 2rem"
-      ><span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: center"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-chevron-left icon"
-          viewBox="0 0 24 24"
-          style="color: currentcolor"
-        >
-          <path d="m14.25 18-6-6 6-6"></path></svg></span
-    ></a>
-    <div class="mr-2 ml-2 flex-grow">
-      <div class="relative">
-        <label
-          class="absolute pointer-events-none opacity-90 z-[3] text-xs left-4 top-2"
-          >Chapter</label
-        >
-        <div
-          class="relative z-[2] pt-6 pb-1 px-4 bg-accent cursor-pointer select-none rounded-md trnasition duration-75 border border-transparent"
-        >
-          <span>Chapter 9</span
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            class="feather feather-chevron-down icon text-icon-contrast text-undefined chevron absolute right-4 top-3 transition-transform duration-150"
-            viewBox="0 0 24 24"
-            style="transform: rotate(0deg)"
-          >
-            <path d="m6 9 6 6 6-6"></path>
-          </svg>
-        </div>
-        <div
-          class="absolute z-50 transition duration-150 rounded-md shadow-lg left-0 w-full overflow-auto bg-slate-300 pointer-events-none opacity-1 -translate-y-2"
-        >
-          <ul>
-            <li
-              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-            >
-              Chapter 5
-            </li>
-            <li
-              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-            >
-              Chapter 4
-            </li>
-            <li
-              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-            >
-              Chapter 3
-            </li>
-            <li
-              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-            >
-              Chapter 2
-            </li>
-            <li
-              class="py-1 px-2 cursor-pointer rounded transition duration-75 scroll-m-8 bg-transparent hover:bg-accent-hover"
-            >
-              Chapter 1
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <a
-      href="/chapter/7bcbabc3-ea11-4f89-8a65-3e19b3ecc2e3"
-      rel="noopener nofollow noreferrer"
-      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent bg-gray-200"
-      style="min-height: 3rem; min-width: 2rem"
-      ><span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: center"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-chevron-right icon"
-          viewBox="0 0 24 24"
-          style="color: currentcolor"
-        >
-          <path d="m10 18 6-6-6-6"></path></svg></span
-    ></a>
   </div>
 
   <hr class="border-1 my-4 border-accent-20 border-dashed border-slate-950" />
   <div class="flex flex-col gap-2">
     <button
-      class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4"
+      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
       style="min-height: 2.5rem; min-width: 100%"
     >
       <span
@@ -732,97 +476,21 @@
             stroke-width="2"
             d="M13 2v7h7"
           ></path></svg
-        >Single Page</span
-      ></button
-    ><!---->
-    <div class="flex">
-      <button
-        class="flex-grow mr-2 rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4 flex-grow mr-2"
-        style="min-height: 2.5rem; min-width: auto"
+        >Đọc theo chiều dọc</span
       >
-        <span
-          class="flex relative items-center justify-center font-medium select-none w-full"
-          style="pointer-events: none; justify-content: start"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="icon mr-4"
-            style="color: currentcolor"
-          >
-            <path
-              fill="currentColor"
-              d="m9.5 13.09 1.41 1.41-4.5 4.5H10v2H3v-7h2v3.59zm1.41-3.59L9.5 10.91 5 6.41V10H3V3h7v2H6.41zm3.59 3.59 4.5 4.5V14h2v7h-7v-2h3.59l-4.5-4.5zM13.09 9.5l4.5-4.5H14V3h7v7h-2V6.41l-4.5 4.5z"
-            ></path></svg
-          >Fit Both</span
-        ></button
-      ><button
-        class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent"
-        style="min-height: 2.5rem; min-width: 2.5rem"
-      >
-        <span
-          class="flex relative items-center justify-center font-medium select-none w-full"
-          style="pointer-events: none; justify-content: center"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="icon"
-            style="color: currentcolor"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-            ></path>
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 3.417 1.415 2 2 0 0 1-.587 1.415l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1"
-            ></path></svg
-        ></span>
-      </button>
-    </div>
+    </button>
     <button
-      class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4"
+      data-v-8d292eb9=""
+      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
       style="min-height: 2.5rem; min-width: 100%"
     >
       <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: start"
+        data-v-8d292eb9=""
+        class="flex relative items-center justify-center font-medium select-none w-full pointer-events-none"
+        style="justify-content: start"
         ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-arrow-right-circle icon mr-4"
-          viewBox="0 0 24 24"
-          style="color: currentcolor"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="m12 16 4-4-4-4m-4 4h8"></path></svg
-        >Left To Right</span
-      ></button
-    ><button
-      class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4"
-      style="min-height: 2.5rem; min-width: 100%"
-    >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: start"
-        ><svg
+          data-v-9ba4cb7e=""
+          data-v-8d292eb9=""
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -836,101 +504,22 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"
+            d="M22 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6M2 4h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2"
           ></path></svg
-        >Header Hidden</span
+        >Đọc theo chiều ngang</span
       >
     </button>
-    <div class="flex">
-      <button
-        class="flex-grow mr-2 rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4 flex-grow mr-2"
-        style="min-height: 2.5rem; min-width: auto"
-      >
-        <span
-          class="flex relative items-center justify-center font-medium select-none w-full"
-          style="pointer-events: none; justify-content: start"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            class="icon mr-4"
-            style="color: currentcolor"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 15h16M7 15v-5m10 5v-5M4 9h16"
-            ></path></svg
-          >Normal Progress</span
-        ></button
-      ><button
-        class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent !px-0"
-        style="min-height: 2.5rem; min-width: 2.5rem"
-      >
-        <span
-          class="flex relative items-center justify-center font-medium select-none w-full"
-          style="pointer-events: none; justify-content: center"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="icon"
-            style="color: currentcolor"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-            ></path>
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 3.417 1.415 2 2 0 0 1-.587 1.415l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1"
-            ></path></svg
-        ></span>
-      </button>
-    </div>
-    <button
-      class="rounded custom-opacity relative md-btn flex items-center px-3 overflow-hidden accent px-4"
-      style="min-height: 2.5rem; min-width: 100%"
+
+    <label
+      class="inline-flex items-center cursor-pointer hover:bg-slate-100 p-3 rounded"
     >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: start"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="icon mr-4"
-          style="color: currentcolor"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-          ></path>
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 3.417 1.415 2 2 0 0 1-.587 1.415l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1"
-          ></path>
-        </svg>
-        Reader Settings
-      </span>
-    </button>
+      <input type="checkbox" value="" class="sr-only peer" />
+      <div
+        class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
+      ></div>
+      <span class="ms-3 text-gray-900 dark:text-gray-300"
+        >Tự động chuyển chương</span
+      >
+    </label>
   </div>
 </div>
