@@ -67,7 +67,6 @@
         stroke-width="2"
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
-        (click)="removeFilterTag(tag)"
       >
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
@@ -80,7 +79,7 @@
     class="expander grid grid-rows-[1fr_0fr]"
   >
     <div
-      class="md:grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-8 my-4"
+      class="grid grid-cols-2 max-sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-8 my-4 max-sm:gap-4"
     >
       <div class="relative space-y-1">
         <label
@@ -96,9 +95,15 @@
           aria-expanded="false"
           data-headlessui-state=""
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
-          (click)="showFiltersOptions1 = !showFiltersOptions1"
+          (click)="
+            selectOptions.sorts.isShow = !selectOptions.sorts.isShow;
+            selectOptions.status.isShow = false;
+            selectOptions.genres.isShow = false
+          "
         >
-          <span class="text-left truncate" title="None">Top All</span
+          <span class="text-left truncate" title="None">{{
+            selectOptions.sorts.name
+          }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5 my-auto text-midTone"
@@ -115,7 +120,7 @@
           </svg>
         </button>
         <ul
-          [ngClass]="{ hidden: !showFiltersOptions1 }"
+          [ngClass]="{ hidden: !selectOptions.sorts.isShow }"
           id="listbox-options-3"
           aria-labelledby="headlessui-listbox-button-2"
           aria-orientation="vertical"
@@ -128,21 +133,18 @@
             *ngFor="let sort of dataView.sorts"
             (click)="
               OnFilterChange({
-                option: 'sort',
-                data: {
-                  name: sort.name,
-                  value: sort.value,
-                  selected: !sort.selected
-                }
+                option: 'sorts',
+                data: sort
               })
             "
-            class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone {{
-              sort.selected === true ? 'text-primary' : ''
+            class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone border-dashed border hover:border-primary-100 hover:text-primary-100 {{
+              sort.selected === true
+                ? 'text-white bg-[#F86E4C] hover:text-white'
+                : ''
             }}"
             id="headlessui-listbox-option-353"
             role="option"
             tabindex="-1"
-            aria-selected="false"
             data-headlessui-state=""
           >
             <div
@@ -160,9 +162,13 @@
           title="Include any"
           id="headlessui-popover-button-4"
           type="button"
-          (click)="showFiltersOptions4 = !showFiltersOptions4"
+          (click)="
+            selectOptions.genres.isShow = !selectOptions.genres.isShow;
+            selectOptions.sorts.isShow = false;
+            selectOptions.status.isShow = false
+          "
         >
-          <span class="truncate text-left">Trống</span
+          <span class="truncate text-left">Thể loại</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5 my-auto text-midTone"
@@ -179,14 +185,18 @@
           </svg>
         </button>
         <div
-          [ngClass]="{ hidden: !showFiltersOptions4 }"
+          [ngClass]="{ hidden: !selectOptions.genres.isShow }"
           class="absolute top-full left-0 group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
         >
           <app-genre-catagories
+            [routerLinkGenres]="false"
             [listGenres]="listGenres"
+            (clickGenres)="OnGenresChange($event)"
+            [statusGenres]="this.selectOptions.genres.value"
           ></app-genre-catagories>
         </div>
       </div>
+
       <div
         hidden=""
         style="
@@ -201,59 +211,39 @@
         "
       ></div>
 
-      <div
-        class="relative space-y-1 grid"
-        disablefilter="true"
-        data-headlessui-state=""
-      >
-        <!----><label
-          id="headlessui-listbox-label-15"
-          data-headlessui-state=""
-          class="text-midTone truncate xl:text-base text-sm"
-          ><span title="Authors">Tác giả</span
-          ><!----></label
-        ><button
-          id="headlessui-listbox-button-16"
-          type="button"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-          data-headlessui-state=""
-          class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
-          aria-labelledby="headlessui-listbox-label-15 headlessui-listbox-button-16"
-        >
-          <span class="text-left truncate">Trống<!----></span
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 my-auto text-midTone"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m8 9l4-4l4 4m0 6l-4 4l-4-4"
-            ></path>
-          </svg></button
-        ><!---->
-      </div>
       <label
-        data-v-eb114e73=""
         class="text-midTone truncate xl:text-base text-sm relative space-y-1 grid"
-        ><span data-v-eb114e73="" title="Publication year">Năm phát hành</span>
+        data-v-eb114e73=""
+      >
+        <span data-v-eb114e73="" title="Publication year">Năm phát hành</span>
         <div
           class="grid grid-cols-[1fr_3rem] gap-2 rounded-md outline outline-0 outline-transparent bg-gray-100 pointer-events-none"
         >
           <input
-            class="px-2 py-[0.3rem] bg-gray-100 rounded-md text-color outline-none outline-1 -outline-offset-1 transition-[outline-color] w-full font-medium pointer-events-auto placeholder:text-color focus:outline-primary"
+            class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-2 py-[0.3rem] bg-gray-100 rounded-md text-color outline-none outline-1 -outline-offset-1 transition-[outline-color] w-full font-medium pointer-events-auto placeholder:text-color focus:outline-primary"
             type="number"
-            min="0"
+            required
+            minlength="4"
+            maxlength="4"
+            min="1900"
+            max="4000"
+            id="quantity-input"
+            data-input-counter
+            aria-describedby="helper-text-explanation"
+            [(ngModel)]="selectOptions.year.value"
+            (ngModelChange)="
+              selectOptions.genres.isShow = false;
+              selectOptions.sorts.isShow = false;
+              selectOptions.status.isShow = false
+            "
             inputmode="numeric"
-            placeholder="Trống"
-          /><!---->
+            placeholder="Năm phát hành"
+            autocomplete="off"
+          />
+
           <div class="flex my-auto gap-2 pointer-events-auto">
             <svg
+              data-input-counter-increment="quantity-input"
               data-v-5cba5096=""
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -265,9 +255,19 @@
               stroke-width="2"
               class="feather feather-minus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
               viewBox="0 0 24 24"
+              (click)="
+                selectOptions.genres.isShow = false;
+                selectOptions.sorts.isShow = false;
+                selectOptions.status.isShow = false;
+                selectOptions.year.value =
+                  selectOptions.year.value > 1900
+                    ? selectOptions.year.value - 1
+                    : selectOptions.year.value
+              "
             >
               <path d="M5 12h14"></path>
             </svg>
+
             <svg
               data-v-5cba5096=""
               data-v-eb114e73=""
@@ -281,6 +281,15 @@
               stroke-width="2"
               class="feather feather-plus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
               viewBox="0 0 24 24"
+              (click)="
+                selectOptions.genres.isShow = false;
+                selectOptions.sorts.isShow = false;
+                selectOptions.status.isShow = false;
+                selectOptions.year.value =
+                  selectOptions.year.value < 4000
+                    ? selectOptions.year.value + 1
+                    : selectOptions.year.value
+              "
             >
               <path d="M12 5v14m-7-7h14"></path>
             </svg>
@@ -297,10 +306,14 @@
         <button
           id="headlessui-listbox-button-25"
           type="button"
-          (click)="showFiltersOptions2 = !showFiltersOptions2"
+          (click)="
+            selectOptions.status.isShow = !selectOptions.status.isShow;
+            selectOptions.sorts.isShow = false;
+            selectOptions.genres.isShow = false
+          "
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
         >
-          <span class="text-left truncate">Tất cả</span
+          <span class="text-left truncate">{{ selectOptions.status.name }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5 my-auto text-midTone"
@@ -324,20 +337,16 @@
           aria-orientation="vertical"
           role="listbox"
           tabindex="0"
-          [hidden]="!showFiltersOptions2"
+          [hidden]="!selectOptions.status.isShow"
           data-headlessui-state="open"
-          class="absolute w-full max-h-64 xl:max-h-[32rem] overflow-y-auto z-50 rounded-md shadow-xl bg-accent py-1 focus:outline-none border border-accent-10 top-full"
+          class="absolute border w-full max-h-64 xl:max-h-[32rem] overflow-y-auto z-50 left-0 rounded-md shadow-2xl shadow-black/50 py-1 focus:outline-none top-full bg-white border-accent-10"
         >
           <li
             *ngFor="let status of dataView.status"
             (click)="
               OnFilterChange({
                 option: 'status',
-                data: {
-                  name: status.name,
-                  value: status.value,
-                  selected: true
-                }
+                data: status
               })
             "
             id="headlessui-listbox-option-386"
@@ -345,15 +354,17 @@
             tabindex="-1"
             aria-selected="false"
             data-headlessui-state=""
+            class="grid grid-flow-col auto-cols-max border-dashed border hover:border-primary-100 hover:text-primary-100 bg-white text-midTone cursor-pointer text-left truncate
+            {{
+              status.selected == true
+                ? 'text-white bg-[#F86E4C] hover:text-white'
+                : ''
+            }}"
           >
             <div
-              class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 px-2 cursor-pointer transition-[color] text-midTone bg-white"
-            >
-              <div
-                class="my-auto w-3 h-3 border transition-[border-color,background-color] rounded-full border-midTone"
-              ></div>
-              <span class="select-none truncate">{{ status.name }}</span>
-            </div>
+              class="h-3 w-[6px] rounded-full my-auto transition-[background-color] bg-transparent"
+            ></div>
+            <span class="truncate">{{ status.name }} </span>
           </li>
         </ul>
         <!---->

@@ -18,6 +18,7 @@ export const advancedFiltersOptions: IFilters = {
     {
       name: 'Tất Cả',
       value: ComicStatus.ALL,
+      selected: true
     },
     {
       name: 'Đang Ra',
@@ -33,10 +34,23 @@ export const advancedFiltersOptions: IFilters = {
     {
       name: 'Mới cập nhật',
       value: SortType.LastUpdate,
+      selected: true
     },
     {
       name: 'Top All',
       value: SortType.TopAll,
+    },
+    {
+      name: 'Top ngày',
+      value: SortType.TopDay,
+    },
+    {
+      name: 'Top tuần',
+      value: SortType.TopWeek,
+    },
+    {
+      name: 'Top tháng',
+      value: SortType.TopMonth,
     },
     {
       name: 'Chapter',
@@ -54,18 +68,7 @@ export const advancedFiltersOptions: IFilters = {
       name: 'Truyện mới',
       value: SortType.NewComic,
     },
-    {
-      name: 'Top ngày',
-      value: SortType.TopDay,
-    },
-    {
-      name: 'Top tuần',
-      value: SortType.TopWeek,
-    },
-    {
-      name: 'Top tháng',
-      value: SortType.TopMonth,
-    },
+
   ],
 
 
@@ -80,7 +83,7 @@ export const rankFiltersOptions: IFilters = {
     {
       name: 'Tất Cả',
       value: ComicStatus.ALL,
-      selected: true,
+      selected: true
     },
     {
       name: 'Đang Ra',
@@ -96,7 +99,7 @@ export const rankFiltersOptions: IFilters = {
     {
       name: 'Top All',
       value: SortType.TopAll,
-      selected: true,
+      selected: true
     },
     {
       name: 'Top ngày',
