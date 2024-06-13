@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { Comic } from '../../dataSource/schema/comic';
-import { IAdvancedFilters, IFilter, advancedFiltersOptions } from '../../components/utils/constants';
+import { IFilters, IFilter, advancedFiltersOptions } from '../../components/utils/constants';
 import { Genre } from '../../dataSource/schema/Genre';
 import { ComicStatus, SortType } from '../../dataSource/enum';
 import { ComicService } from '@services/comic.service';
@@ -22,10 +22,10 @@ export class SearchPageComponent {
   totalpage!: number;
   totalResult!: number;
   currentPage: number = 1;
-  dataView: IAdvancedFilters = {
+  dataView: IFilters = {
     status: advancedFiltersOptions.status,
     sorts: advancedFiltersOptions.sorts,
-    tops: advancedFiltersOptions.tops,
+
   };
   listGenres!: Genre[];
   showFilters: boolean = false;
@@ -45,7 +45,7 @@ export class SearchPageComponent {
     private router: Router,
   ) {
     this.queryParams.set('status', advancedFiltersOptions.status);
-    this.queryParams.set('tops', advancedFiltersOptions.tops);
+
     this.queryParams.set('sorts', advancedFiltersOptions.sorts);
   }
 
@@ -56,11 +56,13 @@ export class SearchPageComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       let page = Number(params['page']) || 1;
-      let sort = Number(params['sort']) || SortType.TopAll;
       let status = Number(params['status']) || ComicStatus.ALL;
-      let genre = Number(params['genre']) || -1;
+      let sort = Number(params['sort']) >= 0 ? Number(params['sort']) : SortType.TopAll
+      let genres = Number(params['genres']) || -1;
+      let nogenres = Number(params['nogenres']) || -1;
       this.isLoading = true;
-      this.OnSearchComic(page, sort, status, genre);
+      this.currentPage = page
+      this.OnSearchComic(page, sort, status, genres, nogenres);
     });
 
     this.comicService.getGenres().subscribe((genres) => {
@@ -68,7 +70,7 @@ export class SearchPageComponent {
     });
   }
 
-  OnSearchComic(page: number, sort: number, status: number, genre: number) {
+  OnSearchComic(page: number, sort: number, status: number, genre: number, nogenres: number) {
     this.listComics = [];
     this.comicService
       .getComics(page, 40, genre, sort, status)
