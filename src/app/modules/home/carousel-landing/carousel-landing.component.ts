@@ -50,6 +50,10 @@ export class CarouselLandingComponent implements OnInit {
 
   OnComicHover(comic: Comic) {
     clearTimeout(this.timer);
+    if (comic == undefined) {
+      this._state = 'out';
+      return
+    }
     this.timer = setTimeout(() => {
       this._state = 'in';
     }, 750);

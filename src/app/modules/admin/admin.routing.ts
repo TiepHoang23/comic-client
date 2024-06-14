@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminPage } from './admin-page.component';
 import { AdminNewComicComponent } from './page/newcomic/admin-newcomic.component';
 import { AdminComicDetailComponent } from './page/comicdetail/admin-comic-detail.component';
+import { AdminDownloadComponent } from './page/download/admin-download.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: AdminNewComicComponent ,
+        component: AdminNewComicComponent,
       },
       {
         path: 'comic/:slug',
-        component: AdminComicDetailComponent ,
+        component: AdminComicDetailComponent,
+      },
+      {
+        path: 'download',
+        component: AdminDownloadComponent,
       }
     ]
   },

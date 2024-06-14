@@ -11,7 +11,7 @@ import { AdminService } from '@services/admin.service';
   templateUrl: './admin-download.component.html',
   styleUrls: ['./admin-download.component.scss'],
 })
-export class AdminNewComicComponent {
+export class AdminDownloadComponent {
   listComics!: any[];
 
   constructor(private adminService: AdminService) {
@@ -20,5 +20,15 @@ export class AdminNewComicComponent {
   ngOnInit(): void {
 
   }
+  loadchapters() {
 
+
+    const url = (document.getElementById('orginal-comic-url') as HTMLInputElement).value;
+    const host = (document.getElementById('selection-host') as HTMLSelectElement).value;
+    console.log(url, host);
+
+    this.adminService.GetChapters(host, url).subscribe((res: any) => {
+      console.log(res);
+    });
+  }
 }

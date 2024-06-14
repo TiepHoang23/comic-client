@@ -11,7 +11,7 @@ import { IUser } from '../dataSource/schema/User';
   providedIn: 'root',
 })
 export class AdminService {
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   GetNewComics() {
     return this.httpclient.get(`${globalConfig.ADMIN_HOST}/newcomics`);
@@ -22,7 +22,12 @@ export class AdminService {
   GetComic(id: string) {
     return this.httpclient.get(`${globalConfig.ADMIN_HOST}/newcomic/${id}`);
   }
-  MapComic(slug1: string,slug2:string) {
+  GetChapters(host: string, url: string) {
+
+    return this.httpclient.get(`${globalConfig.ADMIN_HOST}/getchapters?host=${host}&url=${url}`);
+  }
+
+  MapComic(slug1: string, slug2: string) {
 
     return this.httpclient.post(`${globalConfig.ADMIN_HOST}/mapcomic`,
       {

@@ -1,9 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comic } from '../../../../dataSource/schema/comic';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '@services/admin.service';
 import { ComicService } from '@services/comic.service';
+import { ToastService, ToastType } from '@services/toast.service';
 
 @Component({
   selector: 'admin-comic-detail',
@@ -16,8 +17,10 @@ export class AdminComicDetailComponent {
   constructor(
     private adminService: AdminService,
     private comicService: ComicService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router,
+    public toastService: ToastService
+  ) { }
   ngOnInit(): void {
     let url = this.route.snapshot.params['slug'];
     this.adminService.GetComic(url).subscribe((res: any) => {
@@ -35,7 +38,8 @@ export class AdminComicDetailComponent {
   }
   mapingComic(slug1: string, slug2: string) {
     this.adminService.MapComic(slug1, slug2).subscribe((res: any) => {
-      console.log(res);
+      this.toastService.show(ToastType.Success, res.msg);
+      this.router.navigate(['/admin']);
     });
 
     return false;

@@ -24,6 +24,7 @@ export class CarouselLayoutComponent {
     this.comicHover.emit(comic);
   }
   OnComicLeave() {
+    this.comicHover.emit(undefined);
 
   }
 }

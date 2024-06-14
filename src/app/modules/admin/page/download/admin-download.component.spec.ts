@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminNewComicComponent } from './admin-download.component';
+import { AdminDownloadComponent } from './admin-download.component';
 
 describe('AdmicNewComicComponet', () => {
-  let component: AdminNewComicComponent;
-  let fixture: ComponentFixture<AdminNewComicComponent>;
+  let component: AdminDownloadComponent;
+  let fixture: ComponentFixture<AdminDownloadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminNewComicComponent]
+      imports: [AdminDownloadComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(AdminNewComicComponent);
+    fixture = TestBed.createComponent(AdminDownloadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
