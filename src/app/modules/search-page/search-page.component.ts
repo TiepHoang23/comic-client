@@ -20,15 +20,18 @@ export class SearchPageComponent implements OnInit {
   listGenres: Genre[] = [];
   showFilters: boolean = false;
   nowyear!: number;
-  filterTags: any[] = [{ name: 324 }];
   isLoad = false;
   private isOnInit = false;
+  filterTags: any[] = [];
+
+  lastupdate!: SortType.LastUpdate;
+
   selectOptions: any = {
-    sorts: { name: '', value: -1, isShow: false },
-    status: { name: '', value: -1, isShow: false },
-    year: { value: -1, isShow: false },
+    sorts: { value: -1, name: '', isShow: false },
+    status: { value: -1, name: '', isShow: false },
+    year: { value: 0, name: '', isShow: false },
     genres: { value: {}, name: {}, isShow: false },
-    keyword: { value: '' },
+    keyword: { value: '', name: '' },
   };
 
   constructor(
@@ -42,6 +45,9 @@ export class SearchPageComponent implements OnInit {
     };
     this.selectOptions.status.name = advancedFiltersOptions.status[0].name;
     this.selectOptions.sorts.name = advancedFiltersOptions.sorts[0].name;
+    this.lastupdate = SortType.LastUpdate;
+    console.log(this.lastupdate);
+
   }
 
   toggleFilters() {
@@ -49,13 +55,16 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.comicService.getGenres().subscribe((genres) => {
+      this.listGenres = genres;
+    });
     this.route.queryParams.subscribe((params) => {
       const page = +params['page'] || 1;
       const status = +params['status'] || ComicStatus.ALL;
       const sort = +params['sort'] >= 0 ? +params['sort'] : SortType.LastUpdate;
       const genres = params['genres'] || '';
       const nogenres = params['nogenres'] || '';
-      const year = +params['year'] || -1;
+      const year = +params['year'] || 0;
       const keyword = params['keyword'] || '';
       this.currentPage = page;
 
@@ -63,18 +72,28 @@ export class SearchPageComponent implements OnInit {
       this.searchComics(page, sort, status, genres, nogenres, year, keyword);
     });
 
-    this.comicService.getGenres().subscribe((genres) => {
-      this.listGenres = genres;
-    });
   }
-
+  getGenreKeys() {
+    return Object.keys(this.selectOptions.genres.value)
+      .filter(key => this.selectOptions.genres.value[key] > 0);
+  }
   private resetOptions(status: number, sort: number, year: number, genres: string, nogenres: string, keyword: string) {
     if (this.isOnInit) return;
 
     this.selectOptions.keyword.value = keyword;
-    genres.split(',').forEach((id) => this.selectOptions.genres.value[id] = 1);
-    nogenres.split(',').forEach((id) => this.selectOptions.genres.value[id] = 2);
+
+    genres.split(',').filter(x => x != '').forEach((id) => {
+      this.selectOptions.genres.value[id] = 1
+      this.selectOptions.genres.name[id] = this.listGenres.find(x => x.id == parseInt(id))?.title
+    })
+    nogenres.split(',').filter(x => x != '').forEach((id) => {
+      this.selectOptions.genres.value[id] = 2
+      this.selectOptions.genres.name[id] = this.listGenres.find(x => x.id == parseInt(id))?.title
+    }
+    );
+
     this.selectOptions.year.value = year;
+    this.selectOptions.year.name = year.toString()
 
     this.dataView.status.forEach(filter => {
       filter.selected = filter.value === status;
@@ -113,6 +132,9 @@ export class SearchPageComponent implements OnInit {
     this.selectOptions[option as keyof IFilters].name = data.name;
     this.selectOptions[option as keyof IFilters].value = data.value;
     this.selectOptions[option as keyof IFilters].isShow = false;
+
+
+
   }
   OnYearChange(year: number) {
     this.isLoad = true;
@@ -120,6 +142,7 @@ export class SearchPageComponent implements OnInit {
     this.selectOptions.sorts.isShow = false;
     this.selectOptions.status.isShow = false;
     this.selectOptions.year.value = this.selectOptions.year.value + year
+    this.selectOptions.year.name = year.toString()
   }
   OnGenresChange(genre: Genre) {
     this.isLoad = true;
@@ -166,8 +189,24 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  RemoveFilterTag(tag: any) {
-    // Implement filter tag removal logic
+  RemoveFilterTag({ option, data }: { option: string; data: any }) {
+    this.isLoad = true;
+    switch (option) {
+      case 'status':
+        this.selectOptions.status.value = -1;
+        break;
+      case 'sort':
+        this.selectOptions.sorts.value = this.lastupdate;
+        this.selectOptions.sorts.name = this.dataView.sorts[0].name
+        break;
+      case 'year':
+        this.selectOptions.year.value = 0;
+        break;
+      case 'genres':
+        this.selectOptions.genres.value[data] = 0;
+        break;
+
+    }
   }
 
   OnChangePage(page: number) {

@@ -9,8 +9,6 @@ export type IFilter = {
 export type IFilters = {
   status: IFilter[];
   sorts: IFilter[];
-
-
 };
 
 export const advancedFiltersOptions: IFilters = {
@@ -75,9 +73,6 @@ export const advancedFiltersOptions: IFilters = {
 
 };
 
-
-
-
 export const rankFiltersOptions: IFilters = {
   status: [
     {
@@ -131,3 +126,4 @@ export const rankFiltersOptions: IFilters = {
 
 
 };
+
