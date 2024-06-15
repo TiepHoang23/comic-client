@@ -79,6 +79,7 @@
         stroke-width="2"
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
+        (click)="RemoveFilterTag(tag)"
       >
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
@@ -243,12 +244,7 @@
             data-input-counter
             aria-describedby="helper-text-explanation"
             [(ngModel)]="selectOptions.year.value"
-            (ngModelChange)="
-              isLoad = true;
-              selectOptions.genres.isShow = false;
-              selectOptions.sorts.isShow = false;
-              selectOptions.status.isShow = false
-            "
+            (ngModelChange)="OnYearChange(0)"
             inputmode="numeric"
             placeholder="Năm phát hành"
             autocomplete="off"
@@ -268,16 +264,7 @@
               stroke-width="2"
               class="feather feather-minus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
               viewBox="0 0 24 24"
-              (click)="
-                isLoad = true;
-                selectOptions.genres.isShow = false;
-                selectOptions.sorts.isShow = false;
-                selectOptions.status.isShow = false;
-                selectOptions.year.value =
-                  selectOptions.year.value > 1900
-                    ? selectOptions.year.value - 1
-                    : selectOptions.year.value
-              "
+              (click)="OnYearChange(-1)"
             >
               <path d="M5 12h14"></path>
             </svg>
@@ -295,16 +282,7 @@
               stroke-width="2"
               class="feather feather-plus icon small text-icon-contrast text-undefined hover:text-primary cursor-pointer"
               viewBox="0 0 24 24"
-              (click)="
-                isLoad = true;
-                selectOptions.genres.isShow = false;
-                selectOptions.sorts.isShow = false;
-                selectOptions.status.isShow = false;
-                selectOptions.year.value =
-                  selectOptions.year.value < 4000
-                    ? selectOptions.year.value + 1
-                    : selectOptions.year.value
-              "
+              (click)="OnYearChange(+1)"
             >
               <path d="M12 5v14m-7-7h14"></path>
             </svg>
