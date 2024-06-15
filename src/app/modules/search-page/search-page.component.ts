@@ -194,6 +194,7 @@ export class SearchPageComponent implements OnInit {
     switch (option) {
       case 'status':
         this.selectOptions.status.value = -1;
+        this.selectOptions.status.name = this.dataView.status[0].name;
         break;
       case 'sort':
         this.selectOptions.sorts.value = this.lastupdate;

@@ -102,7 +102,7 @@
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
         (click)="
-          RemoveFilterTag({ option: 'sort', data: selectOptions.status })
+          RemoveFilterTag({ option: 'status', data: selectOptions.status })
         "
       >
         <path d="M18 6 6 18M6 6l12 12"></path>
@@ -112,10 +112,11 @@
 
     <li
       *ngFor="let key of getGenreKeys()"
-      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      class="pl-1 pr-2 rounded-ful select-none cursor-pointer flex space-x-1 whitespace-nowrap"
       [ngClass]="{
-        'text-[#ffffff] bg-[#030303]': selectOptions.genres.value[key] == 2,
-        'text-white bg-primary-100': selectOptions.genres.value[key] == 1,
+        ' bg-gray-100 ': !selectOptions.genres.value[key] ,
+        'text-[#ffffff] bg-[#030303] ': selectOptions.genres.value[key] == 2,
+        'text-white bg-primary-100 ' : selectOptions.genres.value[key] == 1,
       }"
     >
       <svg
@@ -155,7 +156,7 @@
         stroke-width="2"
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
-        (click)="RemoveFilterTag({ option: 'sort', data: selectOptions.year })"
+        (click)="RemoveFilterTag({ option: 'year', data: selectOptions.year })"
       >
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
