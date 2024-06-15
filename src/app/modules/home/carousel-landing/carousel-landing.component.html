@@ -1,8 +1,13 @@
-<div class="w-full h-full absolute pl-0 pr-0 overflow-hidden">
+<!--For pc -->
+
+<div
+  class="w-full h-full absolute pl-0 pr-0 overflow-hidden"
+  *ngIf="TypeUI === 0"
+>
   <button
     *ngIf="carouselItems.length > 0"
     class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full"
-    (click)="recalpulate(true)"
+    (click)="next()"
   ></button>
   <div
     *ngIf="ComicHover"
@@ -130,7 +135,7 @@
   <button
     *ngIf="carouselItems.length > 0"
     class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full right-0"
-    (click)="recalpulate(false)"
+    (click)="prev()"
   ></button>
   <div
     *ngFor="let comics of carouselItems; let i = index"
@@ -219,5 +224,21 @@
         stroke-width="24"
       ></line>
     </svg>
+  </div>
+</div>
+<!--For Phone -->
+<div
+  class="absolute w-full h-full flex overflow-hidden bg-dark-bg"
+  *ngIf="TypeUI === 1"
+>
+  <div
+    *ngFor="let comic of carouselItems; let i = index"
+    class="carousel-item h-full block absolute top-0 transition-all duration-700 ease-out py-1 px-0.5"
+  >
+    <img
+      class="h-full w-full object-cover"
+      src="{{ comic[0].coverImage }}"
+      alt=""
+    />
   </div>
 </div>

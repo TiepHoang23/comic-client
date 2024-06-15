@@ -18,9 +18,7 @@ import { HistoryService } from '@services/history.service';
 import { ComicService } from '@services/comic.service';
 import { AccountService } from '@services/account.service';
 import { ToastService, ToastType } from '@services/toast.service';
-import chunk from 'lodash/chunk';
-import { Target } from '@angular/compiler';
-// import {theme } from '../../../../../tailwind.config';
+import config from '../../../../GlobalConfig';
 type ComicChapters = {
   id: number;
   chapterTitle?: string;
@@ -113,10 +111,10 @@ export class ComicDetailComponent implements OnInit {
   }
 
   CalcGirdSize() {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < config.GetScreenSize('sm')) {
       //sm breakpoint
       this.chapter_grid_size = 2;
-    } else if (window.innerWidth < 1100) {
+    } else if (window.innerWidth < config.GetScreenSize('xl')) {
       // xl break point
       this.chapter_grid_size = 3;
     } else {

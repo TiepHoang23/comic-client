@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import config from './GlobalConfig';
 module.exports = {
   prefix: '',
   mode: 'jit',
@@ -6,13 +7,7 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
 
   theme: {
-    screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '940px',
-      xl: '1100px',
-      '2xl': '1200px',
-    },
+    screens: { ...config.screens },
     extend: {
       colors: {
         "light-bg": "#fff",

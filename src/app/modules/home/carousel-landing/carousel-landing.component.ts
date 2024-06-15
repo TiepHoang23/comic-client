@@ -5,7 +5,7 @@ import { DOCUMENT } from '@angular/common';
 import { forEach } from 'lodash';
 import { ComicService } from '@services/comic.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import config from '../../../../../GlobalConfig';
 @Component({
   selector: 'app-carousel-landing',
   templateUrl: './carousel-landing.component.html',
@@ -22,22 +22,25 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class CarouselLandingComponent implements OnInit {
   carouselItems: Array<Comic[]> = [];
-
   slideElements: Element[] = [];
   lastTime: number = 0;
   isTransitioning: boolean = false;
-
   ComicHover?: Comic;
-  private interval: any;
+  interval: any;
   _state = 'out';
   timer: any;
+  TypeUI = 0;
+  grid = 3;
   constructor(
     private comicService: ComicService) { }
   ngOnInit(): void {
+    this.ComputeStyleUI();
     this.comicService.getrecommendComics().subscribe((res: any) => {
       let dataSlide = res.data;
       this.carouselItems = chunk(dataSlide, 5);
     })
+    this.resetAutoSlide();
+
   }
 
   OnComicLeave() {
@@ -45,7 +48,40 @@ export class CarouselLandingComponent implements OnInit {
     clearTimeout(this.timer);
   }
   ngOnChanges(change: any) {
-    this.resetAutoSlide();
+
+  }
+  ComputeStyleUI() {
+    if (window.innerWidth <= config.GetScreenSize('lg')) { //lg breakpoint
+      this.TypeUI = 1;
+
+      if (window.innerWidth <= config.GetScreenSize('sm')) {
+        this.grid = 3;
+      } else {
+
+        this.grid = 4;
+      }
+    } else {
+      this.TypeUI = 0;
+      this.grid = 3;
+
+    }
+
+  }
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    let preTypeUI = this.TypeUI;
+    let preGrid = this.grid;
+    this.ComputeStyleUI();
+    if (preTypeUI != this.TypeUI) {
+      this.slideElements = []
+    }
+    else
+      if (preGrid != this.grid) {
+        this.recalpulate();
+
+      }
+
+
   }
 
   OnComicHover(comic: Comic) {
@@ -81,15 +117,30 @@ export class CarouselLandingComponent implements OnInit {
   private startAutoSlide() {
     this.interval = setInterval(() => {
       this.recalpulate();
+
     }, 4000);
   }
 
-  recalpulate(isNext = true): void {
+  next() {
     let now = Date.now();
     if (now - this.lastTime < 700) {
       return;
     }
     this.lastTime = now;
+    this.recalpulate(true);
+  }
+
+  prev() {
+    let now = Date.now();
+    if (now - this.lastTime < 700) {
+      return;
+    }
+    this.lastTime = now;
+    this.recalpulate(false);
+  }
+
+  recalpulate(isNext = true): void {
+
 
     if (isNext) {
       let last = this.slideElements.pop()!;
@@ -100,7 +151,8 @@ export class CarouselLandingComponent implements OnInit {
     }
 
     this.slideElements.forEach((e: any, index) => {
-      e.style.left = `${((index - 1) * 100) / 3}%`;
+      e.style.left = `${((index - 1) * 100) / this.grid}%`;
+      e.style.width = `${100 / this.grid}%`;
       if (index == 0) {
         e.style['z-index'] = 0;
       } else e.style['z-index'] = 5 - index;
