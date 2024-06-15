@@ -17,7 +17,7 @@ import { CommentComponent } from '../components/common/comment/comment.component
 import { GenreCatagoriesComponent } from '../components/common/genre-catagories/genre-catagories.component';
 import { ImageLoaderComponent } from '../components/common/image-loader/image-loader.component';
 import { TopListComponent } from '../components/common/top-list/top-list.component';
-
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 @NgModule({
   declarations: [
     NumeralPipe,
@@ -32,7 +32,13 @@ import { TopListComponent } from '../components/common/top-list/top-list.compone
     TopListComponent,
     ImageLoaderComponent,
   ],
-  imports: [CommonModule, RouterLink, HttpClientModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    HttpClientModule,
+    ReactiveFormsModule,
+    PickerComponent,
+  ],
   exports: [
     NumeralPipe,
     DateAgoPipe,

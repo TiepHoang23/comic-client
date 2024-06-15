@@ -364,6 +364,7 @@
       *ngFor="let page of ListChapterImg; let i = index"
       [imageUrl]="page.url"
       [style.width]="'calc(50% + ' + (zoomLevel * 100) / 2 + '%)'"
+      [direction]="direction"
       class="block relative object-contain transition-transform duration-200 ease-in-out cursor-zoom-in mx-auto"
     ></app-image-loader>
   </div>
@@ -449,6 +450,8 @@
     <button
       class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
       style="min-height: 2.5rem; min-width: 100%"
+      (click)="changeDirectionReading(true)"
+      [ngClass]="{ 'bg-slate-100  text-primary-100': direction }"
     >
       <span
         class="flex relative items-center justify-center font-medium select-none w-full"
@@ -483,6 +486,8 @@
       data-v-8d292eb9=""
       class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
       style="min-height: 2.5rem; min-width: 100%"
+      (click)="changeDirectionReading(false)"
+      [ngClass]="{ 'bg-slate-100 text-primary-100': !direction }"
     >
       <span
         data-v-8d292eb9=""

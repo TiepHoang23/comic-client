@@ -12,13 +12,14 @@ const translateToVNAgo = (dateString: string): string => {
     .replace('about', '')
     .replace('over', 'hơn')
     .replace('almost', 'gần')
+    .replace('less than', '')
+    .replace(/a[s]*/, '1')
     .replace(/day[s]*/, 'ngày')
     .replace(/hour[s]*/, 'giờ')
     .replace(/minute[s]*/, 'phút')
     .replace(/second[s]*/, 'giây')
     .replace(/month[s]*/, 'tháng')
-    .replace(/year[s]*/, 'năm')
-    .replace(/less than a[s]*/, 'ít hơn 1');
+    .replace(/year[s]*/, 'năm');
 };
 
 @Pipe({

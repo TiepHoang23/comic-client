@@ -46,6 +46,7 @@ export class ChapterPageComponent {
   public isLimitZoom: boolean = false;
   private lastScrollTop = 0;
   elementOffset = 0;
+  direction = true;
 
   constructor(
     private comicService: ComicService,
@@ -230,5 +231,31 @@ export class ChapterPageComponent {
     }
 
     this.lastScrollTop = windowScroll <= 0 ? 0 : windowScroll;
+  }
+  changeDirectionReading(stage: boolean) {
+    this.direction = stage;
+    const styles = this.direction
+      ? {
+          'scroll-snap-align': 'start',
+          flex: '0 0 auto',
+          display: 'flex',
+          'flex-direction': 'column',
+          'overflow-y': 'auto',
+          'overflow-x': 'hidden',
+        }
+      : {
+          'margin-top': '30px',
+          'min-width': '30rem',
+          'scroll-snap-align': 'start',
+          display: 'flex',
+          'flex-direction': 'row',
+          overflow: 'hidden',
+          'overflow-x': 'auto',
+          'overflow-y': 'hidden',
+        };
+
+    for (const [key, value] of Object.entries(styles)) {
+      this.renderer.setStyle(this.imageContainer.nativeElement, key, value);
+    }
   }
 }

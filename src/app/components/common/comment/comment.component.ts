@@ -67,7 +67,7 @@ export class CommentComponent implements OnInit {
 
   currentPage: number = 1;
   totalpage: number = 2;
-
+  showEmojiPicker: boolean = false;
   @ViewChildren('ViewReplyEle') ViewReplyEles!: QueryList<ElementRef>;
 
   constructor(
@@ -156,5 +156,14 @@ export class CommentComponent implements OnInit {
   ngOnChanges(change: any) {
     this.document.removeEventListener('scroll', this.WindowScroll);
     this.document.addEventListener('scroll', this.WindowScroll);
+  }
+
+  toggleEmojiPicker(): void {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  addEmoji(event: any): void {
+    this.form.value.content += event.emoji.native;
+    // this.showEmojiPicker = false;
   }
 }

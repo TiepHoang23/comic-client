@@ -1,58 +1,93 @@
 <div
-  class="container flex flex-col w-full bg-slate-100 dark:bg-neutral-800 border dark:border-black dark:text-white px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto"
+  class="container flex flex-col w-full bg-slate-100 dark:bg-neutral-800 border dark:border-black dark:text-white px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto rounded-lg"
 >
-  @if(!isLogin) {
-  <a
-    class="m-3 p-2 mx-auto rounded bg-primary-100 text-white"
-    [routerLink]="['/auth/login']"
-  >
-    Đăng nhập để bình luận
-  </a>
-
+  @if (!isLogin) {
+    <a
+      class="m-3 p-2 mx-auto rounded bg-primary-100 text-white"
+      [routerLink]="['/auth/login']"
+    >
+      > Đăng nhập để bình luận
+    </a>
   }
   <div
-    class="my-4 w-full flex flex-row flex-wrap justify-between items-end border-b-2 border-black"
+    class="my-4 w-full flex flex-row flex-wrap justify-between items-end border-b border-gray-200"
   >
     <div
-      class="border-b-2 -mb-[1.2px] h-full border-primary-100"
+      class="border-b-2 -mb-[1.2px] h-full border-primary-100 text-xl font-bold"
       data-comments-count="2810"
     >
-      <span class="wpdtc" title="2810">{{ 100 }}</span> BÌNH LUẬN
+      <span class="text-lg font-bold" title="2810">{{ 100 }}</span> bình luận
     </div>
   </div>
   <div class="flex flex-col gap-2">
-    @if(isLogin) {
-    <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
-      <div class="w-full mb-2 mt-6 flex">
-        <div class="px-3 pt-1">
-          <div class="flex gap-3 items-center w-16">
-            <img
-              src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
-              class="object-cover p-0.5 w-16 h-16 rounded-full"
-              style="
-                background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
-              "
-            />
+    @if (isLogin) {
+      <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
+        <div class="w-full mb-2 mt-6 flex">
+          <div class="px-3 pt-1">
+            <div class="flex gap-3 items-center w-16">
+              <img
+                src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
+                class="object-cover p-0.5 w-16 h-16 rounded-full"
+                style="
+                  background: url(&quot;https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif&quot;);
+                "
+              />
+            </div>
           </div>
+          <textarea
+            class="text-sm dark:bg-dark-bg rounded-2xl leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:border focus:border-gray-300 dark:focus:bg-neutral-700"
+            name="content"
+            placeholder="Viết bình luận..."
+            required
+            formControlName="content"
+          ></textarea>
         </div>
-        <textarea
-          class="bg-gray-100 dark:bg-dark-bg rounded border border-gray-400 leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white dark:focus:bg-neutral-700"
-          name="content"
-          placeholder="Comment"
-          required
-          formControlName="content"
-        ></textarea>
-      </div>
 
-      <div class="w-full flex justify-end">
-        <button
-          class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded"
-          type="submit"
-        >
-          Gửi
-        </button>
-      </div>
-    </form>
+        <div class="w-full flex justify-between">
+          <svg
+            class="h-8 w-8 text-gray-400 ml-24 hover:bg-slate-200 rounded-full p-1 cursor-pointer"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            (click)="toggleEmojiPicker()"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="9" y1="9" x2="9.01" y2="9" />
+            <line x1="15" y1="9" x2="15.01" y2="9" />
+            <path d="M8 13a4 4 0 1 0 8 0m0 0H8" />
+          </svg>
+          <div *ngIf="showEmojiPicker" class="mt-2">
+            <emoji-mart (emojiSelect)="addEmoji($event)"></emoji-mart>
+          </div>
+          <button
+            class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded-2xl inline-flex items-center justify-center gap-1"
+            type="submit"
+          >
+            Gửi
+            <svg
+              class="h-4 w-4 text-slate-100 rotate-45"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+              <path
+                d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
     }
     <div
       [@inOutAnimation]="'in'"
@@ -90,15 +125,15 @@
                   src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
                   class="object-cover p-0.5 w-16 h-16 rounded-full"
                   style="
-                    background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+                    background: url(&quot;https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif&quot;);
                   "
                 />
               </div>
             </div>
             <textarea
-              class="dark:bg-dark-bg dark:focus:bg-neutral-700 bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-12 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+              class="dark:bg-dark-bg dark:focus:bg-neutral-700 text-sm rounded-2xl leading-normal resize-none w-full h-12 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
               name="content"
-              placeholder="Comment"
+              placeholder="Viết bình luận..."
               required
               formControlName="content"
             ></textarea>
@@ -139,75 +174,83 @@
         <img
           src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
           class="object-cover p-0.5 w-12 h-12 md:w-16 md:h-16 rounded-full"
-          style="background: url('assets/effects/than_hoa.webp')"
+          style="background: url(&quot;assets/effects/than_hoa.webp&quot;)"
         />
       </div>
     </div>
     <div
-      class="text-sm lg:text-base w-[calc(100%-56px)] md:w-[calc(100%-72px)] flex flex-col bg-white dark:bg-dark-bg space-y-1 rounded borde leading-normal resize-none py-2 px-3"
+      class="text-sm lg:text-base w-[calc(100%-56px)] md:w-[calc(100%-72px)] flex flex-col bg-white dark:bg-dark-bg space-y-1 rounded-2xl leading-normal resize-none py-2 px-3"
     >
-      <div class="flex border-b-2 border-primary-50 mb-2 justify-between">
-        <span class="font-bold text-primary-100">{{ comment.userName }}</span>
-        <span
-          *ngIf="hide === false"
-          class="ml-2 hover:underline hover:text-gray-800 dark:text-gray-400 font-thin text-gray-600"
-        >
-          <a
-            [routerLink]="[
-              '/truyen-tranh',
-              comment.url,
-              'chapter',
-              comment.chapterID
-            ]"
+      <div class="flex justify-between items-center">
+        <p class="font-semibold text-center text-sm">{{ comment.userName }}</p>
+        <span *ngIf="hide === false">
+          <span
+            class="ml-2 text-gray-600 dark:text-gray-400 text-[0.75rem] font-thin"
+            >{{ comment.commentedAt | dateAgo }}</span
           >
-            [chapter-{{ comment.chapterID }}]
-          </a>
         </span>
         <span class="flex-1"></span>
-        <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm font-thin">{{
-          comment.commentedAt | dateAgo
-        }}</span>
+        <a
+          [routerLink]="[
+            '/truyen-tranh',
+            comment.url,
+            'chapter',
+            comment.chapterID
+          ]"
+          class="hover:underline hover:text-gray-500 dark:text-gray-400 text-[0.75rem] font-semibold text-gray-400"
+        >
+          [ Chapter-{{ comment.chapterID }} ]
+        </a>
       </div>
-      <div class="text-gray-600 dark:text-gray-100 break-words">
+      <div class="text-gray-600 dark:text-gray-100 text-sm break-words">
         {{ comment.content }}
       </div>
-      <div class="flex flex-row flex-nowrap justify-between items-center">
-        <div class="flex flex-row flex-nowrap justify-start items-center pr-5">
-          <div class="w-4 h-4">
-            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="none" d="M0 0h24v24H0V0z"></path>
-              <path
-                d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"
-              ></path>
-            </svg>
-          </div>
+      <div class="flex flex-row flex-nowrap items-center">
+        <div class="flex flex-row flex-nowrap justify-start items-center pr-2">
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"
+            />
+          </svg>
           <div class="mx-1" title="0">0</div>
-          <div class="w-4 h-4">
-            <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="none" d="M0 0h24v24H0z"></path>
-              <path
-                d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"
-              ></path>
-            </svg>
-          </div>
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"
+            />
+          </svg>
         </div>
 
         <button
-          class="text-right font-thin text-gray-500 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-200"
+          class="text-center ml-2 font-semibold text-[0.75rem] text-gray-500 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-200"
           (click)="replyCmt(comment.id)"
         >
           Phản hồi
         </button>
-        <div class="flex-grow"></div>
+      </div>
 
-        <div *ngIf="comment.replies && comment.replies.length > 0">
-          <button
-            class="text-right font-thin text-gray-500 hover:text-gray-800 text-sm"
-            (click)="ViewReplyCmt(comment.id)"
-          >
-            Xem ({{ comment.replies.length }}) phản hồi
-          </button>
-        </div>
+      <div *ngIf="comment.replies && comment.replies.length > 0">
+        <button
+          class="text-right font-thin hover:underline text-sm text-primary-100"
+          (click)="ViewReplyCmt(comment.id)"
+        >
+          Xem ({{ comment.replies.length }}) phản hồi
+        </button>
       </div>
     </div>
   </div>
