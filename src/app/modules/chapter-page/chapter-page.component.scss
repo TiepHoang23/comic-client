@@ -3,6 +3,7 @@
 //     flex-direction: column;
 //     height: 100vh;
 //   }
+
   
  
 #image-container {
@@ -12,12 +13,7 @@
     flex-direction: column;
     overflow-y: auto;
   } 
-//   .image-container img {
-//     display: block;
-//     max-width: 100%;
-//     height: auto;
-//     transition: transform 0.2s ease-in-out;
-//   }
+
 .sticky {
   position: fixed;
   top: 0;

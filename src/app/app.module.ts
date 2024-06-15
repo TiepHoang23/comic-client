@@ -57,4 +57,4 @@ import { RankComponent } from './modules/rank/rank.component';
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule { }
+export class AppModule {}
