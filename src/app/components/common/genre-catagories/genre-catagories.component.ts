@@ -17,6 +17,8 @@ export class GenreCatagoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateCategories();
+
+
   }
 
   private updateCategories(): void {

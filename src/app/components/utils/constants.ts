@@ -18,7 +18,7 @@ export const advancedFiltersOptions: IFilters = {
     {
       name: 'Tất Cả',
       value: ComicStatus.ALL,
-      selected: true
+
     },
     {
       name: 'Đang Ra',
@@ -34,7 +34,7 @@ export const advancedFiltersOptions: IFilters = {
     {
       name: 'Mới cập nhật',
       value: SortType.LastUpdate,
-      selected: true
+
     },
     {
       name: 'Top All',
@@ -83,7 +83,7 @@ export const rankFiltersOptions: IFilters = {
     {
       name: 'Tất Cả',
       value: ComicStatus.ALL,
-      selected: true
+
     },
     {
       name: 'Đang Ra',
@@ -99,7 +99,7 @@ export const rankFiltersOptions: IFilters = {
     {
       name: 'Top All',
       value: SortType.TopAll,
-      selected: true
+
     },
     {
       name: 'Top ngày',

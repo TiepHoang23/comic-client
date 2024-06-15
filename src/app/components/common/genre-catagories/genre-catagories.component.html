@@ -35,13 +35,14 @@
     >
       <li
         *ngFor="let genre of filteredCatagoriesGenre.get('countries')"
+        class="hover:border-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-secondary-100 bg-background border-dashed border"
         [ngClass]="{
-          'text-white bg-[#F86E4C] hover:text-white':
+          'text-black hover:text-primary-100': !statusGenres[genre.id],
+          'text-[#FFFFFF]   hover:border-black bg-[#F86E4C] hover:text-[#FFFFFF] ':
             statusGenres[genre.id] == 1,
           'text-white bg-[#000000] hover:text-white':
             statusGenres[genre.id] == 2
         }"
-        class="hover:border-primary-100 hover:text-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-secondary-100 bg-background border-dashed border"
       >
         <div
           [routerLink]="routerLinkGenres ? ['tim-truyen'] : null"
@@ -69,13 +70,14 @@
     >
       <li
         *ngFor="let genre of filteredCatagoriesGenre.get('genreCommon')"
+        class="hover:border-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-secondary-100 bg-background border-dashed border"
         [ngClass]="{
-          'text-white bg-[#F86E4C] hover:text-white':
+          'text-[#FFFFFF]   hover:border-black bg-[#F86E4C] hover:text-[#FFFFFF] ':
             statusGenres[genre.id] == 1,
+          'text-black hover:text-primary-100': !statusGenres[genre.id],
           'text-white bg-[#000000] hover:text-white':
             statusGenres[genre.id] == 2
         }"
-        class="hover:border-primary-100 hover:text-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-color border border-dashed"
       >
         <div
           [routerLink]="routerLinkGenres ? ['tim-truyen'] : null"

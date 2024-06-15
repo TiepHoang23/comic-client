@@ -25,20 +25,22 @@ export class ComicService {
     status: number = -1,
   ) {
 
-    const params = {
-      page: _.random(1, 200).toString(),
-      step: step.toString(),
-      genre: '-1',
-      sort: sort.toString(),
-      status: '-1',
-    };
     // const params = {
-    //   page: page.toString(),
+    //   page: _.random(1, 200).toString(),
     //   step: step.toString(),
-    //   genre: genre.toString(),
+    //   genre: '-1',
     //   sort: sort.toString(),
-    //   status: status.toString(),
+    //   status: '-1',
     // };
+    const params = {
+      page: page.toString(),
+      step: step.toString(),
+      genre: genre.toString(),
+      sort: sort.toString(),
+      status: status.toString(),
+    };
+
+
     const searchParams = new URLSearchParams(params).toString();
     let req = this.httpService.get(
       `${globalConfig.API_HOST}/comics?${searchParams}`,
@@ -81,9 +83,43 @@ export class ComicService {
     )
   }
   getSearchComic(key: string) {
+    console.log(key);
+
     return this.httpclient.get(
       `${globalConfig.API_HOST}/api/search?keyword=${key}`,
     );
+  }
+  getAdvanceSearchComic(
+    page: number = 1,
+    step: number = 40,
+    sort: number = 1,
+    status: number = -1,
+    genres: string = '',
+    nogenres: string = '',
+    year: number = -1,
+    keyword: string = ''
+
+  ) {
+
+    const params = {
+      page: page.toString(),
+      step: step.toString(),
+      sort: sort.toString(),
+      status: status.toString(),
+      genres: genres,
+      nogenres: nogenres,
+      year: year.toString(),
+      keyword: keyword
+    };
+
+
+    const searchParams = new URLSearchParams(params).toString();
+
+    let req = this.httpService.get(
+      `${globalConfig.API_HOST}/Comic/advance?${searchParams}`,
+    )
+    return req;
+
   }
   getDuplicateComic(key: string) {
     return this.httpclient.get(

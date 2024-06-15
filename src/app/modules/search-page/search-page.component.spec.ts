@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchPageComponent } from './search-page.component';
+import { SearchPageComponent } from './SearchPageComponent';
 
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;
@@ -10,8 +10,8 @@ describe('SearchPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SearchPageComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SearchPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

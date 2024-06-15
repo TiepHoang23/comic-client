@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HistoryPageComponent } from './modules/history-page/history-page.component';
 import { FollowedPageComponent } from './modules/followed-page/followed-page.component';
-import { SearchPageComponent } from './modules/search-page/search-page.component';
+
 import { ChapterPageComponent } from './modules/chapter-page/chapter-page.component';
 import { RankComponent } from './modules/rank/rank.component';
 const routes: Routes = [
