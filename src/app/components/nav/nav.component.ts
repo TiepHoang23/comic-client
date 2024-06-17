@@ -20,12 +20,9 @@ import { ThemeService } from '@services/theme.service';
 export class NavComponent {
   listGenres: Array<Genre> = new Array<Genre>();
   searchText: string = '';
-  doneTypingInterval = 200;
-  typingTimer: any;
-  isSearching = false;
+  
   avatar!: string
   user?: IUser;
-  @ViewChild('SearchInput') SearchField!: ElementRef;
   constructor(
     private comicService: ComicService,
     private accountService: AccountService,
@@ -62,21 +59,5 @@ export class NavComponent {
   onUserClick() {
     document.getElementById('user-dropdown')?.classList.toggle('invisible');
   }
-  OnSearchChange(e: Event) {
-    clearTimeout(this.typingTimer);
-    this.typingTimer = setTimeout(() => {
-      this.searchText = this.SearchField.nativeElement.value;
-    }, this.doneTypingInterval);
-  }
-  OnSearchFocus = (isFoucs: boolean): boolean => {
-    this.isSearching = isFoucs;
-    if (isFoucs) this.SearchField.nativeElement.classList.add('!w-full');
-    else this.SearchField.nativeElement.classList.remove('!w-full');
-    return true;
-  };
 
-  clearSearch(): void {
-    this.searchText = '';
-    this.SearchField.nativeElement.value = '';
-  }
 }
