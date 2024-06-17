@@ -65,7 +65,29 @@
     class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden border-b border-b-accent-10"
   >
     <li
-      *ngFor="let tag of filterTags"
+      *ngIf="selectOptions.sorts.value !== -1"
+      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+    >
+      <svg
+        *ngIf="selectOptions.sorts.value != lastupdate"
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+        viewBox="0 0 24 24"
+        (click)="RemoveFilterTag({ option: 'sort', data: selectOptions.sorts })"
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+      <span class="text-sm">{{ selectOptions.sorts.name }}</span>
+    </li>
+    <li
+      *ngIf="selectOptions.status.value !== -1"
       class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
     >
       <svg
@@ -79,11 +101,66 @@
         stroke-width="2"
         class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
         viewBox="0 0 24 24"
-        (click)="RemoveFilterTag(tag)"
+        (click)="
+          RemoveFilterTag({ option: 'status', data: selectOptions.status })
+        "
       >
         <path d="M18 6 6 18M6 6l12 12"></path>
       </svg>
-      <span class="text-sm">{{ tag.name }}</span>
+      <span class="text-sm">{{ selectOptions.status.name }}</span>
+    </li>
+
+    <li
+      *ngFor="let key of getGenreKeys()"
+      class="pl-1 pr-2 rounded-ful select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      [ngClass]="{
+        ' bg-gray-100 ': !selectOptions.genres.value[key] ,
+        'text-[#ffffff] bg-[#030303] ': selectOptions.genres.value[key] == 2,
+        'text-white bg-primary-100 ' : selectOptions.genres.value[key] == 1,
+      }"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+        viewBox="0 0 24 24"
+        (click)="
+          RemoveFilterTag({
+            option: 'genres',
+            data: key
+          })
+        "
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+      <span class="text-sm">{{ selectOptions.genres.name[key] }}</span>
+    </li>
+    <li
+      *ngIf="selectOptions.year.value > 0"
+      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+        viewBox="0 0 24 24"
+        (click)="RemoveFilterTag({ option: 'year', data: selectOptions.year })"
+      >
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+      <span class="text-sm">{{ selectOptions.year.value }}</span>
     </li>
   </ul>
   <!-- Filter Options -->

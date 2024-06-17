@@ -30,6 +30,7 @@ export class UserPageComponent implements OnInit {
   })
 
   submitFailed = false;
+  submitInfoFailed = false;
   constructor(private accountService: AccountService,
     private toast: ToastService,
     private elementRef: ElementRef,
@@ -126,6 +127,12 @@ export class UserPageComponent implements OnInit {
     }
   }
   onUpdateInfo() {
+    if (this.infoForm.valid == false || this.infoForm.dirty == false) {
+      this.submitInfoFailed = true;
+      this.markFormAsUpdated(this.infoForm)
+      return
+    }
+    this.submitInfoFailed = false;
     let userinfortoUpdate = this.infoForm.value;
     for (let key in userinfortoUpdate) {
       if (userinfortoUpdate.hasOwnProperty(key) && typeof userinfortoUpdate[key] === 'string') {

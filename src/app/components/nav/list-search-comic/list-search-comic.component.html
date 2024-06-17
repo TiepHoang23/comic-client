@@ -1,59 +1,139 @@
-<div class="-mt-2">
-  @if (searchValue !== "") {
-  <div class="flex items-center my-4">
-    <div class="font-bold text-xl flex-grow">Kết quả</div>
+<div class="relative z-[12] flex justify-end h-8 md:w-[32rem] bg-white">
+  <div class="relative w-full rounded-lg">
+    <input
+      #SearchInput
+      (focus)="OnSearchFocus(true)"
+      (input)="OnSearchChange($event)"
+      type="text"
+      class="bg-white custom-transition justify-items-end absolute right-0 h-8 hidden md:block"
+      placeholder="Tìm kiếm..."
+    />
+
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      class="search-icon h-4 w-4 text-gray-500 absolute right-3 top-4 transform -translate-y-1/2 transition-opacity duration-300"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      [ngClass]="{ 'opacity-0': isSearching }"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+    <svg
+      *ngIf="searchText.length > 0 && isSearching"
+      (click)="clearSearch()"
+      class="clear-icon h-4 w-4 text-gray-500 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
+      stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      stroke-width="2"
-      class="feather feather-arrow-right icon text-icon-contrast text-undefined"
-      viewBox="0 0 24 24"
     >
-      <path d="M5 12h14m-7-7 7 7-7 7"></path>
+      <circle cx="12" cy="12" r="10" />
+      <line x1="15" y1="9" x2="9" y2="15" />
+      <line x1="9" y1="9" x2="15" y2="15" />
     </svg>
   </div>
-  } @else {
-  <div class="flex items-center">
-    <div class="text-md flex-grow mt-3 text-gray-400">Kết quả tìm kiếm...</div>
-  </div>
-  }
-  <section class="">
-    <div
-      *ngFor="let comic of listSearch"
-      class="rounded-lg bg-gray-100 border-2 shadow-xl mb-2 hover:outline-slate-500 hover:outline-1 hover:outline"
-    >
-      <a [routerLink]="['truyen-tranh', comic.url]" (click)="close()">
-        <div class="px-2 py-1">
-          <!-- <ul class="-my-8"> -->
-          <div
-            class="flex flex-row space-y-3 py-1 text-left sm:space-x-5 sm:space-y-0"
-          >
-            <img
-              class="h-16 w-12 rounded-lg object-cover"
-              src="{{ comic.coverImage }}"
-              alt="{{ comic.title }}"
-            />
+  <!-- Nhập từ khóa tìm kiếm -->
+  <ng-container
+    [ngTemplateOutlet]="SearchResultTpl"
+    [ngTemplateOutletContext]="{
+      listSearch: listSearch,
+      isSearching: isSearching,
+      class: 'transition-[width] absolute rounded-md z-[20] flex w-full mt-10 flex-col bg-white px-4 py-3 shadow-xl',
+    }"
+  >
+  </ng-container>
+  <div
+    *ngIf="isSearching"
+    (click)="OnSearchFocus(false)"
+    class="fixed -z-10 top-0 bottom-0 right-0 left-0 bg-gray-800 opacity-30"
+  ></div>
 
-            <div class="relative flex flex-1 flex-col justify-between">
-              <div class="pr-8 sm:pr-5">
-                <p class="text-base font-semibold text-gray-900">
-                  {{ comic.title }}
-                </p>
-                <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
-                  {{ comic.description | slice : 0 : 100 }}...
-                </p>
-              </div>
-              <!-- </div> -->
-            </div>
-          </div>
-          <!-- </ul> -->
-        </div>
-      </a>
-    </div>
-  </section>
+  <!-- </div> -->
 </div>
+
+
+
+
+<!-- Search result teamplate -->
+<ng-template
+  #SearchResultTpl
+  let-listSearch="listSearch"
+  let-isSearching="isSearching"
+  let-class="class"
+>
+  <div
+    *ngIf="isSearching"
+    (CloseEvent)="OnSearchFocus(false)"
+    class={{class}}
+  >
+    <div class="-mt-2">
+      @if (searchText !== "") {
+      <div class="flex items-center my-4">
+        <div class="font-bold text-xl flex-grow">Kết quả</div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-arrow-right icon text-icon-contrast text-undefined"
+          viewBox="0 0 24 24"
+        >
+          <path d="M5 12h14m-7-7 7 7-7 7"></path>
+        </svg>
+      </div>
+      } @else {
+      <div class="flex items-center">
+        <div class="text-md flex-grow mt-3 text-gray-400">
+          Kết quả tìm kiếm...
+        </div>
+      </div>
+      }
+      <section
+        *ngFor="let comic of listSearch"
+        class="rounded-lg bg-gray-100 border-2 shadow-xl mb-2 hover:outline-slate-500 hover:outline-1 hover:outline"
+      >
+        <a
+          [routerLink]="['truyen-tranh', comic.url]"
+          (click)="OnSearchFocus(false)"
+        >
+          <div class="px-2 py-1">
+            <!-- <ul class="-my-8"> -->
+            <div
+              class="flex flex-row space-y-3 py-1 text-left sm:space-x-5 sm:space-y-0"
+            >
+              <img
+                class="h-16 w-12 rounded-lg object-cover"
+                src="{{ comic.coverImage }}"
+                alt="{{ comic.title }}"
+              />
+
+              <div class="relative flex flex-1 flex-col justify-between">
+                <div class="pr-8 sm:pr-5">
+                  <p class="text-base font-semibold text-gray-900">
+                    {{ comic.title }}
+                  </p>
+                  <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
+                    {{ comic.description | slice : 0 : 100 }}...
+                  </p>
+                </div>
+                <!-- </div> -->
+              </div>
+            </div>
+            <!-- </ul> -->
+          </div>
+        </a>
+      </section>
+    </div>
+  </div>
+</ng-template>
