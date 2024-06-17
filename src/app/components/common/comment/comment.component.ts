@@ -31,6 +31,7 @@ import {
 } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { AccountService } from '@services/account.service';
+import { CUSTOM_I18N } from './utils/constants';
 
 @Component({
   selector: 'comment-component',
@@ -68,7 +69,10 @@ export class CommentComponent implements OnInit {
   currentPage: number = 1;
   totalpage: number = 2;
   showEmojiPicker: boolean = false;
+  focusInsideEmojiPicker: boolean = false;
   @ViewChildren('ViewReplyEle') ViewReplyEles!: QueryList<ElementRef>;
+  isTyping: boolean = false;
+  customI18n = CUSTOM_I18N;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -98,8 +102,7 @@ export class CommentComponent implements OnInit {
       this.document.removeEventListener('scroll', this.WindowScroll);
     }
   };
-  ngAfterViewInit() {}
-  ngAfterContentInit() {}
+
   refreshcomments() {
     this.accountService
       .GetCommentsByComicId(this.comicId)
@@ -152,18 +155,32 @@ export class CommentComponent implements OnInit {
       this.BeginState = true;
     }
   }
-
+  onInput(): void {
+    this.isTyping = this.form.get('content')?.value.length > 0;
+  }
   ngOnChanges(change: any) {
     this.document.removeEventListener('scroll', this.WindowScroll);
     this.document.addEventListener('scroll', this.WindowScroll);
   }
 
-  toggleEmojiPicker(): void {
-    this.showEmojiPicker = !this.showEmojiPicker;
+  toggleEmojiPicker(show: boolean): void {
+    if (show) {
+      this.focusInsideEmojiPicker = true;
+      this.showEmojiPicker = true;
+    } else {
+      setTimeout(() => {
+        if (!this.focusInsideEmojiPicker) {
+          this.showEmojiPicker = false;
+        }
+        this.focusInsideEmojiPicker = false;
+      }, 100);
+    }
   }
 
   addEmoji(event: any): void {
-    this.form.value.content += event.emoji.native;
-    // this.showEmojiPicker = false;
+    const currentContent = this.form.get('content')?.value;
+    this.form.patchValue({ content: currentContent + event.emoji.native });
+    this.showEmojiPicker = false;
+    this.onInput();
   }
 }

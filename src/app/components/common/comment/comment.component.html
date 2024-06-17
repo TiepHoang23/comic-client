@@ -40,7 +40,9 @@
             placeholder="Viết bình luận..."
             required
             formControlName="content"
-          ></textarea>
+            (input)="onInput()"
+          >
+          </textarea>
         </div>
 
         <div class="w-full flex justify-between">
@@ -54,7 +56,8 @@
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
-            (click)="toggleEmojiPicker()"
+            (focus)="toggleEmojiPicker(true)"
+            (blur)="toggleEmojiPicker(false)"
           >
             <path stroke="none" d="M0 0h24v24H0z" />
             <circle cx="12" cy="12" r="9" />
@@ -62,8 +65,19 @@
             <line x1="15" y1="9" x2="15.01" y2="9" />
             <path d="M8 13a4 4 0 1 0 8 0m0 0H8" />
           </svg>
-          <div *ngIf="showEmojiPicker" class="mt-2">
-            <emoji-mart (emojiSelect)="addEmoji($event)"></emoji-mart>
+          <div *ngIf="showEmojiPicker" class="mt-2 relative">
+            <emoji-mart
+              [style]="{
+                position: 'absolute',
+                bottom: '5px',
+                right: '5px',
+                fontSize: '14px'
+              }"
+              (emojiSelect)="addEmoji($event)"
+              [showPreview]="false"
+              [i18n]="customI18n"
+              [showSingleCategory]="true"
+            ></emoji-mart>
           </div>
           <button
             class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded-2xl inline-flex items-center justify-center gap-1"
