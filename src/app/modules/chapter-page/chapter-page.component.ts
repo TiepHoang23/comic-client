@@ -65,6 +65,7 @@ export class ChapterPageComponent {
     }
   }
   ngOnInit(): void {
+    this.setZoomDefaultLevel();
     this.zoomLevel = this.defaultZoomLevel;
     this.isSticky = false;
     this.isToggle = false;
@@ -232,6 +233,17 @@ export class ChapterPageComponent {
 
     this.lastScrollTop = windowScroll <= 0 ? 0 : windowScroll;
   }
+
+  setZoomDefaultLevel(): void {
+    const screenWidth = window.innerWidth;
+    const xlBreakpoint = 1280; // xl size
+    if (screenWidth < xlBreakpoint) {
+      this.defaultZoomLevel = this.maxZoomLevel;
+    } else {
+      this.defaultZoomLevel = this.defaultZoomLevel;
+    }
+  }
+
   changeDirectionReading(stage: boolean) {
     this.direction = stage;
     const styles = this.direction
