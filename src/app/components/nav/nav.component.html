@@ -11,14 +11,16 @@
     <!-- Search input -->
     <div class="flex space-x-3 items-center">
       <list-search-comic
-        class="absolute top-0 right-0 left-0 h-16 md:relative z-[12] flex justify-end md:h-8 md:w-[32rem] bg-black/50 md:bg-white"
-      ></list-search-comic>
+       
+      />
+
+    
 
       <img
         (click)="themeService.ToggleTheme()"
         alt=""
         src="assets/dark-mode.svg"
-        class="w-8 h-8 cursor-pointer"
+        class="w-7 h-7 cursor-pointer"
       />
       <div *ngIf="!user" class="hidden space-x-1 text-white lg:flex h-8">
         <button
