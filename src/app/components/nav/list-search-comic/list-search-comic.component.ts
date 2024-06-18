@@ -21,13 +21,13 @@ export class ListSearchComicComponent implements OnInit {
   isSearching = false;
   typingTimer: any;
   searchText: string = '';
-  doneTypingInterval = 300;
+  doneTypingInterval = 700;
   @ViewChild('SearchInput') SearchInput!: ElementRef;
   @ViewChild('SearchFrame') SearchFrame!: ElementRef;
 
-  constructor(private comicService: ComicService) {}
-  ngOnInit() {}
-  ngOnChanges(change: any) {}
+  constructor(private comicService: ComicService) { }
+  ngOnInit() { }
+  ngOnChanges(change: any) { }
   SendSearchReq() {
     if (this.searchText != '') {
       this.comicService
@@ -59,7 +59,7 @@ export class ListSearchComicComponent implements OnInit {
   };
   OnSearchClick = (): boolean => {
     this.SearchFrame.nativeElement.classList.remove('hidden');
-      this.SearchInput.nativeElement.focus();
+    this.SearchInput.nativeElement.focus();
 
     return true;
   };
