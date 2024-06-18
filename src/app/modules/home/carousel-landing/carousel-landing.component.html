@@ -1,14 +1,25 @@
 <!--For pc -->
-
 <div
   class="w-full h-full absolute pl-0 pr-0 overflow-hidden"
   *ngIf="TypeUI === 0"
 >
-  <button
+  <div
     *ngIf="carouselItems.length > 0"
-    class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full"
+    class="bg-dark-bg/40 w-1/4 absolute z-10 h-full cursor-pointer group"
     (click)="next()"
-  ></button>
+  >
+    <svg
+      class="absolute text-white opacity-10 h-20 w-20 top-1/2 -translate-y-1/2 left-[50%] group-hover:opacity-80"
+      id="Layer_1"
+      version="1.1"
+      viewBox="0 0 512 512"
+      fill="currentColor"
+    >
+      <polygon
+        points="352,128.4 319.7,96 160,256 160,256 160,256 319.7,416 352,383.6 224.7,256 "
+      />
+    </svg>
+  </div>
   <div
     *ngIf="ComicHover"
     [@slideAnimation]="_state"
@@ -132,11 +143,21 @@
       </div>
     </div>
   </div>
-  <button
+  <div
     *ngIf="carouselItems.length > 0"
-    class="bg-dark-bg w-1/4 absolute z-10 opacity-40 h-full right-0"
+    class="bg-dark-bg/40 w-1/4 absolute z-10 h-full cursor-pointer right-0 group"
     (click)="prev()"
-  ></button>
+  >
+    <svg
+      fill="currentColor"
+      class="absolute text-white opacity-10 h-20 w-20 top-1/2 -translate-y-1/2 right-[50%] group-hover:opacity-80"
+      viewBox="0 0 512 512"
+    >
+      <polygon
+        points="160,128.4 192.3,96 352,256 352,256 352,256 192.3,416 160,383.6 287.3,256 "
+      />
+    </svg>
+  </div>
   <div
     *ngFor="let comics of carouselItems; let i = index"
     class="carousel-item block absolute h-full w-1/3 top-0 transition-all duration-700 ease-out"
@@ -232,13 +253,48 @@
   *ngIf="TypeUI === 1"
 >
   <div
+    *ngIf="carouselItems.length > 0"
+    class="top-1/2 -translate-y-1/2 left-2 rounded-xl overflow-hidden bg-dark-bg/40 w-12 h-12 absolute z-10 cursor-pointer group"
+    (click)="next()"
+  >
+    <svg
+      class="absolute text-white opacity-40 h-10 w-10 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 group-hover:opacity-80"
+      id="Layer_1"
+      version="1.1"
+      viewBox="0 0 512 512"
+      fill="currentColor"
+    >
+      <polygon
+        points="352,128.4 319.7,96 160,256 160,256 160,256 319.7,416 352,383.6 224.7,256 "
+      />
+    </svg>
+  </div>
+  <div
     *ngFor="let comic of carouselItems; let i = index"
     class="carousel-item h-full block absolute top-0 transition-all duration-700 ease-out py-1 px-0.5"
   >
-    <img
-      class="h-full w-full object-cover"
-      src="{{ comic[0].coverImage }}"
-      alt=""
-    />
+    <a [routerLink]="['/truyen-tranh', comic[0].url]">
+      <img
+        class="h-full w-full object-cover"
+        src="{{ comic[0].coverImage }}"
+        alt=""
+      />
+    </a>
+  </div>
+
+  <div
+    *ngIf="carouselItems.length > 0"
+    class="top-1/2 -translate-y-1/2 right-2 rounded-xl overflow-hidden bg-dark-bg/40 w-12 h-12 absolute z-10 cursor-pointer group"
+    (click)="prev()"
+  >
+    <svg
+      fill="currentColor"
+      class="absolute text-white opacity-40 h-10 w-10 top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 group-hover:opacity-80"
+      viewBox="0 0 512 512"
+    >
+      <polygon
+        points="160,128.4 192.3,96 352,256 352,256 352,256 192.3,416 160,383.6 287.3,256 "
+      />
+    </svg>
   </div>
 </div>

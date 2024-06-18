@@ -1,13 +1,13 @@
 <div
-  class="container flex flex-col w-full bg-slate-100 dark:bg-neutral-800 border dark:border-black dark:text-white px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto rounded-lg"
+  class="md:container flex flex-col w-full bg-slate-100 dark:bg-neutral-800 border dark:border-black dark:text-white px-3 md:px-10 xl:px-20 py-5 mt-10 mx-auto rounded-lg"
 >
   @if (!isLogin) {
-    <a
-      class="m-3 p-2 mx-auto rounded bg-primary-100 text-white"
-      [routerLink]="['/auth/login']"
-    >
-      > Đăng nhập để bình luận
-    </a>
+  <a
+    class="m-3 p-2 mx-auto rounded bg-primary-100 text-white"
+    [routerLink]="['/auth/login']"
+  >
+    > Đăng nhập để bình luận
+  </a>
   }
   <div
     class="my-4 w-full flex flex-row flex-wrap justify-between items-end border-b border-gray-200"
@@ -21,87 +21,87 @@
   </div>
   <div class="flex flex-col gap-2">
     @if (isLogin) {
-      <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
-        <div class="w-full mb-2 mt-6 flex">
-          <div class="px-3 pt-1">
-            <div class="flex gap-3 items-center w-16">
-              <img
-                src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
-                class="object-cover p-0.5 w-16 h-16 rounded-full"
-                style="
-                  background: url(&quot;https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif&quot;);
-                "
-              />
-            </div>
+    <form (submit)="onSubmit(0)" [formGroup]="form" class="mb-5">
+      <div class="w-full mb-2 mt-6 flex">
+        <div class="px-3 pt-1">
+          <div class="flex gap-3 items-center w-16">
+            <img
+              src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
+              class="object-cover p-0.5 w-16 h-16 rounded-full"
+              style="
+                background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
+              "
+            />
           </div>
-          <textarea
-            class="text-sm dark:bg-dark-bg rounded-2xl leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:border focus:border-gray-300 dark:focus:bg-neutral-700"
-            name="content"
-            placeholder="Viết bình luận..."
-            required
-            formControlName="content"
-            (input)="onInput()"
-          >
-          </textarea>
         </div>
+        <textarea
+          class="text-sm dark:bg-dark-bg rounded-2xl leading-normal resize-none w-full h-16 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:border focus:border-gray-300 dark:focus:bg-neutral-700"
+          name="content"
+          placeholder="Viết bình luận..."
+          required
+          formControlName="content"
+          (input)="onInput()"
+        >
+        </textarea>
+      </div>
 
-        <div class="w-full flex justify-between">
+      <div class="w-full flex justify-between">
+        <svg
+          class="h-8 w-8 text-gray-400 ml-24 hover:bg-slate-200 rounded-full p-1 cursor-pointer"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          (focus)="toggleEmojiPicker(true)"
+          (blur)="toggleEmojiPicker(false)"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="9" y1="9" x2="9.01" y2="9" />
+          <line x1="15" y1="9" x2="15.01" y2="9" />
+          <path d="M8 13a4 4 0 1 0 8 0m0 0H8" />
+        </svg>
+        <div *ngIf="showEmojiPicker" class="mt-2 relative">
+          <emoji-mart
+            [style]="{
+              position: 'absolute',
+              bottom: '5px',
+              right: '5px',
+              fontSize: '14px'
+            }"
+            (emojiSelect)="addEmoji($event)"
+            [showPreview]="false"
+            [i18n]="customI18n"
+            [showSingleCategory]="true"
+          ></emoji-mart>
+        </div>
+        <button
+          class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded-2xl inline-flex items-center justify-center gap-1"
+          type="submit"
+        >
+          Gửi
           <svg
-            class="h-8 w-8 text-gray-400 ml-24 hover:bg-slate-200 rounded-full p-1 cursor-pointer"
-            width="24"
-            height="24"
+            class="h-4 w-4 text-slate-100 rotate-45"
             viewBox="0 0 24 24"
             stroke-width="2"
             stroke="currentColor"
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
-            (focus)="toggleEmojiPicker(true)"
-            (blur)="toggleEmojiPicker(false)"
           >
             <path stroke="none" d="M0 0h24v24H0z" />
-            <circle cx="12" cy="12" r="9" />
-            <line x1="9" y1="9" x2="9.01" y2="9" />
-            <line x1="15" y1="9" x2="15.01" y2="9" />
-            <path d="M8 13a4 4 0 1 0 8 0m0 0H8" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+            <path
+              d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3"
+            />
           </svg>
-          <div *ngIf="showEmojiPicker" class="mt-2 relative">
-            <emoji-mart
-              [style]="{
-                position: 'absolute',
-                bottom: '5px',
-                right: '5px',
-                fontSize: '14px'
-              }"
-              (emojiSelect)="addEmoji($event)"
-              [showPreview]="false"
-              [i18n]="customI18n"
-              [showSingleCategory]="true"
-            ></emoji-mart>
-          </div>
-          <button
-            class="w-24 h-8 text-white bg-primary-100 hover:bg-primary-200 rounded-2xl inline-flex items-center justify-center gap-1"
-            type="submit"
-          >
-            Gửi
-            <svg
-              class="h-4 w-4 text-slate-100 rotate-45"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-              <path
-                d="M21 3L14.5 21a.55 .55 0 0 1 -1 0L10 14L3 10.5a.55 .55 0 0 1 0 -1L21 3"
-              />
-            </svg>
-          </button>
-        </div>
-      </form>
+        </button>
+      </div>
+    </form>
     }
     <div
       [@inOutAnimation]="'in'"
@@ -139,7 +139,7 @@
                   src="https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg"
                   class="object-cover p-0.5 w-16 h-16 rounded-full"
                   style="
-                    background: url(&quot;https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif&quot;);
+                    background: url('https://hoathinh3d.fun/wp-content/themes/halimmovies-child/assets/image/gif/than_hoa.gif');
                   "
                 />
               </div>
@@ -188,7 +188,7 @@
         <img
           src="https://st.nhattruyenss.com/data/comics/172/tren-nguoi-ta-co-mot-con-rong.jpg"
           class="object-cover p-0.5 w-12 h-12 md:w-16 md:h-16 rounded-full"
-          style="background: url(&quot;assets/effects/than_hoa.webp&quot;)"
+          style="background: url('assets/effects/than_hoa.webp')"
         />
       </div>
     </div>

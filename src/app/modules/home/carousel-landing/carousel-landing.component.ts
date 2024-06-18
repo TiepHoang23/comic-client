@@ -116,14 +116,14 @@ export class CarouselLandingComponent implements OnInit {
 
   private startAutoSlide() {
     this.interval = setInterval(() => {
-      this.recalpulate();
+      this.recalpulate(false);
 
     }, 4000);
   }
 
   next() {
     let now = Date.now();
-    if (now - this.lastTime < 700) {
+    if (now - this.lastTime < 500) {
       return;
     }
     this.lastTime = now;
@@ -132,7 +132,7 @@ export class CarouselLandingComponent implements OnInit {
 
   prev() {
     let now = Date.now();
-    if (now - this.lastTime < 700) {
+    if (now - this.lastTime < 500) {
       return;
     }
     this.lastTime = now;

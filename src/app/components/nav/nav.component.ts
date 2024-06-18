@@ -20,9 +20,11 @@ import { ThemeService } from '@services/theme.service';
 export class NavComponent {
   listGenres: Array<Genre> = new Array<Genre>();
   searchText: string = '';
-  
+
   avatar!: string
   user?: IUser;
+  showslidebar = false;
+  @ViewChild('dropdownNavbar') dropdownNavbar!: ElementRef;
   constructor(
     private comicService: ComicService,
     private accountService: AccountService,
@@ -58,6 +60,10 @@ export class NavComponent {
   }
   onUserClick() {
     document.getElementById('user-dropdown')?.classList.toggle('invisible');
+  }
+  toggleSidebar() {
+    this.showslidebar = !this.showslidebar
+    this.dropdownNavbar.nativeElement.classList.toggle('hidden');
   }
 
 }

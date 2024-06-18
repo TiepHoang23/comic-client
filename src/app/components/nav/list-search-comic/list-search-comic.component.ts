@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { Comic } from '../../../dataSource/schema/comic';
 import { ComicService } from '@services/comic.service';
@@ -13,15 +21,14 @@ export class ListSearchComicComponent implements OnInit {
   isSearching = false;
   typingTimer: any;
   searchText: string = '';
-  doneTypingInterval = 300;
-  @ViewChild('SearchInput') SearchField!: ElementRef;
+  doneTypingInterval = 700;
+  @ViewChild('SearchInput') SearchInput!: ElementRef;
+  @ViewChild('SearchFrame') SearchFrame!: ElementRef;
 
-  constructor(private comicService: ComicService) {}
-  ngOnInit() {}
-  ngOnChanges(change: any) {
-  }
-  SendSearchReq()
-  {
+  constructor(private comicService: ComicService) { }
+  ngOnInit() { }
+  ngOnChanges(change: any) { }
+  SendSearchReq() {
     if (this.searchText != '') {
       this.comicService
         .getSearchComic(this.searchText)
@@ -35,20 +42,31 @@ export class ListSearchComicComponent implements OnInit {
   OnSearchChange(e: Event) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-      this.searchText = this.SearchField.nativeElement.value;
+      this.searchText = this.SearchInput.nativeElement.value;
       this.SendSearchReq();
     }, this.doneTypingInterval);
   }
   OnSearchFocus = (isFoucs: boolean): boolean => {
     this.isSearching = isFoucs;
-    if (isFoucs) this.SearchField.nativeElement.classList.add('!w-full');
-    else this.SearchField.nativeElement.classList.remove('!w-full');
+    if (isFoucs) {
+      this.SearchInput.nativeElement.classList.add('!w-full');
+    } else {
+      this.SearchFrame.nativeElement.classList.add('hidden');
+      this.SearchInput.nativeElement.classList.remove('!w-full');
+    }
+
+    return true;
+  };
+  OnSearchClick = (): boolean => {
+    this.SearchFrame.nativeElement.classList.remove('hidden');
+    this.SearchInput.nativeElement.focus();
+
     return true;
   };
 
   clearSearch(): void {
     this.searchText = '';
-    this.SearchField.nativeElement.value = '';
+    this.SearchInput.nativeElement.value = '';
     this.listSearch = [];
   }
 }
