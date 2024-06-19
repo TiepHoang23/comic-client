@@ -73,11 +73,11 @@ export class NavComponent {
   }
   toggleSidebar() {
     this.showslidebar = !this.showslidebar
-    let height = 0;
-    for (const child of this.dropdownNavbar.nativeElement.children) {
-      height += child.getBoundingClientRect().height
-    }
     if (this.showslidebar) {
+      let height = 0;
+      for (const child of this.dropdownNavbar.nativeElement.children) {
+        height += child.getBoundingClientRect().height
+      }
       //set height style
       this.dropdownNavbar.nativeElement.style.height = height + 'px';
     } else {

@@ -116,8 +116,7 @@ export class CarouselLandingComponent implements OnInit {
 
   private startAutoSlide() {
     this.interval = setInterval(() => {
-      this.recalpulate(false);
-
+      this.prev();
     }, 4000);
   }
 
@@ -127,6 +126,7 @@ export class CarouselLandingComponent implements OnInit {
       return;
     }
     this.lastTime = now;
+    
     this.recalpulate(true);
   }
 

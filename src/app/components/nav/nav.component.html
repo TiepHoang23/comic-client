@@ -245,7 +245,7 @@
       class="ml-auto border rounded cursor-pointer"
       (click)="toggleSidebar()"
     >
-      <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+      <svg *ngIf="!this.showslidebar" class="w-[28px] h-[28px] text-white" fill="currentColor" viewBox="0 0 24 24">
         <path
           d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
           stroke="#000000"
@@ -253,6 +253,20 @@
           stroke-linecap="round"
           stroke-linejoin="round"
         />
+      </svg>
+      <svg 
+        *ngIf="this.showslidebar" class="w-[28px] h-[28px] text-white" fill="currentColor" viewBox="0 0 24 24">
+
+        <g id="Menu / Close_LG">
+          <path
+            id="Vector"
+            d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </g>
       </svg>
     </div>
   </div>
