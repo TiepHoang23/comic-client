@@ -1,10 +1,14 @@
 <div class="relative inline-block w-auto lg:w-[245px] text-sm font-normal">
   <div
     *ngIf="mainChapter"
-    class="border border-solid border-[#ccc] rounded px-3 py-2 cursor-pointer flex justify-between items-center"
+    class="border border-solid border-[#ccc] rounded px-3 cursor-pointer flex justify-between items-center whitespace-nowrap min-w-40"
     (click)="toggleDropdown()"
   >
-    {{ mainChapter?.title ? "#" + mainChapter.title : "Select Chapter" }}
+    {{
+      mainChapter?.title
+        ? "#" + mainChapter.title?.split(":")?.[0]
+        : "Select Chapter"
+    }}
     <svg
       class="h-8 w-8 transition-transform duration-200 text-gray-500"
       [ngClass]="{ 'rotate-180': isDropdownOpen, 'rotate-0': !isDropdownOpen }"
@@ -35,7 +39,7 @@
         class="h-[40px] text-gray-500 m-3"
         *ngIf="filteredChapters.length == 0"
       >
-        Không tìm thấy chương ^^!...
+        Không tìm thấy chương ...
       </div>
       <div
         *ngFor="let chapter of filteredChapters"

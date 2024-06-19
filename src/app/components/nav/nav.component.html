@@ -1,5 +1,5 @@
 <header class="bg-white p-3 border-b-primary border-2">
-  <div class="container mx-auto flex justify-between">
+  <div class="md:container mx-auto flex justify-between">
     <!-- Logo or brand name -->
     <a
       [routerLink]="['/']"
@@ -38,50 +38,51 @@
         class="flex cursor-pointer text-sm relative bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
       >
         <img class="w-10 h-10 rounded-full" [src]="avatar" alt="user photo" />
-
-        <div
-          class="invisible min-w-48 overflow-hidden z-30 mt-10 absolute right-0 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-          id="user-dropdown"
-        >
-          <div class="px-4 py-3 bg-white">
-            <span class="block text-sm text-gray-900 dark:text-white">
-              {{ user.firstName }}
-            </span>
-          </div>
-          <ul class="py-2 bg-white">
-            <li>
-              <a
-                [routerLink]="['/tai-khoan']"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >Trang cá nhân</a
-              >
-            </li>
-            <li>
-              <a
-                [routerLink]="['/theo-doi']"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >Theo dõi</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >Cài đặt</a
-              >
-            </li>
-
-            <li>
-              <a
-                href="/"
-                (click)="onLogoutClick()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >Đăng xuất</a
-              >
-            </li>
-          </ul>
+        <div class="relative" [ngClass]="{ hidden: !showaccount }">
           <div
-            class="fixed bg-black opacity-50 top-0 left-0 w-full h-full -z-10"
+            [@showHide]="showaccount ? 'visible' : 'hidden'"
+            class="transition-all min-w-48 overflow-hidden z-30 mt-10 absolute right-0 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+          >
+            <div class="px-4 py-3 bg-white">
+              <span class="block text-sm text-gray-900 dark:text-white">
+                {{ user.firstName }}
+              </span>
+            </div>
+            <ul class="py-2 bg-white">
+              <li>
+                <a
+                  [routerLink]="['/tai-khoan']"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Trang cá nhân</a
+                >
+              </li>
+              <li>
+                <a
+                  [routerLink]="['/theo-doi']"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Theo dõi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Cài đặt</a
+                >
+              </li>
+
+              <li>
+                <a
+                  href="/"
+                  (click)="onLogoutClick()"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >Đăng xuất</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="fixed bg-black opacity-50 top-0 left-0 w-full h-full z-20"
           ></div>
         </div>
       </div>
@@ -235,4 +236,176 @@
       >
     </li>
   </ul>
+</nav>
+<nav
+  class="relative bg-primary-100 text-sm text-white md:hidden flex flex-col items-center"
+>
+  <div class="flex items-center mx-auto px-3 h-10 w-full">
+    <a [routerLink]="['/']">Trang chủ</a>
+    <div
+      class="ml-auto border rounded cursor-pointer"
+      (click)="toggleSidebar()"
+    >
+      <svg
+        *ngIf="!this.showslidebar"
+        class="w-[28px] h-[28px] text-white"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
+          stroke="#000000"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <svg
+        *ngIf="this.showslidebar"
+        class="w-[28px] h-[28px] text-white"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <g id="Menu / Close_LG">
+          <path
+            id="Vector"
+            d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div
+    class="w-full bg-primary-100 border-t transition-[height] duration-200 overflow-hidden"
+    style="height: 0px"
+    #dropdownNavbar
+  >
+    <div class="flex h-10 text-sm">
+      <a
+        [routerLink]="['/tim-kiem-nang-cao']"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 mr-1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+          ></path></svg
+        >Hot</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <a
+        href="https://www.facebook.com/groups/doctruyenonline.vn"
+        target="blank"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+          ></path></svg
+        >Thể loại</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <a
+        [routerLink]="['/theo-doi']"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
+          ></path></svg
+        >Theo dõi</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <a
+        [routerLink]="['/xep-hang']"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="16"
+          viewBox="0 0 512 512"
+          class="mr-1"
+        >
+          <path
+            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
+          ></path></svg
+        >Xếp hạng</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <a
+        [routerLink]="['/tim-truyen']"
+        target="blank"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+          ></path></svg
+        >Tìm kiếm nâng cao</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <a
+        [routerLink]="['/lich-su']"
+        target="blank"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+          ></path></svg
+        >Lịch sử</a
+      >
+    </div>
+    <div class="flex h-10 text-sm">
+      <button class="px-3 h-full flex items-center">Đăng Ký</button>
+    </div>
+    <div class="flex h-10 text-sm">
+      <button class="px-3 h-full flex items-center">Đăng Nhập</button>
+    </div>
+  </div>
 </nav>

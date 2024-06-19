@@ -18,18 +18,17 @@ export class AppComponent implements OnInit {
       .subscribe((e: any) => {
         if (e.position) {
           // backward navigation
-          viewportScroller.scrollToPosition(e.position);
+          window.scrollTo({ top: e.position[1], left: e.position[0], behavior: "instant" })// scrollToPosition(e.position);
         } else if (e.anchor) {
           viewportScroller.scrollToAnchor(e.anchor);
         } else {
-          // forward navigation
-          viewportScroller.scrollToPosition([0, 0]);
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" })
         }
       });
 
   }
 
   ngOnInit(): void {
-  
+
   }
 }

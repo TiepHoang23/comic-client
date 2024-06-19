@@ -1,6 +1,6 @@
 <div
   id="content"
-  class="container mx-auto mt-10"
+  class="md:container mx-auto mt-10"
   (keydown.enter)="
     ClickSearch();
     selectOptions.genres.isShow = false;
@@ -453,9 +453,8 @@
       </button>
     </div>
   </div>
-
-  <div class="flex flex-row mt-10">
-    <div id="listComic" class="basis-9/12">
+  <div class="grid grid-cols-1 xl:grid-cols-4 gap-4" id="listComic">
+    <div id="comics" class="col-span-1 xl:col-span-3 row-start-1">
       <grid-comic
         [listComics]="listComics"
         [num_preview]="40"
@@ -463,16 +462,16 @@
           '(' + (totalpage - 1) * 40 + listComics.length + ') kết quả tìm kiếm'
         "
         [_class]="
-          'grid gap-[12px] grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
+          'grid gap-[12px] grid-cols-2 sm:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
         "
       >
       </grid-comic>
     </div>
-
-    <div class="basis-3/12 ml-4">
+    <div class="col-span-1">
       <app-top-list class="mt-5 block"></app-top-list>
     </div>
   </div>
+
   <pagination-component
     (OnChange)="OnChangePage($event)"
     [currentPage]="currentPage"

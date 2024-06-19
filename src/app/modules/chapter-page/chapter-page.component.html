@@ -1,9 +1,9 @@
 <div class="bg-[#333] min-h-screen" #screenContainer>
   <div
-    class="mx-auto container flex flex-col items-center font-bold text-base static"
+    class="mx-auto md:container flex flex-col items-center font-bold text-base static"
   >
     <ol
-      class="flex items-center h-full w-full flex-wrap text-white text-sm m-2"
+      class="flex items-center h-full w-full flex-wrap text-white text-[0.7rem] lg:text-[0.75rem] m-2 line-clamp-1 whitespace-nowrap"
       itemscope=""
       itemtype="https://schema.org/BreadcrumbList"
       *ngIf="comic"
@@ -62,10 +62,7 @@
           class="hover:underline capitalize"
           title="{{ comic.title }}"
           itemprop="item"
-          ><span
-            class="block max-w-[250px] lg:max-w-full truncate"
-            itemprop="name"
-          >
+          ><span class="block max-w-[250px] lg:max-w-full" itemprop="name">
             {{ comic.title }}
           </span></a
         >
@@ -106,8 +103,8 @@
         <meta itemprop="position" content="3" />
       </li>
     </ol>
-    <div class="bg-white p-5 text-center w-full rounded-md">
-      <div class="mt-10" *ngIf="comic">
+    <div class="bg-white p2 lg:p-5 text-center w-full rounded-t-lg">
+      <div class="mt-6 lg:mt-10" *ngIf="comic">
         <button
           class="bg-[#f0ad4e] px-2 py-1 rounded-lg flex text-white text-sm mx-auto my-2 items-center gap-1"
         >
@@ -126,19 +123,20 @@
             <line x1="12" y1="9" x2="12" y2="13" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
-          <span class="font-normal text-sm"> Báo Lỗi</span>
+          <span class="font-normal text-sm">Báo lỗi</span>
         </button>
 
-        <h1 class="text-center m-3 font-bold text-xl">
+        <h1 class="text-center font-bold text-xl">
           <a
             href="/truyen-tranh/thien-tai-bong-da-tien-dao-so-1"
             title="{{ comic.title }}"
-            class="cursor-pointer text-primary-100 text-xl font-bold uppercase hover:underline border-2 border-primary-100 p-2"
+            class="cursor-pointer text-primary-100 text-xl font-bold uppercase hover:underline"
             >{{ comic.title }}</a
           >
         </h1>
-        <p class="text-sm font-thin text-gray-500">
-          Đăng lúc: {{ mainChapter.updateAt | date: " dd/MM/yyyy" }}
+        <p class="text-sm font-medium">{{ mainChapter.title }}</p>
+        <p class="text-[0.75rem] font-thin text-gray-500">
+          Đăng lúc: {{ mainChapter.updateAt | date : " dd/MM/yyyy" }}
         </p>
       </div>
 
@@ -146,7 +144,7 @@
     </div>
     <div
       #controlBar
-      class="flex items-center w-full justify-center z-10 bg-white py-2 px-3 lg:px-0 rounded-b-lg"
+      class="flex items-center w-full justify-center z-10 bg-white py-2 px-3 lg:px-0 rounded-b-lg gap-1 xl:gap-2"
       *ngIf="mainChapter"
     >
       <a href="" title="Truyện tranh"
@@ -167,8 +165,8 @@
           <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg
       ></a>
       <div
-        class="relative m-3"
         title="Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter"
+        class="p-1"
       >
         <svg
           class="h-6 w-6 text-secondary-100 hover:text-primary-100"
@@ -187,92 +185,96 @@
           <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
       </div>
-      <a href="">
-        <svg
-          class="h-[46px] w-8 hover:opacity-80 flex justify-center rounded-l-lg text-white bg-gray-200"
+      <div id="select-chapter-dropdown" class="flex">
+        <div
+          class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
+          (click)="navigateChapter(true)"
           [ngClass]="{
             'text-white bg-primary-100': mainChapter.chapterNumber != 1
           }"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          (click)="navigateChapter(true)"
         >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <polyline points="15 6 9 12 15 18" />
-        </svg>
-      </a>
-      <app-chapter-selector
-        class="mx-3"
-        [comic]="comic"
-        [mainChapter]="mainChapter"
-        (chapterChange)="OnChangeChapter($event)"
-      ></app-chapter-selector>
+          <svg
+            class="h-8 w-8 text-white"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <polyline points="15 6 9 12 15 18" />
+          </svg>
+        </div>
 
-      <div
-        class="w-[35px] h-[46px] bg-[#ccc] flex justify-center items-center rounded-r-lg mr-3 cursor-pointer"
-        (click)="navigateChapter(false)"
-        [ngClass]="{
-          'text-white bg-primary-100':
-            mainChapter.chapterNumber != comic.chapters!.length
-        }"
-      >
-        <svg
-          class="h-8 w-8 text-white"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+        <app-chapter-selector
+          class="mx-1 lg:mx-2"
+          [comic]="comic"
+          [mainChapter]="mainChapter"
+          (chapterChange)="OnChangeChapter($event)"
+        ></app-chapter-selector>
+
+        <div
+          class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
+          (click)="navigateChapter(false)"
+          [ngClass]="{
+            'text-white bg-primary-100':
+              mainChapter.chapterNumber != comic.chapters!.length
+          }"
         >
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
+          <svg
+            class="h-8 w-8 text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </div>
       </div>
+
       <button title="Zoom In" class="p-1 rounded flex">
         @if (!isLimitZoom) {
-          <svg
-            (click)="ZoomImage(true)"
-            class="h-6 w-6 text-black hover:text-primary-100 relative"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            <line x1="11" y1="8" x2="11" y2="14" />
-            <line x1="8" y1="11" x2="14" y2="11" />
-          </svg>
+        <svg
+          (click)="ZoomImage(true)"
+          class="h-6 w-6 text-black hover:text-primary-100 relative"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          <line x1="11" y1="8" x2="11" y2="14" />
+          <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
         } @else {
-          <svg
-            (click)="ZoomImage(false)"
-            class="h-6 w-6 text-black hover:text-primary-100 relative"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            <line x1="8" y1="11" x2="14" y2="11" />
-          </svg>
+        <svg
+          (click)="ZoomImage(false)"
+          class="h-6 w-6 text-black hover:text-primary-100 relative"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
         }
 
         <!-- <span>100%</span> -->
         <div
-          *ngIf="getZoomPercentage() !== 100"
+          *ngIf="zoomLevel !== defaultZoomLevel"
           id="zoom-progress"
-          class="absolute bg-white rounded shadow-sm mt-10 p-2 space-x-2 flex items-center"
+          class="absolute bg-white rounded shadow-sm mt-12 p-2 space-x-2 flex items-center -translate-x-3/4 lg:translate-x-0 min-w-48"
         >
           <div class="flex items-center gap-4">
             <p class="text-secondary-100 text-sm font-thin">
@@ -336,7 +338,7 @@
 
       <button
         title="Full Screen"
-        class="ml-2 p-1 rounded"
+        class="p-1 rounded"
         (click)="enterFullscreen()"
       >
         <svg
@@ -365,14 +367,14 @@
       [imageUrl]="page.url"
       [style.width]="'calc(50% + ' + (zoomLevel * 100) / 2 + '%)'"
       [direction]="direction"
-      class="block relative object-contain transition-transform duration-200 ease-in-out cursor-zoom-in mx-auto"
+      class="block relative object-contain transition-transform duration-200 ease-in-out mx-auto"
     ></app-image-loader>
   </div>
   @if (comic) {
-    <comment-component
-      [comicId]="comic.id"
-      [lastchapterID]="comic.chapters![0].id"
-    ></comment-component>
+  <comment-component
+    [comicId]="comic.id"
+    [lastchapterID]="comic.chapters![0].id"
+  ></comment-component>
   }
 </div>
 <a
