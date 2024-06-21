@@ -277,7 +277,7 @@
           <div
             *ngIf="zoomLevel !== defaultZoomLevel"
             id="zoom-progress"
-            class="absolute bg-white rounded shadow-sm mt-12 p-2 space-x-2 flex items-center -translate-x-3/4 lg:translate-x-0 min-w-48"
+            class="absolute bg-white rounded shadow-sm mt-10 p-2 space-x-2 flex items-center -translate-x-3/4 lg:translate-x-0 min-w-48"
           >
             <div class="flex items-center gap-4">
               <p class="text-secondary-100 text-sm font-thin">
@@ -358,7 +358,7 @@
             />
           </svg>
         </button>
-        <button (click)="ToggleMenu(!isToggle)">
+        <button (click)="ToggleMenu(!isToggle)" #ToggleMenuButton>
           <svg
             class="h-6 w-6"
             viewBox="0 0 24 24"
@@ -456,11 +456,17 @@
           >
             <span
               class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin"
-              >Tự động chuyển chương</span
             >
-            <input type="checkbox" value="" class="sr-only peer" />
+              Tự động chuyển chương
+            </span>
+            <input
+              type="checkbox"
+              value=""
+              class="sr-only peer"
+              (change)="onCheckboxChange($event)"
+            />
             <div
-              class="relative w-12 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
+              class="relative w-12 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
             ></div>
           </label>
         </div>
@@ -482,6 +488,7 @@
   </div>
   @if (comic) {
     <comment-component
+      #commentComponent
       [comicId]="comic.id"
       [lastchapterID]="comic.chapters![0].id"
     ></comment-component>

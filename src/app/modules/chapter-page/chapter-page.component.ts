@@ -31,11 +31,15 @@ export class ChapterPageComponent {
   isToggle!: boolean;
 
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
-  @ViewChild('controlBar') controlBar!: ElementRef;
+  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
 
+  @ViewChild('ToggleMenuButton') ToggleMenuButton!: ElementRef;
+
+  @ViewChild('controlBar') controlBar!: ElementRef;
   @ViewChild('MenuNavigation')
   MenuNavigation!: ElementRef;
-  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
+  @ViewChild('commentComponent')
+  commentComponent!: ElementRef;
 
   private readonly zoomStep: number = 0.2;
   private readonly minZoomLevel: number = 0;
@@ -46,8 +50,10 @@ export class ChapterPageComponent {
   public isLimitZoom: boolean = false;
   private lastScrollTop = 0;
   elementOffset = 0;
+
   isVertical = true;
   showScrollToTop = false;
+  isAutoNextChapter = false;
 
   constructor(
     private comicService: ComicService,
@@ -69,7 +75,7 @@ export class ChapterPageComponent {
     this.setZoomDefaultLevel();
     this.zoomLevel = this.defaultZoomLevel;
     this.isSticky = false;
-    this.isToggle = true;
+    this.isToggle = false;
     // Signal to cancel the previous request
 
     this.route.params.subscribe((params) => {
@@ -94,12 +100,12 @@ export class ChapterPageComponent {
   ToggleMenu(stage: boolean) {
     this.isToggle = stage;
     if (stage) {
-      this.renderer.addClass(
+      this.renderer.removeClass(
         this.MenuNavigation.nativeElement,
         '-translate-y-full',
       );
     } else {
-      this.renderer.removeClass(
+      this.renderer.addClass(
         this.MenuNavigation.nativeElement,
         '-translate-y-full',
       );
@@ -115,6 +121,17 @@ export class ChapterPageComponent {
       'chapter',
       chapterId,
     ]);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent): void {
+    if (!this.isToggle) return;
+    if (
+      !this.MenuNavigation.nativeElement.contains(event.target) &&
+      !this.ToggleMenuButton.nativeElement.contains(event.target)
+    ) {
+      this.ToggleMenu(false);
+    }
   }
 
   ZoomImage(zoomIn: boolean): void {
@@ -161,11 +178,11 @@ export class ChapterPageComponent {
     this.navigateChapter(false);
   }
 
-  navigateChapter(next: boolean): void {
+  navigateChapter(isNext: boolean): void {
     const currentChapterIndex = this.comic.chapters!.findIndex(
       (chapter) => chapter.id === this.mainChapter.id,
     );
-    const targetChapterIndex = next
+    const targetChapterIndex = isNext
       ? currentChapterIndex + 1
       : currentChapterIndex - 1;
 
@@ -209,10 +226,32 @@ export class ChapterPageComponent {
     this.isHovered = state;
   }
 
+  onCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.isAutoNextChapter = checkbox.checked;
+    // console.log('isAutoNextChapter', this.isAutoNextChapter);
+  }
+
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     if (!this.controlBar) return;
     const windowScroll = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    const isLastPage = windowScroll + windowHeight >= documentHeight;
+    if (isLastPage) {
+      if (this.isAutoNextChapter) {
+        this.navigateChapter(false);
+        return;
+      } else {
+        this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
+        this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
+        this.showScrollToTop = true;
+        this.isSticky = true;
+        return;
+      }
+    }
     if (windowScroll > this.elementOffset) {
       if (windowScroll < this.lastScrollTop) {
         this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
