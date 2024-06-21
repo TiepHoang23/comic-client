@@ -1,6 +1,5 @@
 <div
   class="bg-slate-200 rounded cursor-pointer md:hidden"
-
   (click)="OnSearchClick()"
 >
   <svg
@@ -64,7 +63,6 @@
   </div>
   <!-- Nhập từ khóa tìm kiếm -->
   <div
-    
     *ngIf="isSearching"
     (CloseEvent)="OnSearchFocus(false)"
     class="transition-[width] absolute rounded-md z-[20] flex w-full mt-16 md:mt-10 flex-col bg-white px-4 py-3 shadow-xl"
@@ -91,7 +89,7 @@
       } @else {
       <div class="flex items-center">
         <div class="text-md flex-grow mt-3 text-gray-400">
-          Kết quả tìm kiếm...
+          Nhập từ khóa tìm kiếm...
         </div>
       </div>
       }
