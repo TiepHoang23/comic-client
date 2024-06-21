@@ -454,11 +454,11 @@
           <label
             class="items-center cursor-pointer hover:bg-slate-100 p-3 rounded"
           >
-            <span
+            <p
               class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin"
             >
               Tự động chuyển chương
-            </span>
+            </p>
             <input
               type="checkbox"
               value=""
@@ -466,13 +466,45 @@
               (change)="onCheckboxChange($event)"
             />
             <div
-              class="relative w-12 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
+              class="relative w-12 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-6 rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
             ></div>
           </label>
+          <button
+            (click)="toggleNightLight(!isNightMode)"
+            class="rounded-lg p-3 hover:bg-slate-100"
+            style="min-height: 2.5rem"
+            [ngClass]="{ 'bg-slate-100 text-primary-100': isNightMode }"
+          >
+            <span class="font-medium select-none pointer-events-none">
+              <p class="text-[0.75rem] font-thin">Chế độ ban đêm</p>
+              <svg
+                class="h-6 w-6"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <circle cx="12" cy="12" r="3" />
+                <line x1="12" y1="5" x2="12" y2="3" />
+                <line x1="17" y1="7" x2="18.4" y2="5.6" />
+                <line x1="19" y1="12" x2="21" y2="12" />
+                <line x1="17" y1="17" x2="18.4" y2="18.4" />
+                <line x1="12" y1="19" x2="12" y2="21" />
+                <line x1="7" y1="17" x2="5.6" y2="18.4" />
+                <line x1="6" y1="12" x2="4" y2="12" />
+                <line x1="7" y1="7" x2="5.6" y2="5.6" /></svg
+            ></span>
+          </button>
         </div>
       </div>
     </div>
   </div>
+
   <div
     #imageContainer
     id="image-container"
@@ -486,6 +518,7 @@
       class="block relative object-contain transition-transform duration-200 ease-in-out mx-auto"
     ></app-image-loader>
   </div>
+
   @if (comic) {
     <comment-component
       #commentComponent
