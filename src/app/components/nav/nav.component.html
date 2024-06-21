@@ -11,6 +11,7 @@
     <!-- Search input -->
     <div class="flex space-x-3 items-center">
       <list-search-comic />
+
       <img
         (click)="themeService.ToggleTheme()"
         alt=""
@@ -99,7 +100,7 @@
     <li class="h-full hover:bg-white rounded-t-lg">
       <a
         routerLink="/"
-        class="pr-4 h-full hover:bg-[#fff] hover:fill-black items-center flex fill-white rounded-t-lg"
+        class="px-4 h-full hover:bg-[#fff] hover:fill-black items-center flex fill-white rounded-t-lg"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           height="16"
@@ -245,7 +246,12 @@
       class="ml-auto border rounded cursor-pointer"
       (click)="toggleSidebar()"
     >
-      <svg *ngIf="!this.showslidebar" class="w-[28px] h-[28px] text-white" fill="currentColor" viewBox="0 0 24 24">
+      <svg
+        *ngIf="!this.showslidebar"
+        class="w-[28px] h-[28px] text-white"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path
           d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
           stroke="#000000"
@@ -254,9 +260,12 @@
           stroke-linejoin="round"
         />
       </svg>
-      <svg 
-        *ngIf="this.showslidebar" class="w-[28px] h-[28px] text-white" fill="currentColor" viewBox="0 0 24 24">
-
+      <svg
+        *ngIf="this.showslidebar"
+        class="w-[28px] h-[28px] text-white"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
         <g id="Menu / Close_LG">
           <path
             id="Vector"
