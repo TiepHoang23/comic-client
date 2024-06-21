@@ -103,7 +103,7 @@
         <meta itemprop="position" content="3" />
       </li>
     </ol>
-    <div class="bg-white p2 lg:p-5 text-center w-full rounded-t-lg">
+    <div class="bg-white p2 lg:p-5 text-center w-full rounded-t-lg z-20">
       <div class="mt-6 lg:mt-10" *ngIf="comic">
         <button
           class="bg-[#f0ad4e] px-2 py-1 rounded-lg flex text-white text-sm mx-auto my-2 items-center gap-1"
@@ -136,65 +136,25 @@
         </h1>
         <p class="text-sm font-medium">{{ mainChapter.title }}</p>
         <p class="text-[0.75rem] font-thin text-gray-500">
-          Đăng lúc: {{ mainChapter.updateAt | date : " dd/MM/yyyy" }}
+          Đăng lúc: {{ mainChapter.updateAt | date: " dd/MM/yyyy" }}
         </p>
       </div>
 
       <div id="position-btn"></div>
     </div>
     <div
-      #controlBar
-      class="flex items-center w-full justify-center z-10 bg-white py-2 px-3 lg:px-0 rounded-b-lg gap-1 xl:gap-2"
       *ngIf="mainChapter"
+      #controlBar
+      class="relative flex flex-row justify-center w-full items-center z-10 bg-white rounded-b-lg"
     >
-      <a href="" title="Truyện tranh"
-        ><svg
-          class="h-7 w-7 text-secondary-100 hover:text-primary-100"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <polyline points="5 12 3 12 12 3 21 12 19 12" />
-          <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-          <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg
-      ></a>
       <div
-        title="Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter"
-        class="p-1"
+        class="flex justify-center w-full bg-white z-20 items-center h-full rounded-b-lg py-2 lg:px-0 gap-1 xl:gap-2"
       >
-        <svg
-          class="h-6 w-6 text-secondary-100 hover:text-primary-100"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <circle cx="12" cy="12" r="9" />
-          <line x1="12" y1="8" x2="12" y2="12" />
-          <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-      </div>
-      <div id="select-chapter-dropdown" class="flex">
-        <div
-          class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
-          (click)="navigateChapter(true)"
-          [ngClass]="{
-            'text-white bg-primary-100': mainChapter.chapterNumber != 1
-          }"
-        >
-          <svg
-            class="h-8 w-8 text-white"
+        <a href="" title="Truyện tranh"
+          ><svg
+            class="h-7 w-7 text-secondary-100 hover:text-primary-100"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             stroke-width="2"
             stroke="currentColor"
@@ -203,27 +163,204 @@
             stroke-linejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" />
-            <polyline points="15 6 9 12 15 18" />
-          </svg>
-        </div>
-
-        <app-chapter-selector
-          class="mx-1 lg:mx-2"
-          [comic]="comic"
-          [mainChapter]="mainChapter"
-          (chapterChange)="OnChangeChapter($event)"
-        ></app-chapter-selector>
-
+            <polyline points="5 12 3 12 12 3 21 12 19 12" />
+            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg
+        ></a>
         <div
-          class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
-          (click)="navigateChapter(false)"
-          [ngClass]="{
-            'text-white bg-primary-100':
-              mainChapter.chapterNumber != comic.chapters!.length
-          }"
+          title="Sử dụng mũi tên trái ( ← ) hoặc phải ( → ) để chuyển chapter"
+          class="p-1"
         >
           <svg
-            class="h-8 w-8 text-white"
+            class="h-6 w-6 text-secondary-100 hover:text-primary-100"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </div>
+        <div id="select-chapter-dropdown" class="flex">
+          <div
+            class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
+            (click)="navigateChapter(true)"
+            [ngClass]="{
+              'text-white bg-primary-100': mainChapter.chapterNumber != 1
+            }"
+          >
+            <svg
+              class="h-8 w-8 text-white"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <polyline points="15 6 9 12 15 18" />
+            </svg>
+          </div>
+
+          <app-chapter-selector
+            class="mx-1 lg:mx-2"
+            [comic]="comic"
+            [mainChapter]="mainChapter"
+            (chapterChange)="OnChangeChapter($event)"
+          ></app-chapter-selector>
+
+          <div
+            class="bg-[#ccc] flex justify-center items-center rounded-lg cursor-pointer text-white"
+            (click)="navigateChapter(false)"
+            [ngClass]="{
+              'text-white bg-primary-100':
+                mainChapter.chapterNumber != comic.chapters!.length
+            }"
+          >
+            <svg
+              class="h-8 w-8 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </div>
+
+        <button title="Zoom In" class="p-1 rounded flex">
+          @if (!isLimitZoom) {
+            <svg
+              (click)="ZoomImage(true)"
+              class="h-6 w-6 text-black hover:text-primary-100 relative"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <line x1="11" y1="8" x2="11" y2="14" />
+              <line x1="8" y1="11" x2="14" y2="11" />
+            </svg>
+          } @else {
+            <svg
+              (click)="ZoomImage(false)"
+              class="h-6 w-6 text-black hover:text-primary-100 relative"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <line x1="8" y1="11" x2="14" y2="11" />
+            </svg>
+          }
+
+          <!-- <span>100%</span> -->
+          <div
+            *ngIf="zoomLevel !== defaultZoomLevel"
+            id="zoom-progress"
+            class="absolute bg-white rounded shadow-sm mt-12 p-2 space-x-2 flex items-center -translate-x-3/4 lg:translate-x-0 min-w-48"
+          >
+            <div class="flex items-center gap-4">
+              <p class="text-secondary-100 text-sm font-thin">
+                {{ getZoomPercentage() }}%
+              </p>
+              <div class="flex gap-2">
+                <svg
+                  class="h-4 w-4 text-secondary-100 font-bold"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  (click)="ZoomImage(false)"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                <svg
+                  class="h-4 w-4 text-secondary-100"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  (click)="ZoomImage(true)"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </div>
+            </div>
+
+            <button
+              (click)="resetView()"
+              title="Reset View"
+              class="mr-2 p-1 rounded-lg flex border-primary-100 border text-sm font-light hover:opacity-80"
+            >
+              <svg
+                class="h-4 w-4 text-primary-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+
+              <span class="ml-2 text-primary-100">Đặt lại</span>
+            </button>
+          </div>
+        </button>
+
+        <button
+          title="Full Screen"
+          class="p-1 rounded"
+          (click)="enterFullscreen()"
+        >
+          <svg
+            class="h-6 w-6 text-black hover:text-primary-100"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+            />
+          </svg>
+        </button>
+        <button (click)="ToggleMenu(!isToggle)">
+          <svg
+            class="h-6 w-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -231,130 +368,103 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <polyline points="9 18 15 12 9 6" />
+            <circle cx="12" cy="12" r="1" />
+            <circle cx="12" cy="5" r="1" />
+            <circle cx="12" cy="19" r="1" />
           </svg>
-        </div>
+        </button>
       </div>
 
-      <button title="Zoom In" class="p-1 rounded flex">
-        @if (!isLimitZoom) {
-        <svg
-          (click)="ZoomImage(true)"
-          class="h-6 w-6 text-black hover:text-primary-100 relative"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          <line x1="11" y1="8" x2="11" y2="14" />
-          <line x1="8" y1="11" x2="14" y2="11" />
-        </svg>
-        } @else {
-        <svg
-          (click)="ZoomImage(false)"
-          class="h-6 w-6 text-black hover:text-primary-100 relative"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          <line x1="8" y1="11" x2="14" y2="11" />
-        </svg>
-        }
+      <div
+        #MenuNavigation
+        class="mt-4 absolute transition-transform -translate-y-full px-2.5 py-2 top-0 w-full rounded-b-lg bg-white shadow-md shadow-slate-300"
+      >
+        <div class="mt-4 flex items-center justify-center gap-2">
+          <button
+            class="rounded-lg flex items-center p-3 hover:bg-slate-100"
+            style="min-height: 2.5rem"
+            (click)="changeDirectionReading(true)"
+            [ngClass]="{ 'bg-slate-100  text-primary-100': isVertical }"
+          >
+            <span
+              class="items-center justify-center font-medium select-none"
+              style="pointer-events: none; justify-content: start"
+            >
+              <label class="text-[0.75rem] font-thin"> Đọc dọc</label>
 
-        <!-- <span>100%</span> -->
-        <div
-          *ngIf="zoomLevel !== defaultZoomLevel"
-          id="zoom-progress"
-          class="absolute bg-white rounded shadow-sm mt-12 p-2 space-x-2 flex items-center -translate-x-3/4 lg:translate-x-0 min-w-48"
-        >
-          <div class="flex items-center gap-4">
-            <p class="text-secondary-100 text-sm font-thin">
-              {{ getZoomPercentage() }}%
-            </p>
-            <div class="flex gap-2">
               <svg
-                class="h-4 w-4 text-secondary-100 font-bold"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                (click)="ZoomImage(false)"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-              <svg
-                class="h-4 w-4 text-secondary-100"
+                xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                (click)="ZoomImage(true)"
+                viewBox="0 0 24 24"
+                class="icon mr-4"
+                style="color: currentcolor"
               >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg>
-            </div>
-          </div>
-
-          <button
-            (click)="resetView()"
-            title="Reset View"
-            class="mr-2 p-1 rounded-lg flex border-primary-100 border text-sm font-light hover:opacity-80"
-          >
-            <svg
-              class="h-4 w-4 text-primary-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-
-            <span class="ml-2 text-primary-100">Đặt lại</span>
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
+                ></path>
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 2v7h7"
+                ></path></svg
+            ></span>
           </button>
-        </div>
-      </button>
+          <button
+            data-v-8d292eb9=""
+            class="rounded-lg flex items-center p-3 hover:bg-slate-100"
+            style="min-height: 2.5rem"
+            (click)="changeDirectionReading(false)"
+            [ngClass]="{ 'bg-slate-100 text-primary-100': !isVertical }"
+          >
+            <span
+              data-v-8d292eb9=""
+              class="items-center justify-center font-medium select-none pointer-events-none"
+              style="justify-content: start"
+            >
+              <label class="text-[0.75rem] font-thin"> Đọc ngang</label>
+              <svg
+                data-v-9ba4cb7e=""
+                data-v-8d292eb9=""
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="icon mr-4"
+                style="color: currentcolor"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M22 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6M2 4h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2"
+                ></path></svg
+            ></span>
+          </button>
 
-      <button
-        title="Full Screen"
-        class="p-1 rounded"
-        (click)="enterFullscreen()"
-      >
-        <svg
-          class="h-6 w-6 text-black hover:text-primary-100"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-          />
-        </svg>
-      </button>
+          <label
+            class="items-center cursor-pointer hover:bg-slate-100 p-3 rounded"
+          >
+            <span
+              class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin"
+              >Tự động chuyển chương</span
+            >
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div
+              class="relative w-12 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
+            ></div>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
   <div
@@ -366,23 +476,24 @@
       *ngFor="let page of ListChapterImg; let i = index"
       [imageUrl]="page.url"
       [style.width]="'calc(50% + ' + (zoomLevel * 100) / 2 + '%)'"
-      [direction]="direction"
+      [vertical]="isVertical"
       class="block relative object-contain transition-transform duration-200 ease-in-out mx-auto"
     ></app-image-loader>
   </div>
   @if (comic) {
-  <comment-component
-    [comicId]="comic.id"
-    [lastchapterID]="comic.chapters![0].id"
-  ></comment-component>
+    <comment-component
+      [comicId]="comic.id"
+      [lastchapterID]="comic.chapters![0].id"
+    ></comment-component>
   }
 </div>
 <a
   (click)="scrollToTop($event)"
-  class="fixed bottom-10 right-10 z-40 mr-4 mb-4"
+  class="fixed bottom-10 right-2 lg:right-10 z-40 mr-4 mb-4 transition-opacity duration-1000 ease-in-out"
   title="Back To Top"
+  [ngClass]="{ 'opacity-0': !showScrollToTop }"
   ><svg
-    class="h-10 w-10 text-white bg-secondary-100 rounded cursor-pointer hover:-translate-y-1 duration-100 ease-in-out p-1 -rotate-45"
+    class="h-8 w-8 lg:h-10 lg:w-10 text-white bg-secondary-100 rounded cursor-pointer hover:-translate-y-1 duration-100 ease-in-out p-1 -rotate-45"
     width="24"
     height="24"
     viewBox="0 0 24 24"
@@ -399,134 +510,3 @@
     <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />
     <circle cx="15" cy="9" r="1" /></svg
 ></a>
-<button
-  class="fixed bottom-0 right-0 z-40 mr-4 mb-4"
-  (click)="ToggleMenu(!isToggle)"
->
-  <svg
-    class="w-6 h-6 text-gray-800 dark:text-white"
-    aria-hidden="true"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 20 20"
-  >
-    <path
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2"
-    ></path>
-  </svg>
-</button>
-<div
-  #MenuNavigation
-  class="fixed transition-transform translate-x-full px-2.5 py-2 right-0 top-0 bottom-0 w-72 h-screen bg-gray-50 shadow-md shadow-slate-300"
->
-  <!---->
-
-  <div class="flex flex-col gap-y-2 mb-2 md:mb-4">
-    <div class="flex items-center gap-2">
-      <svg
-        class="h-8 w-8"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" />
-        <path
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-        />
-        <circle cx="12" cy="12" r="3" /></svg
-      >Cài đặt nâng cao
-    </div>
-  </div>
-
-  <hr class="border-1 my-4 border-accent-20 border-dashed border-slate-950" />
-  <div class="flex flex-col gap-2">
-    <button
-      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
-      style="min-height: 2.5rem; min-width: 100%"
-      (click)="changeDirectionReading(true)"
-      [ngClass]="{ 'bg-slate-100  text-primary-100': direction }"
-    >
-      <span
-        class="flex relative items-center justify-center font-medium select-none w-full"
-        style="pointer-events: none; justify-content: start"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="icon mr-4"
-          style="color: currentcolor"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-          ></path>
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 2v7h7"
-          ></path></svg
-        >Đọc theo chiều dọc</span
-      >
-    </button>
-    <button
-      data-v-8d292eb9=""
-      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent px-4 hover:bg-slate-100"
-      style="min-height: 2.5rem; min-width: 100%"
-      (click)="changeDirectionReading(false)"
-      [ngClass]="{ 'bg-slate-100 text-primary-100': !direction }"
-    >
-      <span
-        data-v-8d292eb9=""
-        class="flex relative items-center justify-center font-medium select-none w-full pointer-events-none"
-        style="justify-content: start"
-        ><svg
-          data-v-9ba4cb7e=""
-          data-v-8d292eb9=""
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="icon mr-4"
-          style="color: currentcolor"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M22 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6M2 4h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2"
-          ></path></svg
-        >Đọc theo chiều ngang</span
-      >
-    </button>
-
-    <label
-      class="inline-flex items-center cursor-pointer hover:bg-slate-100 p-3 rounded"
-    >
-      <input type="checkbox" value="" class="sr-only peer" />
-      <div
-        class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-50 dark:peer-focus:ring-primary-100 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary-100"
-      ></div>
-      <span class="ms-3 text-gray-900 dark:text-gray-300"
-        >Tự động chuyển chương</span
-      >
-    </label>
-  </div>
-</div>

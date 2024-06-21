@@ -1,6 +1,6 @@
 <img
-  class="object-cover w-full max-h-screen"
-  [ngClass]="{ 'min-w-[15rem] lg:min-w-[28rem]': !direction }"
+  class="object-cover w-full"
+  [ngClass]="{ 'min-w-[15rem] max-h-screen lg:min-w-[28rem]': !vertical }"
   [src]="imageSrc"
   *ngIf="imageSrc"
 />

@@ -46,7 +46,8 @@ export class ChapterPageComponent {
   public isLimitZoom: boolean = false;
   private lastScrollTop = 0;
   elementOffset = 0;
-  direction = true;
+  isVertical = true;
+  showScrollToTop = false;
 
   constructor(
     private comicService: ComicService,
@@ -68,7 +69,7 @@ export class ChapterPageComponent {
     this.setZoomDefaultLevel();
     this.zoomLevel = this.defaultZoomLevel;
     this.isSticky = false;
-    this.isToggle = false;
+    this.isToggle = true;
     // Signal to cancel the previous request
 
     this.route.params.subscribe((params) => {
@@ -93,14 +94,14 @@ export class ChapterPageComponent {
   ToggleMenu(stage: boolean) {
     this.isToggle = stage;
     if (stage) {
-      this.renderer.removeClass(
-        this.MenuNavigation.nativeElement,
-        'translate-x-full',
-      );
-    } else {
       this.renderer.addClass(
         this.MenuNavigation.nativeElement,
-        'translate-x-full',
+        '-translate-y-full',
+      );
+    } else {
+      this.renderer.removeClass(
+        this.MenuNavigation.nativeElement,
+        '-translate-y-full',
       );
     }
   }
@@ -210,17 +211,18 @@ export class ChapterPageComponent {
 
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
+    if (!this.controlBar) return;
     const windowScroll = window.scrollY;
     if (windowScroll > this.elementOffset) {
       if (windowScroll < this.lastScrollTop) {
         this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
         this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
-
+        this.showScrollToTop = true;
         this.isSticky = true;
       } else {
         this.renderer.removeClass(this.controlBar.nativeElement, 'sticky');
         this.renderer.addClass(this.controlBar.nativeElement, 'opacity-0');
-
+        this.showScrollToTop = false;
         this.isSticky = false;
       }
     } else {
@@ -245,8 +247,8 @@ export class ChapterPageComponent {
   }
 
   changeDirectionReading(stage: boolean) {
-    this.direction = stage;
-    const styles = this.direction
+    this.isVertical = stage;
+    const styles = this.isVertical
       ? {
           'scroll-snap-align': 'start',
           flex: '0 0 auto',
