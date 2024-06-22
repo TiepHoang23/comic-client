@@ -38,7 +38,7 @@ export class HomePageComponent implements OnInit {
   RefreshPage(page: number): void {
     this.listComics = [];
 
-    this.ComicService.getComics(page, 30, 21, 1, -1).subscribe((res: any) => {
+    this.ComicService.getComics(page, 30, -1, 1, -1).subscribe((res: any) => {
       if (!this.totalpage) {
         this.totalpage = res.data.totalpage;
       }
