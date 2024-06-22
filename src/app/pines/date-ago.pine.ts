@@ -3,12 +3,12 @@ import { formatDistanceToNow } from 'date-fns';
 import moment, { isDate } from 'moment-timezone';
 
 moment.tz.setDefault('Asia/Ho_Chi_Minh');
-const translateToVNAgo = (dateString: string): string => {
+const translateToVNAgo = (dateString: string, ago: string = 'trước'): string => {
   if (!dateString) {
     return '';
   }
   return dateString
-    .replace('ago', 'trước')
+    .replace('ago', ago)
     .replace('about', '')
     .replace('over', 'hơn')
     .replace('almost', 'gần')
@@ -26,7 +26,7 @@ const translateToVNAgo = (dateString: string): string => {
   name: 'dateAgo',
 })
 export class DateAgoPipe implements PipeTransform {
-  transform(date?: string, FORMAT_DATE: string = 'MM/YYYY'): string {
+  transform(date?: string, FORMAT_DATE: string = 'DD/MM/YYYY', ago: string = 'trước'): string {
     if (!date) {
       return '';
     }
@@ -40,6 +40,6 @@ export class DateAgoPipe implements PipeTransform {
     const distance = formatDistanceToNow(new Date(date), {
       addSuffix: true,
     });
-    return translateToVNAgo(distance);
+    return translateToVNAgo(distance, ago);
   }
 }

@@ -46,6 +46,7 @@ export class CarouselLandingComponent implements OnInit {
   OnComicLeave() {
     this._state = 'out';
     clearTimeout(this.timer);
+    this.startAutoSlide();
   }
   ngOnChanges(change: any) {
 
@@ -86,6 +87,7 @@ export class CarouselLandingComponent implements OnInit {
 
   OnComicHover(comic: Comic) {
     clearTimeout(this.timer);
+    clearInterval(this.interval); // Clear the existing interval
     if (comic == undefined) {
       this._state = 'out';
       return
@@ -126,7 +128,7 @@ export class CarouselLandingComponent implements OnInit {
       return;
     }
     this.lastTime = now;
-    
+
     this.recalpulate(true);
   }
 

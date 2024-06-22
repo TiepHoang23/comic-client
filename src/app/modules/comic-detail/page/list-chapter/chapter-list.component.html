@@ -49,9 +49,8 @@
 <div
   #ChaptersScrollElement
   class="w-full h-full relative overflow-y-auto overflow-x-hidden mt-4"
-  style="max-height: 300px"
 >
-  <div id="overlay" class="absolute top-0 right-0 -z-50 left-0"></div>
+  <div #overlay class="absolute top-0 right-0 -z-50 left-0"></div>
   <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 relative">
     <div
       class="mr-3"
@@ -60,7 +59,7 @@
       style="scroll-snap-align: start"
       id="chapter-{{ $index }}"
     >
-      <a routerLink="/truyen-tranh/chapter/{{ chapter.id }}">
+      <a routerLink="/truyen-tranh/{{ comic_url }}/{{ chapter.id }}">
         <div
           class="h-14 flex items-center col-span-2 bg-gray-100 dark:bg-neutral-700 dark:hover:bg-neutral-500 text-sm hover:bg-gray-200 rounded-lg px-2 py-1 cursor-pointer tooltip-trigger select-none"
         >

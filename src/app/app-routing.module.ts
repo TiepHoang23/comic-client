@@ -46,7 +46,7 @@ const routes: Routes = [
         title: 'Truyện đang theo dõi - [host]',
       },
       {
-        path: 'truyen-tranh/:comicid/chapter/:chapterid',
+        path: 'truyen-tranh/:comicid/:chapterid',
         loadChildren: () =>
           import('./modules/chapter-page/chapter.module').then(
             (m) => m.ChapterModule

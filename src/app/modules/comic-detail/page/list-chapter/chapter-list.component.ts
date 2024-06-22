@@ -20,13 +20,17 @@ export class ChapterListComponent {
   comicChapters!: any[];
   maxChapterPage = 0;
   currentChapterPage = 0;
+  @Input()
+  comic_url!: string | undefined;
   preload_chapter_num: number = 48;
   chapter_grid_size: number = 3;
   height_each_element: number = 68;
-  @ViewChild('ChaptersScrollElement') ChapterScroll!: ElementRef<HTMLDivElement>;
+  @ViewChild('ChaptersScrollElement')
+  ChapterScroll!: ElementRef<HTMLDivElement>;
   @ViewChild('searchChapterInput')
   searchChapterInput!: ElementRef<HTMLInputElement>;
-  overlayEl!: HTMLElement;
+  @ViewChild('overlay')
+  overlayEl!: ElementRef<HTMLElement>;
   $index = 0;
   @Input() allchapters!: ComicChapters[];
   preLoadChapters: ComicChapters[] = [];
@@ -40,12 +44,12 @@ export class ChapterListComponent {
 
   }
   ngOnInit() {
-    this.overlayEl = document.getElementById('overlay')!;
     this.CalcGirdSize();
-
-
   }
-  ngOnChanges() {
+
+  ngOnChanges(change: any) {
+    console.log(change);
+
     if (!this.allchapters) return;
     this.range = Array.from(
       { length: (this.allchapters.length - 1) / 50 + 1 },
@@ -77,7 +81,7 @@ export class ChapterListComponent {
       this.maxChapterPage = Math.ceil(
         (this.allchapters.length + 1) / this.preload_chapter_num - 1,
       );
-      this.overlayEl.style.height = `${nRow * this.height_each_element}px`;
+      this.overlayEl.nativeElement.style.height = `${nRow * this.height_each_element}px`;
     }
   }
 
@@ -101,7 +105,7 @@ export class ChapterListComponent {
     this.maxChapterPage = Math.ceil(
       (this.allchapters.length + 1) / this.preload_chapter_num - 1,
     );
-    this.overlayEl.style.height = `${nRow * this.height_each_element}px`;
+    this.overlayEl.nativeElement.style.height = `${nRow * this.height_each_element}px`;
     this.currentChapterPage = 1;
     this.ChapterScroll.nativeElement.onscroll = this.Onscroll;
   }

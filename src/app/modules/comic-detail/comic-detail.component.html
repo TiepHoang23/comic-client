@@ -410,7 +410,11 @@
 </div>
 <div class="grid grid-cols-4 gap-4 md:container mx-auto">
   <div class="col-span-4 xl:col-span-3 m-2 dark:text-white">
-    <chapter-list [allchapters]="allchapters"></chapter-list>
+    <chapter-list
+      class="max-h-96 flex flex-col"
+      [allchapters]="allchapters"
+      [comic_url]="comic?.url"
+    ></chapter-list>
 
     <grid-comic
       [listComics]="SimilarComics! | slice : 0 : 12"
