@@ -60,12 +60,7 @@
 
     <a
       *ngIf="comic.chapters && comic.chapters.length > 0"
-      [routerLink]="[
-        'truyen-tranh',
-        comic.url,
-        'chapter',
-        comic.chapters[0].id
-      ]"
+      [routerLink]="['truyen-tranh', comic.url, comic.chapters[0].id]"
       class="px-0.5 py-1.5 flex justify-between card-footer text-[0.75rem] bg-slate-100 dark:bg-neutral-800 h-full hover:bg-slate-200 dark:hover:bg-zinc-700"
     >
       <p class="chapter font-semibold line-clamp-1 dark:text-white">
