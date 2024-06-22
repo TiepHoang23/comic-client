@@ -38,6 +38,7 @@ export class NavComponent {
   lengthnotify = this.listnotify.length
   optionNotify = 1;
   isShowNotify = false;
+  hoveredIndexNotify: number | null = null;
   @ViewChild('dropdownNavbar') dropdownNavbar!: ElementRef;
   constructor(
     private comicService: ComicService,
@@ -92,6 +93,8 @@ export class NavComponent {
 
     this.optionNotify = this.optionNotify == 1 ? 2 : 1
   }
+
+
 }
 
 
