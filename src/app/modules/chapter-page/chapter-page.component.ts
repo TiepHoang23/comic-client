@@ -54,6 +54,7 @@ export class ChapterPageComponent {
   isVertical = true;
   showScrollToTop = false;
   isAutoNextChapter = false;
+  isNightMode: boolean = false;
 
   constructor(
     private comicService: ComicService,
@@ -309,6 +310,29 @@ export class ChapterPageComponent {
 
     for (const [key, value] of Object.entries(styles)) {
       this.renderer.setStyle(this.imageContainer.nativeElement, key, value);
+    }
+  }
+
+  toggleNightLight(stage: boolean) {
+    this.isNightMode = stage;
+    console.log('toggleNightLight', this.isNightMode);
+
+    // const body = document.querySelector('body');
+    if (this.isNightMode) {
+      this.renderer.addClass(this.imageContainer.nativeElement, 'night-mode');
+      // this.imageContainer.nativeElement.classList.add('night-mode');
+      // this.renderer.setStyle(
+      //   this.imageContainer.nativeElement,
+      //   'filter',
+      //   'brightness(0.9) sepia(0.5)',
+      // );
+    } else {
+      this.renderer.removeClass(
+        this.imageContainer.nativeElement,
+        'night-mode',
+      );
+
+      // this.renderer.removeStyle(this.imageContainer.nativeElement, 'filter');
     }
   }
 }
