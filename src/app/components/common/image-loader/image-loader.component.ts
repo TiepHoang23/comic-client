@@ -12,7 +12,7 @@ export class ImageLoaderComponent implements OnDestroy {
   @Input()
   imageUrl!: string;
   imageSrc: string = '';
-  @Input() direction!: boolean;
+  @Input() vertical!: boolean;
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {

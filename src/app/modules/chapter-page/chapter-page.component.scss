@@ -4,19 +4,25 @@
 //     height: 100vh;
 //   }
 
-  
- 
+
+
 #image-container {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-  } 
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
 
 .sticky {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100; /* Adjust as needed */
+  z-index: 100;
+  /* Adjust as needed */
+}
+
+/* Apply night light filter */
+.night-mode {
+  filter: brightness(0.9) sepia(0.4);
 }

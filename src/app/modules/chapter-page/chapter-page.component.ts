@@ -31,11 +31,15 @@ export class ChapterPageComponent {
   isToggle!: boolean;
 
   @ViewChild('screenContainer', { static: true }) screenContainer!: ElementRef;
-  @ViewChild('controlBar') controlBar!: ElementRef;
+  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
 
+  @ViewChild('ToggleMenuButton') ToggleMenuButton!: ElementRef;
+
+  @ViewChild('controlBar') controlBar!: ElementRef;
   @ViewChild('MenuNavigation')
   MenuNavigation!: ElementRef;
-  @ViewChild('imageContainer', { static: true }) imageContainer!: ElementRef;
+  @ViewChild('commentComponent')
+  commentComponent!: ElementRef;
 
   private readonly zoomStep: number = 0.2;
   private readonly minZoomLevel: number = 0;
@@ -46,7 +50,11 @@ export class ChapterPageComponent {
   public isLimitZoom: boolean = false;
   private lastScrollTop = 0;
   elementOffset = 0;
-  direction = true;
+
+  isVertical = true;
+  showScrollToTop = false;
+  isAutoNextChapter = false;
+  isNightMode: boolean = false;
 
   constructor(
     private comicService: ComicService,
@@ -95,12 +103,12 @@ export class ChapterPageComponent {
     if (stage) {
       this.renderer.removeClass(
         this.MenuNavigation.nativeElement,
-        'translate-x-full',
+        '-translate-y-full',
       );
     } else {
       this.renderer.addClass(
         this.MenuNavigation.nativeElement,
-        'translate-x-full',
+        '-translate-y-full',
       );
     }
   }
@@ -114,6 +122,17 @@ export class ChapterPageComponent {
       'chapter',
       chapterId,
     ]);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent): void {
+    if (!this.isToggle) return;
+    if (
+      !this.MenuNavigation.nativeElement.contains(event.target) &&
+      !this.ToggleMenuButton.nativeElement.contains(event.target)
+    ) {
+      this.ToggleMenu(false);
+    }
   }
 
   ZoomImage(zoomIn: boolean): void {
@@ -160,11 +179,11 @@ export class ChapterPageComponent {
     this.navigateChapter(false);
   }
 
-  navigateChapter(next: boolean): void {
+  navigateChapter(isNext: boolean): void {
     const currentChapterIndex = this.comic.chapters!.findIndex(
       (chapter) => chapter.id === this.mainChapter.id,
     );
-    const targetChapterIndex = next
+    const targetChapterIndex = isNext
       ? currentChapterIndex + 1
       : currentChapterIndex - 1;
 
@@ -208,19 +227,42 @@ export class ChapterPageComponent {
     this.isHovered = state;
   }
 
+  onCheckboxChange(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.isAutoNextChapter = checkbox.checked;
+    // console.log('isAutoNextChapter', this.isAutoNextChapter);
+  }
+
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
+    if (!this.controlBar) return;
     const windowScroll = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    const isLastPage = windowScroll + windowHeight >= documentHeight;
+    if (isLastPage) {
+      if (this.isAutoNextChapter) {
+        this.navigateChapter(false);
+        return;
+      } else {
+        this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
+        this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
+        this.showScrollToTop = true;
+        this.isSticky = true;
+        return;
+      }
+    }
     if (windowScroll > this.elementOffset) {
       if (windowScroll < this.lastScrollTop) {
         this.renderer.addClass(this.controlBar.nativeElement, 'sticky');
         this.renderer.addClass(this.controlBar.nativeElement, 'opacity-95');
-
+        this.showScrollToTop = true;
         this.isSticky = true;
       } else {
         this.renderer.removeClass(this.controlBar.nativeElement, 'sticky');
         this.renderer.addClass(this.controlBar.nativeElement, 'opacity-0');
-
+        this.showScrollToTop = false;
         this.isSticky = false;
       }
     } else {
@@ -245,8 +287,8 @@ export class ChapterPageComponent {
   }
 
   changeDirectionReading(stage: boolean) {
-    this.direction = stage;
-    const styles = this.direction
+    this.isVertical = stage;
+    const styles = this.isVertical
       ? {
           'scroll-snap-align': 'start',
           flex: '0 0 auto',
@@ -268,6 +310,29 @@ export class ChapterPageComponent {
 
     for (const [key, value] of Object.entries(styles)) {
       this.renderer.setStyle(this.imageContainer.nativeElement, key, value);
+    }
+  }
+
+  toggleNightLight(stage: boolean) {
+    this.isNightMode = stage;
+    console.log('toggleNightLight', this.isNightMode);
+
+    // const body = document.querySelector('body');
+    if (this.isNightMode) {
+      this.renderer.addClass(this.imageContainer.nativeElement, 'night-mode');
+      // this.imageContainer.nativeElement.classList.add('night-mode');
+      // this.renderer.setStyle(
+      //   this.imageContainer.nativeElement,
+      //   'filter',
+      //   'brightness(0.9) sepia(0.5)',
+      // );
+    } else {
+      this.renderer.removeClass(
+        this.imageContainer.nativeElement,
+        'night-mode',
+      );
+
+      // this.renderer.removeStyle(this.imageContainer.nativeElement, 'filter');
     }
   }
 }
