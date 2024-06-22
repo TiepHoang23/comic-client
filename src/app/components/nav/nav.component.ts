@@ -34,6 +34,10 @@ export class NavComponent {
   user?: IUser;
   showslidebar = false;
   showaccount = false;
+  listnotify = [1, 2, 4]
+  lengthnotify = this.listnotify.length
+  optionNotify = 1;
+  isShowNotify = false;
   @ViewChild('dropdownNavbar') dropdownNavbar!: ElementRef;
   constructor(
     private comicService: ComicService,
@@ -84,6 +88,10 @@ export class NavComponent {
       this.dropdownNavbar.nativeElement.style.height = '0px';
     }
   }
+  toggleOptionNotify() {
 
-
+    this.optionNotify = this.optionNotify == 1 ? 2 : 1
+  }
 }
+
+
