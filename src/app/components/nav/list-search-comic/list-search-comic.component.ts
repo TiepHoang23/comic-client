@@ -25,9 +25,9 @@ export class ListSearchComicComponent implements OnInit {
   @ViewChild('SearchInput') SearchInput!: ElementRef;
   @ViewChild('SearchFrame') SearchFrame!: ElementRef;
 
-  constructor(private comicService: ComicService) { }
-  ngOnInit() { }
-  ngOnChanges(change: any) { }
+  constructor(private comicService: ComicService) {}
+  ngOnInit() {}
+  ngOnChanges(change: any) {}
   SendSearchReq() {
     if (this.searchText != '') {
       this.comicService

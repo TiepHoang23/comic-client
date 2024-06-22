@@ -1,18 +1,18 @@
 <div
-  class="bg-slate-200 rounded cursor-pointer md:hidden"
+  class="bg-slate-100 rounded-lg cursor-pointer md:hidden"
   (click)="OnSearchClick()"
 >
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="search-icon h-6 w-6 text-gray-500"
+    class="search-icon h-8 w-8 text-secondary-100 p-1"
+    fill="none"
+    viewBox="0 0 24 24"
     stroke="currentColor"
-    fill="currentColor"
-    viewBox="0 0 128 128"
-    width="64px"
-    height="64px"
   >
     <path
-      d="M 52.349609 14.400391 C 42.624609 14.400391 32.9 18.1 25.5 25.5 C 10.7 40.3 10.7 64.399219 25.5 79.199219 C 32.9 86.599219 42.600391 90.300781 52.400391 90.300781 C 62.200391 90.300781 71.900781 86.599219 79.300781 79.199219 C 94.000781 64.399219 93.999219 40.3 79.199219 25.5 C 71.799219 18.1 62.074609 14.400391 52.349609 14.400391 z M 52.300781 20.300781 C 60.500781 20.300781 68.700391 23.399219 74.900391 29.699219 C 87.400391 42.199219 87.4 62.5 75 75 C 62.5 87.5 42.199219 87.5 29.699219 75 C 17.199219 62.5 17.199219 42.199219 29.699219 29.699219 C 35.899219 23.499219 44.100781 20.300781 52.300781 20.300781 z M 52.300781 26.300781 C 45.400781 26.300781 38.9 29 34 34 C 29.3 38.7 26.700391 44.800391 26.400391 51.400391 C 26.300391 53.100391 27.600781 54.4 29.300781 54.5 L 29.400391 54.5 C 31.000391 54.5 32.300391 53.199609 32.400391 51.599609 C 32.600391 46.499609 34.699219 41.799219 38.199219 38.199219 C 41.999219 34.399219 47.000781 32.300781 52.300781 32.300781 C 54.000781 32.300781 55.300781 31.000781 55.300781 29.300781 C 55.300781 27.600781 54.000781 26.300781 52.300781 26.300781 z M 35 64 A 3 3 0 0 0 32 67 A 3 3 0 0 0 35 70 A 3 3 0 0 0 38 67 A 3 3 0 0 0 35 64 z M 83.363281 80.5 C 82.600781 80.5 81.850781 80.800391 81.300781 81.400391 C 80.100781 82.600391 80.100781 84.499609 81.300781 85.599609 L 83.800781 88.099609 C 83.200781 89.299609 82.900391 90.6 82.900391 92 C 82.900391 94.4 83.8 96.700391 85.5 98.400391 L 98.300781 111 C 100.10078 112.8 102.39922 113.69922 104.69922 113.69922 C 106.99922 113.69922 109.29961 112.79961 111.09961 111.09961 C 114.59961 107.59961 114.59961 101.90039 111.09961 98.400391 L 98.300781 85.599609 C 96.600781 83.899609 94.300391 83 91.900391 83 C 90.500391 83 89.2 83.300391 88 83.900391 L 85.5 81.400391 C 84.9 80.800391 84.125781 80.5 83.363281 80.5 z M 91.900391 88.900391 C 92.700391 88.900391 93.5 89.200781 94 89.800781 L 106.69922 102.5 C 107.89922 103.7 107.89922 105.59922 106.69922 106.69922 C 105.49922 107.89922 103.6 107.89922 102.5 106.69922 L 89.800781 94.099609 C 89.200781 93.499609 88.900391 92.700391 88.900391 91.900391 C 88.900391 91.100391 89.200781 90.300781 89.800781 89.800781 C 90.400781 89.200781 91.100391 88.900391 91.900391 88.900391 z"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
     />
   </svg>
 </div>
@@ -48,7 +48,7 @@
     <svg
       *ngIf="searchText.length > 0 && isSearching"
       (click)="clearSearch()"
-      class="clear-icon h-4 w-4 text-gray-500 absolute right-3 top-4 transform -translate-y-1/2 cursor-pointer"
+      class="clear-icon h-4 w-4 text-primary-100 absolute right-3 top-4 transform -translate-y-1/2 cursor-pointer"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -65,37 +65,37 @@
   <div
     *ngIf="isSearching"
     (CloseEvent)="OnSearchFocus(false)"
-    class="transition-[width] absolute rounded-md z-[20] flex w-full mt-16 md:mt-10 flex-col bg-white px-4 py-3 shadow-xl"
+    class="transition-[width] absolute rounded-xl z-[20] flex w-full mt-16 md:mt-10 flex-col bg-white px-4 py-3 shadow-xl"
   >
     <div class="-mt-2">
       @if (searchText !== "") {
-      <div class="flex items-center my-4">
-        <div class="font-bold text-xl flex-grow">Kết quả</div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-arrow-right icon text-icon-contrast text-undefined"
-          viewBox="0 0 24 24"
-        >
-          <path d="M5 12h14m-7-7 7 7-7 7"></path>
-        </svg>
-      </div>
-      } @else {
-      <div class="flex items-center">
-        <div class="text-md flex-grow mt-3 text-gray-400">
-          Nhập từ khóa tìm kiếm...
+        <div class="flex items-center my-4">
+          <div class="font-bold text-xl flex-grow">Kết quả</div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="feather feather-arrow-right icon text-icon-contrast text-undefined"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 12h14m-7-7 7 7-7 7"></path>
+          </svg>
         </div>
-      </div>
+      } @else {
+        <div class="flex items-center">
+          <div class="text-md flex-grow mt-3 text-gray-400">
+            Nhập từ khóa tìm kiếm...
+          </div>
+        </div>
       }
       <section
         *ngFor="let comic of listSearch"
-        class="rounded-lg bg-gray-100 border-2 shadow-xl mb-2 hover:outline-slate-500 hover:outline-1 hover:outline"
+        class="rounded-lg bg-gray-100 mb-2 hover:bg-gray-200"
       >
         <a
           [routerLink]="['truyen-tranh', comic.url]"
@@ -103,23 +103,110 @@
         >
           <div class="px-2 py-1">
             <!-- <ul class="-my-8"> -->
-            <div
-              class="flex flex-row space-y-3 py-1 text-left sm:space-x-5 sm:space-y-0"
-            >
+            <div class="flex flex-row space-y-0 py-1 text-left">
               <img
-                class="h-16 w-12 rounded-lg object-cover"
+                class="h-16 w-12 rounded-lg object-cover my-auto"
                 src="{{ comic.coverImage }}"
                 alt="{{ comic.title }}"
               />
 
-              <div class="relative flex flex-1 flex-col justify-between">
+              <div class="relative flex px-2 lg:px-3 justify-between">
                 <div class="pr-8 sm:pr-5">
-                  <p class="text-base font-semibold text-gray-900">
-                    {{ comic.title }}
-                  </p>
-                  <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
-                    {{ comic.description | slice : 0 : 100 }}...
-                  </p>
+                  <div class="flex justify-between">
+                    <p
+                      class="text-base font-semibold text-gray-900 line-clamp-2"
+                    >
+                      {{ comic.title }}
+                    </p>
+                  </div>
+                  <div
+                    class="text-[0.7rem] text-center comment-container flex gap-2 items-center"
+                  >
+                    @if (comic.status === 0) {
+                      <div
+                        class="animate-ping h-1 w-1 rounded-full bg-sky-400 opacity-75"
+                      ></div>
+                      <div>Đang tiến hành</div>
+                    } @else {
+                      <svg
+                        class="animate-ping opacity-75"
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="6"
+                        width="6"
+                        viewBox="0 0 512 512"
+                      >
+                        <path
+                          fill="#2debb2"
+                          d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                        />
+                      </svg>
+                      <div>Đã hoàn thành</div>
+                    }
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="text-sm text-center flex gap-1 items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        class="feather feather-star icon rel"
+                        viewBox="0 0 24 24"
+                        style="color: currentcolor"
+                      >
+                        <path
+                          d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
+                        ></path></svg
+                      >{{ comic.rating }}
+                    </div>
+                    <div class="text-sm text-center flex gap-1 items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        class="icon small text-icon-contrast text-undefined"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                        ></path>
+                      </svg>
+                      {{ comic.rating }}
+                    </div>
+                    <div
+                      class="text-sm text-center uppercase flex gap-1 items-center text-primary-100"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        class="feather feather-eye icon small text-icon-contrast text-undefined"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"
+                        ></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      {{ comic.viewCount | numeral }}
+                    </div>
+
+                    <!---->
+                  </div>
                 </div>
                 <!-- </div> -->
               </div>

@@ -4,9 +4,7 @@ import {
   HostListener,
   Inject,
   Renderer2,
-  SimpleChange,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -116,11 +114,7 @@ export class ChapterPageComponent {
     this.OnChangeChapter(event.target.value);
   }
   OnChangeChapter(chapterId: number) {
-    this.router.navigate([
-      'truyen-tranh',
-      this.comic.url,
-      chapterId,
-    ]);
+    this.router.navigate(['truyen-tranh', this.comic.url, chapterId]);
   }
 
   @HostListener('document:click', ['$event'])
@@ -229,7 +223,6 @@ export class ChapterPageComponent {
   onCheckboxChange(event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     this.isAutoNextChapter = checkbox.checked;
-    // console.log('isAutoNextChapter', this.isAutoNextChapter);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -289,23 +282,23 @@ export class ChapterPageComponent {
     this.isVertical = stage;
     const styles = this.isVertical
       ? {
-        'scroll-snap-align': 'start',
-        flex: '0 0 auto',
-        display: 'flex',
-        'flex-direction': 'column',
-        'overflow-y': 'auto',
-        'overflow-x': 'hidden',
-      }
+          'scroll-snap-align': 'start',
+          flex: '0 0 auto',
+          display: 'flex',
+          'flex-direction': 'column',
+          'overflow-y': 'auto',
+          'overflow-x': 'hidden',
+        }
       : {
-        'margin-top': '30px',
-        'min-width': '30rem',
-        'scroll-snap-align': 'start',
-        display: 'flex',
-        'flex-direction': 'row',
-        overflow: 'hidden',
-        'overflow-x': 'auto',
-        'overflow-y': 'hidden',
-      };
+          'margin-top': '30px',
+          'min-width': '30rem',
+          'scroll-snap-align': 'start',
+          display: 'flex',
+          'flex-direction': 'row',
+          overflow: 'hidden',
+          'overflow-x': 'auto',
+          'overflow-y': 'hidden',
+        };
 
     for (const [key, value] of Object.entries(styles)) {
       this.renderer.setStyle(this.imageContainer.nativeElement, key, value);
@@ -314,24 +307,13 @@ export class ChapterPageComponent {
 
   toggleNightLight(stage: boolean) {
     this.isNightMode = stage;
-    console.log('toggleNightLight', this.isNightMode);
-
-    // const body = document.querySelector('body');
     if (this.isNightMode) {
       this.renderer.addClass(this.imageContainer.nativeElement, 'night-mode');
-      // this.imageContainer.nativeElement.classList.add('night-mode');
-      // this.renderer.setStyle(
-      //   this.imageContainer.nativeElement,
-      //   'filter',
-      //   'brightness(0.9) sepia(0.5)',
-      // );
     } else {
       this.renderer.removeClass(
         this.imageContainer.nativeElement,
         'night-mode',
       );
-
-      // this.renderer.removeStyle(this.imageContainer.nativeElement, 'filter');
     }
   }
 }

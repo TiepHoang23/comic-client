@@ -1,5 +1,5 @@
 .custom-transition {
-    @apply w-2/5 bg-slate-200 text-black rounded-md pl-4 pr-8 py-2 border-2 outline-none transition-all;
+    @apply w-2/4 bg-slate-200 text-black rounded-lg pl-4 pr-8 py-2 border-2 outline-none transition-all;
 
     &:focus-within {
         @apply border-primary-100 bg-gray-100;
