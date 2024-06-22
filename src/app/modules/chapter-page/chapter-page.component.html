@@ -379,19 +379,16 @@
         #MenuNavigation
         class="mt-4 absolute transition-transform -translate-y-full px-2.5 py-2 top-0 w-full rounded-b-lg bg-white shadow-md shadow-slate-300"
       >
-        <div class="mt-4 flex items-center justify-center gap-2">
+        <div
+          class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2 items-center justify-center lg:w-2/3 mx-auto"
+        >
           <button
-            class="rounded-lg flex items-center p-3 hover:bg-slate-100"
-            style="min-height: 2.5rem"
+            class="rounded-lg p-3 hover:bg-slate-100 min-h-[2.5rem] w-full"
             (click)="changeDirectionReading(true)"
-            [ngClass]="{ 'bg-slate-100  text-primary-100': isVertical }"
+            [ngClass]="{ 'bg-slate-100 text-primary-100': isVertical }"
           >
-            <span
-              class="items-center justify-center font-medium select-none"
-              style="pointer-events: none; justify-content: start"
-            >
-              <label class="text-[0.75rem] font-thin"> Đọc dọc</label>
-
+            <span class="font-medium select-none pointer-events-none">
+              <p class="text-[0.75rem] font-thin text-start">Đọc dọc</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -414,25 +411,18 @@
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M13 2v7h7"
-                ></path></svg
-            ></span>
+                ></path>
+              </svg>
+            </span>
           </button>
           <button
-            data-v-8d292eb9=""
-            class="rounded-lg flex items-center p-3 hover:bg-slate-100"
-            style="min-height: 2.5rem"
+            class="rounded-lg p-3 hover:bg-slate-100 min-h-[2.5rem] w-full"
             (click)="changeDirectionReading(false)"
             [ngClass]="{ 'bg-slate-100 text-primary-100': !isVertical }"
           >
-            <span
-              data-v-8d292eb9=""
-              class="items-center justify-center font-medium select-none pointer-events-none"
-              style="justify-content: start"
-            >
-              <label class="text-[0.75rem] font-thin"> Đọc ngang</label>
+            <span class="font-medium select-none pointer-events-none">
+              <p class="text-[0.75rem] font-thin text-start">Đọc ngang</p>
               <svg
-                data-v-9ba4cb7e=""
-                data-v-8d292eb9=""
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -447,15 +437,16 @@
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M22 20h-6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6M2 4h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2"
-                ></path></svg
-            ></span>
+                ></path>
+              </svg>
+            </span>
           </button>
-
           <label
-            class="items-center cursor-pointer hover:bg-slate-100 p-3 rounded"
+            class="cursor-pointer hover:bg-slate-100 p-3 rounded-lg"
+            [ngClass]="{ 'bg-slate-100 text-primary-100': isAutoNextChapter }"
           >
             <p
-              class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin"
+              class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin text-start leading-snug mb-1"
             >
               Tự động chuyển chương
             </p>
@@ -471,12 +462,11 @@
           </label>
           <button
             (click)="toggleNightLight(!isNightMode)"
-            class="rounded-lg p-3 hover:bg-slate-100"
-            style="min-height: 2.5rem"
+            class="rounded-lg p-3 hover:bg-slate-100 min-h-[2.5rem] w-full"
             [ngClass]="{ 'bg-slate-100 text-primary-100': isNightMode }"
           >
             <span class="font-medium select-none pointer-events-none">
-              <p class="text-[0.75rem] font-thin">Chế độ ban đêm</p>
+              <p class="text-[0.75rem] font-thin text-start">Chế độ ban đêm</p>
               <svg
                 class="h-6 w-6"
                 width="24"
@@ -497,8 +487,9 @@
                 <line x1="12" y1="19" x2="12" y2="21" />
                 <line x1="7" y1="17" x2="5.6" y2="18.4" />
                 <line x1="6" y1="12" x2="4" y2="12" />
-                <line x1="7" y1="7" x2="5.6" y2="5.6" /></svg
-            ></span>
+                <line x1="7" y1="7" x2="5.6" y2="5.6" />
+              </svg>
+            </span>
           </button>
         </div>
       </div>
@@ -508,7 +499,7 @@
   <div
     #imageContainer
     id="image-container"
-    class="flex-grow min-h-screen mx-0 lg:mx-50"
+    class="flex-grow min-h-screen mx-0 lg:mx-50 transition-all duration-[2s] ease-in-out"
   >
     <app-image-loader
       *ngFor="let page of ListChapterImg; let i = index"

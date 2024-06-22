@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   Output,
   ViewChild,
@@ -11,7 +12,7 @@ import { Chapter } from '../../../dataSource/schema/Chapter';
 @Component({
   selector: 'app-chapter-selector',
   templateUrl: './chapter-selector.component.html',
-  styleUrl: './chapter-selector.component.scss',
+  styleUrls: ['./chapter-selector.component.scss'],
 })
 export class ChapterSelectorComponent {
   @Input() comic: any;
@@ -22,7 +23,11 @@ export class ChapterSelectorComponent {
   selectedChapter!: Chapter;
   searchTerm: string = '';
   filteredChapters: Chapter[] = [];
+  displayedChapters: Chapter[] = [];
+  private itemsToShow = 20;
+
   @ViewChild('dropdownList') dropdownList!: ElementRef;
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
     if (this.isDropdownOpen) {
@@ -32,6 +37,7 @@ export class ChapterSelectorComponent {
 
   ngOnInit() {
     this.filteredChapters = this.comic.chapters;
+    this.loadMoreItems();
   }
 
   selectChapter(chapter: Chapter) {
@@ -43,19 +49,35 @@ export class ChapterSelectorComponent {
   onSearch(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchTerm = target.value?.toLowerCase();
-    if (!this.searchTerm) {
-      this.filteredChapters = this.comic.chapters;
-      return;
-    }
-    this.filteredChapters = this.comic.chapters.filter((chapter: any) =>
-      chapter.title.toLowerCase().includes(this.searchTerm),
-    );
+    this.filteredChapters = this.searchTerm
+      ? this.comic.chapters.filter((chapter: any) =>
+          chapter.title.toLowerCase().includes(this.searchTerm),
+        )
+      : this.comic.chapters;
+    this.displayedChapters = [];
+    this.loadMoreItems();
   }
+
+  loadMoreItems() {
+    const nextItems = this.filteredChapters.slice(
+      this.displayedChapters.length,
+      this.displayedChapters.length + this.itemsToShow,
+    );
+    this.displayedChapters = this.displayedChapters.concat(nextItems);
+  }
+
+  @HostListener('scroll', ['$event'])
+  onScroll(event: any): void {
+    const element = event.target;
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      this.loadMoreItems();
+    }
+  }
+
   scrollToSelectedChapter() {
     const selectedIndex = this.filteredChapters.findIndex(
       (chapter) => chapter.id === this.selectedChapter?.id,
     );
-    console.log({ selectedIndex });
     if (selectedIndex >= 0) {
       const chapterItems = this.dropdownList.nativeElement.children;
       const selectedItem = chapterItems[selectedIndex];

@@ -22,11 +22,7 @@
   /* Adjust as needed */
 }
 
-.night-mode {
-  transition: filter 1s ease;
-}
-
 /* Apply night light filter */
 .night-mode {
-  filter: brightness(0.9) sepia(0.5);
+  filter: brightness(0.9) sepia(0.4);
 }

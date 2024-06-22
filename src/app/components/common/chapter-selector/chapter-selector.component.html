@@ -34,7 +34,11 @@
       class="w-full px-3 py-2 border-b border-solid border-[#ccc] outline-none"
       placeholder="Tìm chương..."
     />
-    <div #dropdownList class="max-h-60 overflow-y-auto text-start gap-2">
+    <div
+      #dropdownList
+      (scroll)="onScroll($event)"
+      class="max-h-60 overflow-y-auto text-start gap-2"
+    >
       <div
         class="h-[40px] text-gray-500 m-3"
         *ngIf="filteredChapters.length == 0"
@@ -42,7 +46,7 @@
         Không tìm thấy chương ...
       </div>
       <div
-        *ngFor="let chapter of filteredChapters"
+        *ngFor="let chapter of displayedChapters"
         (click)="selectChapter(chapter)"
         class="my-2 mx-1 rounded-sm line-clamp-1 px-4 py-1 cursor-pointer {{
           chapter.id == mainChapter.id
