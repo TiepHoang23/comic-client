@@ -240,7 +240,7 @@ export class ChapterPageComponent {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
-    const isLastPage = windowScroll + windowHeight >= documentHeight;
+    const isLastPage = windowScroll + windowHeight >= documentHeight - 1;
     if (isLastPage) {
       if (this.isAutoNextChapter) {
         this.navigateChapter(false);

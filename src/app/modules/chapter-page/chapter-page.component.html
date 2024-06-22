@@ -3,13 +3,13 @@
     class="mx-auto md:container flex flex-col items-center font-bold text-base static"
   >
     <ol
-      class="flex items-center h-full w-full flex-wrap text-white text-[0.7rem] lg:text-[0.75rem] m-2 line-clamp-1 whitespace-nowrap"
+      class="flex items-center h-full w-full flex-wrap text-white text-[0.7rem] lg:text-[0.75rem] m-1 line-clamp-1"
       itemscope=""
       itemtype="https://schema.org/BreadcrumbList"
       *ngIf="comic"
     >
       <li
-        class="flex h-full items-center text-center"
+        class="flex h-full items-center"
         itemprop="itemListElement"
         itemscope=""
         itemtype="https://schema.org/ListItem"
@@ -19,7 +19,7 @@
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            stroke-width="2"
             stroke="currentColor"
             class="w-4 h-4"
           >
@@ -62,7 +62,10 @@
           class="hover:underline capitalize"
           title="{{ comic.title }}"
           itemprop="item"
-          ><span class="block max-w-[250px] lg:max-w-full" itemprop="name">
+          ><span
+            class="max-w-[250px] lg:max-w-full line-clamp-1"
+            itemprop="name"
+          >
             {{ comic.title }}
           </span></a
         >
@@ -95,7 +98,7 @@
           title="{{ mainChapter.title }}"
           itemprop="item"
           ><span
-            class="block max-w-[250px] lg:max-w-full truncate"
+            class="max-w-[250px] lg:max-w-full line-clamp-1"
             itemprop="name"
             >{{ mainChapter.title }}</span
           ></a
@@ -377,10 +380,10 @@
 
       <div
         #MenuNavigation
-        class="mt-4 absolute transition-transform -translate-y-full px-2.5 py-2 top-0 w-full rounded-b-lg bg-white shadow-md shadow-slate-300"
+        class="mt-10 absolute transition-transform -translate-y-full px-2.5 pb-2 top-0 w-full rounded-b-lg bg-white shadow-md shadow-slate-300"
       >
         <div
-          class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2 items-center justify-center lg:w-2/3 mx-auto"
+          class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2 items-center justify-center lg:w-[55%] mx-auto"
         >
           <button
             class="rounded-lg p-3 hover:bg-slate-100 min-h-[2.5rem] w-full"
@@ -446,7 +449,7 @@
             [ngClass]="{ 'bg-slate-100 text-primary-100': isAutoNextChapter }"
           >
             <p
-              class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin text-start leading-snug mb-1"
+              class="text-gray-900 dark:text-gray-300 text-[0.75rem] font-thin text-start text-nowrap leading-snug mb-1"
             >
               Tự động chuyển chương
             </p>
@@ -499,7 +502,7 @@
   <div
     #imageContainer
     id="image-container"
-    class="flex-grow min-h-screen mx-0 lg:mx-50 transition-all duration-[2s] ease-in-out"
+    class="flex-grow lg:min-h-screen mx-0 lg:mx-50 transition-all duration-[2s] ease-in-out"
   >
     <app-image-loader
       *ngFor="let page of ListChapterImg; let i = index"

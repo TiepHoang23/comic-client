@@ -35,19 +35,19 @@
       </svg>
     </span>
     @if (comic) {
-    <span class="line-clamp-1">{{ comic.title }}</span>
+      <span class="line-clamp-1">{{ comic.title }}</span>
     }
   </div>
   <div class="absolute inset-0 h-full border-spacing-2 z-[1] blur-sm">
     @if (comic) {
-    <div
-      class="w-full h-full bg-cover bg-black bg-no-repeat"
-      style="background-image: url('{{ comic.coverImage }}');"
-    >
-      <div class="absolute inset-0 bg-black opacity-55"></div>
-    </div>
+      <div
+        class="w-full h-full bg-cover bg-black bg-no-repeat"
+        style="background-image: url('{{ comic.coverImage }}');"
+      >
+        <div class="absolute inset-0 bg-black opacity-55"></div>
+      </div>
     } @else {
-    <div class="w-full h-full animate-pulse bg-gray-400"></div>
+      <div class="w-full h-full animate-pulse bg-gray-400"></div>
     }
   </div>
   <!-- Dark overlay -->
@@ -61,349 +61,353 @@
     "
   >
     @if (comic) {
-    <div class="lg:ml-10">
-      <div class="flex justify-center relative h-[250px] lg:h-auto">
-        <div
-          class="flex shadow-md rounded absolute lg:relative bottom-8 translate-y-4 lg:translate-y-0 lg:bottom-5 border-gray-200 border-2 overflow-hidden"
-          style="width: 200px; height: 300px"
-        >
-          <img
-            class="flex justify-center object-cover"
-            src="{{ comic.coverImage }}"
-            alt="{{ comic.title }}"
-          />
+      <div class="lg:ml-10">
+        <div class="flex justify-center relative h-[250px] lg:h-auto">
+          <div
+            class="flex shadow-md rounded absolute lg:relative bottom-8 translate-y-4 lg:translate-y-0 lg:bottom-5 border-gray-200 border-2 overflow-hidden"
+            style="width: 200px; height: 300px"
+          >
+            <img
+              class="flex justify-center object-cover"
+              src="{{ comic.coverImage }}"
+              alt="{{ comic.title }}"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3 flex justify-center">
+          <button
+            *ngIf="!comic.isFollow"
+            type="button"
+            class="py-1 px-4 gap-1 bg-cyan-600 text-white rounded hover:bg-cyan-500 flex items-center"
+            (click)="Follow(true)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20"
+              width="20"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="#ffffff"
+                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
+              />
+            </svg>
+            Theo dõi
+          </button>
+          <button
+            *ngIf="comic.isFollow"
+            type="button"
+            class="py-1 px-4 border-red-500 border text-red-500 rounded hover:opacity-75 flex space-x-1 gap-1 items-center"
+            (click)="Follow(false)"
+          >
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            Đang theo dõi
+          </button>
         </div>
       </div>
 
-      <div class="mb-3 flex justify-center">
-        <button
-          *ngIf="!comic.isFollow"
-          type="button"
-          class="py-1 px-4 gap-1 bg-cyan-600 text-white rounded hover:bg-cyan-500 flex items-center"
-          (click)="Follow(true)"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="20"
-            width="20"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="#ffffff"
-              d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"
-            />
-          </svg>
-          Theo dõi
-        </button>
-        <button
-          *ngIf="comic.isFollow"
-          type="button"
-          class="py-1 px-4 border-red-500 border text-red-500 rounded hover:opacity-75 flex space-x-1 gap-1 items-center"
-          (click)="Follow(false)"
-        >
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-            <polyline points="22 4 12 14.01 9 11.01" />
-          </svg>
-          Đang theo dõi
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="flex flex-col justify-center items-center lg:items-start mx-4 mb-5"
-    >
-      <h1
-        class="other-name font-bold uppercase text-xl lg:text-2xl text-pretty"
+      <div
+        class="flex flex-col justify-center items-center lg:items-start mx-4 mb-5"
       >
-        {{ comic.title }}
-      </h1>
-      <p class="col-xs-8 uppercase font-thin">{{ comic.author }}</p>
-      <app-star-rating [initialRating]="comic.rating"></app-star-rating>
-      <ul class="list-info space-y-2 text-sm mt-2">
-        <div
-          class="flex flex-wrap justify-center lg:justify-start gap-5 text-sm"
+        <h1
+          class="other-name font-bold uppercase text-xl lg:text-2xl text-pretty"
         >
-          <li>
-            <p class="name text"><i class="fa fa-eye"></i> Chapters:</p>
-            <div class="flex space-x-1 items-center">
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
+          {{ comic.title }}
+        </h1>
+        <p class="col-xs-8 uppercase font-thin">{{ comic.author }}</p>
+        <app-star-rating [initialRating]="comic.rating"></app-star-rating>
+        <ul class="list-info space-y-2 text-sm mt-2">
+          <div
+            class="flex flex-wrap justify-center lg:justify-start gap-5 text-sm"
+          >
+            <li>
+              <p class="name text"><i class="fa fa-eye"></i> Chapters:</p>
+              <div class="flex space-x-1 items-center">
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
 
-              <p class="number font-semibold">
-                {{ comic.chapters?.length }}
-              </p>
-            </div>
-          </li>
-          <li>
-            <p class="name text">Lượt xem:</p>
-            <div class="flex space-x-1 items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="feather feather-eye icon small text-icon-contrast text-undefined"
-                viewBox="0 0 24 24"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <p class="font-semibold uppercase">
-                {{ comic.viewCount | numeral }}
-              </p>
-            </div>
-          </li>
-          <li>
-            <p class="name text">Xếp hạng:</p>
-            <div class="flex space-x-1 items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 24 24"
-                class="icon small text-icon-contrast text-undefined"
-              >
-                <path
+                <p class="number font-semibold">
+                  {{ comic.chapters?.length }}
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="name text">Lượt xem:</p>
+              <div class="flex space-x-1 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="none"
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
-                ></path>
-              </svg>
-              <p class="ratingValue font-semibold">
-                {{ comic.rating }}
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <p class="name col-xs-4"><i class="fa fa-rss"></i> Tình trạng:</p>
-            <div class="flex space-x-2 items-center font-semibold">
-              @if (comic.status === 0) {
-              <span class="relative flex h-2 w-2 justify-center items-center">
-                <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-65"
-                ></span>
-                <span
-                  class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"
-                ></span>
-              </span>
-              <div class="text-sm">Đang tiến hành</div>
-              } @else {
-              <span class="relative flex h-2 w-2 justify-center items-center">
-                <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-65"
-                ></span>
-                <!-- <span class="relative inline-flex rounded-full h-2 w-2"> -->
+                  class="feather feather-eye icon small text-icon-contrast text-undefined"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <p class="font-semibold uppercase">
+                  {{ comic.viewCount | numeral }}
+                </p>
+              </div>
+            </li>
+            <li>
+              <p class="name text">Xếp hạng:</p>
+              <div class="flex space-x-1 items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  height="12"
-                  width="12"
-                  viewBox="0 0 512 512"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  class="icon small text-icon-contrast text-undefined"
                 >
                   <path
-                    fill="#2debb2"
-                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
-                  />
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                  ></path>
                 </svg>
-                <!-- </span> -->
-              </span>
+                <p class="ratingValue font-semibold">
+                  {{ comic.rating }}
+                </p>
+              </div>
+            </li>
 
-              <div class="text-sm">Đã hoàn thành</div>
-              }
-            </div>
+            <li>
+              <p class="name col-xs-4"><i class="fa fa-rss"></i> Tình trạng:</p>
+              <div class="flex space-x-2 items-center font-semibold">
+                @if (comic.status === 0) {
+                  <span
+                    class="relative flex h-2 w-2 justify-center items-center"
+                  >
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-65"
+                    ></span>
+                    <span
+                      class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"
+                    ></span>
+                  </span>
+                  <div class="text-sm">Đang tiến hành</div>
+                } @else {
+                  <span
+                    class="relative flex h-2 w-2 justify-center items-center"
+                  >
+                    <span
+                      class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-500 opacity-65"
+                    ></span>
+                    <!-- <span class="relative inline-flex rounded-full h-2 w-2"> -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="12"
+                      width="12"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="#2debb2"
+                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
+                      />
+                    </svg>
+                    <!-- </span> -->
+                  </span>
+
+                  <div class="text-sm">Đã hoàn thành</div>
+                }
+              </div>
+            </li>
+          </div>
+          <li
+            class="kind flex justify-center xl:justify-normal flex-wrap space-x-2"
+          >
+            <ng-container *ngFor="let category of comic.genres">
+              <a
+                class="dark:bg-neutral-500 dark:text-white category uppercase font-semibold hover:text-white mt-1 px-2 text-gray-600 hover:bg-primary-100 rounded border-gray-300 border border-dashed"
+                [routerLink]="['/tim-truyen']"
+                [queryParams]="{ genre: category.id }"
+                >{{ category.title }}</a
+              >
+            </ng-container>
           </li>
-        </div>
-        <li
-          class="kind flex justify-center xl:justify-normal flex-wrap space-x-2"
-        >
-          <ng-container *ngFor="let category of comic.genres">
-            <a
-              class="dark:bg-neutral-500 dark:text-white category uppercase font-semibold hover:text-white mt-1 px-2 text-gray-600 hover:bg-primary-100 rounded border-gray-300 border border-dashed"
-              [routerLink]="['/tim-truyen']"
-              [queryParams]="{ genre: category.id }"
-              >{{ category.title }}</a
-            >
-          </ng-container>
-        </li>
-      </ul>
+        </ul>
 
-      <div class="row rating">
-        <div class="col-xs-6">
+        <div class="row rating">
+          <div class="col-xs-6">
+            <div
+              class="star"
+              data-id="83850"
+              data-allow-rating="true"
+              style="cursor: pointer"
+            ></div>
+          </div>
           <div
-            class="star"
-            data-id="83850"
-            data-allow-rating="true"
-            style="cursor: pointer"
+            class="col-xs-6 lazy-module"
+            data-type="facebook"
+            style="overflow: hidden"
           ></div>
         </div>
-        <div
-          class="col-xs-6 lazy-module"
-          data-type="facebook"
-          style="overflow: hidden"
-        ></div>
-      </div>
-      <div class="follow"></div>
+        <div class="follow"></div>
 
-      <div class="description inline lg:text-left lg:w-full mx-3 lg:m-0">
-        <div
-          [class.line-clamp-3]="!isOpen"
-          class="shortened line-clamp-3 mt-2 text-sm mr-4"
-        >
-          {{ comic.description }}
+        <div class="description inline lg:text-left lg:w-full mx-3 lg:m-0">
+          <div
+            [class.line-clamp-3]="!isOpen"
+            class="shortened line-clamp-3 mt-2 text-sm mr-4"
+          >
+            {{ comic.description }}
+          </div>
+          <button
+            class="text-sm font-semibold hover:text-gray-700"
+            (click)="isOpen = !isOpen"
+          >
+            <span *ngIf="!isOpen">Xem thêm</span>
+            <span *ngIf="isOpen">Ẩn</span>
+          </button>
         </div>
-        <button
-          class="text-sm font-semibold hover:text-gray-700"
-          (click)="isOpen = !isOpen"
-        >
-          <span *ngIf="!isOpen">Xem thêm</span>
-          <span *ngIf="isOpen">Ẩn</span>
-        </button>
-      </div>
 
-      <div class="read-action flex space-x-2 mt-3">
-        <a
-          class="bg-primary-100 rounded px-4 hover:opacity-90 text-white flex items-center space-x-2"
-          routerLink="/truyen-tranh/{{ comic.url }}"
+        <div class="read-action flex space-x-2 mt-3">
+          <a
+            class="bg-primary-100 rounded px-4 hover:opacity-90 text-white flex items-center space-x-2"
+            routerLink="/truyen-tranh/{{ comic.url }}"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="16"
+              width="16"
+              viewBox="0 0 448 512"
+              class="w-4 h-4"
+            >
+              <path
+                fill="#ffffff"
+                d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+              />
+            </svg>
+            <span class="font-semibold text-sm">Đọc từ đầu</span>
+          </a>
+
+          <a
+            class="px-4 p-2 border dark:text-white dark:bg-neutral-500 border-gray-500 cursor-pointer rounded text-black font-semibold text-sm hover:text-white hover:bg-secondary-100"
+          >
+            Đọc mới nhất</a
+          >
+        </div>
+      </div>
+    } @else {
+      <div
+        class="mx-auto h-full animate-pulse flex items-center justify-between"
+        style="height: 350px"
+      >
+        <div
+          aria-label="Loading..."
+          role="status"
+          class="flex items-center space-x-2"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="16"
-            width="16"
-            viewBox="0 0 448 512"
-            class="w-4 h-4"
+            class="h-20 w-20 animate-spin stroke-gray-500"
+            viewBox="0 0 256 256"
           >
-            <path
-              fill="#ffffff"
-              d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
-            />
+            <line
+              x1="128"
+              y1="32"
+              x2="128"
+              y2="64"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="195.9"
+              y1="60.1"
+              x2="173.3"
+              y2="82.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="224"
+              y1="128"
+              x2="192"
+              y2="128"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="195.9"
+              y1="195.9"
+              x2="173.3"
+              y2="173.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="128"
+              y1="224"
+              x2="128"
+              y2="192"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="60.1"
+              y1="195.9"
+              x2="82.7"
+              y2="173.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="32"
+              y1="128"
+              x2="64"
+              y2="128"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
+            <line
+              x1="60.1"
+              y1="60.1"
+              x2="82.7"
+              y2="82.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="24"
+            ></line>
           </svg>
-          <span class="font-semibold text-sm">Đọc từ đầu</span>
-        </a>
-
-        <a
-          class="px-4 p-2 border dark:text-white dark:bg-neutral-500 border-gray-500 cursor-pointer rounded text-black font-semibold text-sm hover:text-white hover:bg-secondary-100"
-        >
-          Đọc mới nhất</a
-        >
+          <span class="text-4xl font-medium text-gray-500">Loading...</span>
+        </div>
       </div>
-    </div>
-    } @else {
-    <div
-      class="mx-auto h-full animate-pulse flex items-center justify-between"
-      style="height: 350px"
-    >
-      <div
-        aria-label="Loading..."
-        role="status"
-        class="flex items-center space-x-2"
-      >
-        <svg
-          class="h-20 w-20 animate-spin stroke-gray-500"
-          viewBox="0 0 256 256"
-        >
-          <line
-            x1="128"
-            y1="32"
-            x2="128"
-            y2="64"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="195.9"
-            y1="60.1"
-            x2="173.3"
-            y2="82.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="224"
-            y1="128"
-            x2="192"
-            y2="128"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="195.9"
-            y1="195.9"
-            x2="173.3"
-            y2="173.3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="128"
-            y1="224"
-            x2="128"
-            y2="192"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="60.1"
-            y1="195.9"
-            x2="82.7"
-            y2="173.3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="32"
-            y1="128"
-            x2="64"
-            y2="128"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-          <line
-            x1="60.1"
-            y1="60.1"
-            x2="82.7"
-            y2="82.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="24"
-          ></line>
-        </svg>
-        <span class="text-4xl font-medium text-gray-500">Loading...</span>
-      </div>
-    </div>
     }
   </div>
   <!-- </div> -->
@@ -413,11 +417,11 @@
     <chapter-list
       class="max-h-96 flex flex-col"
       [allchapters]="allchapters"
-      [comic_url]="comic?.url"
+      [comic_url]="comic.url"
     ></chapter-list>
 
     <grid-comic
-      [listComics]="SimilarComics! | slice : 0 : 12"
+      [listComics]="SimilarComics! | slice: 0 : 12"
       [num_preview]="12"
       [_title]="'Truyện tương tự'"
       [_class]="
@@ -432,9 +436,9 @@
 </div>
 
 @if (comic) {
-<comment-component
-  [comicId]="comic.id"
-  [lastchapterID]="comic.chapters![0].id"
-></comment-component>
+  <comment-component
+    [comicId]="comic.id"
+    [lastchapterID]="comic.chapters![0].id"
+  ></comment-component>
 }
 <!-- </ng-container> -->
