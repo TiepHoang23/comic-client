@@ -21,7 +21,7 @@ export class ChapterListComponent {
   maxChapterPage = 0;
   currentChapterPage = 0;
   @Input()
-  comic_url!: string | undefined;
+  comic_url?: string;
   preload_chapter_num: number = 48;
   chapter_grid_size: number = 3;
   height_each_element: number = 68;
