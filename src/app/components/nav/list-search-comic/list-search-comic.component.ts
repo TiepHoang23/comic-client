@@ -21,13 +21,15 @@ export class ListSearchComicComponent implements OnInit {
   isSearching = false;
   typingTimer: any;
   searchText: string = '';
+  isLoading: boolean = false;
   doneTypingInterval = 700;
+  skeletonLoader = new Array(1);
   @ViewChild('SearchInput') SearchInput!: ElementRef;
   @ViewChild('SearchFrame') SearchFrame!: ElementRef;
 
   constructor(private comicService: ComicService) {}
   ngOnInit() {}
-  ngOnChanges(change: any) {}
+
   SendSearchReq() {
     if (this.searchText != '') {
       this.comicService
@@ -40,27 +42,27 @@ export class ListSearchComicComponent implements OnInit {
     }
   }
   OnSearchChange(e: Event) {
+    this.isLoading = true;
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
       this.searchText = this.SearchInput.nativeElement.value;
       this.SendSearchReq();
+      this.isLoading = false;
     }, this.doneTypingInterval);
   }
-  OnSearchFocus = (isFoucs: boolean): boolean => {
-    this.isSearching = isFoucs;
-    if (isFoucs) {
+  OnSearchFocus = (isFocus: boolean): boolean => {
+    this.isSearching = isFocus;
+    if (isFocus) {
       this.SearchInput.nativeElement.classList.add('!w-full');
     } else {
       this.SearchFrame.nativeElement.classList.add('hidden');
       this.SearchInput.nativeElement.classList.remove('!w-full');
     }
-
     return true;
   };
   OnSearchClick = (): boolean => {
     this.SearchFrame.nativeElement.classList.remove('hidden');
     this.SearchInput.nativeElement.focus();
-
     return true;
   };
 
