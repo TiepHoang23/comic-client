@@ -33,7 +33,7 @@ type ComicChapters = {
   styleUrl: './comic-detail.component.scss',
 })
 export class ComicDetailComponent implements OnInit {
-  comic!: Comic;
+  comic?: Comic;
   isFollowed!: boolean;
   allchapters!: ComicChapters[];
   range!: Number[];
@@ -94,7 +94,7 @@ export class ComicDetailComponent implements OnInit {
 
 
   getSimilarComics(): void {
-    this.ComicService.getSimilarComic(this.comic.id).subscribe((res: any) => {
+    this.ComicService.getSimilarComic(this.comic!.id).subscribe((res: any) => {
       this.SimilarComics = res.data;
     });
   }
@@ -117,13 +117,14 @@ export class ComicDetailComponent implements OnInit {
     }
     this.followtime = now;
     this.accountService
-      .Follow(this.comic.id, isFollow)
+      .Follow(this.comic!.id, isFollow)
       .subscribe((res: any) => {
+
         if (res.status === 1) {
-          this.comic.isFollow = !this.comic.isFollow;
+          this.comic!.isFollow = !this.comic!.isFollow;
           this.toastService.show(
             ToastType.Success,
-            this.comic.isFollow ? 'Đã theo dõi' : 'Đã hủy theo dõi',
+            this.comic!.isFollow ? 'Đã theo dõi' : 'Đã hủy theo dõi',
           );
         } else {
           this.toastService.show(ToastType.Error, res.message);
