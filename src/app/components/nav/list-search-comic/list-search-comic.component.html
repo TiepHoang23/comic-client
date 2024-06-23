@@ -32,7 +32,7 @@
     />
 
     <svg
-      class="search-icon h-4 w-4 text-gray-500 absolute right-3 top-4 transform -translate-y-1/2 transition-opacity duration-300"
+      class="search-icon h-4 w-4 text-secondary-100 absolute right-3 top-4 transform -translate-y-1/2 transition-opacity duration-300"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -48,9 +48,9 @@
     <svg
       *ngIf="searchText.length > 0 && isSearching"
       (click)="clearSearch()"
-      class="clear-icon h-4 w-4 text-primary-100 absolute right-3 top-4 transform -translate-y-1/2 cursor-pointer"
+      class="clear-icon h-6 w-6 text-white absolute right-3 top-4 transform -translate-y-1/2 cursor-pointer"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#F86E4C"
       stroke="currentColor"
       stroke-width="2"
       stroke-linecap="round"
@@ -72,18 +72,18 @@
         <div class="flex items-center my-4">
           <div class="font-bold text-xl flex-grow">Kết quả</div>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            class="h-6 w-6 cursor-pointer"
             fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            class="feather feather-arrow-right icon text-icon-contrast text-undefined"
             viewBox="0 0 24 24"
+            stroke="currentColor"
+            (click)="OnSearchFocus(false)"
           >
-            <path d="M5 12h14m-7-7 7 7-7 7"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </div>
       } @else {
@@ -105,45 +105,59 @@
             <!-- <ul class="-my-8"> -->
             <div class="flex flex-row space-y-0 py-1 text-left">
               <img
-                class="h-16 w-12 rounded-lg object-cover my-auto"
+                class="h-18 w-14 rounded-lg object-cover my-auto"
                 src="{{ comic.coverImage }}"
                 alt="{{ comic.title }}"
               />
 
               <div class="relative flex px-2 lg:px-3 justify-between">
-                <div class="pr-8 sm:pr-5">
+                <div class="pr-3 my-auto">
                   <div class="flex justify-between">
                     <p
-                      class="text-base font-semibold text-gray-900 line-clamp-2"
+                      class="text-lg font-bold text-secondary-100 line-clamp-2"
                     >
                       {{ comic.title }}
                     </p>
                   </div>
                   <div
-                    class="text-[0.7rem] text-center comment-container flex gap-2 items-center"
+                    class="text-[0.75rem] text-center comment-container flex gap-1 items-center"
                   >
                     @if (comic.status === 0) {
                       <div
-                        class="animate-ping h-1 w-1 rounded-full bg-sky-400 opacity-75"
+                        class="h-2 w-2 rounded-full bg-sky-400 opacity-75"
                       ></div>
                       <div>Đang tiến hành</div>
                     } @else {
-                      <svg
-                        class="animate-ping opacity-75"
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="6"
-                        width="6"
-                        viewBox="0 0 512 512"
-                      >
-                        <path
-                          fill="#2debb2"
-                          d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"
-                        />
-                      </svg>
+                      <div
+                        class="h-2 w-2 rounded-full bg-lime-500 opacity-75"
+                      ></div>
                       <div>Đã hoàn thành</div>
                     }
                   </div>
-                  <div class="flex gap-3">
+                  <div class="flex gap-3 mt-1">
+                    <div
+                      class="text-sm text-center uppercase flex gap-1 items-center text-primary-100"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        class="feather feather-eye icon small text-icon-contrast text-undefined"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"
+                        ></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      {{ comic.viewCount | numeral }}
+                    </div>
+
                     <div class="text-sm text-center flex gap-1 items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -182,28 +196,6 @@
                       </svg>
                       {{ comic.rating }}
                     </div>
-                    <div
-                      class="text-sm text-center uppercase flex gap-1 items-center text-primary-100"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        class="feather feather-eye icon small text-icon-contrast text-undefined"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"
-                        ></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                      {{ comic.viewCount | numeral }}
-                    </div>
 
                     <!---->
                   </div>
@@ -215,6 +207,31 @@
           </div>
         </a>
       </section>
+      <!-- <div> -->
+      <a
+        *ngIf="listSearch.length > 0"
+        [routerLink]="['/tim-truyen']"
+        [queryParams]="{ page: 1, keyword: searchText }"
+        (click)="OnSearchFocus(false)"
+        class="cursor-pointer flex items-center justify-end text-center mx-auto hover:underline hover:text-primary-100"
+      >
+        Xem thêm
+        <svg
+          class="h-5 w-5"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </a>
+      <!-- </div> -->
     </div>
   </div>
   <div
