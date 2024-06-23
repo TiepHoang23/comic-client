@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, ViewChild } from '@angular/core';
 import { Genre } from '../../dataSource/schema/Genre';
 // import { Observable } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
@@ -34,11 +34,7 @@ export class NavComponent {
   user?: IUser;
   showslidebar = false;
   showaccount = false;
-  listnotify = [1, 2, 4]
-  lengthnotify = this.listnotify.length
-  optionNotify = 1;
-  isShowNotify = false;
-  hoveredIndexNotify: number | null = null;
+
   @ViewChild('dropdownNavbar') dropdownNavbar!: ElementRef;
   constructor(
     private comicService: ComicService,
@@ -46,7 +42,9 @@ export class NavComponent {
     private router: Router,
     private route: ActivatedRoute,
     private imageService: ImageService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+
+
   ) { }
   ngOnInit() {
     this.comicService.getGenres().subscribe((genres) => {
@@ -63,6 +61,8 @@ export class NavComponent {
 
 
   }
+
+
   onLoginClick() {
     this.router.navigate(['auth/login']);
   }
@@ -89,10 +89,7 @@ export class NavComponent {
       this.dropdownNavbar.nativeElement.style.height = '0px';
     }
   }
-  toggleOptionNotify() {
 
-    this.optionNotify = this.optionNotify == 1 ? 2 : 1
-  }
 
 
 }

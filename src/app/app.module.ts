@@ -29,6 +29,7 @@ import { ToastComponent } from './components/common/toast/toast.component';
 import { LoadingBarComponent } from './components/common/loading-bar/loading-bar.component';
 import { RankComponent } from './modules/rank/rank.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { RankComponent } from './modules/rank/rank.component';
     FollowedPageComponent,
     LoadingBarComponent,
     RankComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -57,4 +59,4 @@ import { RankComponent } from './modules/rank/rank.component';
   bootstrap: [AppComponent],
   // exports: [AppModule]
 })
-export class AppModule {}
+export class AppModule { }

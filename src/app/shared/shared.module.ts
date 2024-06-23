@@ -18,6 +18,7 @@ import { GenreCatagoriesComponent } from '../components/common/genre-catagories/
 import { ImageLoaderComponent } from '../components/common/image-loader/image-loader.component';
 import { TopListComponent } from '../components/common/top-list/top-list.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { NotifyComponent } from '../components/nav/notify/notify.component';
 @NgModule({
   declarations: [
     NumeralPipe,
@@ -31,6 +32,7 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
     GenreCatagoriesComponent,
     TopListComponent,
     ImageLoaderComponent,
+    NotifyComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
     GenreCatagoriesComponent,
     ImageLoaderComponent,
     TopListComponent,
+    NotifyComponent
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

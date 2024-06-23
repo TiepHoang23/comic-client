@@ -1,0 +1,267 @@
+<div
+  class="notify relative h-full hover:bg-white rounded-t-lg ml-auto cursor-pointer"
+>
+  <a
+    class="px-2 h-full hover:bg-[#fff] hover:fill-black items-center flex rounded-t-lg select-none"
+    [ngClass]="{
+      'fill-black bg-[#fff]': isShowNotify,
+      'fill-white': !isShowNotify
+    }"
+    (click)="onClickNotifyBell()"
+  >
+    <span
+      [hidden]="lengthnotify <= 0"
+      class="absolute z-50 w-4 h-4 top-[0px] right-[7px] bg-[#FA383E] text-center text-white font-bold text-[10px] rounded-full"
+    >
+      {{ lengthnotify }}
+    </span>
+
+    <svg
+      height="25"
+      width="30"
+      viewBox="0 0 1024 1024"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M512 938.666667c47.146667 0 85.333333-38.186667 85.333333-85.333334h-170.666666c0 47.146667 38.186667 85.333333 85.333333 85.333334z m256-256V469.333333c0-131.2-69.76-240.64-192-269.653333V170.666667c0-35.413333-28.586667-64-64-64s-64 28.586667-64 64v29.013333c-122.24 29.013333-192 138.453333-192 269.653333v213.333334l-85.333333 85.333333v42.666667h682.666666v-42.666667l-85.333333-85.333333z"
+      />
+    </svg>
+  </a>
+
+  <div
+    *ngIf="isShowNotify"
+    class="absolute w-[360px] z-50 right-0 top-10 text-[#000000] bg-[#ffffff] rounded-lg shadow-[0px_0px_5px_5px_rgba(0,0,0,0.1)] cursor-default"
+  >
+    <div class="relative my-3 mx-4 flex items-center justify-between">
+      <h1 class="text-xl font-extrabold font-roboto">Thông báo</h1>
+
+      <div
+        class="hover:cursor-pointer hover:bg-gray-200 px-2 rounded-lg select-none"
+        (click)="isShowOptionGeneral = !isShowOptionGeneral"
+      >
+        <svg
+          fill="#5E5E5E"
+          version="1.1"
+          id="Capa_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="20px"
+          height="20px"
+          viewBox="0 0 992 992"
+          xml:space="preserve"
+        >
+          <g>
+            <circle cx="144.3" cy="496" r="144.3" />
+            <circle cx="496" cy="496" r="144.3" />
+            <circle cx="847.7" cy="496" r="144.3" />
+          </g>
+        </svg>
+
+        <div
+          *ngIf="isShowOptionGeneral"
+          class="absolute z-[100] bg-white shadow-[5px_5px_15px_15px_rgba(0,0,0,0.1)] top-[30px] left-[5%] w-[90%] px-2 py-2 rounded-lg"
+        >
+          <svg
+            aria-hidden="true"
+            height="12"
+            viewBox="0 0 21 12"
+            width="21"
+            class="x10l6tqk xng853d xds687c z-[200] absolute top-[-10px] fill-white right-[0px]"
+            fill="var(--card-background)"
+            style="transform: scale(-1, -1) translate(0px, 0px)"
+          >
+            <path
+              d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"
+            ></path>
+          </svg>
+
+          <div
+            (click)="OnRead()"
+            class="flex flex-row p-2 hover:bg-gray-200 rounded-lg"
+          >
+            <svg
+              fill="#000000"
+              height="15px"
+              width="15px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 490 490"
+              xml:space="preserve"
+            >
+              <polygon
+                points="452.253,28.326 197.831,394.674 29.044,256.875 0,292.469 207.253,461.674 490,54.528 "
+              />
+            </svg>
+            <span class="ml-2">Đánh dấu tất cả đã đọc</span>
+          </div>
+          <div
+            (click)="onDelete(3)"
+            class="flex flex-row p-2 hover:bg-gray-200 rounded-lg"
+          >
+            <svg
+              fill="#000000"
+              height="15px"
+              width="15px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 460.775 460.775"
+              xml:space="preserve"
+            >
+              <path
+                d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+                    c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+                    c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+                    c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+                    l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+                    c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+              />
+            </svg>
+            <span class="ml-2">Xóa tất cả thông báo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-3 mx-4 flex items-center">
+      <button
+        [ngClass]="{ 'bg-[#ebf5ff] text-[#0064d1]': optionNotify == 0 }"
+        class="text-md font-bold mr-3 p-2 rounded-xl hover:bg-gray-200"
+        (click)="toggleOptionNotify(0)"
+      >
+        Tất cả
+      </button>
+      <button
+        [ngClass]="{ 'bg-[#ebf5ff] text-[#0064d1]': optionNotify == 1 }"
+        class="text-md font-bold mr-3 p-2 rounded-xl hover:bg-gray-200"
+        (click)="toggleOptionNotify(1)"
+      >
+        Chưa đọc
+      </button>
+    </div>
+
+    <div
+      [ngClass]="{ hidden: lengthnotify > 0 }"
+      class="items-center flex flex-col p-4"
+    >
+      <img class="w-[70%]" src="assets/not_notify.jpg" alt="" />
+      <p
+        class="m-y-2 font-extrabold text-lg text-center text-gray-500 font-roboto"
+      >
+        Bạn không có thông báo nào
+      </p>
+    </div>
+    <div [ngClass]="{ hidden: lengthnotify <= 0 }" class="flex flex-col p-4">
+      <ul (mouseleave)="hoveredIndexNotify = null" class="">
+        <li
+          *ngFor="let notify of listnotify; let i = index"
+          class="relative select-none"
+        >
+          <div
+            (mousemove)="hoveredIndexNotify = i"
+            class="flex items-center hover:bg-gray-200 p-2 rounded-md"
+          >
+            <img class="w-14 h-10" src="sdf" alt="" />
+            <span class="">{{ notify.notify }}</span>
+          </div>
+
+          <div
+            *ngIf="hoveredIndexNotify == i || isShowOption == i"
+            (click)="onClickOption(i)"
+            class="absolute z-50 top-[25%] right-2 flex items-center justify-between bg-white w-7 h-7 rounded-full border border-gray-200 hover:cursor-pointer hover:bg-gray-200"
+          >
+            <svg
+              class="m-auto"
+              fill="#5E5E5E"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="15px"
+              height="15px"
+              viewBox="0 0 992 992"
+              xml:space="preserve"
+            >
+              <g>
+                <circle cx="144.3" cy="496" r="144.3" />
+                <circle cx="496" cy="496" r="144.3" />
+                <circle cx="847.7" cy="496" r="144.3" />
+              </g>
+            </svg>
+          </div>
+
+          <div
+            *ngIf="isShowOption == i"
+            class="absolute z-[100] right-[40px] top-10 shadow-[0px_0px_10px_10px_rgba(0,0,0,0.1)] bg-white drop-shadow-2xl w-[200px] px-2 py-2 rounded-lg"
+          >
+            <svg
+              aria-hidden="true"
+              height="12"
+              viewBox="0 0 21 12"
+              width="21"
+              class="x10l6tqk xng853d xds687c z-[200] absolute top-[-10px] fill-white right-[0px]"
+              fill="var(--card-background)"
+              style="transform: scale(-1, -1) translate(0px, 0px)"
+            >
+              <path
+                d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"
+              ></path>
+            </svg>
+            <div
+              (click)="OnRead()"
+              class="flex flex-row p-2 hover:bg-gray-200 rounded-lg"
+            >
+              <svg
+                fill="#000000"
+                height="15px"
+                width="15px"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 490 490"
+                xml:space="preserve"
+              >
+                <polygon
+                  points="452.253,28.326 197.831,394.674 29.044,256.875 0,292.469 207.253,461.674 490,54.528 "
+                />
+              </svg>
+              <span class="ml-2">{{
+                notify.isRead ? "Đánh dấu chưa đọc" : " Đánh dấu đã đọc"
+              }}</span>
+            </div>
+            <div
+              (click)="onDelete(i)"
+              class="flex flex-row p-2 hover:bg-gray-200 rounded-lg"
+            >
+              <svg
+                fill="#000000"
+                height="15px"
+                width="15px"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 460.775 460.775"
+                xml:space="preserve"
+              >
+                <path
+                  d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+                  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+                  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+                  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+                  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+                  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+                />
+              </svg>
+              <span class="ml-2">Xóa</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
