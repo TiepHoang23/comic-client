@@ -35,12 +35,13 @@
     >
       <li
         *ngFor="let genre of filteredCatagoriesGenre.get('countries')"
-        class="hover:border-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-secondary-100 bg-background border-dashed border"
+        class="cursor-pointer rounded-md px-1 flex items-center gap-1"
         [ngClass]="{
-          'text-black hover:text-primary-100': !statusGenres[genre.id],
-          'text-[#FFFFFF]  hover:border-black bg-[#F86E4C] hover:text-[#FFFFFF] ':
+          'outline-1 outline-gray-300 outline-dashed hover:outline-primary-100 hover:text-primary-100 ':
+            !statusGenres[genre.id],
+          'border border-primary-100 bg-primary-50 text-primary-100 ':
             statusGenres[genre.id] == 1,
-          'text-white bg-[#000000] hover:text-white':
+          'text-red-500 bg-red-300 border border-dashed  border-red-500':
             statusGenres[genre.id] == 2
         }"
       >
@@ -70,12 +71,13 @@
     >
       <li
         *ngFor="let genre of filteredCatagoriesGenre.get('genreCommon')"
-        class="hover:border-primary-100 cursor-pointer rounded-md px-1 flex items-center gap-1 text-secondary-100 bg-background border-dashed border"
+        class="cursor-pointer rounded-md px-1 flex items-center gap-1"
         [ngClass]="{
-          'text-[#FFFFFF] hover:border-black bg-[#F86E4C] hover:text-[#FFFFFF] ':
+          'outline-1 outline-gray-300 outline-dashed hover:outline-primary-100 hover:text-primary-100 ':
+            !statusGenres[genre.id],
+          'border border-primary-100 bg-primary-50 text-primary-100 ':
             statusGenres[genre.id] == 1,
-          'text-black hover:text-primary-100': !statusGenres[genre.id],
-          'text-white bg-[#000000] hover:text-white':
+          'text-red-500 bg-red-300 border border-dashed border-red-500':
             statusGenres[genre.id] == 2
         }"
       >

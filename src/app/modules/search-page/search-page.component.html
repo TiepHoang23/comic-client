@@ -8,11 +8,11 @@
     selectOptions.status.isShow = false
   "
 >
-  <div class="grid gap-2 md:grid-cols-[1fr_12rem] font-semibold">
+  <div class="grid gap-2 md:grid-cols-[1fr_12rem]">
     <!-- Search Form -->
     <form class="">
       <input
-        class="placeholder-current bg-gray-200 w-full h-10 rounded px-4"
+        class="placeholder-current bg-gray-200 w-full h-10 rounded-lg px-4 focus:outline-primary-100 outline-1 focus:bg-slate-100"
         type="search"
         placeholder="Nhập tên truyện..."
         title="Search"
@@ -33,7 +33,7 @@
     <!-- Show Filters Button -->
     <button
       (click)="toggleFilters()"
-      class="rounded custom-opacity relative md-btn flex items-center overflow-hidden accent bg-primary-100 text-white"
+      class="rounded-lg relative bg-primary-100 text-white flex items-center overflow-hidden accent"
       style="min-height: 2.5rem; min-width: 100%"
     >
       <span
@@ -41,23 +41,21 @@
         style="pointer-events: none; justify-content: center"
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          class="h-6 w-6 transition-all ease-in mx-2"
+          [ngClass]="{ 'rotate-180 ': showFilters }"
           fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="feather feather-chevron-down icon mr-4"
           viewBox="0 0 24 24"
-          style="color: currentcolor"
+          stroke="currentColor"
         >
           <path
-            [attr.d]="showFilters ? 'm18 15-6-6-6 6' : 'm6 9 6 6 6-6'"
-          ></path>
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
-        {{ showFilters ? "Ẩn bộ lọc" : "Thêm bộ lọc" }}
+
+        <p class="mx-2">{{ showFilters ? "Ẩn bộ lọc" : "Thêm bộ lọc" }}</p>
       </span>
     </button>
   </div>
@@ -66,7 +64,7 @@
   >
     <li
       *ngIf="selectOptions.sorts.value !== -1"
-      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      class="px-2 border border-primary-100 text-primary-100 rounded-full select-none cursor-pointer flex"
     >
       <svg
         *ngIf="selectOptions.sorts.value != lastupdate"
@@ -88,7 +86,7 @@
     </li>
     <li
       *ngIf="selectOptions.status.value !== -1"
-      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      class="border border-primary-100 text-primary-100 rounded-full px-2 cursor-pointer flex space-x-1 whitespace-nowrap"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +110,13 @@
 
     <li
       *ngFor="let key of getGenreKeys()"
-      class="pl-1 pr-2 rounded-ful select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      class="px-2 rounded-full select-none cursor-pointer flex space-x-1 whitespace-nowrap"
       [ngClass]="{
-        ' bg-gray-100 ': !selectOptions.genres.value[key] ,
-        'text-[#ffffff] bg-[#030303] ': selectOptions.genres.value[key] == 2,
-        'text-white bg-primary-100 ' : selectOptions.genres.value[key] == 1,
+        ' bg-gray-100 ': !selectOptions.genres.value[key],
+        'text-red-500 line-through outline-1 outline-dashed outline-red-500 ':
+          selectOptions.genres.value[key] == 2,
+        'text-primary-100 border border-primary-100 ':
+          selectOptions.genres.value[key] == 1
       }"
     >
       <svg
@@ -143,7 +143,7 @@
     </li>
     <li
       *ngIf="selectOptions.year.value > 0"
-      class="pl-1 pr-2 rounded-full bg-gray-100 select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+      class="px-2 rounded-full border border-primary-100 text-primary-100 cursor-pointer flex space-x-1 whitespace-nowrap"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -163,6 +163,7 @@
       <span class="text-sm">{{ selectOptions.year.value }}</span>
     </li>
   </ul>
+
   <!-- Filter Options -->
   <div
     [ngClass]="{ hidden: !showFilters }"
@@ -175,15 +176,13 @@
         <label
           id="headlessui-listbox-label-1"
           data-headlessui-state=""
-          class="text-midTone xl:text-base text-sm"
+          class="xl:text-base text-sm text-gray-600"
           >Sắp xếp theo</label
         >
         <button
           id="headlessui-listbox-button-2"
           type="button"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-          data-headlessui-state=""
+          [ngClass]="{ 'outline-primary-100': selectOptions.sorts.isShow }"
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
           (click)="
             selectOptions.sorts.isShow = !selectOptions.sorts.isShow;
@@ -191,7 +190,7 @@
             selectOptions.genres.isShow = false
           "
         >
-          <span class="text-left truncate" title="None">{{
+          <span class="text-left truncate font-semibold" title="None">{{
             selectOptions.sorts.name
           }}</span
           ><svg
@@ -210,10 +209,10 @@
           </svg>
         </button>
         <ul
-          [ngClass]="{ hidden: !selectOptions.sorts.isShow }"
           id="listbox-options-3"
-          aria-labelledby="headlessui-listbox-button-2"
-          aria-orientation="vertical"
+          [ngClass]="{
+            hidden: !selectOptions.sorts.isShow
+          }"
           role="listbox"
           tabindex="0"
           data-headlessui-state="open"
@@ -227,10 +226,10 @@
                 data: sort
               })
             "
-            class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone border-dashed border hover:border-primary-100 hover:text-primary-100 {{
+            class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone mx-2 rounded-md my-1  {{
               sort.selected === true
-                ? 'text-white bg-[#F86E4C] hover:text-white'
-                : ''
+                ? 'text-primary-100 font-semibold ou border-primary-100  hover:bg-primary-100 hover:text-white'
+                : 'hover:bg-gray-200 hover:text-secondary-100'
             }}"
             id="headlessui-listbox-option-353"
             role="option"
@@ -246,20 +245,27 @@
       </div>
 
       <div class="relative space-y-1">
-        <label class="text-midTone xl:text-base text-sm">Thể loại </label
+        <label class="text-midTone xl:text-base text-sm text-gray-600"
+          >Thể loại </label
         ><button
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color,outline-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
-          title="Include any"
-          id="headlessui-popover-button-4"
           type="button"
+          [ngClass]="{ 'outline-primary-100': selectOptions.genres.isShow }"
           (click)="
             selectOptions.genres.isShow = !selectOptions.genres.isShow;
             selectOptions.sorts.isShow = false;
             selectOptions.status.isShow = false
           "
         >
-          <span class="truncate text-left">Thể loại</span
-          ><svg
+          @if (getGenreKeys().length > 0) {
+            <p class="font-semibold line-clamp-1 text-left">
+              {{ getJoinedGenreNames() }}
+            </p>
+          } @else {
+            <span class="truncate text-left font-semibold">Thể loại</span>
+          }
+
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5 my-auto text-midTone"
             viewBox="0 0 24 24"
@@ -276,7 +282,7 @@
         </button>
         <div
           [ngClass]="{ hidden: !selectOptions.genres.isShow }"
-          class="absolute top-full left-0 group-hover:flex bg-white z-20 text-black shadow-sm border border-solid border-[#be8c28]"
+          class="absolute top-full left-0 group-hover:flex bg-white z-20 text-black shadow-sm"
         >
           <app-genre-catagories
             [routerLinkGenres]="false"
@@ -301,33 +307,29 @@
         "
       ></div>
 
-      <label
-        class="text-midTone truncate xl:text-base text-sm relative space-y-1 grid"
-        data-v-eb114e73=""
-      >
-        <span data-v-eb114e73="" title="Publication year">Năm phát hành</span>
+      <label class="truncate xl:text-base text-sm relative space-y-1 grid">
+        <span class="text-gray-600" title="Publication year"
+          >Năm phát hành</span
+        >
         <div
           class="grid grid-cols-[1fr_3rem] gap-2 rounded-md outline outline-0 outline-transparent bg-gray-100 pointer-events-none"
         >
           <input
-            class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-2 py-[0.3rem] bg-gray-100 rounded-md text-color outline-none outline-1 -outline-offset-1 transition-[outline-color] w-full font-medium pointer-events-auto placeholder:text-color focus:outline-primary"
+            class="font-semibold px-2 py-[0.3rem] bg-gray-100 rounded-md text-color outline-none outline-1 -outline-offset-1 transition-[outline-color] w-full pointer-events-auto placeholder:text-color focus:outline-primary"
             type="number"
             required
             minlength="4"
             maxlength="4"
             min="1900"
             max="4000"
-            id="quantity-input"
-            data-input-counter
-            aria-describedby="helper-text-explanation"
+            [ngClass]="{ 'outline-primary-100': selectOptions.year.isShow }"
             [(ngModel)]="selectOptions.year.value"
             (ngModelChange)="OnYearChange(0)"
             inputmode="numeric"
             placeholder="Năm phát hành"
-            autocomplete="off"
           />
 
-          <div class="flex my-auto gap-2 pointer-events-auto">
+          <div class="flex my-auto gap-2 pointer-events-auto mr-2">
             <svg
               data-input-counter-increment="quantity-input"
               data-v-5cba5096=""
@@ -367,14 +369,12 @@
         </div>
       </label>
       <div class="relative space-y-1 grid">
-        <label
-          id="headlessui-listbox-label-24"
-          data-headlessui-state=""
-          class="text-midTone truncate xl:text-base text-sm"
+        <label class="text-gray-600 truncate xl:text-base text-sm"
           ><span title="Publication Status">Trạng thái</span></label
         >
         <button
           id="headlessui-listbox-button-25"
+          [ngClass]="{ 'outline-primary-100': selectOptions.status.isShow }"
           type="button"
           (click)="
             selectOptions.status.isShow = !selectOptions.status.isShow;
@@ -383,7 +383,9 @@
           "
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
         >
-          <span class="text-left truncate">{{ selectOptions.status.name }}</span
+          <span class="text-left truncate font-semibold">{{
+            selectOptions.status.name
+          }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5 my-auto text-midTone"
@@ -400,13 +402,6 @@
           </svg>
         </button>
         <ul
-          data-v-5658a12f=""
-          id="headlessui-listbox-options-26"
-          aria-multiselectable="true"
-          aria-labelledby="headlessui-listbox-button-25"
-          aria-orientation="vertical"
-          role="listbox"
-          tabindex="0"
           [hidden]="!selectOptions.status.isShow"
           data-headlessui-state="open"
           class="absolute border w-full max-h-64 xl:max-h-[32rem] overflow-y-auto z-50 left-0 rounded-md shadow-2xl shadow-black/50 py-1 focus:outline-none top-full bg-white border-accent-10"
@@ -424,11 +419,11 @@
             tabindex="-1"
             aria-selected="false"
             data-headlessui-state=""
-            class="grid grid-flow-col auto-cols-max border-dashed border hover:border-primary-100 hover:text-primary-100  text-midTone cursor-pointer text-left truncate
+            class="grid grid-flow-col auto-cols-max cursor-pointer text-left truncate mx-2 py-1 my-1 rounded-md
             {{
               status.selected === true
-                ? 'text-white bg-[#F86E4C] hover:text-white'
-                : ''
+                ? 'text-primary-100 font-semibold  border-primary-100  hover:bg-primary-100 hover:text-white'
+                : 'hover:bg-gray-200 hover:text-secondary-100'
             }}"
           >
             <div
@@ -439,9 +434,31 @@
         </ul>
         <!---->
       </div>
-
+    </div>
+    <div class="w-full flex justify-end">
       <button
-        class="rounded m-auto ml-0 md:mb-0 h-[36px] max-w-20 p-2 px-2 custom-opacity relative md-btn items-center overflow-hidden accent bg-[#3B82F6] text-white"
+        class="font-semibold border-2 border-secondary-100 p-2 rounded-lg text-center flex items-center gap-2"
+        (click)="clearAllFilter()"
+      >
+        <!-- <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="1 4 1 10 7 10" />
+          <polyline points="23 20 23 14 17 14" />
+          <path
+            d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"
+          />
+        </svg> -->
+        <span>Xóa bộ lọc</span>
+      </button>
+      <button
+        class="bg-primary-100 hover:rounded-xl transition-all ease-in text-white font-bold py-2 px-4 rounded flex items-center mx-2"
         (click)="
           ClickSearch();
           selectOptions.genres.isShow = false;
@@ -449,7 +466,34 @@
           selectOptions.status.isShow = false
         "
       >
-        Search
+        <svg
+          class="h-6 w-6 mr-2"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+        <span>Tìm kiếm</span>
+        <!-- <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="13 17 18 12 13 7" />
+          <polyline points="6 17 11 12 6 7" />
+        </svg> -->
       </button>
     </div>
   </div>

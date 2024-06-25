@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Comic } from '../../dataSource/schema/comic';
-import { IFilters, IFilter, advancedFiltersOptions } from '../../components/utils/constants';
+import {
+  IFilters,
+  IFilter,
+  advancedFiltersOptions,
+} from '../../components/utils/constants';
 import { Genre } from '../../dataSource/schema/Genre';
 import { ComicStatus, SortType } from '../../dataSource/enum';
 import { ComicService } from '@services/comic.service';
@@ -37,7 +41,7 @@ export class SearchPageComponent implements OnInit {
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
     this.dataView = {
       status: advancedFiltersOptions.status,
@@ -47,7 +51,6 @@ export class SearchPageComponent implements OnInit {
     this.selectOptions.sorts.name = advancedFiltersOptions.sorts[0].name;
     this.lastupdate = SortType.LastUpdate;
     console.log(this.lastupdate);
-
   }
 
   toggleFilters() {
@@ -71,31 +74,47 @@ export class SearchPageComponent implements OnInit {
       this.resetOptions(status, sort, year, genres, nogenres, keyword);
       this.searchComics(page, sort, status, genres, nogenres, year, keyword);
     });
-
   }
   getGenreKeys() {
-    return Object.keys(this.selectOptions.genres.value)
-      .filter(key => this.selectOptions.genres.value[key] > 0);
+    return Object.keys(this.selectOptions.genres.value).filter(
+      (key) => this.selectOptions.genres.value[key] > 0,
+    );
   }
-  private resetOptions(status: number, sort: number, year: number, genres: string, nogenres: string, keyword: string) {
+  private resetOptions(
+    status: number,
+    sort: number,
+    year: number,
+    genres: string,
+    nogenres: string,
+    keyword: string,
+  ) {
     if (this.isOnInit) return;
 
     this.selectOptions.keyword.value = keyword;
 
-    genres.split(',').filter(x => x != '').forEach((id) => {
-      this.selectOptions.genres.value[id] = 1
-      this.selectOptions.genres.name[id] = this.listGenres.find(x => x.id == parseInt(id))?.title
-    })
-    nogenres.split(',').filter(x => x != '').forEach((id) => {
-      this.selectOptions.genres.value[id] = 2
-      this.selectOptions.genres.name[id] = this.listGenres.find(x => x.id == parseInt(id))?.title
-    }
-    );
+    genres
+      .split(',')
+      .filter((x) => x != '')
+      .forEach((id) => {
+        this.selectOptions.genres.value[id] = 1;
+        this.selectOptions.genres.name[id] = this.listGenres.find(
+          (x) => x.id == parseInt(id),
+        )?.title;
+      });
+    nogenres
+      .split(',')
+      .filter((x) => x != '')
+      .forEach((id) => {
+        this.selectOptions.genres.value[id] = 2;
+        this.selectOptions.genres.name[id] = this.listGenres.find(
+          (x) => x.id == parseInt(id),
+        )?.title;
+      });
 
     this.selectOptions.year.value = year;
-    this.selectOptions.year.name = year.toString()
+    this.selectOptions.year.name = year.toString();
 
-    this.dataView.status.forEach(filter => {
+    this.dataView.status.forEach((filter) => {
       filter.selected = filter.value === status;
       if (filter.selected) {
         this.selectOptions.status.name = filter.name;
@@ -103,7 +122,7 @@ export class SearchPageComponent implements OnInit {
       }
     });
 
-    this.dataView.sorts.forEach(filter => {
+    this.dataView.sorts.forEach((filter) => {
       filter.selected = filter.value === sort;
       if (filter.selected) {
         this.selectOptions.sorts.name = filter.name;
@@ -114,35 +133,54 @@ export class SearchPageComponent implements OnInit {
     this.isOnInit = true;
   }
 
-  private searchComics(page: number, sort: number, status: number, genres: string, nogenres: string, year: number, keyword: string) {
+  private searchComics(
+    page: number,
+    sort: number,
+    status: number,
+    genres: string,
+    nogenres: string,
+    year: number,
+    keyword: string,
+  ) {
     this.listComics = [];
-    this.comicService.getAdvanceSearchComic(page, 40, sort, status, genres, nogenres, year, keyword).subscribe((res: any) => {
-      this.totalpage = res.data.totalpage;
-      this.listComics = res.data.comics;
-    });
+    this.comicService
+      .getAdvanceSearchComic(
+        page,
+        40,
+        sort,
+        status,
+        genres,
+        nogenres,
+        year,
+        keyword,
+      )
+      .subscribe((res: any) => {
+        this.totalpage = res.data.totalpage;
+        this.listComics = res.data.comics;
+      });
   }
 
   OnFilterChange({ option, data }: { option: string; data: IFilter }) {
     if (data.selected) return;
 
     this.isLoad = true;
-    this.dataView[option as keyof IFilters].forEach(filter => filter.selected = false);
+    this.dataView[option as keyof IFilters].forEach(
+      (filter) => (filter.selected = false),
+    );
     data.selected = true;
 
     this.selectOptions[option as keyof IFilters].name = data.name;
     this.selectOptions[option as keyof IFilters].value = data.value;
     this.selectOptions[option as keyof IFilters].isShow = false;
-
-
-
   }
   OnYearChange(year: number) {
     this.isLoad = true;
+    this.selectOptions.year.isShow = true;
     this.selectOptions.genres.isShow = false;
     this.selectOptions.sorts.isShow = false;
     this.selectOptions.status.isShow = false;
-    this.selectOptions.year.value = this.selectOptions.year.value + year
-    this.selectOptions.year.name = year.toString()
+    this.selectOptions.year.value = this.selectOptions.year.value + year;
+    this.selectOptions.year.name = year.toString();
   }
   OnGenresChange(genre: Genre) {
     this.isLoad = true;
@@ -156,10 +194,12 @@ export class SearchPageComponent implements OnInit {
       const genres: string[] = [];
       const nogenres: string[] = [];
 
-      Object.entries(this.selectOptions.genres.value).forEach(([key, value]) => {
-        if (value === 1) genres.push(key);
-        if (value === 2) nogenres.push(key);
-      });
+      Object.entries(this.selectOptions.genres.value).forEach(
+        ([key, value]) => {
+          if (value === 1) genres.push(key);
+          if (value === 2) nogenres.push(key);
+        },
+      );
 
       resolve({
         genres: genres.join(','),
@@ -170,7 +210,6 @@ export class SearchPageComponent implements OnInit {
 
   ClickSearch() {
     if (!this.isLoad) return;
-
     this.updateGenres().then(({ genres, nogenres }) => {
       this.isLoad = false;
       this.router.navigate([], {
@@ -198,7 +237,7 @@ export class SearchPageComponent implements OnInit {
         break;
       case 'sort':
         this.selectOptions.sorts.value = this.lastupdate;
-        this.selectOptions.sorts.name = this.dataView.sorts[0].name
+        this.selectOptions.sorts.name = this.dataView.sorts[0].name;
         break;
       case 'year':
         this.selectOptions.year.value = 0;
@@ -206,10 +245,24 @@ export class SearchPageComponent implements OnInit {
       case 'genres':
         this.selectOptions.genres.value[data] = 0;
         break;
-
     }
   }
 
+  getJoinedGenreNames(): string {
+    return this.getGenreKeys()
+      .map((key) => this.selectOptions.genres.name[key])
+      .join(', ');
+  }
+
+  clearAllFilter() {
+    this.selectOptions = {
+      sorts: { value: -1, name: '', isShow: false },
+      status: { value: -1, name: '', isShow: false },
+      year: { value: 0, name: '', isShow: false },
+      genres: { value: {}, name: {}, isShow: false },
+      keyword: { value: '', name: '' },
+    };
+  }
   OnChangePage(page: number) {
     this.router.navigate([], {
       queryParams: { page },
