@@ -77,4 +77,15 @@ export class AccountService {
     const timestamp = new Date().getTime();
     return `${url}?timestamp=${timestamp}`;
   }
+  getUserNotify() {
+    return this.httpclient.get(`${globalConfig.API_HOST}/User/Notify`);
+  }
+  updateUserNotify(idNotify: number | null, IsRead: boolean | null) {
+
+    return this.httpclient.post(`${globalConfig.API_HOST}/User/Notify/update`, { ID: idNotify, IsRead: IsRead });
+  }
+  deleteUserNotify(idNotify: number | null) {
+
+    return this.httpclient.delete(`${globalConfig.API_HOST}/User/Notify/delete/${idNotify}`);
+  }
 }
