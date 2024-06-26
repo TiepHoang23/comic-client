@@ -10,10 +10,11 @@ import { partition } from 'lodash';
 export class GenreCatagoriesComponent implements OnInit {
   @Input() listGenres: Array<Genre> = new Array<Genre>();
   @Input() routerLinkGenres: boolean = true;
-  @Input() statusGenres: any = {}
+  @Input() statusGenres: any = {};
   @Output() clickGenres: EventEmitter<any> = new EventEmitter<any>();
   catagoriesGenre: Map<string, Genre[]> = new Map();
   filteredCatagoriesGenre: Map<string, Genre[]> = new Map();
+  searchTerm: string = '';
 
   ngOnInit(): void {
     this.updateCategories();
@@ -26,23 +27,36 @@ export class GenreCatagoriesComponent implements OnInit {
     this.catagoriesGenre.set('countries', genreCountry);
     this.catagoriesGenre.set('genreCommon', genreCommon);
 
-    // Initialize filtered categories with the original categories
     this.filteredCatagoriesGenre = new Map(this.catagoriesGenre);
   }
-
 
   public clickGenre(id: any): void {
     this.clickGenres.emit(id);
     // console.log(this.statusGenres[genre.id]);
   }
-  // searchCategoryByTitle(title: string): Genre[] | undefined {
-  //   for (const [category, genres] of this.catagoriesGenre) {
-  //     if (genres.some((genre) => genre.title === title)) {
-  //       return genres;
-  //     }
-  //   }
-  //   return undefined;
-  // }
+
+  filterGenres(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm = input.value;
+
+    if (!this.searchTerm) {
+      this.filteredCatagoriesGenre = new Map(this.catagoriesGenre);
+      return;
+    }
+
+    const filtered = new Map<string, Genre[]>();
+
+    for (const [category, genres] of this.catagoriesGenre) {
+      const filteredGenres = genres.filter((genre) =>
+        genre.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      if (filteredGenres.length > 0) {
+        filtered.set(category, filteredGenres);
+      }
+    }
+
+    this.filteredCatagoriesGenre = filtered;
+  }
 
   // OnSearchChange(e: Event) {
   //   clearTimeout(this.typingTimer);

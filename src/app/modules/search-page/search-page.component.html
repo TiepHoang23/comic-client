@@ -9,10 +9,27 @@
   "
 >
   <div class="grid gap-2 md:grid-cols-[1fr_12rem]">
-    <!-- Search Form -->
-    <form class="">
+    <form class="flex items-center relative">
+      <div class="absolute left-1 p-2 rounded-lg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="icon text-icon-contrast text-gray-700"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16m10 2-4.35-4.35"
+          ></path>
+        </svg>
+      </div>
       <input
-        class="placeholder-current bg-gray-200 w-full h-10 rounded-lg px-4 focus:outline-primary-100 outline-1 focus:bg-slate-100"
+        class="placeholder-current bg-gray-200 w-full h-10 rounded-lg pl-12 pr-4 focus:outline-primary-100 outline-1 focus:bg-slate-100"
         type="search"
         placeholder="Nhập tên truyện..."
         title="Search"
@@ -20,21 +37,19 @@
         (ngModelChange)="isLoad = true"
         name="keyword"
       />
-      <!-- <div class="md-search-icon relative">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"
-          class="icon text-icon-contrast text-undefined">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16m10 2-4.35-4.35"></path>
-        </svg>
-      </div> -->
       <div class="md-search"></div>
     </form>
 
     <!-- Show Filters Button -->
     <button
       (click)="toggleFilters()"
-      class="rounded-lg relative bg-primary-100 text-white flex items-center overflow-hidden accent"
+      class="rounded-lg relative flex items-center overflow-hidden accent text-white"
       style="min-height: 2.5rem; min-width: 100%"
+      title="Show Filters"
+      [ngClass]="{
+        'bg-primary-50 ': showFilters,
+        'bg-primary-100': !showFilters
+      }"
     >
       <span
         class="flex relative items-center justify-center font-medium select-none w-full"
@@ -59,110 +74,134 @@
       </span>
     </button>
   </div>
-  <ul
-    class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden border-b border-b-accent-10"
-  >
-    <li
-      *ngIf="selectOptions.sorts.value !== -1"
-      class="px-2 border border-primary-100 text-primary-100 rounded-full select-none cursor-pointer flex"
+  <div class="grid grid-cols-[1fr_5rem]">
+    <ul
+      class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden border-b border-b-accent-10"
     >
-      <svg
-        *ngIf="selectOptions.sorts.value != lastupdate"
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
-        viewBox="0 0 24 24"
-        (click)="RemoveFilterTag({ option: 'sort', data: selectOptions.sorts })"
+      <li
+        *ngIf="selectOptions.sorts.value !== -1"
+        class="px-2 border border-primary-100 text-primary-100 rounded-full select-none cursor-pointer flex"
       >
-        <path d="M18 6 6 18M6 6l12 12"></path>
-      </svg>
-      <span class="text-sm">{{ selectOptions.sorts.name }}</span>
-    </li>
-    <li
-      *ngIf="selectOptions.status.value !== -1"
-      class="border border-primary-100 text-primary-100 rounded-full px-2 cursor-pointer flex space-x-1 whitespace-nowrap"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
-        viewBox="0 0 24 24"
-        (click)="
-          RemoveFilterTag({ option: 'status', data: selectOptions.status })
-        "
+        <svg
+          *ngIf="selectOptions.sorts.value != lastupdate"
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+          viewBox="0 0 24 24"
+          (click)="
+            RemoveFilterTag({ option: 'sort', data: selectOptions.sorts })
+          "
+        >
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        <span class="text-sm">{{ selectOptions.sorts.name }}</span>
+      </li>
+      <li
+        *ngIf="selectOptions.status.value !== -1"
+        class="border border-primary-100 text-primary-100 rounded-full px-2 cursor-pointer flex space-x-1 whitespace-nowrap"
       >
-        <path d="M18 6 6 18M6 6l12 12"></path>
-      </svg>
-      <span class="text-sm">{{ selectOptions.status.name }}</span>
-    </li>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+          viewBox="0 0 24 24"
+          (click)="
+            RemoveFilterTag({ option: 'status', data: selectOptions.status })
+          "
+        >
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        <span class="text-sm">{{ selectOptions.status.name }}</span>
+      </li>
 
-    <li
-      *ngFor="let key of getGenreKeys()"
-      class="px-2 rounded-full select-none cursor-pointer flex space-x-1 whitespace-nowrap"
-      [ngClass]="{
-        ' bg-gray-100 ': !selectOptions.genres.value[key],
-        'text-red-500 line-through outline-1 outline-dashed outline-red-500 ':
-          selectOptions.genres.value[key] == 2,
-        'text-primary-100 border border-primary-100 ':
-          selectOptions.genres.value[key] == 1
-      }"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
-        viewBox="0 0 24 24"
-        (click)="
-          RemoveFilterTag({
-            option: 'genres',
-            data: key
-          })
-        "
+      <li
+        *ngFor="let key of getGenreKeys()"
+        class="px-2 rounded-full select-none cursor-pointer flex space-x-1 whitespace-nowrap"
+        [ngClass]="{
+          ' bg-gray-100 ': !selectOptions.genres.value[key],
+          'text-red-500 line-through outline-1 outline-dashed outline-red-500 ':
+            selectOptions.genres.value[key] == 2,
+          'text-primary-100 border border-primary-100 ':
+            selectOptions.genres.value[key] == 1
+        }"
       >
-        <path d="M18 6 6 18M6 6l12 12"></path>
-      </svg>
-      <span class="text-sm">{{ selectOptions.genres.name[key] }}</span>
-    </li>
-    <li
-      *ngIf="selectOptions.year.value > 0"
-      class="px-2 rounded-full border border-primary-100 text-primary-100 cursor-pointer flex space-x-1 whitespace-nowrap"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
-        viewBox="0 0 24 24"
-        (click)="RemoveFilterTag({ option: 'year', data: selectOptions.year })"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+          viewBox="0 0 24 24"
+          (click)="
+            RemoveFilterTag({
+              option: 'genres',
+              data: key
+            })
+          "
+        >
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        <span class="text-sm">{{ selectOptions.genres.name[key] }}</span>
+      </li>
+      <li
+        *ngIf="selectOptions.year.value > 0"
+        class="px-2 rounded-full border border-primary-100 text-primary-100 cursor-pointer flex space-x-1 whitespace-nowrap"
       >
-        <path d="M18 6 6 18M6 6l12 12"></path>
-      </svg>
-      <span class="text-sm">{{ selectOptions.year.value }}</span>
-    </li>
-  </ul>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          class="feather feather-x icon small text-icon-contrast text-undefined my-auto"
+          viewBox="0 0 24 24"
+          (click)="
+            RemoveFilterTag({ option: 'year', data: selectOptions.year })
+          "
+        >
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        <span class="text-sm">{{ selectOptions.year.value }}</span>
+      </li>
+    </ul>
+    <div
+      class="flex text-primary-100 gap-2 mt-2 text-sm mx-1"
+      *ngIf="showFilters"
+    >
+      <button
+        class="font-semibold text-center text-primary-100 inline-flex"
+        (click)="saveFilters()"
+      >
+        <span>Lưu</span>
+      </button>
+      |
+      <button
+        class="font-semibold text-center text-primary-100 inline-flex"
+        (click)="clearAllFilter()"
+      >
+        <span>Xóa</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Filter Options -->
   <div
@@ -182,7 +221,9 @@
         <button
           id="headlessui-listbox-button-2"
           type="button"
-          [ngClass]="{ 'outline-primary-100': selectOptions.sorts.isShow }"
+          [ngClass]="{
+            ' border border-primary-100': selectOptions.sorts.isShow
+          }"
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
           (click)="
             selectOptions.sorts.isShow = !selectOptions.sorts.isShow;
@@ -195,7 +236,7 @@
           }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 my-auto text-midTone"
+            class="w-5 h-5 my-auto text-gray-500"
             viewBox="0 0 24 24"
           >
             <path
@@ -226,9 +267,9 @@
                 data: sort
               })
             "
-            class="grid gap-2 grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone mx-2 rounded-md my-1  {{
+            class="grid  grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone mx-2 rounded-md my-1  {{
               sort.selected === true
-                ? 'text-primary-100 font-semibold ou border-primary-100  hover:bg-primary-100 hover:text-white'
+                ? 'text-primary-100   hover:bg-primary-100 hover:border-white hover:text-white'
                 : 'hover:bg-gray-200 hover:text-secondary-100'
             }}"
             id="headlessui-listbox-option-353"
@@ -239,7 +280,26 @@
             <div
               class="h-3 w-[2px] rounded-full my-auto transition-[background-color] bg-transparent"
             ></div>
-            <span class="truncate">{{ sort.name }} </span>
+
+            <span class="truncate">
+              <label class="custom-radio flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  [checked]="sort.selected"
+                  class="hidden"
+                  aria-hidden="true"
+                />
+                <span
+                  class="custom-radio-indicator w-3 h-3 border rounded-full mr-2 transition-colors
+                    {{
+                    sort.selected
+                      ? 'border-white bg-primary-100'
+                      : 'border-gray-400'
+                  }}"
+                ></span>
+                {{ sort.name }}
+              </label>
+            </span>
           </li>
         </ul>
       </div>
@@ -250,7 +310,9 @@
         ><button
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color,outline-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
           type="button"
-          [ngClass]="{ 'outline-primary-100': selectOptions.genres.isShow }"
+          [ngClass]="{
+            'border border-primary-100': selectOptions.genres.isShow
+          }"
           (click)="
             selectOptions.genres.isShow = !selectOptions.genres.isShow;
             selectOptions.sorts.isShow = false;
@@ -267,7 +329,7 @@
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 my-auto text-midTone"
+            class="w-5 h-5 my-auto text-gray-500"
             viewBox="0 0 24 24"
           >
             <path
@@ -322,7 +384,9 @@
             maxlength="4"
             min="1900"
             max="4000"
-            [ngClass]="{ 'outline-primary-100': selectOptions.year.isShow }"
+            [ngClass]="{
+              'border border-primary-100': selectOptions.year.isShow
+            }"
             [(ngModel)]="selectOptions.year.value"
             (ngModelChange)="OnYearChange(0)"
             inputmode="numeric"
@@ -374,7 +438,9 @@
         >
         <button
           id="headlessui-listbox-button-25"
-          [ngClass]="{ 'outline-primary-100': selectOptions.status.isShow }"
+          [ngClass]="{
+            'border border-primary-100': selectOptions.status.isShow
+          }"
           type="button"
           (click)="
             selectOptions.status.isShow = !selectOptions.status.isShow;
@@ -388,7 +454,7 @@
           }}</span
           ><svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 my-auto text-midTone"
+            class="w-5 h-5 my-auto text-gray-500"
             viewBox="0 0 24 24"
           >
             <path
@@ -422,41 +488,38 @@
             class="grid grid-flow-col auto-cols-max cursor-pointer text-left truncate mx-2 py-1 my-1 rounded-md
             {{
               status.selected === true
-                ? 'text-primary-100 font-semibold  border-primary-100  hover:bg-primary-100 hover:text-white'
+                ? 'text-primary-100  border-primary-100  hover:bg-primary-100 hover:text-white'
                 : 'hover:bg-gray-200 hover:text-secondary-100'
             }}"
           >
             <div
               class="h-3 w-[6px] rounded-full my-auto transition-[background-color] bg-transparent"
             ></div>
-            <span class="truncate">{{ status.name }} </span>
+            <span class="truncate">
+              <label class="custom-radio flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  [checked]="status.selected"
+                  class="hidden"
+                  aria-hidden="true"
+                />
+                <span
+                  class="custom-radio-indicator w-3 h-3 border rounded-full mr-2 transition-colors
+                  {{
+                    status.selected
+                      ? 'border-white bg-primary-100 '
+                      : 'border-gray-400'
+                  }}"
+                ></span>
+                {{ status.name }}
+              </label>
+            </span>
           </li>
         </ul>
         <!---->
       </div>
     </div>
     <div class="w-full flex justify-end">
-      <button
-        class="font-semibold border-2 border-secondary-100 p-2 rounded-lg text-center flex items-center gap-2"
-        (click)="clearAllFilter()"
-      >
-        <!-- <svg
-          class="h-4 w-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <polyline points="1 4 1 10 7 10" />
-          <polyline points="23 20 23 14 17 14" />
-          <path
-            d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"
-          />
-        </svg> -->
-        <span>Xóa bộ lọc</span>
-      </button>
       <button
         class="bg-primary-100 hover:rounded-xl transition-all ease-in text-white font-bold py-2 px-4 rounded flex items-center mx-2"
         (click)="

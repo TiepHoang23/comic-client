@@ -263,6 +263,9 @@ export class SearchPageComponent implements OnInit {
       keyword: { value: '', name: '' },
     };
   }
+  saveFilters() {
+    return;
+  }
   OnChangePage(page: number) {
     this.router.navigate([], {
       queryParams: { page },
