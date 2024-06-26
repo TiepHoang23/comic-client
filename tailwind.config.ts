@@ -10,8 +10,8 @@ module.exports = {
     screens: { ...config.screens },
     extend: {
       colors: {
-        "light-bg": "#fff",
-        "dark-bg": "#191A1C",
+        'light-bg': '#fff',
+        'dark-bg': '#191A1C',
         primary: {
           50: '#FFC49B',
           100: '#F86E4C',
