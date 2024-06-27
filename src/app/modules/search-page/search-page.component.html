@@ -8,7 +8,7 @@
     selectOptions.status.isShow = false
   "
 >
-  <div class="grid gap-2 md:grid-cols-[1fr_12rem]">
+  <div class="grid gap-2 md:grid-cols-[1fr_12rem] mx-2 lg:mx-0">
     <form class="flex items-center relative">
       <div class="absolute left-1 p-2 rounded-lg">
         <svg
@@ -47,7 +47,7 @@
       style="min-height: 2.5rem; min-width: 100%"
       title="Show Filters"
       [ngClass]="{
-        'bg-primary-50 ': showFilters,
+        'bg-primary-50': showFilters,
         'bg-primary-100': !showFilters
       }"
     >
@@ -74,10 +74,8 @@
       </span>
     </button>
   </div>
-  <div class="grid grid-cols-[1fr_5rem]">
-    <ul
-      class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden border-b border-b-accent-10"
-    >
+  <div class="grid grid-cols-[1fr_5rem] border-b border-b-accent-10">
+    <ul class="flex flex-wrap gap-2 py-2 mx-1 overflow-hidden">
       <li
         *ngIf="selectOptions.sorts.value !== -1"
         class="px-2 border border-primary-100 text-primary-100 rounded-full select-none cursor-pointer flex"
@@ -184,20 +182,36 @@
       </li>
     </ul>
     <div
-      class="flex text-primary-100 gap-2 mt-2 text-sm mx-1"
+      class="flex justify-end text-primary-100 gap-2 m-2 lg:m-2 text-xs"
       *ngIf="showFilters"
     >
-      <button
+      <!-- <button
         class="font-semibold text-center text-primary-100 inline-flex"
         (click)="saveFilters()"
       >
         <span>Lưu</span>
       </button>
-      |
+      | -->
       <button
-        class="font-semibold text-center text-primary-100 inline-flex"
+        class="font-semibold text-center text-primary-100 inline-flex gap-1"
         (click)="clearAllFilter()"
       >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="3 6 5 6 21 6" />
+          <path
+            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+          />
+          <line x1="10" y1="11" x2="10" y2="17" />
+          <line x1="14" y1="11" x2="14" y2="17" />
+        </svg>
         <span>Xóa</span>
       </button>
     </div>
@@ -206,7 +220,7 @@
   <!-- Filter Options -->
   <div
     [ngClass]="{ hidden: !showFilters }"
-    class="expander grid grid-rows-[1fr_0fr]"
+    class="mx-2 lg:mx-0 grid grid-rows-[1fr_0fr]"
   >
     <div
       class="grid grid-cols-2 max-sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-8 my-4 max-sm:gap-4"
@@ -215,14 +229,15 @@
         <label
           id="headlessui-listbox-label-1"
           data-headlessui-state=""
-          class="xl:text-base text-sm text-gray-600"
+          class="xl:text-sm text-xs text-gray-600"
           >Sắp xếp theo</label
         >
         <button
-          id="headlessui-listbox-button-2"
           type="button"
           [ngClass]="{
-            ' border border-primary-100': selectOptions.sorts.isShow
+            'outline outline-primary-100': selectOptions.sorts.isShow,
+            'hover:outline hover:outline-primary-100':
+              !selectOptions.sorts.isShow
           }"
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
           (click)="
@@ -267,7 +282,7 @@
                 data: sort
               })
             "
-            class="grid  grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color] text-midTone mx-2 rounded-md my-1  {{
+            class="grid  grid-cols-[0.75rem_1fr] py-1 cursor-pointer transition-[color]  mx-2 rounded-md my-1  {{
               sort.selected === true
                 ? 'text-primary-100   hover:bg-primary-100 hover:border-white hover:text-white'
                 : 'hover:bg-gray-200 hover:text-secondary-100'
@@ -305,13 +320,15 @@
       </div>
 
       <div class="relative space-y-1">
-        <label class="text-midTone xl:text-base text-sm text-gray-600"
+        <label class="text-midTone xl:text-sm text-xs text-gray-600"
           >Thể loại </label
         ><button
           class="w-full grid grid-cols-[1fr_1rem] px-2 py-1 rounded-md transition-[background-color,outline-color] outline outline-1 outline-transparent focus:outline-primary font-medium bg-gray-100"
           type="button"
           [ngClass]="{
-            'border border-primary-100': selectOptions.genres.isShow
+            'outline outline-primary-100': selectOptions.genres.isShow,
+            'hover:outline hover:outline-primary-100':
+              !selectOptions.genres.isShow
           }"
           (click)="
             selectOptions.genres.isShow = !selectOptions.genres.isShow;
@@ -370,7 +387,7 @@
       ></div>
 
       <label class="truncate xl:text-base text-sm relative space-y-1 grid">
-        <span class="text-gray-600" title="Publication year"
+        <span class="text-gray-600 xl:text-sm text-xs" title="Publication year"
           >Năm phát hành</span
         >
         <div
@@ -385,7 +402,9 @@
             min="1900"
             max="4000"
             [ngClass]="{
-              'border border-primary-100': selectOptions.year.isShow
+              'outline outline-primary-100': selectOptions.year.isShow,
+              'hover:outline hover:outline-primary-100':
+                !selectOptions.year.isShow
             }"
             [(ngModel)]="selectOptions.year.value"
             (ngModelChange)="OnYearChange(0)"
@@ -434,12 +453,16 @@
       </label>
       <div class="relative space-y-1 grid">
         <label class="text-gray-600 truncate xl:text-base text-sm"
-          ><span title="Publication Status">Trạng thái</span></label
+          ><span title="Publication Status " class="xl:text-sm text-xs"
+            >Trạng thái</span
+          ></label
         >
         <button
           id="headlessui-listbox-button-25"
           [ngClass]="{
-            'border border-primary-100': selectOptions.status.isShow
+            'outline outline-primary-100': selectOptions.status.isShow,
+            'hover:outline hover:outline-primary-100':
+              !selectOptions.status.isShow
           }"
           type="button"
           (click)="
