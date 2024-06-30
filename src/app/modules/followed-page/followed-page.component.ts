@@ -18,8 +18,8 @@ export class FollowedPageComponent {
     private comicService: ComicService,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private toastService: ToastService
-  ) { }
+    private toastService: ToastService,
+  ) {}
   // @Output() Click: any;
   ngOnInit(): void {
     this.reqFollowComics();
@@ -35,15 +35,21 @@ export class FollowedPageComponent {
     return this;
   }
 
-  onUnFollowClick(id: Number) {
-    let comic = this.comics.find((comic) => comic.id === id)
+  onUnFollowClick(id: Number[]) {
+    if (id.length === 0) {
+      return;
+    }
+    const [comicId] = id;
+    const comic = this.comics.find((comic) => comic.id === comicId);
 
-    this.accountService.Follow(id, false).subscribe((res: any) => {
+    this.accountService.Follow(comicId, false).subscribe((res: any) => {
       if (res.status === 1) {
         this.reqFollowComics();
-        this.toastService.show(ToastType.Success, `Đã bỏ theo dõi ${comic!.title}`);
-      }
-      else {
+        this.toastService.show(
+          ToastType.Success,
+          `Đã bỏ theo dõi ${comic!.title}`,
+        );
+      } else {
         this.toastService.show(ToastType.Error, res.message);
       }
     });

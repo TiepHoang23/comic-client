@@ -47,8 +47,8 @@
       style="min-height: 2.5rem; min-width: 100%"
       title="Show Filters"
       [ngClass]="{
-        'bg-primary-50': showFilters,
-        'bg-primary-100': !showFilters
+        'bg-primary-50 hover:opacity-90': showFilters,
+        'bg-primary-100  hover:bg-primary-200': !showFilters
       }"
     >
       <span
@@ -56,18 +56,18 @@
         style="pointer-events: none; justify-content: center"
       >
         <svg
-          class="h-6 w-6 transition-all ease-in mx-2"
-          [ngClass]="{ 'rotate-180 ': showFilters }"
-          fill="none"
+          class="h-4 w-4"
+          [ngClass]="{
+            'fill-white': showFilters
+          }"
           viewBox="0 0 24 24"
+          fill="none"
           stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          />
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
         </svg>
 
         <p class="mx-2">{{ showFilters ? "Ẩn bộ lọc" : "Thêm bộ lọc" }}</p>
@@ -542,46 +542,46 @@
         <!---->
       </div>
     </div>
-    <div class="w-full flex justify-end">
-      <button
-        class="bg-primary-100 hover:rounded-xl transition-all ease-in text-white font-bold py-2 px-4 rounded flex items-center mx-2"
-        (click)="
-          ClickSearch();
-          selectOptions.genres.isShow = false;
-          selectOptions.sorts.isShow = false;
-          selectOptions.status.isShow = false
-        "
+  </div>
+  <div class="w-full flex justify-start mt-3">
+    <button
+      class="bg-primary-100 hover:rounded-xl transition-all ease-in text-white font-bold py-2 px-4 rounded flex items-center"
+      (click)="
+        ClickSearch();
+        selectOptions.genres.isShow = false;
+        selectOptions.sorts.isShow = false;
+        selectOptions.status.isShow = false
+      "
+    >
+      <svg
+        class="h-6 w-6 mr-2"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <svg
-          class="h-6 w-6 mr-2"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <circle cx="10" cy="10" r="7" />
-          <line x1="21" y1="21" x2="15" y2="15" />
-        </svg>
-        <span>Tìm kiếm</span>
-        <!-- <svg
-          class="h-6 w-6"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <polyline points="13 17 18 12 13 7" />
-          <polyline points="6 17 11 12 6 7" />
-        </svg> -->
-      </button>
-    </div>
+        <path stroke="none" d="M0 0h24v24H0z" />
+        <circle cx="10" cy="10" r="7" />
+        <line x1="21" y1="21" x2="15" y2="15" />
+      </svg>
+      <span>Tìm kiếm</span>
+      <!-- <svg
+        class="h-6 w-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="13 17 18 12 13 7" />
+        <polyline points="6 17 11 12 6 7" />
+      </svg> -->
+    </button>
   </div>
   <div class="grid grid-cols-1 xl:grid-cols-4 gap-4" id="listComic">
     <div id="comics" class="col-span-1 xl:col-span-3 row-start-1">

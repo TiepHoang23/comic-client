@@ -11,27 +11,96 @@
     <!-- Search input -->
     <div class="flex space-x-3 items-center">
       <list-search-comic />
-
-      <img
+      <svg
+        (click)="themeService.ToggleTheme()"
+        class="h-8 w-8 cursor-pointer bg-slate-100 lg:bg-slate-200 rounded-full p-1"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" />
+        <circle cx="12" cy="12" r="3" />
+        <line x1="12" y1="5" x2="12" y2="3" />
+        <line x1="17" y1="7" x2="18.4" y2="5.6" />
+        <line x1="19" y1="12" x2="21" y2="12" />
+        <line x1="17" y1="17" x2="18.4" y2="18.4" />
+        <line x1="12" y1="19" x2="12" y2="21" />
+        <line x1="7" y1="17" x2="5.6" y2="18.4" />
+        <line x1="6" y1="12" x2="4" y2="12" />
+        <line x1="7" y1="7" x2="5.6" y2="5.6" />
+      </svg>
+      <!-- <img
         (click)="themeService.ToggleTheme()"
         alt=""
         src="assets/dark-mode.svg"
         class="w-7 h-7 cursor-pointer"
-      />
-      <div *ngIf="!user" class="hidden space-x-1 text-white lg:flex h-8">
+      /> -->
+
+      <div class="relative flex items-center space-x-1 text-white h-8">
         <button
-          class="flex hover:bg-amber-600 items-center bg-gray-800 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          (click)="onLoginClick()"
+          *ngIf="!user"
+          class="md:hidden flex items-center bg-gray-200 p-1 rounded-full text-secondary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          (click)="toggleButtons()"
         >
-          <span>Đăng nhập</span>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
         </button>
-        <button
-          class="flex hover:text-amber-600 items-center bg-white border border-gray-300 rounded-r-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          (click)="onRegisterClick()"
+
+        <div
+          *ngIf="showButtons && screenWidth < 768"
+          class="absolute top-10 right-0 bg-white rounded-lg shadow-lg p-2 space-y-1 min-w-40 z-50"
         >
-          <span>Đăng ký</span>
-        </button>
+          <button
+            class="flex w-full justify-center lg:w-auto items-center bg-gray-800 border border-gray-300 rounded-lg shadow-md px-3 py-2 text-sm font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            (click)="onLoginClick()"
+          >
+            Đăng nhập
+          </button>
+          <button
+            class="flex items-center w-full justify-center lg:w-auto bg-white border border-gray-300 rounded-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            (click)="onRegisterClick()"
+          >
+            Đăng ký
+          </button>
+        </div>
+
+        <div
+          *ngIf="screenWidth >= 768 && !user"
+          class="hidden md:flex space-x-1"
+        >
+          <button
+            class="flex items-center bg-gray-800 border border-gray-300 rounded-l-lg shadow-md px-3 py-2 text-sm font-medium text-white hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            (click)="onLoginClick()"
+          >
+            <i class="fas fa-sign-in-alt mr-2"></i>
+            <span>Đăng nhập</span>
+          </button>
+          <button
+            class="flex items-center bg-white border border-gray-300 rounded-r-lg shadow-md px-3 py-2 text-sm font-medium text-gray-800 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            (click)="onRegisterClick()"
+          >
+            <i class="fas fa-user-plus mr-2"></i>
+            <span>Đăng ký</span>
+          </button>
+        </div>
       </div>
+
       <div
         *ngIf="user"
         (click)="onUserClick()"
@@ -246,68 +315,94 @@
   class="relative bg-primary-100 text-sm text-white md:hidden flex flex-col items-center"
 >
   <div class="flex items-center mx-auto px-3 h-10 w-full">
-    <a [routerLink]="['/']">Trang chủ</a>
+    <div class="flex items-center gap-1">
+      <svg
+        class="h-6 w-6"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" />
+        <polyline points="5 12 3 12 12 3 21 12 19 12" />
+        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+      </svg>
+
+      <span class="text-sm font-medium">
+        <a [routerLink]="['/']">Trang chủ</a></span
+      >
+    </div>
 
     <div
-      class="ml-auto border rounded cursor-pointer"
+      class="ml-auto border-2 rounded-lg cursor-pointer"
       (click)="toggleSidebar()"
     >
       <svg
         *ngIf="!this.showslidebar"
-        class="w-[28px] h-[28px] text-white"
-        fill="currentColor"
+        class="h-8 w-8 text-white"
+        fill="none"
         viewBox="0 0 24 24"
+        stroke="currentColor"
       >
         <path
-          d="M8 6L21 6.00078M8 12L21 12.0008M8 18L21 18.0007M3 6.5H4V5.5H3V6.5ZM3 12.5H4V11.5H3V12.5ZM3 18.5H4V17.5H3V18.5Z"
-          stroke="#000000"
-          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h7"
         />
       </svg>
       <svg
         *ngIf="this.showslidebar"
-        class="w-[28px] h-[28px] text-white"
-        fill="currentColor"
+        class="h-8 w-8 text-white"
+        fill="none"
         viewBox="0 0 24 24"
+        stroke="currentColor"
       >
-        <g id="Menu / Close_LG">
-          <path
-            id="Vector"
-            d="M21 21L12 12M12 12L3 3M12 12L21.0001 3M12 12L3 21.0001"
-            stroke="#000000"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </g>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
       </svg>
     </div>
   </div>
   <div
-    class="w-full bg-primary-100 border-t transition-[height] duration-200 overflow-hidden"
+    class="w-full bg-white text-secondary-100 border-t transition-[height] duration-200 overflow-hidden"
     style="height: 0px"
     #dropdownNavbar
   >
     <div class="flex h-10 text-sm">
       <a
         [routerLink]="['/tim-kiem-nang-cao']"
-        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
+        class="px-3 h-full w-full hover:bg-white items-center flex hover:text-secondary-100 gap-1"
+      >
+        <svg
+          class="h-6 w-6"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
           stroke="currentColor"
-          class="w-5 h-5 mr-1"
         >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-          ></path></svg
-        >Hot</a
+            stroke-width="2"
+            d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
+          />
+        </svg>
+
+        Hot</a
       >
     </div>
     <div class="flex h-10 text-sm">
@@ -315,103 +410,117 @@
         href="https://www.facebook.com/groups/doctruyenonline.vn"
         target="blank"
         class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+      >
+        <svg
+          class="h-6 w-6"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          stroke-width="2"
           stroke="currentColor"
-          class="w-5 h-5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
+          <path stroke="none" d="M0 0h24v24H0z" />
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-          ></path></svg
-        >Thể loại</a
+            d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4"
+          />
+          <circle cx="9" cy="9" r="2" />
+        </svg>
+        Thể loại</a
       >
     </div>
     <div class="flex h-10 text-sm">
       <a
         [routerLink]="['/theo-doi']"
-        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="16"
-          viewBox="0 0 512 512"
-          class="mr-1"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex gap-1"
+      >
+        <svg
+          class="h-6 w-6"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
+          <path stroke="none" d="M0 0h24v24H0z" />
           <path
-            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
-          ></path></svg
-        >Theo dõi</a
+            d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
+          />
+        </svg>
+        Theo dõi</a
       >
     </div>
     <div class="flex h-10 text-sm">
       <a
         [routerLink]="['/xep-hang']"
-        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28] hover:fill-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="16"
-          viewBox="0 0 512 512"
-          class="mr-1"
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex gap-1"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
           <path
-            d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"
-          ></path></svg
-        >Xếp hạng</a
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          />
+        </svg>
+
+        Xếp hạng</a
       >
     </div>
     <div class="flex h-10 text-sm">
       <a
         [routerLink]="['/tim-truyen']"
         target="blank"
-        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+        class="px-3 h-full w-full items-center flex"
+      >
+        <svg
+          class="h-6 w-6"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          fill="none"
           stroke="currentColor"
-          class="w-5 h-5"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-          ></path></svg
-        >Tìm kiếm nâng cao</a
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        Tìm kiếm nâng cao</a
       >
     </div>
     <div class="flex h-10 text-sm">
       <a
         [routerLink]="['/lich-su']"
         target="blank"
-        class="px-3 h-full w-full hover:bg-[#fff] items-center flex hover:text-[#be8c28]"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-          ></path></svg
-        >Lịch sử</a
+        class="px-3 h-full w-full hover:bg-[#fff] items-center flex gap-1"
       >
-    </div>
-    <div class="flex h-10 text-sm">
-      <button class="px-3 h-full flex items-center">Đăng Ký</button>
-    </div>
-    <div class="flex h-10 text-sm">
-      <button class="px-3 h-full flex items-center">Đăng Nhập</button>
+        <svg
+          class="h-6 w-6"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <polyline points="12 8 12 12 14 14" />
+          <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
+        </svg>
+        Lịch sử</a
+      >
     </div>
   </div>
 </nav>

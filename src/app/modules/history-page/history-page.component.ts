@@ -1,8 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { url } from 'inspector';
 import { Comic } from '../../dataSource/schema/comic';
 import { HistoryService } from '@services/history.service';
 import { ComicService } from '@services/comic.service';
@@ -17,6 +14,8 @@ export class HistoryPageComponent {
   page: number = 1;
   totalpage: number = 1;
   comicPerPage = 12;
+  selectedComics = new Set<number>();
+
   constructor(
     private comicService: ComicService,
     private route: ActivatedRoute,
@@ -26,6 +25,7 @@ export class HistoryPageComponent {
   ngOnInit(): void {
     this.RefeshPage();
   }
+
   RefeshPage() {
     let his = this.hisService.GetHistory();
     this.totalpage = Math.floor((his.length - 1) / this.comicPerPage) + 1;
@@ -43,12 +43,23 @@ export class HistoryPageComponent {
       });
     });
   }
+
   OnChangePage(page: number) {
     this.page = page;
     this.RefeshPage();
   }
-  onRemoveClick(id: Number) {
+
+  onRemoveClickSingle(id: number) {
     this.hisService.RemoveHistory(id);
+    this.updatePage();
+  }
+
+  onRemoveSelectedComics(ids: number[]) {
+    ids.forEach((id) => this.hisService.RemoveHistory(id));
+    this.updatePage();
+  }
+
+  updatePage() {
     let totalpage =
       Math.floor((this.hisService.GetHistorySize() - 1) / this.comicPerPage) +
       1;
@@ -59,5 +70,13 @@ export class HistoryPageComponent {
     } else {
       this.OnChangePage(this.page);
     }
+  }
+
+  selectAllComics() {
+    this.comics.forEach((comic) => this.selectedComics.add(comic.id));
+  }
+
+  getSelectedComicsArray(): number[] {
+    return Array.from(this.selectedComics);
   }
 }

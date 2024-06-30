@@ -1,75 +1,147 @@
-<div class="flex mt-6 mb-3 flex-row justify-between gap-6">
-  <div class="grid-nav bg-dark-bg dark:bg-black">
-    <h4 class="text-lg text-white font-semibold">{{ _title }}</h4>
+<div class="mt-6 mb-3">
+  <div *ngIf="showCheckboxes" class="flex gap-2 justify-end m-3">
+    <!-- <button >Select All</button> -->
+    <button
+      (click)="selectAllComics(!isSelectAll)"
+      type="button"
+      class="inline-flex items-center px-4 py-2.5 text-sm font-medium text-center rounded-lg focus:outline-none dark:bg-primary-100 dark:hover:bg-primary-200 dark:text-white"
+      [ngClass]="{
+        'bg-primary-100 text-white ': isSelectAll,
+        'text-secondary-100 bg-gray-200 hover:bg-gray-300': !isSelectAll
+      }"
+      title="Select All"
+    >
+      Chọn tất cả
+      <span
+        class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-pbg-primary-50 rounded-full"
+        [ngClass]="{
+          'bg-primary-50 text-white': isSelectAll,
+          'bg-white text-secondary-100': !isSelectAll
+        }"
+      >
+        <p class="p-1 text-xs">{{ selectedComics.size }}</p>
+      </span>
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ disabled: selectedComics.size === 0 }"
+      (click)="deleteSelectedComics()"
+      title="Delete Selected"
+      class="text-primary-100 font-medium focus:ring-4 focus:outline-none focus:ring-primary-50 rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center me-2"
+    >
+      <svg
+        class="w-3.5 h-3.5 me-2"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" />
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="10" y1="11" x2="10" y2="17" />
+        <line x1="14" y1="11" x2="14" y2="17" />
+        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+      </svg>
+
+      Xóa
+    </button>
   </div>
-  <div class="flex ml-auto bg-slate-300 dark:bg-neutral-700">
-    <div
-      class="p-1.5"
-      [ngClass]="{ active: girdType == 1, 'cursor-pointer': girdType != 1 }"
-      value="1"
-      (click)="ChangeGridType($event.target, 1)"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-        class=""
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 3H3v7h18zm0 11H3v7h18z"
-        ></path>
-      </svg>
+  <div class="flex flex-row justify-between gap-6">
+    <div class="grid-nav bg-dark-bg dark:bg-black">
+      <h4 class="text-lg text-white font-semibold">{{ _title }}</h4>
     </div>
-    <div
-      class="p-1.5 cursor-pointer"
-      [ngClass]="{ active: girdType == 0, 'cursor-pointer': girdType != 0 }"
-      value="0"
-      (click)="ChangeGridType($event.target, 0)"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-        class=""
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M10 3H3v7h7zm11 0h-7v7h7zm0 11h-7v7h7zm-11 0H3v7h7z"
-        ></path>
-      </svg>
+    <div class="flex">
+      <div class="flex ml-auto bg-slate-300 dark:bg-neutral-700">
+        <div
+          class="p-1.5"
+          [ngClass]="{ active: girdType == 1, 'cursor-pointer': girdType != 1 }"
+          value="1"
+          (click)="ChangeGridType($event.target, 1)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            class=""
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 3H3v7h18zm0 11H3v7h18z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="p-1.5 cursor-pointer"
+          [ngClass]="{ active: girdType == 0, 'cursor-pointer': girdType != 0 }"
+          value="0"
+          (click)="ChangeGridType($event.target, 0)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            class=""
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 3H3v7h7zm11 0h-7v7h7zm0 11h-7v7h7zm-11 0H3v7h7z"
+            ></path>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-@if (girdType === 0) {
-<div class="{{ _class }}">
-  <div *ngFor="let comic of listComics">
+
+<div *ngIf="girdType === 0" class="{{ _class }}">
+  <div *ngFor="let comic of listComics; let i = index">
+    <input
+      id="orange-checkbox"
+      class="absolute z-10 m-2 w-4 h-4 rounded-lg box-border border-2 border-white"
+      *ngIf="showCheckboxes"
+      type="checkbox"
+      (change)="toggleSelectComic(i)"
+      [checked]="selectedComics.has(i)"
+    />
+
     <app-comic-card
       [comic]="comic"
-      (clickEvent)="ClickEvent.emit($event)"
+      (clickEvent)="ClickEvent.emit([comic.id])"
       [EventName]="EventName"
       (comicHover)="onHoverComic($event)"
     ></app-comic-card>
   </div>
 </div>
-} @else {
-<div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
-  <comic-card-v2
-    *ngFor="let comic of listComics"
-    [comic]="comic"
-  ></comic-card-v2>
+
+<div *ngIf="girdType !== 0" class="grid gap-2 grid-cols-1 xl:grid-cols-2">
+  <div *ngFor="let comic of listComics; let i = index" class="">
+    <input
+      id="orange-checkbox"
+      class="absolute z-10 m-2 w-4 h-4 box-border border-2 border-white"
+      *ngIf="showCheckboxes"
+      type="checkbox"
+      (change)="toggleSelectComic(i)"
+      [checked]="selectedComics.has(i)"
+    />
+
+    <comic-card-v2 [comic]="comic"></comic-card-v2>
+  </div>
 </div>
-}
 
 <app-popup-detail-comic
   *ngIf="hoverComic"
