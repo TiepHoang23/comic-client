@@ -50,7 +50,7 @@ export class SearchPageComponent implements OnInit {
     this.selectOptions.status.name = advancedFiltersOptions.status[0].name;
     this.selectOptions.sorts.name = advancedFiltersOptions.sorts[0].name;
     this.lastupdate = SortType.LastUpdate;
-    console.log(this.lastupdate);
+
   }
 
   toggleFilters() {
@@ -255,13 +255,19 @@ export class SearchPageComponent implements OnInit {
   }
 
   clearAllFilter() {
+
+    this.isLoad = true;
+    this.dataView.status.map((d: any, index: number) => d.selected = index === 0);
+    this.dataView.sorts.map((d: any, index: number) => d.selected = index === 0);
+
     this.selectOptions = {
-      sorts: { value: -1, name: '', isShow: false },
-      status: { value: -1, name: '', isShow: false },
+      sorts: { value: SortType.LastUpdate, name: advancedFiltersOptions.sorts[0].name, isShow: false },
+      status: { value: ComicStatus.ALL, name: advancedFiltersOptions.status[0].name, isShow: false },
       year: { value: 0, name: '', isShow: false },
       genres: { value: {}, name: {}, isShow: false },
       keyword: { value: '', name: '' },
     };
+
   }
   saveFilters() {
     return;

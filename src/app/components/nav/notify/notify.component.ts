@@ -83,8 +83,8 @@ export class NotifyComponent implements OnInit {
 
   onReadNotify(idNotify: any, option: string | null = null, isRead: boolean = false): void {
     this.isShowOption = null;
-
     if ((option === 'read' && isRead) || (option === 'all' && !this.listnotifyData.some(e => !e.isRead))) return;
+
 
     if (option === 'all') {
       this.accountService.updateUserNotify(idNotify, null).subscribe(() => {
@@ -97,6 +97,8 @@ export class NotifyComponent implements OnInit {
         const notify = this.listnotifyData.find(e => e.id === idNotify);
         if (notify) notify.isRead = updateIsRead;
         this.updateListNotify();
+
+
       });
     }
   }
